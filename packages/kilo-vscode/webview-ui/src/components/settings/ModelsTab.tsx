@@ -14,7 +14,7 @@ import SettingsRow from "./SettingsRow"
 import { DEFAULT_SPEECH_TO_TEXT_MODEL } from "../../../../src/speech-to-text/models"
 import { hasSpeechToTextAccess, selectedSpeechToTextModel } from "../speech-to-text/availability"
 import { SPEECH_TO_TEXT_MODEL_OPTIONS } from "../speech-to-text/model-selector"
-import { AUTOCOMPLETE_SELECTOR_MODELS, getAutocompleteSelection } from "./autocomplete-model-selector"
+
 
 const ModelsTab: Component = () => {
   const { config, settings, updateConfig, updateSetting } = useConfig()
@@ -29,6 +29,13 @@ const ModelsTab: Component = () => {
   const autocompleteModel = () => {
     const v = settings()["autocomplete.model"]
     return typeof v === "string" ? v : undefined
+  }
+
+  const autocompleteSelection = () => {
+    const p = autocompleteProvider()
+    const m = autocompleteModel()
+    return p && m ? { providerID:p, modelID:m } : null
+
   }
 
   function handleModelSelect(configKey: "model" | "small_model") {
@@ -165,10 +172,9 @@ const ModelsTab: Component = () => {
           description={language.t("settings.autocomplete.model.description")}
         >
           <ModelSelectorBase
-            value={getAutocompleteSelection(autocompleteProvider(), autocompleteModel())}
+            value={autocompleteSelection()}
             onSelect={handleAutocompleteModelSelect}
             placement="bottom-start"
-            models={AUTOCOMPLETE_SELECTOR_MODELS}
             favorites={false}
             allowClear
             clearLabel={language.t("settings.providers.notSet")}

@@ -32,8 +32,8 @@ function readSettings(): AutocompleteServiceSettings {
     enableAutoTrigger: config.get<boolean>("enableAutoTrigger") ?? true,
     enableSmartInlineTaskKeybinding: config.get<boolean>("enableSmartInlineTaskKeybinding") ?? true,
     enableChatAutocomplete: config.get<boolean>("enableChatAutocomplete") ?? true,
-    provider: info.providerID,
-    model: info.modelID,
+    provider: config.get<string>("provider") ?? DEFAULT_AUTOCOMPLETE_MODEL.providerID,
+    model: config.get<string>("model") ?? DEFAULT_AUTOCOMPLETE_MODEL.modelID,
     snoozeUntil: config.get<number>("snoozeUntil"),
   }
 }
@@ -366,13 +366,15 @@ export class AutocompleteServiceManager {
   }
 
   private getCurrentModelName(): string {
-    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-    return info.label
+    //const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+    //return info.label
+    return this.settings?.model || getAutocompleteModel(this.settings?.provider, this.settings?.model).label
   }
 
   private getCurrentProviderName(): string {
-    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-    return info.provider
+    //const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+    //return info.provider
+    return this.settings?.provider || getAutocompleteModel(this.settings?.provider, this.settings?.model).provider
   }
 
   private hasNoUsableProvider(): boolean {
