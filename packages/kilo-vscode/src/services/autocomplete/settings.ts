@@ -1,5 +1,4 @@
 import * as vscode from "vscode"
-import { validAutocompleteModel, validAutocompleteProvider } from "../../shared/autocomplete-models"
 
 type Message = {
   type: string
@@ -43,20 +42,13 @@ export function watchAutocompleteConfig(post: Post): vscode.Disposable {
 }
 
 export function validAutocompleteSetting(key: string, value: unknown) {
-  if (key === "model") {
-    // Allow clearing back to the server-side default.
-    if (value === null || value === undefined) return true
-    return validAutocompleteModel(value)
+  if (key === "model" || key === "provider") {
+    // Accept any provider/model Id so the Models-tab dropdown can persist
+    // Selection from configured providers, not just the static whitelist
+    return value === null || value === undefined || typeof value === "string"
   }
-
-  if (key === "provider") {
-    if (value === null || value === undefined) return true
-    return validAutocompleteProvider(value)
-  }
-
   if (key === "enableAutoTrigger") return typeof value === "boolean"
   if (key === "enableSmartInlineTaskKeybinding") return typeof value === "boolean"
   if (key === "enableChatAutocomplete") return typeof value === "boolean"
-
   return false
 }

@@ -115,8 +115,8 @@ async function resolveFimConfig(connectionService: KiloConnectionService): Promi
   const style = firstStr(tune.get<string>("style"), env.KILO_LOCAL_FIM_STYLE || inferStyle(model)) as FimStyle
 
   return {
-    baseUrl: (baseUrl || "http://127.0.0.1:8888/v1").replace(/\/+$/, ""),
-    model: model || "Qwen2.5-Coder-7B",
+    baseUrl: baseUrl.replace(/\/+$/, ""),
+    model,
     apiKey,
     style: STOP_TOKENS[style] ? style : "raw",
     temperature: tune.get<number>("temperature") ?? 0.2,
@@ -216,6 +216,8 @@ export async function generateFim(
   signal?: AbortSignal,
 ): Promise<ResponseMetaData> {
   const cfg = await resolveFimConfig(connectionService)
+  if ( !cfg.baseUrl || !cfg.model )
+    throw new Error("Local FIM: No autocomplete model selected (Settings -> Models -> Autocomplete model)")
   const meta: TokenMeta = { inputTokens: 0, outputTokens: 0 }
 
   console.info(`[FIM] local model=${cfg.model} style=${cfg.style} url=${cfg.baseUrl}/completions selector=${modelId}`)
