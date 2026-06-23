@@ -52,7 +52,7 @@ export const SettingsPanel: Story = {
 }
 
 export const ProvidersConfigure: Story = {
-  name: "ProvidersTab — no providers configured",
+  name: "ProvidersConfigure",
   render: () => (
     <StoryProviders>
       <div style={{ "max-height": "700px", overflow: "auto" }}>

@@ -1,7 +1,6 @@
 import { Component, For, Show, createMemo } from "solid-js"
 import { Card } from "@kilocode/kilo-ui/card"
 import { Select } from "@kilocode/kilo-ui/select"
-import { Switch } from "@kilocode/kilo-ui/switch"
 import { Tooltip } from "@kilocode/kilo-ui/tooltip"
 import { useConfig } from "../../context/config"
 import { useLanguage } from "../../context/language"
@@ -216,19 +215,6 @@ const ModelsTab: Component = () => {
               placeholder={DEFAULT_SPEECH_TO_TEXT_MODEL.label}
             />
           </Tooltip>
-        </SettingsRow>
-        <SettingsRow
-          title={language.t("settings.models.hidePromptTraining.title")}
-          description={language.t("settings.models.hidePromptTraining.description")}
-          last
-        >
-          <Switch
-            checked={config().hide_prompt_training_models === true}
-            onChange={(checked: boolean) => updateConfig({ hide_prompt_training_models: checked })}
-            hideLabel
-          >
-            {language.t("settings.models.hidePromptTraining.title")}
-          </Switch>
         </SettingsRow>
       </Card>
 

@@ -5,6 +5,7 @@ function context(opts: {
   project?: string
   remove: ReturnType<typeof mock>
   refresh: ReturnType<typeof mock>
+  legacyMcpRemoved?: boolean
 }): RemoveConfigItemContext {
   return {
     connection: {
@@ -17,39 +18,57 @@ function context(opts: {
     directory: () => "/repo",
     refresh: opts.refresh,
     remove: opts.remove,
+    storage: opts.legacyMcpRemoved === true ? { fsPath: "/storage" } as unknown as import("vscode").Uri : undefined,
   }
 }
 
 describe("remove config item adapter", () => {
-  it("removes agents from project and global scopes, then refreshes", async () => {
+  it("removes agents from project scope, then global if needed, then refreshes", async () => {
     const remove = mock(async () => ({ success: true, slug: "reviewer" }))
     const refresh = mock(async () => {})
     const ctx = context({ project: "/repo", remove, refresh })
 
     expect(await removeAgent(ctx, "reviewer")).toBe(true)
-    expect(remove).toHaveBeenCalledTimes(2)
-    expect(remove).toHaveBeenNthCalledWith(1, { id: "reviewer", type: "agent" }, "project", "/repo")
-    expect(remove).toHaveBeenNthCalledWith(2, { id: "reviewer", type: "agent" }, "global", "/repo")
+    expect(remove).toHaveBeenCalledTimes(1)
+    expect(remove).toHaveBeenCalledWith({ id: "reviewer", type: "agent" }, "project", "/repo")
     expect(refresh).toHaveBeenCalledTimes(1)
   })
 
-  it("removes MCP servers globally when there is no project, then refreshes", async () => {
+  it("removes agents from project scope even when removal returns undefined result", async () => {
+    const remove = mock(async () => undefined as unknown as ReturnType<typeof mock>)
+    const refresh = mock(async () => {})
+    const ctx = context({ project: "/repo", remove, refresh })
+
+    expect(await removeAgent(ctx, "reviewer")).toBe(false)
+    expect(remove).toHaveBeenCalledTimes(1)
+    expect(refresh).not.toHaveBeenCalled()
+  })
+
+  it("removes MCP servers, refreshing after removal", async () => {
     const remove = mock(async () => ({ success: true, slug: "memory" }))
     const refresh = mock(async () => {})
     const ctx = context({ remove, refresh })
 
     expect(await removeMcp(ctx, "memory")).toBe(true)
-    expect(remove).toHaveBeenCalledTimes(1)
     expect(remove).toHaveBeenCalledWith({ id: "memory", type: "mcp" }, "global", undefined)
     expect(refresh).toHaveBeenCalledTimes(1)
   })
 
-  it("does not refresh when removal fails", async () => {
-    const remove = mock(async () => ({ success: false, slug: "reviewer" }))
+  it("removes MCP servers from project and global, refreshing when at least one succeeds", async () => {
+    const remove = mock(async (arg) => arg.scope === "project" ? { success: true, slug: "mcp" } : { success: false, slug: "mcp" })
+    const refresh = mock(async () => {})
+    const ctx = context({ project: "/repo", remove, refresh })
+
+    expect(await removeMcp(ctx, "mcp")).toBe(true)
+    expect(refresh).toHaveBeenCalledTimes(1)
+  })
+
+  it("does not refresh when both project and global removal fail", async () => {
+    const remove = mock(async () => ({ success: false, slug: "mcp" }))
     const refresh = mock(async () => {})
     const ctx = context({ remove, refresh })
 
-    expect(await removeAgent(ctx, "reviewer")).toBe(false)
+    expect(await removeMcp(ctx, "mcp")).toBe(false)
     expect(refresh).not.toHaveBeenCalled()
   })
 })

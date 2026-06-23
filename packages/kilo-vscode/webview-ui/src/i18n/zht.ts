@@ -1347,7 +1347,6 @@ export const dict = {
   "settings.agentBehaviour.addMcp.args.help": "每行一個引數。包含空格的路徑將按原樣保留。",
   "settings.agentBehaviour.addMcp.args.placeholder": "e.g.\n-y\n@modelcontextprotocol/server-filesystem\n/tmp",
   "settings.agentBehaviour.addMcp.url": "伺服器 URL",
-  "settings.agentBehaviour.addMcp.url.placeholder": "e.g. http://localhost:3000/sse",
   "settings.agentBehaviour.skillPaths": "Skill 資料夾路徑",
   "settings.agentBehaviour.skillUrls": "Skill URL",
   "settings.agentBehaviour.removeSkill.title": "移除技能",
@@ -1365,7 +1364,6 @@ export const dict = {
   "settings.agentBehaviour.mcpDetail.args": "引數",
   "settings.agentBehaviour.mcpDetail.env": "環境",
   "settings.agentBehaviour.mcpDetail.disabled": "此伺服器已停用。",
-  "settings.agentBehaviour.mcpBrowseMarketplace": "瀏覽市場",
   "settings.agentBehaviour.mcpEmpty": "未設定 MCP 伺服器。在 kilo.jsonc 中新增 MCP 伺服器，或請代理為您新增。",
   "settings.agentBehaviour.workflowsPlaceholder": "工作流程透過工作區中的工作流程檔案管理。",
   "settings.agentBehaviour.workflows.description":

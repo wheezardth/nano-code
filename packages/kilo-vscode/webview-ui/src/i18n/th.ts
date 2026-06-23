@@ -1423,9 +1423,8 @@ export const dict = {
   "settings.agentBehaviour.mcpDetail.args": "อาร์กิวเมนต์",
   "settings.agentBehaviour.mcpDetail.env": "สภาพแวดล้อม",
   "settings.agentBehaviour.mcpDetail.disabled": "เซิร์ฟเวอร์นี้ถูกปิดใช้งาน",
-  "settings.agentBehaviour.mcpBrowseMarketplace": "เรียกดู Marketplace",
   "settings.agentBehaviour.mcpEmpty":
-    "ไม่ได้กำหนดค่าเซิร์ฟเวอร์ MCP เพิ่มเซิร์ฟเวอร์ MCP ใน kilo.jsonc หรือขอให้เอเจนต์เพิ่มให้คุณ",
+    "No MCP servers configured. Add MCP servers in kilo.jsonc, or ask the agent to add them for you.",
   "settings.agentBehaviour.workflowsPlaceholder": "เวิร์กโฟลว์จัดการผ่านไฟล์เวิร์กโฟลว์ในพื้นที่ทำงาน",
   "settings.agentBehaviour.workflows.description":
     "เวิร์กโฟลว์คือคำสั่งสแลชแบบกำหนดเองที่กำหนดไว้ในการตั้งค่าของคุณ พิมพ์ /command-name ในแชทเพื่อเรียกใช้ คำสั่งถูกกำหนดค่าใน opencode.json ภายใต้ส่วน 'command'",

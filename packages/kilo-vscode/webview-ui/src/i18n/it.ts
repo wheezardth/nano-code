@@ -1234,9 +1234,8 @@ export const dict = {
   "settings.agentBehaviour.addMcp.args.placeholder": "es.\n-y\n@modelcontextprotocol/server-filesystem\n/tmp",
   "settings.agentBehaviour.addMcp.url": "URL server",
   "settings.agentBehaviour.addMcp.url.placeholder": "es. http://localhost:3000/sse",
-  "settings.agentBehaviour.mcpBrowseMarketplace": "Sfoglia Marketplace",
   "settings.agentBehaviour.mcpEmpty":
-    "Nessun server MCP configurato. Aggiungi server MCP in kilo.jsonc, o chiedi all'agente di aggiungerli per te.",
+    "No MCP servers configured. Add MCP servers in kilo.jsonc, or ask the agent to add them for you.",
   "settings.agentBehaviour.workflowsPlaceholder": "I workflow sono gestiti tramite file workflow nel workspace.",
   "settings.agentBehaviour.workflows.description":
     "I workflow sono comandi slash personalizzati definiti nella configurazione. Scrivi /nome-comando nella chat per invocarli. I comandi sono configurati in opencode.json nella sezione 'command'.",
