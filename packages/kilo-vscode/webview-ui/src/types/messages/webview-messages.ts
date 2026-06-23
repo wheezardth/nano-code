@@ -1180,8 +1180,8 @@ export type WebviewMessage =
   | CloseSessionRequest
   | PersistSessionRequest
   | ForgetSessionRequest
-   | RenameWorktreeRequest
-   | RequestRepoInfoMessage
+  | RenameWorktreeRequest
+  | RequestRepoInfoMessage
   | RequestStateMessage
   | ConfigureSetupScriptRequest
   | ConfigureRunScriptRequest

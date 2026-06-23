@@ -77,11 +77,11 @@ async function resolveFromProvider(
 }
 
 /**Return the first non-empty string, or"" if none. */
-function firstStr(...vals:Array<string | undefined>): string {
+function firstStr(...vals: Array<string | undefined>): string {
   for (const val of vals) {
-      if (val) {
-        return val
-      }
+    if (val) {
+      return val
+    }
   }
   return ""
 }
@@ -216,7 +216,7 @@ export async function generateFim(
   signal?: AbortSignal,
 ): Promise<ResponseMetaData> {
   const cfg = await resolveFimConfig(connectionService)
-  if ( !cfg.baseUrl || !cfg.model )
+  if (!cfg.baseUrl || !cfg.model)
     throw new Error("Local FIM: No autocomplete model selected (Settings -> Models -> Autocomplete model)")
   const meta: TokenMeta = { inputTokens: 0, outputTokens: 0 }
 

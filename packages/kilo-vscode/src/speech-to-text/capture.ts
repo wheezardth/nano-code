@@ -61,7 +61,7 @@ export async function stopSpeechCapture(requestId: string): Promise<Audio> {
   const size = await stat(state.file)
     .then((info) => info.size)
     .catch((err: unknown) => {
-      console.warn("[Kilo New] Failed to stat speech recording", err)
+      console.warn("[Nano New] Failed to stat speech recording", err)
       return 0
     })
 
@@ -245,11 +245,11 @@ async function findFFmpeg(): Promise<string> {
       await exec(bin, ["-version"], { timeout: 3000 })
       return bin
     } catch (err) {
-      console.warn(`[Kilo New] FFmpeg candidate failed: ${bin}`, err)
+      console.warn(`[Nano New] FFmpeg candidate failed: ${bin}`, err)
     }
   }
 
-  throw new Error("Speech input needs the bundled FFmpeg helper, but it was not found. Rebuild or reinstall Kilo Code.")
+  throw new Error("Speech input needs the bundled FFmpeg helper, but it was not found. Rebuild or reinstall Nano Code.")
 }
 
 function bundledPath(): string {
@@ -362,6 +362,6 @@ export function cleanOutput(raw: string): string {
 
 async function removeFile(file: string): Promise<void> {
   await unlink(file).catch((err: unknown) => {
-    console.warn("[Kilo New] Failed to remove speech recording", err)
+    console.warn("[Nano New] Failed to remove speech recording", err)
   })
 }

@@ -113,7 +113,7 @@ export const dict = {
   "dialog.model.expand": "ขยาย",
   "dialog.model.collapse": "ยุบ",
 
-  "dialog.model.unpaid.freeModels.title": "โมเดลฟรีที่จัดหาให้โดย Kilo",
+  "dialog.model.unpaid.freeModels.title": "โมเดลฟรีที่จัดหาให้โดย Nano",
   "dialog.model.unpaid.addMore.title": "เพิ่มโมเดลเพิ่มเติมจากผู้ให้บริการยอดนิยม",
 
   "dialog.provider.viewAll": "แสดงผู้ให้บริการเพิ่มเติม",
@@ -126,7 +126,7 @@ export const dict = {
   "provider.connect.status.waiting": "รอการอนุญาต...",
   "provider.connect.status.failed": "การอนุญาตล้มเหลว: {{error}}",
   "provider.connect.apiKey.description":
-    "ป้อนคีย์ API ของ {{provider}} เพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Kilo",
+    "ป้อนคีย์ API ของ {{provider}} เพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Nano",
   "provider.connect.apiKey.description.local":
     "Connect to your local {{provider}} server. Leave the API key empty if the server does not require one (default for localhost).",
   "provider.connect.atomicChat.description":
@@ -156,14 +156,14 @@ export const dict = {
   "provider.connect.oauth.code.visit.prefix": "เยี่ยมชม ",
   "provider.connect.oauth.code.visit.link": "ลิงก์นี้",
   "provider.connect.oauth.code.visit.suffix":
-    " เพื่อรวบรวมรหัสการอนุญาตของคุณเพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Kilo",
+    " เพื่อรวบรวมรหัสการอนุญาตของคุณเพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Nano",
   "provider.connect.oauth.code.label": "รหัสการอนุญาต {{method}}",
   "provider.connect.oauth.code.placeholder": "รหัสการอนุญาต",
   "provider.connect.oauth.code.required": "ต้องใช้รหัสการอนุญาต",
   "provider.connect.oauth.code.invalid": "รหัสการอนุญาตไม่ถูกต้อง",
   "provider.connect.oauth.auto.visit.prefix": "เยี่ยมชม ",
   "provider.connect.oauth.auto.visit.link": "ลิงก์นี้",
-  "provider.connect.oauth.auto.visit.suffix": " และป้อนรหัสด้านล่างเพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Kilo",
+  "provider.connect.oauth.auto.visit.suffix": " และป้อนรหัสด้านล่างเพื่อเชื่อมต่อบัญชีและใช้โมเดล {{provider}} ใน Nano",
   "provider.connect.oauth.auto.confirmationCode": "รหัสยืนยัน",
   "provider.connect.toast.connected.title": "{{provider}} ที่เชื่อมต่อแล้ว",
   "provider.connect.toast.connected.description": "โมเดล {{provider}} พร้อมใช้งานแล้ว",
@@ -286,12 +286,12 @@ export const dict = {
     "ปุ่ม 'ปรับปรุงพรอมต์' ช่วยปรับปรุงพรอมต์ของคุณโดยให้บริบทเพิ่มเติม ชี้แจง หรือเขียนใหม่ ลองพิมพ์พรอมต์ที่นี่และคลิกปุ่มอีกครั้งเพื่อดูว่ามันทำงานอย่างไร",
   "prompt.action.indexing": "การตั้งค่าการสร้างดัชนี",
 
-  "speechToText.tooltip.start": "เริ่มการป้อนข้อมูลด้วยเสียงด้วย Kilo Gateway",
+  "speechToText.tooltip.start": "เริ่มการป้อนข้อมูลด้วยเสียงด้วย Nano Gateway",
   "speechToText.tooltip.stop": "หยุดจับเสียง",
   "speechToText.tooltip.transcribing": "กำลังถอดเสียง... คลิกเพื่อยกเลิก",
   "speechToText.tooltip.error": "การป้อนข้อมูลด้วยเสียงล้มเหลว คลิกเพื่อล้าง",
   "speechToText.error.title": "การป้อนข้อมูลด้วยเสียงล้มเหลว",
-  "speechToText.error.loginRequired": "ลงชื่อเข้าใช้ Kilo เพื่อใช้การป้อนข้อมูลด้วยเสียง",
+  "speechToText.error.loginRequired": "ลงชื่อเข้าใช้ Nano เพื่อใช้การป้อนข้อมูลด้วยเสียง",
   "speechToText.error.permission": "การอนุญาตเข้าถึงไมโครโฟนถูกปฏิเสธ",
   "speechToText.error.microphone": "ไม่สามารถเริ่มต้นไมโครโฟนได้",
   "speechToText.error.recording": "การบันทึกล้มเหลว",
@@ -329,7 +329,7 @@ export const dict = {
   "dialog.directory.empty": "ไม่พบโฟลเดอร์",
 
   "dialog.server.title": "เซิร์ฟเวอร์",
-  "dialog.server.description": "สลับเซิร์ฟเวอร์ Kilo ที่แอปนี้เชื่อมต่อด้วย",
+  "dialog.server.description": "สลับเซิร์ฟเวอร์ Nano ที่แอปนี้เชื่อมต่อด้วย",
   "dialog.server.search.placeholder": "ค้นหาเซิร์ฟเวอร์",
   "dialog.server.empty": "ยังไม่มีเซิร์ฟเวอร์",
   "dialog.server.add.title": "เพิ่มเซิร์ฟเวอร์",
@@ -456,7 +456,7 @@ export const dict = {
   "toast.session.listFailed.title": "ไม่สามารถโหลดเซสชันสำหรับ {{project}}",
 
   "toast.update.title": "มีการอัปเดต",
-  "toast.update.description": "เวอร์ชันใหม่ของ Kilo ({{version}}) พร้อมใช้งานสำหรับติดตั้ง",
+  "toast.update.description": "เวอร์ชันใหม่ของ Nano ({{version}}) พร้อมใช้งานสำหรับติดตั้ง",
   "toast.update.action.installRestart": "ติดตั้งและรีสตาร์ท",
   "toast.update.action.notYet": "ยังไม่",
 
@@ -467,7 +467,7 @@ export const dict = {
   "error.page.action.checking": "กำลังตรวจสอบ...",
   "error.page.action.checkUpdates": "ตรวจสอบการอัปเดต",
   "error.page.action.updateTo": "อัปเดตเป็น {{version}}",
-  "error.page.report.prefix": "โปรดรายงานข้อผิดพลาดนี้ให้ทีม Kilo",
+  "error.page.report.prefix": "โปรดรายงานข้อผิดพลาดนี้ให้ทีม Nano",
   "error.page.report.discord": "บน Discord",
   "error.page.version": "เวอร์ชัน: {{version}}",
 
@@ -500,7 +500,7 @@ export const dict = {
   "error.chain.didYouMean": "คุณหมายถึง: {{suggestions}}",
   "error.chain.modelNotFound": "ไม่พบโมเดล: {{provider}}/{{model}}",
   "error.chain.checkConfig": "ตรวจสอบการกำหนดค่าของคุณ (opencode.json) ชื่อผู้ให้บริการ/โมเดล",
-  "error.chain.mcpFailed": 'เซิร์ฟเวอร์ MCP "{{name}}" ล้มเหลว โปรดทราบว่า Kilo ยังไม่รองรับการตรวจสอบสิทธิ์ MCP',
+  "error.chain.mcpFailed": 'เซิร์ฟเวอร์ MCP "{{name}}" ล้มเหลว โปรดทราบว่า Nano ยังไม่รองรับการตรวจสอบสิทธิ์ MCP',
   "error.chain.providerAuthFailed": "การตรวจสอบสิทธิ์ผู้ให้บริการล้มเหลว ({{provider}}): {{message}}",
   "error.chain.providerInitFailed": 'ไม่สามารถเริ่มต้นผู้ให้บริการ "{{provider}}" ตรวจสอบข้อมูลรับรองและการกำหนดค่า',
   "error.chain.configJsonInvalid": "ไฟล์กำหนดค่าที่ {{path}} ไม่ใช่ JSON(C) ที่ถูกต้อง",
@@ -672,12 +672,12 @@ export const dict = {
   "sidebar.workspaces.enable": "เปิดใช้งานพื้นที่ทำงาน",
   "sidebar.workspaces.disable": "ปิดใช้งานพื้นที่ทำงาน",
   "sidebar.gettingStarted.title": "เริ่มต้นใช้งาน",
-  "sidebar.gettingStarted.line1": "Kilo รวมถึงโมเดลฟรีเพื่อให้คุณเริ่มต้นได้ทันที",
+  "sidebar.gettingStarted.line1": "Nano รวมถึงโมเดลฟรีเพื่อให้คุณเริ่มต้นได้ทันที",
   "sidebar.gettingStarted.line2": "เชื่อมต่อผู้ให้บริการใด ๆ เพื่อใช้โมเดล รวมถึง Claude, GPT, Gemini ฯลฯ",
   "sidebar.project.recentSessions": "เซสชันล่าสุด",
   "sidebar.project.viewAllSessions": "ดูเซสชันทั้งหมด",
 
-  "app.name.desktop": "Kilo Desktop",
+  "app.name.desktop": "Nano Desktop",
 
   "settings.section.desktop": "เดสก์ท็อป",
   "settings.section.server": "เซิร์ฟเวอร์",
@@ -690,24 +690,24 @@ export const dict = {
   "settings.general.section.sounds": "เสียงเอฟเฟกต์",
 
   "settings.general.row.language.title": "ภาษา",
-  "settings.general.row.language.description": "เปลี่ยนภาษาที่แสดงสำหรับ Kilo",
+  "settings.general.row.language.description": "เปลี่ยนภาษาที่แสดงสำหรับ Nano",
   "settings.general.row.appearance.title": "รูปลักษณ์",
-  "settings.general.row.appearance.description": "ปรับแต่งวิธีการที่ Kilo มีลักษณะบนอุปกรณ์ของคุณ",
+  "settings.general.row.appearance.description": "ปรับแต่งวิธีการที่ Nano มีลักษณะบนอุปกรณ์ของคุณ",
   "settings.general.row.theme.title": "ธีม",
-  "settings.general.row.theme.description": "ปรับแต่งวิธีการที่ Kilo มีธีม",
+  "settings.general.row.theme.description": "ปรับแต่งวิธีการที่ Nano มีธีม",
   "settings.general.row.font.title": "ฟอนต์",
   "settings.general.row.font.description": "ปรับแต่งฟอนต์โมโนที่ใช้ในบล็อกโค้ด",
 
   "settings.general.row.releaseNotes.title": "บันทึกการอัปเดต",
   "settings.general.row.releaseNotes.description": "แสดงป๊อปอัพ What's New หลังจากอัปเดต",
   "settings.updates.row.startup.title": "ตรวจสอบการอัปเดตเมื่อเริ่มต้น",
-  "settings.updates.row.startup.description": "ตรวจสอบการอัปเดตโดยอัตโนมัติเมื่อ Kilo เปิดตัว",
+  "settings.updates.row.startup.description": "ตรวจสอบการอัปเดตโดยอัตโนมัติเมื่อ Nano เปิดตัว",
   "settings.updates.row.check.title": "ตรวจสอบการอัปเดต",
   "settings.updates.row.check.description": "ตรวจสอบการอัปเดตด้วยตนเองและติดตั้งหากมี",
   "settings.updates.action.checkNow": "ตรวจสอบเดี๋ยวนี้",
   "settings.updates.action.checking": "กำลังตรวจสอบ...",
   "settings.updates.toast.latest.title": "คุณใช้เวอร์ชันล่าสุดแล้ว",
-  "settings.updates.toast.latest.description": "คุณกำลังใช้ Kilo เวอร์ชันล่าสุด",
+  "settings.updates.toast.latest.description": "คุณกำลังใช้ Nano เวอร์ชันล่าสุด",
   "font.option.ibmPlexMono": "IBM Plex Mono",
   "font.option.cascadiaCode": "Cascadia Code",
   "font.option.firaCode": "Fira Code",
@@ -791,10 +791,10 @@ export const dict = {
   "settings.indexing.projectEnable.disabledTooltip": "เปิดใช้งานการทำดัชนีระดับโลกแล้ว โปรเจ็กต์นี้จึงถูกรวมไว้แล้ว",
   "settings.indexing.provider.title": "ผู้ให้บริการการฝัง",
   "settings.indexing.provider.description": "เลือกผู้ให้บริการที่ใช้สร้างการฝังสำหรับการค้นหาเชิงความหมาย",
-  "settings.indexing.kiloModel.title": "พรีเซ็ตโมเดล Kilo",
-  "settings.indexing.kiloModel.description": "เลือกโมเดลการฝังที่ Kilo โฮสต์และรองรับ",
-  "settings.indexing.kiloSignIn.title": "ต้องลงชื่อเข้าใช้ Kilo",
-  "settings.indexing.kiloSignIn.description": "ลงชื่อเข้าใช้ Kilo เพื่อใช้การฝังแบบโฮสต์",
+  "settings.indexing.kiloModel.title": "พรีเซ็ตโมเดล Nano",
+  "settings.indexing.kiloModel.description": "เลือกโมเดลการฝังที่ Nano โฮสต์และรองรับ",
+  "settings.indexing.kiloSignIn.title": "ต้องลงชื่อเข้าใช้ Nano",
+  "settings.indexing.kiloSignIn.description": "ลงชื่อเข้าใช้ Nano เพื่อใช้การฝังแบบโฮสต์",
   "settings.indexing.model.title": "โมเดลการฝัง",
   "settings.indexing.model.description": "แทนที่โมเดลการฝังเริ่มต้นสำหรับผู้ให้บริการที่เลือก",
   "settings.indexing.dimension.title": "ขนาดเวกเตอร์",
@@ -835,7 +835,7 @@ export const dict = {
   "settings.providers.title": "ผู้ให้บริการ",
   "settings.providers.description": "การตั้งค่าผู้ให้บริการจะสามารถกำหนดค่าได้ที่นี่",
   "settings.providers.betaNotice":
-    "ปัจจุบันสามารถตั้งค่าได้เฉพาะผู้ให้บริการ Kilo Gateway ในหน้าการตั้งค่าเท่านั้น การรองรับการตั้งค่าผู้ให้บริการรายอื่นจะพร้อมใช้งานในเร็วๆ นี้ในช่วงเบต้า ในระหว่างนี้คุณสามารถตั้งค่าผู้ให้บริการผ่าน CLI หรือไฟล์คอนฟิกได้ เรามุ่งมั่นที่จะรักษาให้ Kilo เปิดกว้างและไม่มีการผูกมัด",
+    "ปัจจุบันสามารถตั้งค่าได้เฉพาะผู้ให้บริการ Nano Gateway ในหน้าการตั้งค่าเท่านั้น การรองรับการตั้งค่าผู้ให้บริการรายอื่นจะพร้อมใช้งานในเร็วๆ นี้ในช่วงเบต้า ในระหว่างนี้คุณสามารถตั้งค่าผู้ให้บริการผ่าน CLI หรือไฟล์คอนฟิกได้ เรามุ่งมั่นที่จะรักษาให้ Nano เปิดกว้างและไม่มีการผูกมัด",
   "settings.providers.section.connected": "ผู้ให้บริการที่เชื่อมต่อ",
   "settings.providers.connected.empty": "ไม่มีผู้ให้บริการที่เชื่อมต่อ",
   "settings.providers.section.popular": "ผู้ให้บริการยอดนิยม",
@@ -855,7 +855,7 @@ export const dict = {
   "settings.providers.subagentModel.description":
     "โมเดลเริ่มต้นและระดับการใช้เหตุผลสำหรับตัวแทนย่อยของ task-tool ปล่อยว่างไว้เพื่อรับค่าโมเดลจากตัวแทนที่เรียก",
   "settings.models.hidePromptTraining.title": "ซ่อนโมเดลที่ใช้พรอมต์ในการฝึก",
-  "settings.models.hidePromptTraining.description": "ซ่อนโมเดล Kilo Gateway ที่ผู้ให้บริการอาจใช้พรอมต์ของคุณในการฝึก",
+  "settings.models.hidePromptTraining.description": "ซ่อนโมเดล Nano Gateway ที่ผู้ให้บริการอาจใช้พรอมต์ของคุณในการฝึก",
   "settings.providers.modeModels": "โมเดลต่อโหมด",
   "settings.providers.custom.note": "เพิ่มผู้ให้บริการแบบกำหนดเองด้วย Base URL",
   "settings.providers.modeModels.description":
@@ -959,11 +959,11 @@ export const dict = {
   "settings.config.status.loadedLegacy": "โหลดการตั้งค่าแบบเก่าแล้ว",
   "settings.config.status.notLoaded": "ยังไม่ได้โหลด",
   "settings.config.status.create": "ไม่พบ - สร้างไฟล์นี้",
-  "settings.config.title": "เปิดไฟล์การตั้งค่า Kilo ({{scope}})",
+  "settings.config.title": "เปิดไฟล์การตั้งค่า Nano ({{scope}})",
   "settings.config.placeholder":
     "ไฟล์การตั้งค่าจะถูกผสานตามลำดับ ไฟล์ที่ถูกทำเครื่องหมายว่าโหลดแล้วจะมีผลกับการตั้งค่าในปัจจุบัน",
-  "settings.config.noWorkspace": "เปิดโฟลเดอร์พื้นที่ทำงานเพื่อแก้ไขไฟล์การตั้งค่า Kilo ภายใน",
-  "settings.config.openFailed": "ไม่สามารถเปิดไฟล์การตั้งค่า Kilo ({{scope}}): {{message}}",
+  "settings.config.noWorkspace": "เปิดโฟลเดอร์พื้นที่ทำงานเพื่อแก้ไขไฟล์การตั้งค่า Nano ภายใน",
+  "settings.config.openFailed": "ไม่สามารถเปิดไฟล์การตั้งค่า Nano ({{scope}}): {{message}}",
   "settings.config.source.xdg": "การตั้งค่า XDG ทั่วโลก",
   "settings.config.source.homeKilo": "การตั้งค่า .kilo ของ Home",
   "settings.config.source.homeKilocode": "การตั้งค่า .kilocode ของ Home",
@@ -1046,7 +1046,7 @@ export const dict = {
   "feedback.dialog.github": "รายงานปัญหาบน GitHub",
   "feedback.dialog.discord": "เข้าร่วมชุมชน Discord ของเรา",
   "feedback.dialog.support": "ฝ่ายสนับสนุนลูกค้า",
-  "workStyle.onboarding.welcome": "ยินดีต้อนรับสู่ Kilo",
+  "workStyle.onboarding.welcome": "ยินดีต้อนรับสู่ Nano",
   "workStyle.onboarding.title": "เลือกวิธีที่คุณต้องการทำงาน",
   "workStyle.onboarding.description":
     "ตั้งค่าเริ่มต้นสำหรับสิทธิ์ บล็อกการให้เหตุผล เอาต์พุตเทอร์มินัล และไทม์ไลน์บริบท การตั้งค่านี้ใช้เพียงครั้งเดียวและจะข้ามรายการที่คุณปรับแต่งไว้แล้ว",
@@ -1061,7 +1061,7 @@ export const dict = {
   "workStyle.choice.visibility": "การแสดงผล",
   "workStyle.choice.human-in-the-loop.eyebrow": "มีผู้ใช้ร่วมตรวจสอบ",
   "workStyle.choice.human-in-the-loop.title": "ตรวจสอบก่อน",
-  "workStyle.choice.human-in-the-loop.description": "Kilo จะหยุดและแสดงแผนให้คุณเห็นระหว่างการทำงาน",
+  "workStyle.choice.human-in-the-loop.description": "Nano จะหยุดและแสดงแผนให้คุณเห็นระหว่างการทำงาน",
   "workStyle.choice.human-in-the-loop.permissions": "ขออนุญาตก่อนแก้ไขไฟล์หรือเรียกใช้คำสั่ง",
   "workStyle.choice.human-in-the-loop.bash": "ขออนุญาตเมื่อเรียกใช้คำสั่งเทอร์มินัลทุกคำสั่ง",
   "workStyle.choice.human-in-the-loop.visibility": "แสดงรายละเอียดการสนทนาทั้งหมด รวมถึงกระบวนการให้เหตุผล",
@@ -1108,7 +1108,7 @@ export const dict = {
   "deviceAuth.toast.codeCopied": "คัดลอกรหัสไปยังคลิปบอร์ดแล้ว",
   "deviceAuth.toast.errorCopied": "คัดลอกข้อผิดพลาดไปยังคลิปบอร์ดแล้ว",
   "deviceAuth.status.initiating": "กำลังเริ่มเข้าสู่ระบบ...",
-  "deviceAuth.title": "เข้าสู่ระบบ Kilo Code",
+  "deviceAuth.title": "เข้าสู่ระบบ Nano Code",
   "deviceAuth.step1": "ขั้นตอนที่ 1: เปิด URL นี้",
   "deviceAuth.action.copyUrl": "คัดลอก URL",
   "deviceAuth.action.openBrowser": "เปิดเบราว์เซอร์",
@@ -1129,7 +1129,7 @@ export const dict = {
 
   "profile.title": "โปรไฟล์",
   "profile.notLoggedIn": "ยังไม่ได้เข้าสู่ระบบ",
-  "profile.action.login": "เข้าสู่ระบบด้วย Kilo Code",
+  "profile.action.login": "เข้าสู่ระบบด้วย Nano Code",
   "profile.balance.title": "ยอดคงเหลือ",
   "profile.balance.refresh": "รีเฟรชยอดคงเหลือ",
   "profile.action.dashboard": "แดชบอร์ด",
@@ -1149,10 +1149,10 @@ export const dict = {
 
   "settings.experimental.title": "ทดลอง",
   "settings.language.title": "ภาษา",
-  "settings.aboutKiloCode.title": "เกี่ยวกับ Kilo Code",
+  "settings.aboutKiloCode.title": "เกี่ยวกับ Nano Code",
 
   "session.messages.empty": "เริ่มการสนทนาโดยพิมพ์ข้อความด้านล่าง",
-  "session.messages.welcome": "Kilo Code เป็นผู้ช่วยเขียนโค้ด AI ขอให้สร้างฟีเจอร์ แก้ไขบัก หรืออธิบายโค้ดเบสของคุณ",
+  "session.messages.welcome": "Nano Code เป็นผู้ช่วยเขียนโค้ด AI ขอให้สร้างฟีเจอร์ แก้ไขบัก หรืออธิบายโค้ดเบสของคุณ",
   "session.messages.scrollToBottom": "เลื่อนไปด้านล่าง",
   "session.messages.initializing": "กำลังเริ่มต้น...",
   "session.messages.taskStarting": "กำลังเริ่มทำงาน...",
@@ -1204,7 +1204,7 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "พอร์ต:",
   "settings.aboutKiloCode.versionInfo": "ข้อมูลเวอร์ชัน",
   "settings.aboutKiloCode.version.label": "เวอร์ชัน:",
-  "settings.aboutKiloCode.extensionName": "ส่วนขยาย Kilo Code",
+  "settings.aboutKiloCode.extensionName": "ส่วนขยาย Nano Code",
   "settings.aboutKiloCode.community": "ชุมชนและการสนับสนุน",
   "settings.aboutKiloCode.feedback.prefix": "หากคุณมีคำถามหรือข้อเสนอแนะ สามารถเปิด issue ได้ที่",
   "settings.aboutKiloCode.feedback.or": "หรือ",
@@ -1219,10 +1219,10 @@ export const dict = {
   "settings.aboutKiloCode.exportSettings": "ส่งออก",
   "settings.aboutKiloCode.importSettings": "นำเข้า",
   "settings.aboutKiloCode.importSettings.invalidJson": "ไฟล์ JSON ไม่ถูกต้อง กรุณาเลือกไฟล์การตั้งค่าที่ถูกต้อง",
-  "settings.aboutKiloCode.importSettings.invalidConfig": "ไฟล์ไม่มีการตั้งค่า Kilo ที่ถูกต้อง",
+  "settings.aboutKiloCode.importSettings.invalidConfig": "ไฟล์ไม่มีการตั้งค่า Nano ที่ถูกต้อง",
   "settings.aboutKiloCode.importSettings.tooLarge": "ไฟล์มีขนาดใหญ่เกินไป ไฟล์การตั้งค่าต้องมีขนาดไม่เกิน 1 MB",
   "settings.aboutKiloCode.importSettings.newerVersion":
-    "ไฟล์นี้ถูกส่งออกจาก Kilo เวอร์ชันใหม่กว่า การตั้งค่าบางรายการอาจถูกข้ามไป",
+    "ไฟล์นี้ถูกส่งออกจาก Nano เวอร์ชันใหม่กว่า การตั้งค่าบางรายการอาจถูกข้ามไป",
   "settings.aboutKiloCode.importSettings.success": "นำเข้าการตั้งค่าแล้ว ตรวจสอบการเปลี่ยนแปลงด้านบน จากนั้นคลิกบันทึก",
 
   "settings.aboutKiloCode.telemetry.title": "Telemetry",
@@ -1245,7 +1245,7 @@ export const dict = {
   "settings.browser.headless.title": "โหมด Headless",
   "settings.browser.headless.description": "ทำงานในโหมด headless (ไม่มีหน้าต่างเบราว์เซอร์ที่มองเห็นได้)",
 
-  "settings.language.description": 'เลือกภาษาสำหรับ UI ของ Kilo Code "อัตโนมัติ" จะใช้ภาษาการแสดงผลของ VS Code',
+  "settings.language.description": 'เลือกภาษาสำหรับ UI ของ Nano Code "อัตโนมัติ" จะใช้ภาษาการแสดงผลของ VS Code',
   "settings.language.auto": "อัตโนมัติ (ภาษา VS Code)",
   "settings.language.current": "ปัจจุบัน:",
 
@@ -1296,18 +1296,18 @@ export const dict = {
   "settings.experimental.codebaseSearch.description": "เปิดใช้งานการค้นหาด้วยภาษาธรรมชาติโดย AI ทั่วทั้งโค้ดเบส",
   "settings.experimental.speechToText.title": "แปลงเสียงเป็นข้อความ",
   "settings.experimental.speechToText.description":
-    "เปิดใช้งานการป้อนข้อมูลด้วยเสียงในช่องพรอมต์โดยใช้บัญชี Kilo ของคุณผ่าน Kilo Gateway",
+    "เปิดใช้งานการป้อนข้อมูลด้วยเสียงในช่องพรอมต์โดยใช้บัญชี Nano ของคุณผ่าน Nano Gateway",
   "settings.models.speechToText.disabledDescription":
-    "เปิดใช้งานและลงชื่อเข้าใช้ผู้ให้บริการ Kilo เพื่อใช้ Speech to Text ปัจจุบัน Speech to Text รองรับเฉพาะกับ Kilo Gateway เท่านั้น",
+    "เปิดใช้งานและลงชื่อเข้าใช้ผู้ให้บริการ Nano เพื่อใช้ Speech to Text ปัจจุบัน Speech to Text รองรับเฉพาะกับ Nano Gateway เท่านั้น",
   "settings.models.speechToTextModel.title": "โมเดลแปลงเสียงเป็นข้อความ",
-  "settings.models.speechToTextModel.description": "เลือกโมเดลการถอดเสียง Kilo Gateway สำหรับการป้อนข้อมูลด้วยเสียง",
+  "settings.models.speechToTextModel.description": "เลือกโมเดลการถอดเสียง Nano Gateway สำหรับการป้อนข้อมูลด้วยเสียง",
   "settings.experimental.continueOnDeny.title": "ดำเนินต่อเมื่อถูกปฏิเสธ",
   "settings.experimental.continueOnDeny.description": "ดำเนินลูปเอเจนต์ต่อเมื่อสิทธิ์ถูกปฏิเสธ",
   "settings.experimental.mcpTimeout.title": "หมดเวลา MCP (มิลลิวินาที)",
   "settings.experimental.mcpTimeout.description": "หมดเวลาสำหรับคำขอเซิร์ฟเวอร์ MCP เป็นมิลลิวินาที",
   "settings.experimental.remote.title": "การควบคุม Remote",
   "settings.experimental.remote.description":
-    "เปิดใช้งานการควบคุม Remote ของเซสชันผ่าน Kilo Cloud ซึ่งจะส่งผลต่อ CLI บนเครื่องนี้ด้วย",
+    "เปิดใช้งานการควบคุม Remote ของเซสชันผ่าน Nano Cloud ซึ่งจะส่งผลต่อ CLI บนเครื่องนี้ด้วย",
   "settings.experimental.remote.current": "สถานะปัจจุบัน:",
   "settings.experimental.remote.startup": "เปิดใช้งานอัตโนมัติเมื่อเริ่มต้น:",
   "settings.experimental.remote.active": "เปิดใช้งาน",
@@ -1418,7 +1418,7 @@ export const dict = {
   "settings.agentBehaviour.claudeCompat.heading": "ความเข้ากันได้กับ Claude Code",
   "settings.agentBehaviour.claudeCompat.title": "โหลดไฟล์ Claude Code",
   "settings.agentBehaviour.claudeCompat.description":
-    "โหลดคำแนะนำและทักษะจาก CLAUDE.md ในไดเรกทอรีการกำหนดค่า Claude Code ของคุณลงในเซสชัน เปิดใช้งานตัวเลือกนี้หากคุณต้องการให้ Kilo ใช้คำแนะนำและทักษะจาก Claude Code ของคุณ จำเป็นต้องรีสตาร์ท",
+    "โหลดคำแนะนำและทักษะจาก CLAUDE.md ในไดเรกทอรีการกำหนดค่า Claude Code ของคุณลงในเซสชัน เปิดใช้งานตัวเลือกนี้หากคุณต้องการให้ Nano ใช้คำแนะนำและทักษะจาก Claude Code ของคุณ จำเป็นต้องรีสตาร์ท",
   "settings.agentBehaviour.mcpDetail.command": "คำสั่ง",
   "settings.agentBehaviour.mcpDetail.args": "อาร์กิวเมนต์",
   "settings.agentBehaviour.mcpDetail.env": "สภาพแวดล้อม",
@@ -1489,7 +1489,7 @@ export const dict = {
   "settings.display.username.title": "ชื่อผู้ใช้",
   "settings.display.username.description": "ชื่อผู้ใช้กำหนดเองในบทสนทนา",
   "settings.display.fontSize.title": "ขนาดฟอนต์",
-  "settings.display.fontSize.description": "ปรับขนาดฟอนต์ webview UI ของ Kilo แยกเป็นอิสระจาก VS Code.",
+  "settings.display.fontSize.description": "ปรับขนาดฟอนต์ webview UI ของ Nano แยกเป็นอิสระจาก VS Code.",
   "settings.display.reasoningAutoCollapse.title": "ยุบเหตุผลอัตโนมัติ",
   "settings.display.reasoningAutoCollapse.description":
     "ยุบ block เหตุผลหลังจากเอเจนต์เขียนเสร็จ ปิดไว้เพื่อให้เหตุผลยังคงขยายอยู่ เว้นแต่คุณจะยุบเอง",
@@ -1524,12 +1524,12 @@ export const dict = {
   "settings.legacyMigration.link": "ย้ายข้อมูลจากเวอร์ชันดั้งเดิม",
   "settings.aboutKiloCode.legacyMigration.title": "การย้ายข้อมูลจากเวอร์ชันดั้งเดิม",
   "settings.aboutKiloCode.legacyMigration.description":
-    "ย้ายการตั้งค่าจากการติดตั้ง Kilo Code ก่อนหน้านี้ รวมถึงคีย์ API ของผู้ให้บริการและโมเดลเริ่มต้น",
+    "ย้ายการตั้งค่าจากการติดตั้ง Nano Code ก่อนหน้านี้ รวมถึงคีย์ API ของผู้ให้บริการและโมเดลเริ่มต้น",
   "settings.aboutKiloCode.rooImport.description": "นำเข้าประวัติการสนทนาจากการติดตั้ง Roo Code",
   "settings.aboutKiloCode.rooImport.button": "นำเข้าเซสชันจาก Roo Code",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "มีอะไรใหม่ใน Kilo Code",
+  "migration.whatsNew.title": "มีอะไรใหม่ใน Nano Code",
   "migration.whatsNew.subtitle": "เราได้สร้างส่วนขยายใหม่บนรากฐานที่เร็วและมีประสิทธิภาพมากขึ้น",
   "migration.whatsNew.features.performance.title": "ประสิทธิภาพเอเจนต์ที่เร็วขึ้น",
   "migration.whatsNew.features.performance.detail":
@@ -1541,7 +1541,7 @@ export const dict = {
     "อินเทอร์เฟซรวมสำหรับการเรียกใช้เอเจนต์หลายตัวพร้อมกัน แต่ละตัวบน worktree ของตัวเอง — ติดตามความคืบหน้า สลับบริบท และตรวจสอบการเปลี่ยนแปลงได้ในที่เดียว",
   "migration.whatsNew.features.foundation.title": "รากฐานที่ใช้ร่วมกัน",
   "migration.whatsNew.features.foundation.detail":
-    "แกนหลักขนาดเล็กและมีประสิทธิภาพเดียวกันในทุกผลิตภัณฑ์ Kilo ประสบการณ์ที่คุ้นเคยไม่ว่าคุณจะเลือกทำงานอย่างไร",
+    "แกนหลักขนาดเล็กและมีประสิทธิภาพเดียวกันในทุกผลิตภัณฑ์ Nano ประสบการณ์ที่คุ้นเคยไม่ว่าคุณจะเลือกทำงานอย่างไร",
   "migration.whatsNew.blogLink": "อ่านประกาศฉบับเต็ม",
   "migration.whatsNew.docsLink": "มีอะไรใหม่และคำถามที่พบบ่อย",
   "migration.whatsNew.continue": "ดำเนินการต่อ",
@@ -1640,7 +1640,7 @@ export const dict = {
     "ไฟล์ที่ถูกแก้ไขในแผนผังการทำงานแต่ยังไม่ได้ staged และไฟล์ที่ไม่ได้ติดตาม (ใหม่)",
   "diffViewer.source.session.label": "เซสชัน",
   "diffViewer.source.session.tooltip":
-    "ไฟล์ที่ Kilo แก้ไขในช่วงเซสชันปัจจุบัน โดยอิงจากสแน็ปช็อตต่อเทิร์น จะรีเซ็ตเมื่อเริ่มเซสชันใหม่",
+    "ไฟล์ที่ Nano แก้ไขในช่วงเซสชันปัจจุบัน โดยอิงจากสแน็ปช็อตต่อเทิร์น จะรีเซ็ตเมื่อเริ่มเซสชันใหม่",
   "diffViewer.group.session": "เซสชัน",
   "diffViewer.group.git": "Git",
   "diffViewer.notice.snapshotsDisabled":

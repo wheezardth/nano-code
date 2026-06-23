@@ -7,8 +7,8 @@ import type { RemoteStatusService } from "./services/RemoteStatusService"
 type PanelView = "settings" | "profile" | "indexing"
 
 const PANEL_TITLES: Record<PanelView, string> = {
-  settings: "Kilo Settings",
-  profile: "Kilo Profile",
+  settings: "Nano Settings",
+  profile: "Nano Profile",
   indexing: "Codebase Indexing",
 }
 
@@ -139,7 +139,7 @@ export class SettingsEditorProvider implements vscode.Disposable {
 
     const title = PANEL_TITLES[view]
     panel.onDidDispose(() => {
-      console.log(`[Kilo New] ${title} panel disposed`)
+      console.log(`[Nano New] ${title} panel disposed`)
       closePanelDisposable.dispose()
       readyDisposable.dispose()
       tabDisposable.dispose()

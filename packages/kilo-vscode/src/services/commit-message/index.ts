@@ -58,8 +58,8 @@ export function registerCommitMessageService(
       try {
         client = await connectionService.getClientAsync(path)
       } catch (err) {
-        console.error("[Kilo New] Failed to connect to Kilo backend:", err)
-        vscode.window.showErrorMessage("Failed to connect to Kilo backend. Please try again.")
+        console.error("[Nano New] Failed to connect to Nano backend:", err)
+        vscode.window.showErrorMessage("Failed to connect to Nano backend. Please try again.")
         return
       }
 
@@ -101,7 +101,7 @@ export function registerCommitMessageService(
               repository.inputBox.value = message
               lastGeneratedMessage = message
               lastWorkspacePath = path
-              console.log("[Kilo New] Commit message generated successfully")
+              console.log("[Nano New] Commit message generated successfully")
             } finally {
               clearTimeout(timer)
             }
@@ -109,16 +109,16 @@ export function registerCommitMessageService(
         )
         .then(undefined, (error: unknown) => {
           if (userCancelled) {
-            console.log("[Kilo New] Commit message generation was cancelled by user")
+            console.log("[Nano New] Commit message generation was cancelled by user")
             return
           }
           if (timedOut) {
-            console.log("[Kilo New] Commit message generation timed out")
+            console.log("[Nano New] Commit message generation timed out")
             vscode.window.showErrorMessage("Commit message generation timed out. Please try again.")
             return
           }
           const msg = getErrorMessage(error)
-          console.error("[Kilo New] Failed to generate commit message:", msg)
+          console.error("[Nano New] Failed to generate commit message:", msg)
           vscode.window.showErrorMessage(`Failed to generate commit message: ${msg}`)
         })
     },

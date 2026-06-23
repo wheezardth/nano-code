@@ -15,7 +15,6 @@ import { DEFAULT_SPEECH_TO_TEXT_MODEL } from "../../../../src/speech-to-text/mod
 import { hasSpeechToTextAccess, selectedSpeechToTextModel } from "../speech-to-text/availability"
 import { SPEECH_TO_TEXT_MODEL_OPTIONS } from "../speech-to-text/model-selector"
 
-
 const ModelsTab: Component = () => {
   const { config, settings, updateConfig, updateSetting } = useConfig()
   const language = useLanguage()
@@ -34,8 +33,7 @@ const ModelsTab: Component = () => {
   const autocompleteSelection = () => {
     const p = autocompleteProvider()
     const m = autocompleteModel()
-    return p && m ? { providerID:p, modelID:m } : null
-
+    return p && m ? { providerID: p, modelID: m } : null
   }
 
   function handleModelSelect(configKey: "model" | "small_model") {

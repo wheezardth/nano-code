@@ -113,7 +113,7 @@ export const dict = {
   "dialog.model.expand": "توسيع",
   "dialog.model.collapse": "طي",
 
-  "dialog.model.unpaid.freeModels.title": "نماذج مجانية مقدمة من Kilo",
+  "dialog.model.unpaid.freeModels.title": "نماذج مجانية مقدمة من Nano",
   "dialog.model.unpaid.addMore.title": "إضافة المزيد من النماذج من موفرين مشهورين",
 
   "dialog.provider.viewAll": "عرض المزيد من الموفرين",
@@ -126,7 +126,7 @@ export const dict = {
   "provider.connect.status.waiting": "في انتظار التفويض...",
   "provider.connect.status.failed": "فشل التفويض: {{error}}",
   "provider.connect.apiKey.description":
-    "أدخل مفتاح واجهة برمجة تطبيقات {{provider}} الخاص بك لتوصيل حسابك واستخدام نماذج {{provider}} في Kilo.",
+    "أدخل مفتاح واجهة برمجة تطبيقات {{provider}} الخاص بك لتوصيل حسابك واستخدام نماذج {{provider}} في Nano.",
   "provider.connect.apiKey.description.local":
     "Connect to your local {{provider}} server. Leave the API key empty if the server does not require one (default for localhost).",
   "provider.connect.atomicChat.description":
@@ -156,14 +156,14 @@ export const dict = {
   "provider.connect.oauth.code.visit.prefix": "قم بزيارة ",
   "provider.connect.oauth.code.visit.link": "هذا الرابط",
   "provider.connect.oauth.code.visit.suffix":
-    " للحصول على رمز التفويض الخاص بك لتوصيل حسابك واستخدام نماذج {{provider}} في Kilo.",
+    " للحصول على رمز التفويض الخاص بك لتوصيل حسابك واستخدام نماذج {{provider}} في Nano.",
   "provider.connect.oauth.code.label": "رمز تفويض {{method}}",
   "provider.connect.oauth.code.placeholder": "رمز التفويض",
   "provider.connect.oauth.code.required": "رمز التفويض مطلوب",
   "provider.connect.oauth.code.invalid": "رمز التفويض غير صالح",
   "provider.connect.oauth.auto.visit.prefix": "قم بزيارة ",
   "provider.connect.oauth.auto.visit.link": "هذا الرابط",
-  "provider.connect.oauth.auto.visit.suffix": " وأدخل الرمز أدناه لتوصيل حسابك واستخدام نماذج {{provider}} في Kilo.",
+  "provider.connect.oauth.auto.visit.suffix": " وأدخل الرمز أدناه لتوصيل حسابك واستخدام نماذج {{provider}} في Nano.",
   "provider.connect.oauth.auto.confirmationCode": "رمز التأكيد",
   "provider.connect.toast.connected.title": "تم توصيل {{provider}}",
   "provider.connect.toast.connected.description": "نماذج {{provider}} متاحة الآن للاستخدام.",
@@ -284,12 +284,12 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "زر «حسّن الموجه» يطوّر موجهك بإضافة سياق أو توضيح أو إعادة صياغة. جرّب اكتب موجه هنا ثم اضغط الزر مرة ثانية وشوف النتيجة.",
 
-  "speechToText.tooltip.start": "بدء الإدخال الصوتي باستخدام Kilo Gateway",
+  "speechToText.tooltip.start": "بدء الإدخال الصوتي باستخدام Nano Gateway",
   "speechToText.tooltip.stop": "إيقاف التقاط الصوت",
   "speechToText.tooltip.transcribing": "جاري تحويل الصوت إلى نص... انقر للإلغاء.",
   "speechToText.tooltip.error": "فشل الإدخال الصوتي. انقر للمسح.",
   "speechToText.error.title": "فشل الإدخال الصوتي",
-  "speechToText.error.loginRequired": "قم بتسجيل الدخول إلى Kilo لاستخدام الإدخال الصوتي.",
+  "speechToText.error.loginRequired": "قم بتسجيل الدخول إلى Nano لاستخدام الإدخال الصوتي.",
   "speechToText.error.permission": "تم رفض إذن الوصول إلى الميكروفون.",
   "speechToText.error.microphone": "تعذر بدء تشغيل الميكروفون.",
   "speechToText.error.recording": "فشل التسجيل.",
@@ -327,7 +327,7 @@ export const dict = {
   "dialog.directory.empty": "لم يتم العثور على مجلدات",
 
   "dialog.server.title": "الخوادم",
-  "dialog.server.description": "تبديل خادم Kilo الذي يتصل به هذا التطبيق.",
+  "dialog.server.description": "تبديل خادم Nano الذي يتصل به هذا التطبيق.",
   "dialog.server.search.placeholder": "البحث في الخوادم",
   "dialog.server.empty": "لا توجد خوادم بعد",
   "dialog.server.add.title": "إضافة خادم",
@@ -453,7 +453,7 @@ export const dict = {
   "toast.session.listFailed.title": "فشل تحميل الجلسات لـ {{project}}",
 
   "toast.update.title": "تحديث متاح",
-  "toast.update.description": "نسخة جديدة من Kilo ({{version}}) متاحة الآن للتثبيت.",
+  "toast.update.description": "نسخة جديدة من Nano ({{version}}) متاحة الآن للتثبيت.",
   "toast.update.action.installRestart": "تثبيت وإعادة تشغيل",
   "toast.update.action.notYet": "ليس الآن",
 
@@ -464,7 +464,7 @@ export const dict = {
   "error.page.action.checking": "جارٍ التحقق...",
   "error.page.action.checkUpdates": "التحقق من وجود تحديثات",
   "error.page.action.updateTo": "تحديث إلى {{version}}",
-  "error.page.report.prefix": "يرجى الإبلاغ عن هذا الخطأ لفريق Kilo",
+  "error.page.report.prefix": "يرجى الإبلاغ عن هذا الخطأ لفريق Nano",
   "error.page.report.discord": "على Discord",
   "error.page.version": "الإصدار: {{version}}",
 
@@ -498,7 +498,7 @@ export const dict = {
   "error.chain.didYouMean": "هل كنت تعني: {{suggestions}}",
   "error.chain.modelNotFound": "النموذج غير موجود: {{provider}}/{{model}}",
   "error.chain.checkConfig": "تحقق من أسماء الموفر/النموذج في التكوين (opencode.json)",
-  "error.chain.mcpFailed": 'فشل خادم MCP "{{name}}". لاحظ أن Kilo لا يدعم مصادقة MCP بعد.',
+  "error.chain.mcpFailed": 'فشل خادم MCP "{{name}}". لاحظ أن Nano لا يدعم مصادقة MCP بعد.',
   "error.chain.providerAuthFailed": "فشلت مصادقة الموفر ({{provider}}): {{message}}",
   "error.chain.providerInitFailed": 'فشل تهيئة الموفر "{{provider}}". تحقق من بيانات الاعتماد والتكوين.',
   "error.chain.configJsonInvalid": "ملف التكوين في {{path}} ليس JSON(C) صالحًا",
@@ -667,12 +667,12 @@ export const dict = {
   "sidebar.workspaces.enable": "تمكين مساحات العمل",
   "sidebar.workspaces.disable": "تعطيل مساحات العمل",
   "sidebar.gettingStarted.title": "البدء",
-  "sidebar.gettingStarted.line1": "يتضمن Kilo نماذج مجانية حتى تتمكن من البدء فورًا.",
+  "sidebar.gettingStarted.line1": "يتضمن Nano نماذج مجانية حتى تتمكن من البدء فورًا.",
   "sidebar.gettingStarted.line2": "قم بتوصيل أي موفر لاستخدام النماذج، بما في ذلك Claude و GPT و Gemini وما إلى ذلك.",
   "sidebar.project.recentSessions": "الجلسات الحديثة",
   "sidebar.project.viewAllSessions": "عرض جميع الجلسات",
 
-  "app.name.desktop": "Kilo Desktop",
+  "app.name.desktop": "Nano Desktop",
   "settings.section.desktop": "سطح المكتب",
   "settings.section.server": "الخادم",
   "settings.tab.general": "عام",
@@ -684,11 +684,11 @@ export const dict = {
   "settings.general.section.sounds": "المؤثرات الصوتية",
 
   "settings.general.row.language.title": "اللغة",
-  "settings.general.row.language.description": "تغيير لغة العرض لـ Kilo",
+  "settings.general.row.language.description": "تغيير لغة العرض لـ Nano",
   "settings.general.row.appearance.title": "المظهر",
-  "settings.general.row.appearance.description": "تخصيص كيفية ظهور Kilo على جهازك",
+  "settings.general.row.appearance.description": "تخصيص كيفية ظهور Nano على جهازك",
   "settings.general.row.theme.title": "السمة",
-  "settings.general.row.theme.description": "تخصيص سمة Kilo.",
+  "settings.general.row.theme.description": "تخصيص سمة Nano.",
   "settings.general.row.font.title": "الخط",
   "settings.general.row.font.description": "تخصيص الخط الأحادي المستخدم في كتل التعليمات البرمجية",
 
@@ -696,13 +696,13 @@ export const dict = {
   "settings.general.row.releaseNotes.description": 'عرض نوافذ "ما الجديد" المنبثقة بعد التحديثات',
 
   "settings.updates.row.startup.title": "التحقق من التحديثات عند بدء التشغيل",
-  "settings.updates.row.startup.description": "التحقق تلقائيًا من التحديثات عند تشغيل Kilo",
+  "settings.updates.row.startup.description": "التحقق تلقائيًا من التحديثات عند تشغيل Nano",
   "settings.updates.row.check.title": "التحقق من التحديثات",
   "settings.updates.row.check.description": "التحقق يدويًا من التحديثات وتثبيتها إذا كانت متاحة",
   "settings.updates.action.checkNow": "تحقق الآن",
   "settings.updates.action.checking": "جارٍ التحقق...",
   "settings.updates.toast.latest.title": "أنت على آخر إصدار",
-  "settings.updates.toast.latest.description": "أنت تستخدم أحدث إصدار من Kilo.",
+  "settings.updates.toast.latest.description": "أنت تستخدم أحدث إصدار من Nano.",
   "font.option.ibmPlexMono": "IBM Plex Mono",
   "font.option.cascadiaCode": "Cascadia Code",
   "font.option.firaCode": "Fira Code",
@@ -796,7 +796,7 @@ export const dict = {
   "settings.providers.title": "الموفرون",
   "settings.providers.description": "ستكون إعدادات الموفر قابلة للتكوين هنا.",
   "settings.providers.betaNotice":
-    "حالياً، يمكن إعداد مزود Kilo Gateway فقط في واجهة الإعدادات. سيتوفر دعم إعداد المزودين الآخرين قريباً خلال الفترة التجريبية. في غضون ذلك، يمكنك إعداد المزودين باستخدام CLI أو ملف التكوين. نحن ملتزمون بإبقاء Kilo مفتوحاً، دون تقييد.",
+    "حالياً، يمكن إعداد مزود Nano Gateway فقط في واجهة الإعدادات. سيتوفر دعم إعداد المزودين الآخرين قريباً خلال الفترة التجريبية. في غضون ذلك، يمكنك إعداد المزودين باستخدام CLI أو ملف التكوين. نحن ملتزمون بإبقاء Nano مفتوحاً، دون تقييد.",
   "settings.providers.section.connected": "الموفرون المتصلون",
   "settings.providers.connected.empty": "لا يوجد موفرون متصلون",
   "settings.providers.section.popular": "الموفرون الشائعون",
@@ -817,7 +817,7 @@ export const dict = {
     "النموذج الافتراضي وجهد التفكير للوكلاء الفرعيين لـ task-tool. اتركه فارغًا ليرث نموذج الوكيل المستدعي.",
   "settings.models.hidePromptTraining.title": "إخفاء النماذج التي تدرّب على المطالبات",
   "settings.models.hidePromptTraining.description":
-    "إخفاء نماذج Kilo Gateway التي قد يستخدم مزودوها مطالباتك لأغراض التدريب.",
+    "إخفاء نماذج Nano Gateway التي قد يستخدم مزودوها مطالباتك لأغراض التدريب.",
   "settings.providers.modeModels": "نموذج لكل وضع",
   "settings.providers.custom.note": "أضف مزودًا مخصصًا عبر عنوان URL الأساسي.",
   "settings.providers.modeModels.description":
@@ -920,10 +920,10 @@ export const dict = {
   "settings.config.status.loadedLegacy": "محمل تكوين قديم",
   "settings.config.status.notLoaded": "غير محمل",
   "settings.config.status.create": "غير موجود - قم بإنشاء هذا الملف",
-  "settings.config.title": "فتح ملف تكوين Kilo {{scope}}",
+  "settings.config.title": "فتح ملف تكوين Nano {{scope}}",
   "settings.config.placeholder": "يتم دمج ملفات التكوين بالترتيب؛ الملفات المحددة كمحملة تؤثر حاليًا على الإعدادات.",
-  "settings.config.noWorkspace": "افتح مجلد مساحة عمل لتحرير ملف تكوين Kilo المحلي.",
-  "settings.config.openFailed": "فشل فتح ملف تكوين Kilo {{scope}}: {{message}}",
+  "settings.config.noWorkspace": "افتح مجلد مساحة عمل لتحرير ملف تكوين Nano المحلي.",
+  "settings.config.openFailed": "فشل فتح ملف تكوين Nano {{scope}}: {{message}}",
   "settings.config.source.xdg": "تكوين XDG العالمي",
   "settings.config.source.homeKilo": "تكوين .kilo في Home",
   "settings.config.source.homeKilocode": "تكوين .kilocode في Home",
@@ -1007,7 +1007,7 @@ export const dict = {
   "feedback.dialog.github": "الإبلاغ عن مشكلة على GitHub",
   "feedback.dialog.discord": "الانضمام إلى مجتمع Discord",
   "feedback.dialog.support": "دعم العملاء",
-  "workStyle.onboarding.welcome": "مرحبًا بك في Kilo",
+  "workStyle.onboarding.welcome": "مرحبًا بك في Nano",
   "workStyle.onboarding.title": "اختر كيف تريد العمل",
   "workStyle.onboarding.settingsNote": "يمكنك تغيير هذه الخيارات في أي وقت من",
   "workStyle.onboarding.settings": "الإعدادات.",
@@ -1022,7 +1022,7 @@ export const dict = {
   "workStyle.choice.visibility": "العرض",
   "workStyle.choice.human-in-the-loop.eyebrow": "الإنسان ضمن سير العمل",
   "workStyle.choice.human-in-the-loop.title": "راجع أولًا",
-  "workStyle.choice.human-in-the-loop.description": "يتوقف Kilo مؤقتًا ويعرض لك خطته أثناء العمل.",
+  "workStyle.choice.human-in-the-loop.description": "يتوقف Nano مؤقتًا ويعرض لك خطته أثناء العمل.",
   "workStyle.choice.human-in-the-loop.permissions": "يطلب الإذن قبل تعديل الملفات أو تشغيل الأوامر.",
   "workStyle.choice.human-in-the-loop.bash": "يطلب الإذن لتشغيل أي أمر في المحطة الطرفية.",
   "workStyle.choice.human-in-the-loop.visibility": "يعرض تفاصيل المحادثة كاملة، بما في ذلك الاستدلال.",
@@ -1069,7 +1069,7 @@ export const dict = {
   "deviceAuth.toast.codeCopied": "تم نسخ الرمز إلى الحافظة",
   "deviceAuth.toast.errorCopied": "تم نسخ الخطأ إلى الحافظة",
   "deviceAuth.status.initiating": "جارٍ بدء تسجيل الدخول...",
-  "deviceAuth.title": "تسجيل الدخول إلى Kilo Code",
+  "deviceAuth.title": "تسجيل الدخول إلى Nano Code",
   "deviceAuth.step1": "الخطوة 1: افتح هذا الرابط",
   "deviceAuth.action.copyUrl": "نسخ الرابط",
   "deviceAuth.action.openBrowser": "فتح المتصفح",
@@ -1090,7 +1090,7 @@ export const dict = {
 
   "profile.title": "الملف الشخصي",
   "profile.notLoggedIn": "لم يتم تسجيل الدخول",
-  "profile.action.login": "تسجيل الدخول باستخدام Kilo Code",
+  "profile.action.login": "تسجيل الدخول باستخدام Nano Code",
   "profile.balance.title": "الرصيد",
   "profile.balance.refresh": "تحديث الرصيد",
   "profile.action.dashboard": "لوحة التحكم",
@@ -1117,10 +1117,10 @@ export const dict = {
   "settings.indexing.projectEnable.disabledTooltip": "الفهرسة العامة مفعلة، لذا هذا المشروع مشمول بالفعل.",
   "settings.indexing.provider.title": "موفر التضمين",
   "settings.indexing.provider.description": "اختر الموفر المستخدم لإنشاء التضمينات للبحث الدلالي.",
-  "settings.indexing.kiloModel.title": "إعداد مسبق لنموذج Kilo",
-  "settings.indexing.kiloModel.description": "اختر نموذج تضمين مدعومًا ومستضافًا بواسطة Kilo.",
-  "settings.indexing.kiloSignIn.title": "تسجيل الدخول إلى Kilo مطلوب",
-  "settings.indexing.kiloSignIn.description": "سجّل الدخول إلى Kilo لاستخدام التضمينات المستضافة.",
+  "settings.indexing.kiloModel.title": "إعداد مسبق لنموذج Nano",
+  "settings.indexing.kiloModel.description": "اختر نموذج تضمين مدعومًا ومستضافًا بواسطة Nano.",
+  "settings.indexing.kiloSignIn.title": "تسجيل الدخول إلى Nano مطلوب",
+  "settings.indexing.kiloSignIn.description": "سجّل الدخول إلى Nano لاستخدام التضمينات المستضافة.",
   "settings.indexing.model.title": "نموذج التضمين",
   "settings.indexing.model.description": "تجاوز نموذج التضمين الافتراضي للموفر المحدد.",
   "settings.indexing.dimension.title": "بُعد المتجه",
@@ -1142,11 +1142,11 @@ export const dict = {
   "prompt.action.indexing": "إعدادات الفهرسة",
   "settings.experimental.title": "تجريبي",
   "settings.language.title": "اللغة",
-  "settings.aboutKiloCode.title": "حول Kilo Code",
+  "settings.aboutKiloCode.title": "حول Nano Code",
 
   "session.messages.empty": "ابدأ محادثة بكتابة رسالة أدناه.",
   "session.messages.welcome":
-    "Kilo Code هو مساعد ترميز بالذكاء الاصطناعي. اطلب منه بناء ميزات أو إصلاح أخطاء أو شرح قاعدة الشيفرة.",
+    "Nano Code هو مساعد ترميز بالذكاء الاصطناعي. اطلب منه بناء ميزات أو إصلاح أخطاء أو شرح قاعدة الشيفرة.",
   "session.messages.scrollToBottom": "التمرير إلى الأسفل",
   "session.messages.initializing": "جاري التهيئة...",
   "session.messages.taskStarting": "جاري البدء...",
@@ -1198,7 +1198,7 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "المنفذ:",
   "settings.aboutKiloCode.versionInfo": "معلومات الإصدار",
   "settings.aboutKiloCode.version.label": "الإصدار:",
-  "settings.aboutKiloCode.extensionName": "إضافة Kilo Code",
+  "settings.aboutKiloCode.extensionName": "إضافة Nano Code",
   "settings.aboutKiloCode.community": "المجتمع والدعم",
   "settings.aboutKiloCode.feedback.prefix": "إذا كان لديك أي أسئلة أو ملاحظات، لا تتردد في فتح مشكلة على",
   "settings.aboutKiloCode.feedback.or": "أو",
@@ -1212,10 +1212,10 @@ export const dict = {
   "settings.aboutKiloCode.exportSettings": "تصدير",
   "settings.aboutKiloCode.importSettings": "استيراد",
   "settings.aboutKiloCode.importSettings.invalidJson": "ملف JSON غير صالح. يرجى اختيار ملف إعدادات صالح.",
-  "settings.aboutKiloCode.importSettings.invalidConfig": "الملف لا يحتوي على إعدادات Kilo صالحة.",
+  "settings.aboutKiloCode.importSettings.invalidConfig": "الملف لا يحتوي على إعدادات Nano صالحة.",
   "settings.aboutKiloCode.importSettings.tooLarge": "الملف كبير جدًا. يجب أن تكون ملفات الإعدادات أقل من 1 MB.",
   "settings.aboutKiloCode.importSettings.newerVersion":
-    "تم تصدير هذا الملف من إصدار أحدث من Kilo. قد يتم تجاهل بعض الإعدادات.",
+    "تم تصدير هذا الملف من إصدار أحدث من Nano. قد يتم تجاهل بعض الإعدادات.",
   "settings.aboutKiloCode.importSettings.success": "تم استيراد الإعدادات. راجع التغييرات أعلاه، ثم انقر على حفظ.",
 
   "settings.aboutKiloCode.telemetry.title": "Telemetry",
@@ -1238,7 +1238,7 @@ export const dict = {
   "settings.browser.headless.title": "الوضع بدون واجهة",
   "settings.browser.headless.description": "التشغيل في الوضع بدون واجهة (بدون نافذة متصفح مرئية).",
 
-  "settings.language.description": 'اختر اللغة لواجهة Kilo Code. "تلقائي" يستخدم لغة عرض VS Code.',
+  "settings.language.description": 'اختر اللغة لواجهة Nano Code. "تلقائي" يستخدم لغة عرض VS Code.',
   "settings.language.auto": "تلقائي (لغة VS Code)",
   "settings.language.current": "الحالية:",
 
@@ -1288,18 +1288,18 @@ export const dict = {
   "settings.experimental.codebaseSearch.description": "تمكين البحث بالذكاء الاصطناعي باللغة الطبيعية عبر قاعدة الكود",
   "settings.experimental.speechToText.title": "تحويل الصوت إلى نص",
   "settings.experimental.speechToText.description":
-    "تمكين الإدخال الصوتي في حقول المطالبة باستخدام حساب Kilo الخاص بك من خلال Kilo Gateway.",
+    "تمكين الإدخال الصوتي في حقول المطالبة باستخدام حساب Nano الخاص بك من خلال Nano Gateway.",
   "settings.models.speechToText.disabledDescription":
-    "قم بتمكين وتسجيل الدخول إلى مزود Kilo لاستخدام Speech to Text. ميزة Speech to Text مدعومة حاليًا فقط مع Kilo Gateway.",
+    "قم بتمكين وتسجيل الدخول إلى مزود Nano لاستخدام Speech to Text. ميزة Speech to Text مدعومة حاليًا فقط مع Nano Gateway.",
   "settings.models.speechToTextModel.title": "نموذج تحويل الصوت إلى نص",
-  "settings.models.speechToTextModel.description": "اختر نموذج نسخ Kilo Gateway للإدخال الصوتي.",
+  "settings.models.speechToTextModel.description": "اختر نموذج نسخ Nano Gateway للإدخال الصوتي.",
   "settings.experimental.continueOnDeny.title": "المتابعة عند الرفض",
   "settings.experimental.continueOnDeny.description": "متابعة حلقة الوكيل عند رفض الإذن",
   "settings.experimental.mcpTimeout.title": "مهلة MCP (مللي ثانية)",
   "settings.experimental.mcpTimeout.description": "مهلة طلبات خادم MCP بالمللي ثانية",
   "settings.experimental.remote.title": "التحكم Remote",
   "settings.experimental.remote.description":
-    "قم بتمكين التحكم Remote في الجلسات عبر Kilo Cloud. سيؤثر هذا أيضًا على واجهات سطر الأوامر (CLIs) على هذا الجهاز.",
+    "قم بتمكين التحكم Remote في الجلسات عبر Nano Cloud. سيؤثر هذا أيضًا على واجهات سطر الأوامر (CLIs) على هذا الجهاز.",
   "settings.experimental.remote.current": "الحالة الحالية:",
   "settings.experimental.remote.startup": "التفعيل التلقائي عند بدء التشغيل:",
   "settings.experimental.remote.active": "نشط",
@@ -1411,7 +1411,7 @@ export const dict = {
   "settings.agentBehaviour.claudeCompat.heading": "توافق Claude Code",
   "settings.agentBehaviour.claudeCompat.title": "تحميل ملفات Claude Code",
   "settings.agentBehaviour.claudeCompat.description":
-    "تحميل تعليمات ومهارات CLAUDE.md من مجلد إعدادات Claude Code إلى الجلسات. قم بتمكين هذا الخيار إذا كنت ترغب في أن يستخدم Kilo مهارات وتعليمات Claude Code الخاصة بك. يتطلب إعادة التشغيل.",
+    "تحميل تعليمات ومهارات CLAUDE.md من مجلد إعدادات Claude Code إلى الجلسات. قم بتمكين هذا الخيار إذا كنت ترغب في أن يستخدم Nano مهارات وتعليمات Claude Code الخاصة بك. يتطلب إعادة التشغيل.",
   "settings.agentBehaviour.mcpDetail.command": "الأمر",
   "settings.agentBehaviour.mcpDetail.args": "الوسائط",
   "settings.agentBehaviour.mcpDetail.env": "البيئة",
@@ -1482,7 +1482,7 @@ export const dict = {
   "settings.display.username.title": "اسم المستخدم",
   "settings.display.username.description": "اسم مستخدم مخصص في المحادثات",
   "settings.display.fontSize.title": "حجم الخط",
-  "settings.display.fontSize.description": "اضبط حجم خط webview UI الخاص بـ Kilo بشكل مستقل عن VS Code.",
+  "settings.display.fontSize.description": "اضبط حجم خط webview UI الخاص بـ Nano بشكل مستقل عن VS Code.",
   "settings.display.reasoningAutoCollapse.title": "طي الاستدلال تلقائيًا",
   "settings.display.reasoningAutoCollapse.description":
     "يطوي كتل الاستدلال بعد أن ينتهي الوكيل من كتابتها. اتركه معطلاً لإبقاء الاستدلال موسعًا ما لم تطوه يدويًا.",
@@ -1519,12 +1519,12 @@ export const dict = {
   "settings.legacyMigration.link": "الترحيل من الإصدار القديم",
   "settings.aboutKiloCode.legacyMigration.title": "ترحيل الإصدار القديم",
   "settings.aboutKiloCode.legacyMigration.description":
-    "ترحيل الإعدادات من تثبيت سابق لـ Kilo Code، بما في ذلك مفاتيح API لمقدمي الخدمة والنموذج الافتراضي.",
+    "ترحيل الإعدادات من تثبيت سابق لـ Nano Code، بما في ذلك مفاتيح API لمقدمي الخدمة والنموذج الافتراضي.",
   "settings.aboutKiloCode.rooImport.description": "استيراد سجل المحادثات من تثبيت Roo Code.",
   "settings.aboutKiloCode.rooImport.button": "استيراد الجلسات من Roo Code",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "ما الجديد في Kilo Code",
+  "migration.whatsNew.title": "ما الجديد في Nano Code",
   "migration.whatsNew.subtitle": "لقد أعدنا بناء الإضافة على أساس أسرع وأكثر كفاءة.",
   "migration.whatsNew.features.performance.title": "أداء أسرع للوكيل",
   "migration.whatsNew.features.performance.detail":
@@ -1536,7 +1536,7 @@ export const dict = {
     "واجهة موحدة لتشغيل عدة وكلاء بالتوازي، كل منهم في شجرة عمل خاصة — راقب التقدم، وبدّل السياق، وراجع التغييرات في مكان واحد.",
   "migration.whatsNew.features.foundation.title": "أساس مشترك",
   "migration.whatsNew.features.foundation.detail":
-    "نواة صغيرة وفعالة واحدة عبر كل منتجات Kilo. تجربة مألوفة بغض النظر عن طريقة عملك.",
+    "نواة صغيرة وفعالة واحدة عبر كل منتجات Nano. تجربة مألوفة بغض النظر عن طريقة عملك.",
   "migration.whatsNew.blogLink": "اقرأ الإعلان الكامل",
   "migration.whatsNew.docsLink": "الجديد والأسئلة الشائعة",
   "migration.whatsNew.continue": "متابعة",
@@ -1635,7 +1635,7 @@ export const dict = {
     "الملفات المعدّلة في شجرة العمل ولكن لم يتم تهيئتها بعد، بالإضافة إلى الملفات غير المتتبعة (الجديدة).",
   "diffViewer.source.session.label": "الجلسة",
   "diffViewer.source.session.tooltip":
-    "الملفات التي غيّرها Kilo خلال الجلسة الحالية، بناءً على لقطات لكل دور. يُعاد ضبطها عند بدء جلسة جديدة.",
+    "الملفات التي غيّرها Nano خلال الجلسة الحالية، بناءً على لقطات لكل دور. يُعاد ضبطها عند بدء جلسة جديدة.",
   "diffViewer.group.session": "الجلسة",
   "diffViewer.group.git": "Git",
   "diffViewer.notice.snapshotsDisabled":

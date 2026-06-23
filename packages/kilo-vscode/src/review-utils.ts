@@ -20,7 +20,7 @@ export function openFileInEditor(
   line?: number,
   column?: number,
   viewColumn: vscode.ViewColumn = vscode.ViewColumn.Beside,
-  prefix = "Kilo",
+  prefix = "Nano",
 ): void {
   const uri = vscode.Uri.file(filePath)
   const options: vscode.TextDocumentShowOptions = { viewColumn, preview: true }

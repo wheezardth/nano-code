@@ -113,7 +113,7 @@ export const dict = {
   "dialog.model.expand": "Expandir",
   "dialog.model.collapse": "Contraer",
 
-  "dialog.model.unpaid.freeModels.title": "Modelos gratuitos proporcionados por Kilo",
+  "dialog.model.unpaid.freeModels.title": "Modelos gratuitos proporcionados por Nano",
   "dialog.model.unpaid.addMore.title": "Añadir más modelos de proveedores populares",
 
   "dialog.provider.viewAll": "Ver más proveedores",
@@ -126,7 +126,7 @@ export const dict = {
   "provider.connect.status.waiting": "Esperando autorización...",
   "provider.connect.status.failed": "Autorización fallida: {{error}}",
   "provider.connect.apiKey.description":
-    "Introduce tu clave API de {{provider}} para conectar tu cuenta y usar modelos de {{provider}} en Kilo.",
+    "Introduce tu clave API de {{provider}} para conectar tu cuenta y usar modelos de {{provider}} en Nano.",
   "provider.connect.apiKey.description.local":
     "Connect to your local {{provider}} server. Leave the API key empty if the server does not require one (default for localhost).",
   "provider.connect.atomicChat.description":
@@ -157,7 +157,7 @@ export const dict = {
   "provider.connect.oauth.code.visit.prefix": "Visita ",
   "provider.connect.oauth.code.visit.link": "este enlace",
   "provider.connect.oauth.code.visit.suffix":
-    " para obtener tu código de autorización para conectar tu cuenta y usar modelos de {{provider}} en Kilo.",
+    " para obtener tu código de autorización para conectar tu cuenta y usar modelos de {{provider}} en Nano.",
   "provider.connect.oauth.code.label": "Código de autorización {{method}}",
   "provider.connect.oauth.code.placeholder": "Código de autorización",
   "provider.connect.oauth.code.required": "El código de autorización es obligatorio",
@@ -165,7 +165,7 @@ export const dict = {
   "provider.connect.oauth.auto.visit.prefix": "Visita ",
   "provider.connect.oauth.auto.visit.link": "este enlace",
   "provider.connect.oauth.auto.visit.suffix":
-    " e introduce el código a continuación para conectar tu cuenta y usar modelos de {{provider}} en Kilo.",
+    " e introduce el código a continuación para conectar tu cuenta y usar modelos de {{provider}} en Nano.",
   "provider.connect.oauth.auto.confirmationCode": "Código de confirmación",
   "provider.connect.toast.connected.title": "{{provider}} conectado",
   "provider.connect.toast.connected.description": "Los modelos de {{provider}} ahora están disponibles para usar.",
@@ -289,12 +289,12 @@ export const dict = {
     "El botón 'Mejorar el mensaje' ayuda a mejorar tu petición proporcionando contexto adicional, aclaraciones o reformulaciones. Intenta escribir una petición aquí y haz clic en el botón nuevamente para ver cómo funciona.",
   "prompt.action.indexing": "Configuración de indexación",
 
-  "speechToText.tooltip.start": "Iniciar entrada de voz con Kilo Gateway",
+  "speechToText.tooltip.start": "Iniciar entrada de voz con Nano Gateway",
   "speechToText.tooltip.stop": "Detener captura",
   "speechToText.tooltip.transcribing": "Transcribiendo... Haz clic para cancelar.",
   "speechToText.tooltip.error": "Falló la entrada de voz. Haz clic para borrar.",
   "speechToText.error.title": "Falló la entrada de voz",
-  "speechToText.error.loginRequired": "Inicia sesión en Kilo para usar la entrada de voz.",
+  "speechToText.error.loginRequired": "Inicia sesión en Nano para usar la entrada de voz.",
   "speechToText.error.permission": "Se denegó el permiso del micrófono.",
   "speechToText.error.microphone": "No se pudo iniciar el micrófono.",
   "speechToText.error.recording": "La grabación falló.",
@@ -332,7 +332,7 @@ export const dict = {
   "dialog.directory.empty": "No se encontraron carpetas",
 
   "dialog.server.title": "Servidores",
-  "dialog.server.description": "Cambiar a qué servidor de Kilo se conecta esta app.",
+  "dialog.server.description": "Cambiar a qué servidor de Nano se conecta esta app.",
   "dialog.server.search.placeholder": "Buscar servidores",
   "dialog.server.empty": "No hay servidores aún",
   "dialog.server.add.title": "Añadir un servidor",
@@ -460,7 +460,7 @@ export const dict = {
   "toast.session.listFailed.title": "Fallo al cargar sesiones para {{project}}",
 
   "toast.update.title": "Actualización disponible",
-  "toast.update.description": "Una nueva versión de Kilo ({{version}}) está disponible para instalar.",
+  "toast.update.description": "Una nueva versión de Nano ({{version}}) está disponible para instalar.",
   "toast.update.action.installRestart": "Instalar y reiniciar",
   "toast.update.action.notYet": "Todavía no",
 
@@ -471,7 +471,7 @@ export const dict = {
   "error.page.action.checking": "Comprobando...",
   "error.page.action.checkUpdates": "Buscar actualizaciones",
   "error.page.action.updateTo": "Actualizar a {{version}}",
-  "error.page.report.prefix": "Por favor reporta este error al equipo de Kilo",
+  "error.page.report.prefix": "Por favor reporta este error al equipo de Nano",
   "error.page.report.discord": "en Discord",
   "error.page.version": "Versión: {{version}}",
 
@@ -505,7 +505,7 @@ export const dict = {
   "error.chain.didYouMean": "¿Quisiste decir: {{suggestions}}",
   "error.chain.modelNotFound": "Modelo no encontrado: {{provider}}/{{model}}",
   "error.chain.checkConfig": "Comprueba los nombres de proveedor/modelo en tu configuración (opencode.json)",
-  "error.chain.mcpFailed": 'El servidor MCP "{{name}}" falló. Nota, Kilo no soporta autenticación MCP todavía.',
+  "error.chain.mcpFailed": 'El servidor MCP "{{name}}" falló. Nota, Nano no soporta autenticación MCP todavía.',
   "error.chain.providerAuthFailed": "Autenticación de proveedor fallida ({{provider}}): {{message}}",
   "error.chain.providerInitFailed":
     'Fallo al inicializar proveedor "{{provider}}". Comprueba credenciales y configuración.',
@@ -680,12 +680,12 @@ export const dict = {
   "sidebar.workspaces.enable": "Habilitar espacios de trabajo",
   "sidebar.workspaces.disable": "Deshabilitar espacios de trabajo",
   "sidebar.gettingStarted.title": "Empezando",
-  "sidebar.gettingStarted.line1": "Kilo incluye modelos gratuitos para que puedas empezar inmediatamente.",
+  "sidebar.gettingStarted.line1": "Nano incluye modelos gratuitos para que puedas empezar inmediatamente.",
   "sidebar.gettingStarted.line2": "Conecta cualquier proveedor para usar modelos, inc. Claude, GPT, Gemini etc.",
   "sidebar.project.recentSessions": "Sesiones recientes",
   "sidebar.project.viewAllSessions": "Ver todas las sesiones",
 
-  "app.name.desktop": "Kilo Desktop",
+  "app.name.desktop": "Nano Desktop",
   "settings.section.desktop": "Escritorio",
   "settings.section.server": "Servidor",
   "settings.tab.general": "General",
@@ -697,11 +697,11 @@ export const dict = {
   "settings.general.section.sounds": "Efectos de sonido",
 
   "settings.general.row.language.title": "Idioma",
-  "settings.general.row.language.description": "Cambiar el idioma de visualización para Kilo",
+  "settings.general.row.language.description": "Cambiar el idioma de visualización para Nano",
   "settings.general.row.appearance.title": "Apariencia",
-  "settings.general.row.appearance.description": "Personaliza cómo se ve Kilo en tu dispositivo",
+  "settings.general.row.appearance.description": "Personaliza cómo se ve Nano en tu dispositivo",
   "settings.general.row.theme.title": "Tema",
-  "settings.general.row.theme.description": "Personaliza el tema de Kilo.",
+  "settings.general.row.theme.description": "Personaliza el tema de Nano.",
   "settings.general.row.font.title": "Fuente",
   "settings.general.row.font.description": "Personaliza la fuente mono usada en bloques de código",
 
@@ -710,13 +710,13 @@ export const dict = {
     'Mostrar ventanas emergentes de "Novedades" después de las actualizaciones',
 
   "settings.updates.row.startup.title": "Buscar actualizaciones al iniciar",
-  "settings.updates.row.startup.description": "Buscar actualizaciones automáticamente cuando se inicia Kilo",
+  "settings.updates.row.startup.description": "Buscar actualizaciones automáticamente cuando se inicia Nano",
   "settings.updates.row.check.title": "Buscar actualizaciones",
   "settings.updates.row.check.description": "Buscar actualizaciones manualmente e instalarlas si hay alguna",
   "settings.updates.action.checkNow": "Buscar ahora",
   "settings.updates.action.checking": "Buscando...",
   "settings.updates.toast.latest.title": "Estás al día",
-  "settings.updates.toast.latest.description": "Estás usando la última versión de Kilo.",
+  "settings.updates.toast.latest.description": "Estás usando la última versión de Nano.",
 
   "font.option.ibmPlexMono": "IBM Plex Mono",
   "font.option.cascadiaCode": "Cascadia Code",
@@ -804,10 +804,10 @@ export const dict = {
   "settings.indexing.provider.title": "Proveedor de embeddings",
   "settings.indexing.provider.description":
     "Elige el proveedor utilizado para generar embeddings para búsqueda semántica.",
-  "settings.indexing.kiloModel.title": "Preajuste de modelo de Kilo",
-  "settings.indexing.kiloModel.description": "Elige un modelo de embeddings alojado por Kilo compatible.",
-  "settings.indexing.kiloSignIn.title": "Se requiere iniciar sesión en Kilo",
-  "settings.indexing.kiloSignIn.description": "Inicia sesión en Kilo para usar embeddings alojados.",
+  "settings.indexing.kiloModel.title": "Preajuste de modelo de Nano",
+  "settings.indexing.kiloModel.description": "Elige un modelo de embeddings alojado por Nano compatible.",
+  "settings.indexing.kiloSignIn.title": "Se requiere iniciar sesión en Nano",
+  "settings.indexing.kiloSignIn.description": "Inicia sesión en Nano para usar embeddings alojados.",
   "settings.indexing.model.title": "Modelo de embeddings",
   "settings.indexing.model.description":
     "Anular el modelo de embeddings predeterminado para el proveedor seleccionado.",
@@ -851,7 +851,7 @@ export const dict = {
   "settings.providers.title": "Proveedores",
   "settings.providers.description": "La configuración de proveedores estará disponible aquí.",
   "settings.providers.betaNotice":
-    "Actualmente, solo el proveedor Kilo Gateway se puede configurar en la interfaz de ajustes. El soporte para configurar otros proveedores llegará pronto durante el período beta. Mientras tanto, puedes configurar proveedores usando la CLI o el archivo de configuración. Estamos comprometidos a mantener Kilo abierto, sin ataduras.",
+    "Actualmente, solo el proveedor Nano Gateway se puede configurar en la interfaz de ajustes. El soporte para configurar otros proveedores llegará pronto durante el período beta. Mientras tanto, puedes configurar proveedores usando la CLI o el archivo de configuración. Estamos comprometidos a mantener Nano abierto, sin ataduras.",
   "settings.providers.section.connected": "Proveedores conectados",
   "settings.providers.connected.empty": "No hay proveedores conectados",
   "settings.providers.section.popular": "Proveedores populares",
@@ -872,7 +872,7 @@ export const dict = {
     "Modelo predeterminado y esfuerzo de razonamiento para los subagentes de task-tool. Déjelo sin configurar para heredar el modelo del agente invocador.",
   "settings.models.hidePromptTraining.title": "Ocultar modelos que entrenan con prompts",
   "settings.models.hidePromptTraining.description":
-    "Oculta los modelos de Kilo Gateway cuyos proveedores pueden usar tus prompts para entrenamiento.",
+    "Oculta los modelos de Nano Gateway cuyos proveedores pueden usar tus prompts para entrenamiento.",
   "settings.providers.modeModels": "Modelo por modo",
   "settings.providers.custom.note": "Agrega un proveedor personalizado mediante URL base.",
   "settings.providers.modeModels.description":
@@ -977,12 +977,12 @@ export const dict = {
   "settings.config.status.loadedLegacy": "configuración heredada cargada",
   "settings.config.status.notLoaded": "no cargado",
   "settings.config.status.create": "no encontrado - crear este archivo",
-  "settings.config.title": "Abrir archivo de configuración Kilo {{scope}}",
+  "settings.config.title": "Abrir archivo de configuración Nano {{scope}}",
   "settings.config.placeholder":
     "Los archivos de configuración se combinan en orden; los archivos marcados como cargados afectan actualmente a los ajustes.",
   "settings.config.noWorkspace":
-    "Abre una carpeta de espacio de trabajo para editar el archivo de configuración Kilo local.",
-  "settings.config.openFailed": "Error al abrir el archivo de configuración Kilo {{scope}}: {{message}}",
+    "Abre una carpeta de espacio de trabajo para editar el archivo de configuración Nano local.",
+  "settings.config.openFailed": "Error al abrir el archivo de configuración Nano {{scope}}: {{message}}",
   "settings.config.source.xdg": "Configuración global XDG",
   "settings.config.source.homeKilo": "Configuración .kilo de Home",
   "settings.config.source.homeKilocode": "Configuración .kilocode de Home",
@@ -1067,7 +1067,7 @@ export const dict = {
   "feedback.dialog.github": "Reportar un problema en GitHub",
   "feedback.dialog.discord": "Unirse a nuestra comunidad de Discord",
   "feedback.dialog.support": "Atención al cliente",
-  "workStyle.onboarding.welcome": "Te damos la bienvenida a Kilo",
+  "workStyle.onboarding.welcome": "Te damos la bienvenida a Nano",
   "workStyle.onboarding.title": "Elige cómo quieres trabajar",
   "workStyle.onboarding.settingsNote": "Puedes cambiar estas opciones en cualquier momento en",
   "workStyle.onboarding.settings": "Configuración.",
@@ -1082,7 +1082,7 @@ export const dict = {
   "workStyle.choice.visibility": "Visibilidad",
   "workStyle.choice.human-in-the-loop.eyebrow": "Supervisión humana",
   "workStyle.choice.human-in-the-loop.title": "Revisar primero",
-  "workStyle.choice.human-in-the-loop.description": "Kilo se detiene y te muestra su plan mientras trabaja.",
+  "workStyle.choice.human-in-the-loop.description": "Nano se detiene y te muestra su plan mientras trabaja.",
   "workStyle.choice.human-in-the-loop.permissions": "Pide permiso antes de editar archivos o ejecutar comandos.",
   "workStyle.choice.human-in-the-loop.bash": "Pide permiso para ejecutar todos los comandos del terminal.",
   "workStyle.choice.human-in-the-loop.visibility":
@@ -1131,7 +1131,7 @@ export const dict = {
   "deviceAuth.toast.codeCopied": "Código copiado al portapapeles",
   "deviceAuth.toast.errorCopied": "Error copiado al portapapeles",
   "deviceAuth.status.initiating": "Iniciando sesión...",
-  "deviceAuth.title": "Iniciar sesión en Kilo Code",
+  "deviceAuth.title": "Iniciar sesión en Nano Code",
   "deviceAuth.step1": "Paso 1: Abre esta URL",
   "deviceAuth.action.copyUrl": "Copiar URL",
   "deviceAuth.action.openBrowser": "Abrir navegador",
@@ -1152,7 +1152,7 @@ export const dict = {
 
   "profile.title": "Perfil",
   "profile.notLoggedIn": "No conectado",
-  "profile.action.login": "Iniciar sesión con Kilo Code",
+  "profile.action.login": "Iniciar sesión con Nano Code",
   "profile.balance.title": "Saldo",
   "profile.balance.refresh": "Actualizar saldo",
   "profile.action.dashboard": "Panel",
@@ -1172,11 +1172,11 @@ export const dict = {
 
   "settings.experimental.title": "Experimental",
   "settings.language.title": "Idioma",
-  "settings.aboutKiloCode.title": "Acerca de Kilo Code",
+  "settings.aboutKiloCode.title": "Acerca de Nano Code",
 
   "session.messages.empty": "Inicia una conversación escribiendo un mensaje a continuación.",
   "session.messages.welcome":
-    "Kilo Code es un asistente de programación con IA. Pídele que cree funcionalidades, corrija errores o explique tu código.",
+    "Nano Code es un asistente de programación con IA. Pídele que cree funcionalidades, corrija errores o explique tu código.",
   "session.messages.scrollToBottom": "Desplazar al final",
   "session.messages.initializing": "Inicializando...",
   "session.messages.taskStarting": "Iniciando...",
@@ -1228,7 +1228,7 @@ export const dict = {
   "settings.aboutKiloCode.port.label": "Puerto:",
   "settings.aboutKiloCode.versionInfo": "Información de versión",
   "settings.aboutKiloCode.version.label": "Versión:",
-  "settings.aboutKiloCode.extensionName": "Extensión Kilo Code",
+  "settings.aboutKiloCode.extensionName": "Extensión Nano Code",
   "settings.aboutKiloCode.community": "Comunidad y soporte",
   "settings.aboutKiloCode.feedback.prefix": "Si tienes preguntas o comentarios, abre un issue en",
   "settings.aboutKiloCode.feedback.or": "o",
@@ -1244,11 +1244,11 @@ export const dict = {
   "settings.aboutKiloCode.importSettings": "Importar",
   "settings.aboutKiloCode.importSettings.invalidJson":
     "Archivo JSON no válido. Seleccione un archivo de ajustes válido.",
-  "settings.aboutKiloCode.importSettings.invalidConfig": "El archivo no contiene ajustes válidos de Kilo.",
+  "settings.aboutKiloCode.importSettings.invalidConfig": "El archivo no contiene ajustes válidos de Nano.",
   "settings.aboutKiloCode.importSettings.tooLarge":
     "El archivo es demasiado grande. Los archivos de ajustes deben ser menores de 1 MB.",
   "settings.aboutKiloCode.importSettings.newerVersion":
-    "Este archivo fue exportado desde una versión más reciente de Kilo. Algunos ajustes podrían ignorarse.",
+    "Este archivo fue exportado desde una versión más reciente de Nano. Algunos ajustes podrían ignorarse.",
   "settings.aboutKiloCode.importSettings.success":
     "Ajustes importados. Revise los cambios anteriores y luego haga clic en Guardar.",
 
@@ -1274,7 +1274,7 @@ export const dict = {
   "settings.browser.headless.description": "Ejecutar en modo headless (sin ventana de navegador visible).",
 
   "settings.language.description":
-    'Elige el idioma de la interfaz de Kilo Code. "Auto" utiliza el idioma de visualización de VS Code.',
+    'Elige el idioma de la interfaz de Nano Code. "Auto" utiliza el idioma de visualización de VS Code.',
   "settings.language.auto": "Auto (idioma de VS Code)",
   "settings.language.current": "Actual:",
 
@@ -1327,19 +1327,19 @@ export const dict = {
     "Habilitar búsqueda por lenguaje natural con IA en toda la base de código",
   "settings.experimental.speechToText.title": "Voz a texto",
   "settings.experimental.speechToText.description":
-    "Habilita la entrada de voz en los campos de prompt usando tu cuenta de Kilo a través de Kilo Gateway.",
+    "Habilita la entrada de voz en los campos de prompt usando tu cuenta de Nano a través de Nano Gateway.",
   "settings.models.speechToText.disabledDescription":
-    "Habilita e inicia sesión en el proveedor Kilo para usar Speech to Text. Actualmente, Speech to Text solo es compatible con Kilo Gateway.",
+    "Habilita e inicia sesión en el proveedor Nano para usar Speech to Text. Actualmente, Speech to Text solo es compatible con Nano Gateway.",
   "settings.models.speechToTextModel.title": "Modelo de voz a texto",
   "settings.models.speechToTextModel.description":
-    "Elige el modelo de transcripción de Kilo Gateway para la entrada de voz.",
+    "Elige el modelo de transcripción de Nano Gateway para la entrada de voz.",
   "settings.experimental.continueOnDeny.title": "Continuar al denegar",
   "settings.experimental.continueOnDeny.description": "Continuar el bucle del agente cuando se deniega un permiso",
   "settings.experimental.mcpTimeout.title": "Tiempo de espera MCP (ms)",
   "settings.experimental.mcpTimeout.description": "Tiempo de espera para solicitudes del servidor MCP en milisegundos",
   "settings.experimental.remote.title": "Control Remote",
   "settings.experimental.remote.description":
-    "Habilite el control Remote de las sesiones a través de Kilo Cloud. Esto también afectará a las CLI de este equipo.",
+    "Habilite el control Remote de las sesiones a través de Nano Cloud. Esto también afectará a las CLI de este equipo.",
   "settings.experimental.remote.current": "Estado actual:",
   "settings.experimental.remote.startup": "Activar automáticamente al inicio:",
   "settings.experimental.remote.active": "Activo",
@@ -1455,7 +1455,7 @@ export const dict = {
   "settings.agentBehaviour.claudeCompat.heading": "Compatibilidad con Claude Code",
   "settings.agentBehaviour.claudeCompat.title": "Cargar archivos de Claude Code",
   "settings.agentBehaviour.claudeCompat.description":
-    "Carga las instrucciones y habilidades de CLAUDE.md desde tu directorio de configuración de Claude Code en las sesiones. Activa esta opción si quieres que Kilo utilice tus instrucciones y habilidades de Claude Code. Requiere reiniciar.",
+    "Carga las instrucciones y habilidades de CLAUDE.md desde tu directorio de configuración de Claude Code en las sesiones. Activa esta opción si quieres que Nano utilice tus instrucciones y habilidades de Claude Code. Requiere reiniciar.",
   "settings.agentBehaviour.mcpDetail.command": "Comando",
   "settings.agentBehaviour.mcpDetail.args": "Argumentos",
   "settings.agentBehaviour.mcpDetail.env": "Entorno",
@@ -1535,7 +1535,7 @@ export const dict = {
   "settings.display.username.description": "Nombre de usuario personalizado en conversaciones",
   "settings.display.fontSize.title": "Tamaño de fuente",
   "settings.display.fontSize.description":
-    "Ajusta el tamaño de fuente de la webview UI de Kilo de forma independiente a VS Code.",
+    "Ajusta el tamaño de fuente de la webview UI de Nano de forma independiente a VS Code.",
   "settings.display.reasoningAutoCollapse.title": "Contraer razonamiento automáticamente",
   "settings.display.reasoningAutoCollapse.description":
     "Contrae los bloques de razonamiento después de que el agente termine de escribirlos. Déjalo desactivado para mantener el razonamiento expandido, a menos que lo contraigas manualmente.",
@@ -1571,13 +1571,13 @@ export const dict = {
   "settings.legacyMigration.link": "Migrar desde la versión heredada",
   "settings.aboutKiloCode.legacyMigration.title": "Migración heredada",
   "settings.aboutKiloCode.legacyMigration.description":
-    "Migra la configuración de una instalación anterior de Kilo Code, incluyendo las claves API de proveedores y el modelo predeterminado.",
+    "Migra la configuración de una instalación anterior de Nano Code, incluyendo las claves API de proveedores y el modelo predeterminado.",
   "settings.aboutKiloCode.rooImport.description":
     "Importa el historial de conversaciones de una instalación de Roo Code.",
   "settings.aboutKiloCode.rooImport.button": "Importar sesiones desde Roo Code",
 
   // Screen 1 — What's New
-  "migration.whatsNew.title": "Novedades en Kilo Code",
+  "migration.whatsNew.title": "Novedades en Nano Code",
   "migration.whatsNew.subtitle": "Hemos reconstruido la extensión sobre una base más rápida y eficiente.",
   "migration.whatsNew.features.performance.title": "Rendimiento de agente más rápido",
   "migration.whatsNew.features.performance.detail":
@@ -1589,7 +1589,7 @@ export const dict = {
     "Una interfaz unificada para ejecutar múltiples agentes en paralelo, cada uno en su propio worktree — supervisa el progreso, cambia de contexto y revisa cambios en un solo lugar.",
   "migration.whatsNew.features.foundation.title": "Base compartida",
   "migration.whatsNew.features.foundation.detail":
-    "Un núcleo pequeño y eficiente en todos los productos Kilo. Una experiencia familiar sin importar cómo elijas trabajar.",
+    "Un núcleo pequeño y eficiente en todos los productos Nano. Una experiencia familiar sin importar cómo elijas trabajar.",
   "migration.whatsNew.blogLink": "Leer el anuncio completo",
   "migration.whatsNew.docsLink": "Novedades y preguntas frecuentes",
   "migration.whatsNew.continue": "Continuar",
@@ -1688,7 +1688,7 @@ export const dict = {
     "Archivos modificados en tu árbol de trabajo pero que aún no están en el área de preparación, más archivos no rastreados (nuevos).",
   "diffViewer.source.session.label": "Sesión",
   "diffViewer.source.session.tooltip":
-    "Archivos modificados por Kilo durante la sesión actual, basado en snapshots por turno. Se reinicia al empezar una nueva sesión.",
+    "Archivos modificados por Nano durante la sesión actual, basado en snapshots por turno. Se reinicia al empezar una nueva sesión.",
   "diffViewer.group.session": "Sesión",
   "diffViewer.group.git": "Git",
   "diffViewer.notice.snapshotsDisabled":

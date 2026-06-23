@@ -38,11 +38,11 @@ export const ModelSelectorNoProviders: Story = {
 }
 
 const ACCESSIBLE_MODELS: EnrichedModel[] = [
-  { id: "alpha", name: "Alpha", providerID: "kilo", providerName: "Kilo" },
-  { id: "bravo", name: "Bravo", providerID: "kilo", providerName: "Kilo" },
-  { id: "charlie", name: "Charlie", providerID: "kilo", providerName: "Kilo" },
-  { id: "delta", name: "Delta", providerID: "kilo", providerName: "Kilo" },
-  { id: "echo", name: "Echo", providerID: "kilo", providerName: "Kilo" },
+  { id: "alpha", name: "Alpha", providerID: "kilo", providerName: "Nano" },
+  { id: "bravo", name: "Bravo", providerID: "kilo", providerName: "Nano" },
+  { id: "charlie", name: "Charlie", providerID: "kilo", providerName: "Nano" },
+  { id: "delta", name: "Delta", providerID: "kilo", providerName: "Nano" },
+  { id: "echo", name: "Echo", providerID: "kilo", providerName: "Nano" },
   { id: "nova", name: "Nova", providerID: "nvidia", providerName: "NVIDIA" },
   { id: "nemotron", name: "Nemotron", providerID: "nvidia", providerName: "NVIDIA" },
 ]

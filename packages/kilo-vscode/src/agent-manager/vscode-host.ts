@@ -209,7 +209,7 @@ export class VscodeHost implements Host {
     void vscode.env.clipboard.writeText(text)
   }
 
-    capture(_event: string, _properties?: Record<string, unknown>): void {}
+  capture(_event: string, _properties?: Record<string, unknown>): void {}
 
   openExternal(url: string): void {
     void vscode.env.openExternal(vscode.Uri.parse(url))

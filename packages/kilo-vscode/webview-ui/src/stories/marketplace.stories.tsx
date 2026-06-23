@@ -204,7 +204,7 @@ const MOCK_AGENTS: AgentMarketplaceItem[] = [
       options: { displayName: "Architect" },
       permission: { read: "allow", edit: "deny", bash: "deny", mcp: "deny", question: "allow" },
     },
-    author: "Kilo",
+    author: "Nano",
     tags: ["planning", "design"],
   },
   {
@@ -220,7 +220,7 @@ const MOCK_AGENTS: AgentMarketplaceItem[] = [
       options: { displayName: "Code Reviewer" },
       permission: { read: "allow", edit: "deny", bash: "allow", mcp: "deny", question: "allow" },
     },
-    author: "Kilo",
+    author: "Nano",
     tags: ["review", "quality"],
   },
   {

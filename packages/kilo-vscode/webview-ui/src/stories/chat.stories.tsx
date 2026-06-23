@@ -856,8 +856,8 @@ export const TaskHeaderWithTodosAllDone: Story = {
 
 const MOCK_NOTIFICATION = {
   id: "notif-1",
-  title: "Try BYOK for Kilo Gateway",
-  message: "Bring your own API key for even more flexibility with Kilo Gateway models.",
+  title: "Try BYOK for Nano Gateway",
+  message: "Bring your own API key for even more flexibility with Nano Gateway models.",
   action: { actionText: "Learn more", actionURL: "https://kilo.ai/docs" },
 }
 
@@ -873,7 +873,7 @@ const mockServer = {
     profile: {
       email: "dev@kilo.dev",
       name: "Dev User",
-      organizations: [{ id: "org-1", name: "Kilo Org", role: "member" }],
+      organizations: [{ id: "org-1", name: "Nano Org", role: "member" }],
     },
     balance: { balance: 5.0 },
     currentOrgId: "org-1",

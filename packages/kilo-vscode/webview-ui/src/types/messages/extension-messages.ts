@@ -1097,5 +1097,5 @@ export type ExtensionMessage =
   | WorktreeStatsLoadedMessage
   | McpStatusLoadedMessage
   | ClearPendingPromptsMessage
-   | ExtensionDataReadyMessage
-   | RemoteStatusMessage
+  | ExtensionDataReadyMessage
+  | RemoteStatusMessage

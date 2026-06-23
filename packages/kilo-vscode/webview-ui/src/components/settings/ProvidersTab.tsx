@@ -179,7 +179,7 @@ const ProvidersTab: Component = () => {
                 color: "var(--vscode-foreground)",
               }}
             >
-              Kilo Gateway
+              Nano Gateway
             </span>
             <Show
               when={kiloLoggedIn()}
