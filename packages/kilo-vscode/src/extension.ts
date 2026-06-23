@@ -16,7 +16,6 @@ import { ensureBackendForAutocomplete } from "./services/autocomplete/ensure-bac
 import { AutocompleteServiceManager } from "./services/autocomplete/AutocompleteServiceManager"
 import { AttentionService } from "./services/attention"
 import { BrowserAutomationService } from "./services/browser-automation"
-import { TelemetryEventName, TelemetryProxy } from "./services/telemetry"
 import { registerCommitMessageService } from "./services/commit-message"
 import { registerCodeActions, registerTerminalActions, KiloCodeActionProvider } from "./services/code-actions"
 import { registerToggleAutoApprove } from "./commands/toggle-auto-approve"
@@ -45,8 +44,6 @@ export function activate(context: vscode.ExtensionContext) {
   console.log("Kilo Code extension is now active")
   shuttingDown = false
 
-  const telemetry = TelemetryProxy.getInstance()
-
   // Create shared connection service (one server for all webviews)
   const connectionService = new KiloConnectionService(context)
   const attention = new AttentionService(connectionService)
@@ -72,15 +69,6 @@ export function activate(context: vscode.ExtensionContext) {
   const unsubscribeStateChange = connectionService.onStateChange((state) => {
     if (state === "connected") {
       browserAutomationService.reregisterIfEnabled()
-      const config = connectionService.getServerConfig()
-      if (config) {
-        telemetry.configure(config.baseUrl, config.password)
-        // Sync the CLI's PostHog client with the current consent state. The
-        // CLI reads KILO_TELEMETRY_LEVEL once at spawn, so without this call
-        // a fresh CLI started while VS Code telemetry was off would stay
-        // opted out for the rest of the session.
-        telemetry.setEnabled(vscode.env.isTelemetryEnabled)
-      }
       try {
         remoteService.setClient(connectionService.getClient())
         console.log("[Kilo New] CLI connected, calling remoteService.refresh()")
@@ -94,14 +82,6 @@ export function activate(context: vscode.ExtensionContext) {
       remoteService.setClient(null)
     }
   })
-
-  // Propagate runtime telemetry consent changes to the CLI subprocess so its
-  // PostHog client stays in sync with the user's VS Code telemetry setting.
-  context.subscriptions.push(
-    vscode.env.onDidChangeTelemetryEnabled((enabled) => {
-      telemetry.setEnabled(enabled)
-    }),
-  )
 
   // Prewarm the CLI backend early so autocomplete is ready before first editor use.
   ensureBackendForAutocomplete(connectionService)
@@ -312,38 +292,28 @@ export function activate(context: vscode.ExtensionContext) {
     }),
   )
 
-  // Sidebar menus use wrapper commands so this event measures real title button presses,
-  // not programmatic opens, shortcuts, or editor title commands.
-  const track = (button: string, command: string) => {
-    TelemetryProxy.capture(TelemetryEventName.TITLE_BUTTON_CLICKED, {
-      button,
-      surface: "sidebar_title",
-    })
-    void vscode.commands.executeCommand(command)
-  }
-
   // Register toolbar button command handlers
   context.subscriptions.push(
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.plusButtonClicked", () => {
-      track("new_task", "kilo-code.new.plusButtonClicked")
+      void vscode.commands.executeCommand("kilo-code.new.plusButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.historyButtonClicked", () => {
-      track("history", "kilo-code.new.historyButtonClicked")
+      void vscode.commands.executeCommand("kilo-code.new.historyButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.agentManagerOpen", () => {
-      track("agent_manager", "kilo-code.new.agentManagerOpen")
+      void vscode.commands.executeCommand("kilo-code.new.agentManagerOpen")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.kiloClawOpen", () => {
-      track("kiloclaw", "kilo-code.new.kiloClawOpen")
+      void vscode.commands.executeCommand("kilo-code.new.kiloClawOpen")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.marketplaceButtonClicked", () => {
-      track("marketplace", "kilo-code.new.marketplaceButtonClicked")
+      void vscode.commands.executeCommand("kilo-code.new.marketplaceButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.profileButtonClicked", () => {
-      track("profile", "kilo-code.new.profileButtonClicked")
+      void vscode.commands.executeCommand("kilo-code.new.profileButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicked", () => {
-      track("settings", "kilo-code.new.settingsButtonClicked")
+      void vscode.commands.executeCommand("kilo-code.new.settingsButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.plusButtonClicked", () => {
       const tab = activeTabProvider()
@@ -546,7 +516,6 @@ export function activate(context: vscode.ExtensionContext) {
 export async function deactivate() {
   shuttingDown = true
   await agentManager?.shutdown()
-  TelemetryProxy.getInstance().shutdown()
 }
 
 async function openKiloInNewTab(

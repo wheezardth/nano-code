@@ -34,7 +34,6 @@ import { useSpeechToText } from "../src/components/speech-to-text/useSpeechToTex
 import { convertToMentionPath } from "../src/utils/path-mentions"
 import { insertSpacedText } from "../src/components/chat/prompt-input-utils"
 import { BranchSelect, BranchSelectPopover } from "../src/components/shared/BranchSelect"
-import { tracker } from "./telemetry"
 
 type VersionCount = 1 | 2 | 3 | 4
 const VERSION_OPTIONS: VersionCount[] = [1, 2, 3, 4]
@@ -72,10 +71,13 @@ export const NewWorktreeDialog: Component<{ onClose: () => void; defaultBaseBran
   const session = useSession()
   const provider = useProvider()
   const { config } = useConfig()
-  const metrics = tracker(vscode)
-  const track = (button: string, properties?: Record<string, string | number | boolean | undefined>) =>
-    metrics.track(button, "configure_worktree_dialog", properties)
-  const click = metrics.click
+  const metrics = {
+    track: (_: string, _props?: Record<string, unknown>) => {},
+    click: (_: string, _surface: string, fn: any, _props?: unknown) => fn,
+    use: (_: string, _surface: string, fn: any) => fn,
+  }
+  const track = (_: string, _props?: Record<string, unknown>) => {}
+  const click = (_: string, _surface: string, fn: any, _props?: unknown) => fn
 
   const [tab, setTab] = createSignal<DialogTab>("new")
 

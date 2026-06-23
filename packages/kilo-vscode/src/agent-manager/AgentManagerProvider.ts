@@ -187,7 +187,6 @@ export class AgentManagerProvider implements Disposable {
       return
     }
     this.log("Opening Agent Manager panel")
-    this.host.capture("Agent Manager Opened", { source: PLATFORM })
 
     this.attachPanel(
       this.host.openPanel({
@@ -479,10 +478,6 @@ export class AgentManagerProvider implements Disposable {
     }
 
     if (m.type === "abort") {
-      this.host.capture("Agent Manager Session Stopped", {
-        source: PLATFORM,
-        sessionId: m.sessionID,
-      })
       return msg
     }
 
@@ -758,11 +753,6 @@ export class AgentManagerProvider implements Disposable {
         message: msg,
         errorCode: classifyWorktreeError(msg),
       })
-      this.host.capture("Agent Manager Session Error", {
-        source: PLATFORM,
-        error: msg,
-        context: "createWorktree",
-      })
       return null
     }
 
@@ -805,11 +795,6 @@ export class AgentManagerProvider implements Disposable {
         message: "Not connected to CLI backend",
         worktreeId,
       })
-      this.host.capture("Agent Manager Session Error", {
-        source: PLATFORM,
-        error: "Not connected to CLI backend",
-        context: "createSession",
-      })
       return null
     }
 
@@ -836,11 +821,6 @@ export class AgentManagerProvider implements Disposable {
         status: "error",
         message: `Failed to create session: ${err}`,
         worktreeId,
-      })
-      this.host.capture("Agent Manager Session Error", {
-        source: PLATFORM,
-        error: err,
-        context: "createSession",
       })
       return null
     }
@@ -942,7 +922,7 @@ export class AgentManagerProvider implements Disposable {
         notifyReady: (sid, result, wid) => this.notifyWorktreeReady(sid, result, wid),
         push: () => this.pushState(),
         post: (msg) => this.postToWebview(msg as AgentManagerOutMessage),
-        capture: (event, props) => this.host.capture(event, props),
+        capture: () => {},
         log: (...args) => this.log(...args),
         error: (msg) => this.host.showError(msg),
       },
@@ -981,12 +961,6 @@ export class AgentManagerProvider implements Disposable {
     // sees the worktree mapping and routes the session to the worktree tab.
     this.notifyWorktreeReady(session.id, created.result, created.worktree.id)
     this.panel?.sessions.registerSession(session)
-    this.host.capture("Agent Manager Session Started", {
-      source: PLATFORM,
-      sessionId: session.id,
-      worktreeId: created.worktree.id,
-      branch: created.result.branch,
-    })
     this.log(`Created worktree ${created.worktree.id} with session ${session.id}`)
     return null
   }
@@ -1117,12 +1091,6 @@ export class AgentManagerProvider implements Disposable {
         sessionId,
         worktreeId,
       })
-      this.host.capture("Agent Manager Session Started", {
-        source: PLATFORM,
-        sessionId,
-        worktreeId,
-        existing: true,
-      })
       this.log(`Added existing session ${sessionId} to worktree ${worktreeId}`)
       return null
     }
@@ -1137,12 +1105,6 @@ export class AgentManagerProvider implements Disposable {
     } catch (error) {
       const err = getErrorMessage(error)
       this.postToWebview({ type: "error", message: `Failed to create session: ${err}` })
-      this.host.capture("Agent Manager Session Error", {
-        source: PLATFORM,
-        error: err,
-        context: "addSessionToWorktree",
-        worktreeId,
-      })
       return null
     }
 
@@ -1159,11 +1121,6 @@ export class AgentManagerProvider implements Disposable {
       this.panel.sessions.registerSession(session)
     }
 
-    this.host.capture("Agent Manager Session Started", {
-      source: PLATFORM,
-      sessionId: session.id,
-      worktreeId,
-    })
     this.log(`Added session ${session.id} to worktree ${worktreeId}`)
     return null
   }
@@ -1310,16 +1267,6 @@ export class AgentManagerProvider implements Disposable {
         versionIndex: i,
       })
 
-      this.host.capture("Agent Manager Session Started", {
-        source: PLATFORM,
-        sessionId: session.id,
-        worktreeId: wt.worktree.id,
-        branch: wt.result.branch,
-        multiVersion: true,
-        version: i + 1,
-        totalVersions: versions,
-        groupId,
-      })
       this.log(`Version ${i + 1} worktree ready: session=${session.id}`)
 
       // Update progress
@@ -1765,7 +1712,7 @@ export class AgentManagerProvider implements Disposable {
         registerWorktreeSession: (sid, dir) => this.registerWorktreeSession(sid, dir),
         registerSession: (session) => this.panel?.sessions.registerSession(session),
         notifyReady: (sid, result, wid) => this.notifyWorktreeReady(sid, result, wid),
-        capture: (event, props) => this.host.capture(event, props),
+        capture: () => {},
         log: (...args) => this.log(...args),
       },
       sessionId,

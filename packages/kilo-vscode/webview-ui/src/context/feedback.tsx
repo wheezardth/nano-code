@@ -12,7 +12,6 @@ import { createContext, useContext, createSignal, onCleanup } from "solid-js"
 import type { ParentComponent, Accessor } from "solid-js"
 import { useVSCode } from "./vscode"
 import type { ExtensionMessage } from "../types/messages"
-import { TelemetryEventName } from "../../../src/services/telemetry/types"
 import { buildFeedbackProperties, type Rating, type RateInput } from "./feedback-payload"
 
 export type { Rating, RateInput } from "./feedback-payload"
@@ -30,12 +29,7 @@ export const FeedbackProvider: ParentComponent = (props) => {
   const [telemetryEnabled, setTelemetryEnabled] = createSignal(false)
   const [ratings, setRatings] = createSignal<Record<string, Rating>>({})
 
-  const unsubscribe = vscode.onMessage((message: ExtensionMessage) => {
-    if (message.type !== "telemetryState") return
-    // Drop stored ratings if the user just revoked consent.
-    if (telemetryEnabled() && !message.enabled) setRatings({})
-    setTelemetryEnabled(message.enabled)
-  })
+  const unsubscribe = vscode.onMessage((_message: ExtensionMessage) => {})
 
   onCleanup(unsubscribe)
 
@@ -50,12 +44,6 @@ export const FeedbackProvider: ParentComponent = (props) => {
       if (input.next === null) delete updated[input.messageID]
       else updated[input.messageID] = input.next
       return updated
-    })
-
-    vscode.postMessage({
-      type: "telemetry",
-      event: TelemetryEventName.FEEDBACK_SUBMITTED,
-      properties: buildFeedbackProperties(input, prev),
     })
   }
 

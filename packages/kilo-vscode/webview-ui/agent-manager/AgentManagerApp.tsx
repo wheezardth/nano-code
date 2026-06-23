@@ -137,7 +137,6 @@ import { createSidebarCollapse } from "./sidebar-collapse"
 import { SidebarToggleButton } from "./SidebarToggleButton"
 import { setTabWidths } from "./tab-widths"
 import { buildShortcutCategories } from "./shortcuts"
-import { tracker } from "./telemetry"
 import "./agent-manager.css"
 import "./agent-manager-review.css"
 const REVIEW_TAB_ID = "review"
@@ -210,7 +209,11 @@ const AgentManagerContent: Component = () => {
   const [worktrees, setWorktrees] = createSignal<WorktreeState[]>([])
   const [managedSessions, setManagedSessions] = createSignal<ManagedSessionState[]>([])
   const [selection, setSelection] = createSignal<SidebarSelection>(LOCAL)
-  const metrics = tracker(vscode)
+  const metrics = {
+    track: (_: string, _surface?: string, _props?: Record<string, unknown>) => {},
+    click: (_: string, _surface: string, fn: any, _props?: unknown) => fn,
+    use: (_: string, _surface: string, fn: any) => fn,
+  }
   const [repoBranch, setRepoBranch] = createSignal<string | undefined>()
   const [busyWorktrees, setBusyWorktrees] = createSignal<Map<string, WorktreeBusyState>>(new Map())
   const [staleWorktreeIds, setStaleWorktreeIds] = createSignal<Set<string>>(new Set())

@@ -128,7 +128,6 @@ export function registerSession(
   // managedSessions (and thus worktreeSessionIds) hadn't been updated yet.
   ctx.notifyReady(session.id, result, worktreeId)
   ctx.registerSession(session)
-  ctx.capture("Continue in Worktree", { source: PLATFORM, sessionId: session.id, worktreeId })
   ctx.log(`Continued sidebar session ${sourceId} → worktree ${worktreeId} (session ${session.id})`)
 }
 

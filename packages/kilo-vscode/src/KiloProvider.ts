@@ -20,12 +20,6 @@ import { saveImage } from "./kilo-provider/save-image"
 import { handleEditorAction } from "./kilo-provider/editor-actions"
 import { exportTranscript } from "./kilo-provider/export-transcript"
 import {
-  TelemetryProxy,
-  type TelemetryPropertiesProvider,
-  pushTelemetryState,
-  watchTelemetryState,
-} from "./services/telemetry"
-import {
   sessionToWebview,
   applySessionPatch,
   sessionPatchToWebview,
@@ -279,7 +273,7 @@ export function unwrapSyncEvent(event: GlobalEvent["payload"] | RawSyncPayload):
   }
 }
 
-export class KiloProvider implements vscode.WebviewViewProvider, TelemetryPropertiesProvider {
+export class KiloProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "kilo-code.SidebarProvider"
   private readonly instanceId = crypto.randomUUID()
 
@@ -359,7 +353,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
   private initConnectionPromise: Promise<void> | null = null
   private webviewMessageDisposable: vscode.Disposable | null = null
   private autocompleteConfigDisposable: vscode.Disposable | null = null
-  private telemetryStateDisposable: vscode.Disposable | null = null
   private viewStateDisposable: vscode.Disposable | null = null
   private visibilityDisposable: vscode.Disposable | null = null
   private autoApproveBridge: ReturnType<typeof createAutoApproveBridge> | null = null
@@ -398,8 +391,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
   ) {
     this.projectDirectory = opts.projectDirectory
     this.slimEditMetadata = opts.slimEditMetadata ?? true
-
-    TelemetryProxy.getInstance().setProvider(this)
   }
 
   setRemoteService(service: RemoteStatusService): void {
@@ -464,18 +455,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
 
   public setDiffVirtualProvider(provider: import("./DiffVirtualProvider").DiffVirtualProvider): void {
     this.diffVirtualProvider = provider
-  }
-
-  getTelemetryProperties(): Record<string, unknown> {
-    return {
-      appName: "kilo-code",
-      appVersion: this.extensionVersion,
-      platform: "vscode",
-      editorName: vscode.env.appName,
-      vscodeVersion: vscode.version,
-      machineId: vscode.env.machineId,
-      vscodeIsTelemetryEnabled: vscode.env.isTelemetryEnabled,
-    }
   }
 
   /**
@@ -560,7 +539,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
 
     // Always push connection state first so the UI can render appropriately.
     this.postConnectionState()
-    pushTelemetryState((m) => this.postMessage(m))
 
     // Re-send ready so the webview can recover after refresh.
     if (serverInfo) {
@@ -796,8 +774,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
     this.webviewMessageDisposable?.dispose()
     this.autocompleteConfigDisposable?.dispose()
     this.autocompleteConfigDisposable = watchAutocompleteConfig((msg) => this.postMessage(msg))
-    this.telemetryStateDisposable?.dispose()
-    this.telemetryStateDisposable = watchTelemetryState((msg) => this.postMessage(msg))
     this.webviewMessageDisposable = webview.onDidReceiveMessage(async (message) => {
       const intercepted = await interceptMessage(message, {
         workspaceDir: (sid) => this.getWorkspaceDirectory(sid ?? this.currentSession?.id),
@@ -1207,9 +1183,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
           break
         case "resetAllSettings":
           await this.handleResetAllSettings()
-          break
-        case "telemetry":
-          TelemetryProxy.capture(message.event, message.properties)
           break
         case "persistVariant": {
           const stored = this.extensionContext?.globalState.get<Record<string, string>>("variantSelections") ?? {}
@@ -3649,7 +3622,6 @@ export class KiloProvider implements vscode.WebviewViewProvider, TelemetryProper
     this.visibilityDisposable?.dispose()
     this.webviewMessageDisposable?.dispose()
     this.autocompleteConfigDisposable?.dispose()
-    this.telemetryStateDisposable?.dispose()
     this.autoApproveBridge?.dispose()
     this.visibleTaskStreams.clear()
     this.streams.dispose()

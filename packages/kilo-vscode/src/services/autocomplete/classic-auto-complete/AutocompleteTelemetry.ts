@@ -72,12 +72,8 @@ export class AutocompleteTelemetry {
     this.autocompleteType = autocompleteType
   }
 
-  private captureEvent(event: TelemetryEventName, properties?: Record<string, unknown>): void {
-    const props = {
-      ...properties,
-      autocompleteType: this.autocompleteType,
-    }
-    TelemetryProxy.capture(event, props)
+  private captureEvent(_event: TelemetryEventName, _properties?: Record<string, unknown>): void {
+    // Telemetry removed
   }
 
   /**

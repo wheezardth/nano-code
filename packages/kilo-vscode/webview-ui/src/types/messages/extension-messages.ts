@@ -868,11 +868,6 @@ export interface ExtensionDataReadyMessage {
   type: "extensionDataReady"
 }
 
-export interface TelemetryStateMessage {
-  type: "telemetryState"
-  enabled: boolean
-}
-
 // ============================================
 // Marketplace Messages
 // ============================================
@@ -1102,6 +1097,5 @@ export type ExtensionMessage =
   | WorktreeStatsLoadedMessage
   | McpStatusLoadedMessage
   | ClearPendingPromptsMessage
-  | ExtensionDataReadyMessage
-  | TelemetryStateMessage
-  | RemoteStatusMessage
+   | ExtensionDataReadyMessage
+   | RemoteStatusMessage
