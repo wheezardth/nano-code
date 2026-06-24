@@ -45,7 +45,6 @@ import { GitOps } from "./agent-manager/GitOps"
 import { GitStatsPoller, type LocalStats } from "./agent-manager/GitStatsPoller"
 import { diffSummary as localDiffSummary } from "./agent-manager/local-diff"
 import { getWorkspaceRoot } from "./review-utils"
-import { createMarketplaceRemover, removeAgent, removeMcp } from "./kilo-provider/remove-config-item"
 import type { RemoteStatusService } from "./services/RemoteStatusService"
 import { resolveProjectDirectory } from "./project-directory"
 import { seedSessionStatuses } from "./session-status"
@@ -356,7 +355,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
   private viewStateDisposable: vscode.Disposable | null = null
   private visibilityDisposable: vscode.Disposable | null = null
   private autoApproveBridge: ReturnType<typeof createAutoApproveBridge> | null = null
-  private readonly marketplaceRemove = createMarketplaceRemover()
 
   private ignoreController: FileIgnoreController | null = null
   private ignoreControllerDir: string | null = null
@@ -504,21 +502,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
       forked: (session: Session) => this.postMessage({ type: "sessionForked", sessionID: session.id }),
       status: (sessionID: string) => this.sessionStatusMap.get(sessionID),
       directory: (sessionID: string) => this.getWorkspaceDirectory(sessionID),
-    }
-  }
-
-  private get removeConfigItemCtx() {
-    return {
-      connection: this.connectionService,
-      project: () => this.getProjectDirectory(this.currentSession?.id),
-      directory: () => this.getWorkspaceDirectory(),
-      remove: this.marketplaceRemove,
-      refresh: async () => {
-        this.cachedAgentsMessage = null
-        this.cachedConfigMessage = null
-        await Promise.all([this.fetchAndSendAgents(), this.fetchAndSendConfig()])
-      },
-      storage: this.extensionContext?.globalStorageUri,
     }
   }
 
@@ -946,9 +929,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
           break
         case "openConfigFile":
           await openConfig(message.scope, message.labels, this.getProjectDirectory(this.currentSession?.id))
-          break
-        case "openMarketplacePanel":
-          vscode.commands.executeCommand("kilo-code.new.marketplaceButtonClicked", this.projectDirectory)
           break
         case "forkSession":
           handleForkSession(this.forkCtx, message.sessionId, message.messageId).catch((e) =>
@@ -2100,18 +2080,13 @@ export class KiloProvider implements vscode.WebviewViewProvider {
         return
       }
     } catch {
-      // fall through to kilo.json removal
+      // CLI removal failed, nothing else to try
     }
-    if (!(await removeAgent(this.removeConfigItemCtx, name))) {
-      console.error("[Kilo New] KiloProvider: Failed to remove agent:", name)
-    }
+    console.error("[Kilo New] KiloProvider: Failed to remove agent:", name)
   }
 
   private async handleRemoveMcp(name: string): Promise<void> {
-    const removed = await removeMcp(this.removeConfigItemCtx, name)
-    if (!removed) {
-      console.error("[Kilo New] KiloProvider: Failed to remove MCP server:", name)
-    }
+    console.error("[Kilo New] KiloProvider: Failed to remove MCP server:", name)
   }
 
   private async fetchAndSendMcpStatus(): Promise<void> {
