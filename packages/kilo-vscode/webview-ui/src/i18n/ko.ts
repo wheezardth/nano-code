@@ -287,19 +287,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'프롬프트 향상' 버튼은 추가 컨텍스트, 명확화 또는 재구성을 제공하여 요청을 개선합니다. 여기에 요청을 입력한 다음 버튼을 다시 클릭하여 작동 방식을 확인해보세요.",
 
-  "speechToText.tooltip.start": "Nano Gateway로 음성 입력 시작",
-  "speechToText.tooltip.stop": "음성 캡처 중지",
-  "speechToText.tooltip.transcribing": "변환 중... 취소하려면 클릭하세요.",
-  "speechToText.tooltip.error": "음성 입력에 실패했습니다. 지우려면 클릭하세요.",
-  "speechToText.error.title": "음성 입력 실패",
-  "speechToText.error.loginRequired": "음성 입력을 사용하려면 Nano에 로그인하세요.",
-  "speechToText.error.permission": "마이크 권한이 거부되었습니다.",
-  "speechToText.error.microphone": "마이크를 시작할 수 없습니다.",
-  "speechToText.error.recording": "녹음에 실패했습니다.",
-  "speechToText.error.emptyRecording": "녹음된 오디오가 없습니다.",
-  "speechToText.error.emptyTranscript": "음성이 감지되지 않았습니다.",
-  "speechToText.error.encoding": "녹음을 인코딩할 수 없습니다.",
-  "speechToText.toast.transcribed": "변환 텍스트 삽입됨",
 
   "prompt.toast.pasteUnsupported.title": "지원되지 않는 붙여넣기",
   "prompt.toast.pasteUnsupported.description": "이미지나 PDF만 붙여넣을 수 있습니다.",
@@ -1298,11 +1285,6 @@ export const dict = {
   "settings.experimental.batch.description": "여러 도구 호출의 배치 처리 활성화",
   "settings.experimental.codebaseSearch.title": "코드베이스 검색",
   "settings.experimental.codebaseSearch.description": "코드베이스 전체에서 AI 기반 자연어 검색 활성화",
-  "settings.experimental.speechToText.title": "음성 텍스트 변환",
-  "settings.experimental.speechToText.description":
-    "Nano Gateway를 통해 Nano 계정을 사용하여 프롬프트 필드에서 음성 입력을 활성화합니다.",
-  "settings.models.speechToText.disabledDescription":
-    "Speech to Text를 사용하려면 Nano 제공자를 활성화하고 로그인하세요. 현재 Speech to Text는 Nano Gateway에서만 지원됩니다.",
   "settings.models.speechToTextModel.title": "음성 텍스트 변환 모델",
   "settings.models.speechToTextModel.description": "음성 입력에 사용할 Nano Gateway 변환 모델을 선택하세요.",
   "settings.experimental.continueOnDeny.title": "거부 시 계속",
@@ -1654,5 +1636,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "일치하는 브랜치 없음",
   "diffViewer.baseBranch.loading": "브랜치 로딩 중…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "계획이 준비되었습니다:",
+  "plan.exit.ready": "계획이 준비되었습니다:"
 }

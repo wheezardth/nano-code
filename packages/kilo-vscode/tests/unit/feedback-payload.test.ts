@@ -38,17 +38,3 @@ describe("buildFeedbackProperties — non-Kilo providers", () => {
     expect(props.previousRating).toBe("up")
   })
 })
-
-describe("buildFeedbackProperties — Kilo Gateway", () => {
-  it("includes sessionID, messageID, parentMessageID", () => {
-    const props = buildFeedbackProperties({ ...baseInput, providerID: "kilo", next: "up" })
-    expect(props).toEqual({
-      providerID: "kilo",
-      modelID: "claude-sonnet-4-5",
-      rating: "up",
-      sessionID: "ses_xyz",
-      messageID: "msg_abc",
-      parentMessageID: "msg_parent",
-    })
-  })
-})

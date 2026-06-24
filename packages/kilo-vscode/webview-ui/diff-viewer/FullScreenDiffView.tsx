@@ -25,8 +25,6 @@ import { useVSCode } from "../src/context/vscode"
 import { useServer } from "../src/context/server"
 import { useProvider } from "../src/context/provider"
 import { useConfig } from "../src/context/config"
-import { canUseSpeechToText, selectedSpeechToTextModel } from "../src/components/speech-to-text/availability"
-import { useSpeechToText } from "../src/components/speech-to-text/useSpeechToText"
 import { FileTree } from "./FileTree"
 import { treeOrder } from "./file-tree-utils"
 import { getDirectory, getFilename, lineCount, sanitizeReviewComments, type ReviewComment } from "./review-comments"
@@ -96,9 +94,6 @@ export const FullScreenDiffView: Component<FullScreenDiffViewProps> = (props) =>
   const server = useServer()
   const provider = useProvider()
   const { config } = useConfig()
-  const speech = useSpeechToText(vscode, server, { t })
-  const canUseSpeech = () => canUseSpeechToText(config(), provider.authStates())
-  const speechModel = () => selectedSpeechToTextModel(config())
   const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.userAgent)
   const sendAllKeybind = () =>
     isMac ? t("agentManager.review.sendAllShortcut.mac") : t("agentManager.review.sendAllShortcut.other")
@@ -118,18 +113,10 @@ export const FullScreenDiffView: Component<FullScreenDiffViewProps> = (props) =>
   const [open, setOpen] = createSignal<string[]>([])
   const [draft, setDraft] = createSignal<ReviewDraft | null>(reviewComposerDraft(composer()))
   const [editing, setEditing] = createSignal<string | null>(reviewComposerEdit(composer()))
-  const speechKeys = createMemo(() => {
-    const keys = new Set<string>()
-    const current = draft()
-    const edit = editing()
-    if (current) keys.add(reviewDraftSpeechKey(current))
-    if (edit) keys.add(reviewEditSpeechKey(edit))
-    return keys
-  })
+  const speechKeys = () => new Set<string>()
   const reviewSpeech = createReviewAnnotationSpeechRenderer({
-    speech,
-    enabled: canUseSpeech,
-    model: speechModel,
+    enabled: () => false,
+    model: () => "",
     label: t,
     keys: speechKeys,
   })

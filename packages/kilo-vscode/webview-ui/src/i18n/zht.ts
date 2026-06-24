@@ -284,19 +284,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "「強化提示詞」按鈕可透過提供額外內容、說明或改寫來協助改善提示詞。試著在這裡輸入提示詞，再點選一次按鈕以了解其運作方式。",
 
-  "speechToText.tooltip.start": "使用 Nano Gateway 開始語音輸入",
-  "speechToText.tooltip.stop": "停止擷取音訊",
-  "speechToText.tooltip.transcribing": "正在轉錄... 點擊取消。",
-  "speechToText.tooltip.error": "語音輸入失敗。點擊清除。",
-  "speechToText.error.title": "語音輸入失敗",
-  "speechToText.error.loginRequired": "登入 Nano 以使用語音輸入。",
-  "speechToText.error.permission": "麥克風權限被拒絕。",
-  "speechToText.error.microphone": "無法啟動麥克風。",
-  "speechToText.error.recording": "錄音失敗。",
-  "speechToText.error.emptyRecording": "未錄製任何音訊。",
-  "speechToText.error.emptyTranscript": "未偵測到語音。",
-  "speechToText.error.encoding": "無法編碼錄音。",
-  "speechToText.toast.transcribed": "已插入轉錄文字",
 
   "prompt.toast.pasteUnsupported.title": "不支援的貼上",
   "prompt.toast.pasteUnsupported.description": "這裡只能貼上圖片或 PDF 檔案。",
@@ -1243,10 +1230,6 @@ export const dict = {
   "settings.experimental.batch.description": "啟用多個工具呼叫的批次處理",
   "settings.experimental.codebaseSearch.title": "程式碼庫搜尋",
   "settings.experimental.codebaseSearch.description": "啟用 AI 驅動的自然語言程式碼庫搜尋",
-  "settings.experimental.speechToText.title": "語音轉文字",
-  "settings.experimental.speechToText.description": "透過 Nano Gateway 使用您的 Nano 帳戶在提示詞欄位中啟用語音輸入。",
-  "settings.models.speechToText.disabledDescription":
-    "啟用並登入 Nano 供應商以使用 Speech to Text。Speech to Text 目前僅支援透過 Nano Gateway 使用。",
   "settings.models.speechToTextModel.title": "語音轉文字模型",
   "settings.models.speechToTextModel.description": "選擇用於語音輸入的 Nano Gateway 轉錄模型。",
   "settings.experimental.continueOnDeny.title": "拒絕後繼續",

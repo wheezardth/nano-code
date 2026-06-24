@@ -4,8 +4,6 @@ import {
   buildTriggerLabel,
   stripSubProviderPrefix,
   sanitizeName,
-  KILO_GATEWAY_ID,
-  PROVIDER_ORDER,
   freeDataLabel,
   isDataCollectedModel,
   hasByok,
@@ -15,53 +13,17 @@ import {
 const labels = { select: "Select model", noProviders: "No providers", notSet: "Not set" }
 
 describe("providerSortKey", () => {
-  it("returns 0 for kilo gateway", () => {
-    expect(providerSortKey(KILO_GATEWAY_ID)).toBe(0)
-  })
-
-  it("returns correct index for known providers", () => {
-    expect(providerSortKey("anthropic")).toBe(1)
-    expect(providerSortKey("openai")).toBe(3)
-    expect(providerSortKey("google")).toBe(4)
-  })
-
-  it("returns order length for unknown provider", () => {
-    expect(providerSortKey("unknown-provider")).toBe(PROVIDER_ORDER.length)
-  })
-
-  it("is case-insensitive", () => {
-    expect(providerSortKey("Anthropic")).toBe(providerSortKey("anthropic"))
-    expect(providerSortKey("OpenAI")).toBe(providerSortKey("openai"))
-  })
-
-  it("respects custom order array", () => {
-    const order = ["z-provider", "a-provider"]
-    expect(providerSortKey("z-provider", order)).toBe(0)
-    expect(providerSortKey("a-provider", order)).toBe(1)
-    expect(providerSortKey("other", order)).toBe(2)
-  })
-
-  it("sorts providers correctly when used with sort", () => {
-    const ids = ["google", "anthropic", "kilo", "openai", "deepseek"]
-    const sorted = ids.slice().sort((a, b) => providerSortKey(a) - providerSortKey(b))
-    expect(sorted).toEqual(["kilo", "anthropic", "deepseek", "openai", "google"])
+  it("returns length for any provider", () => {
+    expect(providerSortKey("kilo")).toBe(4)
+    expect(providerSortKey("anthropic")).toBe(9)
   })
 })
 
 describe("stripSubProviderPrefix", () => {
-  it("strips prefix before ': '", () => {
-    expect(stripSubProviderPrefix("Anthropic: Claude Sonnet")).toBe("Claude Sonnet")
-    expect(stripSubProviderPrefix("OpenAI: GPT-4o")).toBe("GPT-4o")
-  })
-
-  it("leaves names without ': ' unchanged", () => {
+  it("leaves names unchanged (no longer strips any prefix)", () => {
+    expect(stripSubProviderPrefix("Anthropic: Claude Sonnet")).toBe("Anthropic: Claude Sonnet")
+    expect(stripSubProviderPrefix("OpenAI: GPT-4o")).toBe("OpenAI: GPT-4o")
     expect(stripSubProviderPrefix("GPT-4o")).toBe("GPT-4o")
-    expect(stripSubProviderPrefix("claude-3-5-sonnet")).toBe("claude-3-5-sonnet")
-  })
-
-  it("does not strip 'Kilo: ' prefix", () => {
-    expect(stripSubProviderPrefix("Kilo: Auto")).toBe("Kilo: Auto")
-    expect(stripSubProviderPrefix("kilo: Auto")).toBe("kilo: Auto")
   })
 })
 
@@ -129,36 +91,19 @@ describe("hasByok", () => {
 })
 
 describe("buildTriggerLabel", () => {
-  it("returns resolved model name for non-kilo provider unchanged", () => {
-    expect(buildTriggerLabel("GPT-4o", "openai", undefined, null, false, "", true, labels)).toBe("GPT-4o")
-  })
-
-  it("strips sub-provider prefix from resolved name for kilo gateway models", () => {
-    expect(
-      buildTriggerLabel("Anthropic: Claude Sonnet", KILO_GATEWAY_ID, undefined, null, false, "", true, labels),
-    ).toBe("Claude Sonnet")
-  })
-
-  it("does not strip prefix for non-kilo provider even if name contains ': '", () => {
-    expect(buildTriggerLabel("Anthropic: Claude Sonnet", "anthropic", undefined, null, false, "", true, labels)).toBe(
-      "Anthropic: Claude Sonnet",
-    )
-  })
-
-  it("returns resolved name as-is when providerID is undefined", () => {
-    expect(buildTriggerLabel("GPT-4o", undefined, undefined, null, false, "", true, labels)).toBe("GPT-4o")
-  })
-
-  it("returns providerName / resolvedName for non-kilo provider with providerName", () => {
+  it("returns providerName / resolvedName for provider with name", () => {
     expect(buildTriggerLabel("GPT-4o", "openai", "OpenAI", null, false, "", true, labels)).toBe("OpenAI / GPT-4o")
   })
 
-  it("returns modelID for kilo gateway raw selection", () => {
-    const raw = { providerID: "kilo", modelID: "kilo-auto/frontier" }
-    expect(buildTriggerLabel(undefined, undefined, undefined, raw, false, "", true, labels)).toBe("kilo-auto/frontier")
+  it("returns resolved name as-is when no providerName", () => {
+    expect(buildTriggerLabel("GPT-4o", "openai", undefined, null, false, "", true, labels)).toBe("GPT-4o")
   })
 
-  it("returns providerID / modelID for non-kilo raw selection", () => {
+  it("returns resolved name when providerID is undefined", () => {
+    expect(buildTriggerLabel("GPT-4o", undefined, undefined, null, false, "", true, labels)).toBe("GPT-4o")
+  })
+
+  it("returns modelID as providerID / modelID for raw selection", () => {
     const raw = { providerID: "anthropic", modelID: "claude-3-5-sonnet" }
     expect(buildTriggerLabel(undefined, undefined, undefined, raw, false, "", true, labels)).toBe(
       "anthropic / claude-3-5-sonnet",

@@ -19,8 +19,6 @@ import { useConfig } from "../../context/config"
 import { useProvider } from "../../context/provider"
 import { ModelSelector } from "../shared/ModelSelector"
 import { ModeSwitcher } from "../shared/ModeSwitcher"
-import { SpeechToTextButton } from "../speech-to-text/SpeechToTextButton"
-import { canUseSpeechToText, selectedSpeechToTextModel } from "../speech-to-text/availability"
 import { ThinkingSelector } from "../shared/ThinkingSelector"
 import { useFileMention } from "../../hooks/useFileMention"
 import { useTerminalContext } from "../../hooks/useTerminalContext"
@@ -29,7 +27,6 @@ import { hasTerminalMention } from "../../hooks/terminal-context-utils"
 import { hasGitChangesMention } from "../../hooks/git-changes-context-utils"
 import { useSlashCommand } from "../../hooks/useSlashCommand"
 import { useGhostText } from "../../hooks/useGhostText"
-import { useSpeechToText } from "../speech-to-text/useSpeechToText"
 import { useImageAttachments, type ImageAttachment } from "../../hooks/useImageAttachments"
 import { convertToMentionPath } from "../../utils/path-mentions"
 import { usePromptHistory } from "../../hooks/usePromptHistory"
@@ -146,7 +143,6 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
   let preEnhanceText: string | null = null
 
   const ghost = useGhostText(vscode, text, () => server.isConnected())
-  const speech = useSpeechToText(vscode, server, language)
 
   const replaceReviewComments = (next: ReviewComment[]) => {
     setReviewComments(next)
@@ -296,8 +292,6 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
   const isBusy = () =>
     isPromptBusy(session.status(), !!props.suggesting?.(), !!props.questioning?.(), session.submitting())
   const isDisabled = () => !server.isConnected()
-  const canUseSpeech = () => canUseSpeechToText(config(), provider.authStates())
-  const speechModel = () => selectedSpeechToTextModel(config())
   const hasInput = () => text().trim().length > 0 || imageAttach.images().length > 0 || reviewComments().length > 0
   const canSend = () =>
     !isDisabled() &&
@@ -662,10 +656,6 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
     adjustHeight()
     syncHighlightScroll()
     ghost.scheduleRequest(result.text, ref)
-  }
-
-  const startSpeech = () => {
-    speech.start({ model: speechModel(), insert: insertSpeechText })
   }
 
   const transcribeAndSend = () => {
@@ -1075,9 +1065,6 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
               <WandSparkles size={16} class={enhancing() ? "enhance-spinner" : ""} />
             </Button>
           </Tooltip>
-          <Show when={canUseSpeech()}>
-            <SpeechToTextButton speech={speech} disabled={isDisabled()} start={startSpeech} label={language.t} />
-          </Show>
           <Show
             when={showStop()}
             fallback={

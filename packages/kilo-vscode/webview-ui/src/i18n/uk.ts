@@ -288,19 +288,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Кнопка 'Покращити запит' допомагає вдосконалити ваш запит, надаючи додатковий контекст, уточнення або перефразування. Введіть запит тут і натисніть кнопку ще раз, щоб побачити, як це працює.",
 
-  "speechToText.tooltip.start": "Почати голосове введення з Nano Gateway",
-  "speechToText.tooltip.stop": "Зупинити захоплення звуку",
-  "speechToText.tooltip.transcribing": "Транскрибування... Натисніть, щоб скасувати.",
-  "speechToText.tooltip.error": "Помилка голосового введення. Натисніть, щоб очистити.",
-  "speechToText.error.title": "Помилка голосового введення",
-  "speechToText.error.loginRequired": "Увійдіть до Nano, щоб використовувати голосове введення.",
-  "speechToText.error.permission": "Доступ до мікрофона заборонено.",
-  "speechToText.error.microphone": "Не вдалося запустити мікрофон.",
-  "speechToText.error.recording": "Помилка запису.",
-  "speechToText.error.emptyRecording": "Аудіо не записано.",
-  "speechToText.error.emptyTranscript": "Мовлення не виявлено.",
-  "speechToText.error.encoding": "Не вдалося закодувати запис.",
-  "speechToText.toast.transcribed": "Транскрипцію вставлено",
 
   "prompt.toast.pasteUnsupported.title": "Вставка не підтримується",
   "prompt.toast.pasteUnsupported.description": "Сюди можна вставляти лише зображення або PDF.",
@@ -1303,11 +1290,6 @@ export const dict = {
   "settings.experimental.codebaseSearch.title": "Пошук по кодовій базі",
   "settings.experimental.codebaseSearch.description":
     "Увімкнути пошук природною мовою на основі ШІ по всій кодовій базі",
-  "settings.experimental.speechToText.title": "Мовлення в текст",
-  "settings.experimental.speechToText.description":
-    "Увімкніть голосове введення в полях запитів, використовуючи ваш обліковий запис Nano через Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Увімкніть провайдер Nano та виконайте вхід, щоб використовувати Speech to Text. Наразі Speech to Text підтримується лише з Nano Gateway.",
   "settings.models.speechToTextModel.title": "Модель мовлення в текст",
   "settings.models.speechToTextModel.description": "Виберіть модель транскрипції Nano Gateway для голосового введення.",
   "settings.experimental.continueOnDeny.title": "Продовжувати при відхиленні",
@@ -1697,5 +1679,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "План готовий:",
+  "plan.exit.ready": "План готовий:"
 }

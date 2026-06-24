@@ -1522,11 +1522,6 @@ export const dict = {
   "session.outcome.finish": "Motivo tecnico di fine: {{reason}}",
 
   // Speech to Text
-  "settings.experimental.speechToText.title": "Da voce a testo",
-  "settings.experimental.speechToText.description":
-    "Abilita input vocale nei campi prompt usando il tuo account Nano tramite Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Abilita e accedi al provider Nano per usare Da voce a testo. Da voce a testo è attualmente supportato solo tramite Nano Gateway.",
   "settings.models.speechToTextModel.title": "Modello Da voce a testo",
   "settings.models.speechToTextModel.description": "Scegli il modello di trascrizione Nano Gateway per l'input vocale.",
 
@@ -1596,17 +1591,4 @@ export const dict = {
     "Accedi di nuovo con ChatGPT, quindi invia di nuovo il tuo messaggio per continuare a usare i modelli Codex.",
 
   // Speech to Text tooltips and errors
-  "speechToText.tooltip.start": "Avvia input vocale con Nano Gateway",
-  "speechToText.tooltip.stop": "Interrompi acquisizione",
-  "speechToText.tooltip.transcribing": "Trascrizione... Fai clic per annullare.",
-  "speechToText.tooltip.error": "Input vocale fallito. Fai clic per cancellare.",
-  "speechToText.error.title": "Input vocale fallito",
-  "speechToText.error.loginRequired": "Accedi a Nano per usare l'input vocale.",
-  "speechToText.error.permission": "Permesso microfono negato.",
-  "speechToText.error.microphone": "Impossibile avviare il microfono.",
-  "speechToText.error.recording": "Registrazione fallita.",
-  "speechToText.error.emptyRecording": "Nessun audio registrato.",
-  "speechToText.error.emptyTranscript": "Nessun parlato rilevato.",
-  "speechToText.error.encoding": "Impossibile codificare la registrazione.",
-  "speechToText.toast.transcribed": "Trascrizione inserita",
 } as const

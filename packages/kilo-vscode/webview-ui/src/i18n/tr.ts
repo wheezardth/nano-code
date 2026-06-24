@@ -286,19 +286,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'Komutu Geliştir' düğmesi, ek bağlam, açıklama veya yeniden ifadelendirme sağlayarak komutunuzu iyileştirmeye yardımcı olur. Buraya bir komut yazıp düğmeye tekrar tıklayarak nasıl çalıştığını görebilirsiniz.",
 
-  "speechToText.tooltip.start": "Nano Gateway ile sesli girişi başlatın",
-  "speechToText.tooltip.stop": "Ses yakalamayı durdur",
-  "speechToText.tooltip.transcribing": "Metne dönüştürülüyor... İptal etmek için tıklayın.",
-  "speechToText.tooltip.error": "Sesli giriş başarısız oldu. Temizlemek için tıklayın.",
-  "speechToText.error.title": "Sesli giriş başarısız oldu",
-  "speechToText.error.loginRequired": "Sesli girişi kullanmak için Nano'ya giriş yapın.",
-  "speechToText.error.permission": "Mikrofon izni reddedildi.",
-  "speechToText.error.microphone": "Mikrofon başlatılamadı.",
-  "speechToText.error.recording": "Kayıt başarısız oldu.",
-  "speechToText.error.emptyRecording": "Hiçbir ses kaydedilmedi.",
-  "speechToText.error.emptyTranscript": "Hiçbir konuşma algılanmadı.",
-  "speechToText.error.encoding": "Kayıt kodlanamadı.",
-  "speechToText.toast.transcribed": "Döküm eklendi",
 
   "prompt.toast.pasteUnsupported.title": "Desteklenmeyen yapıştırma",
   "prompt.toast.pasteUnsupported.description": "Buraya sadece görsel veya PDF yapıştırılabilir.",
@@ -1304,11 +1291,6 @@ export const dict = {
   "settings.experimental.codebaseSearch.title": "Kod Tabanı Araması",
   "settings.experimental.codebaseSearch.description":
     "Kod tabanınız genelinde yapay zeka destekli doğal dil aramasını etkinleştir",
-  "settings.experimental.speechToText.title": "Sesten metne",
-  "settings.experimental.speechToText.description":
-    "Nano Gateway üzerinden Nano hesabınızı kullanarak komut alanlarında sesli girişi etkinleştirin.",
-  "settings.models.speechToText.disabledDescription":
-    "Speech to Text kullanmak için Nano sağlayıcısını etkinleştirin ve giriş yapın. Speech to Text şu anda yalnızca Nano Gateway ile desteklenmektedir.",
   "settings.models.speechToTextModel.title": "Sesten metne modeli",
   "settings.models.speechToTextModel.description": "Sesli giriş için Nano Gateway transkripsiyon modelini seçin.",
   "settings.experimental.continueOnDeny.title": "Reddetme Durumunda Devam Et",
@@ -1699,5 +1681,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan hazır:",
+  "plan.exit.ready": "Plan hazır:"
 }

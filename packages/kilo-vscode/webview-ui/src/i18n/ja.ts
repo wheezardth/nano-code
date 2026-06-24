@@ -285,19 +285,6 @@ export const dict = {
     "「プロンプトを強化」ボタンは、追加コンテキスト、説明、または言い換えを提供することで、リクエストを改善します。ここにリクエストを入力し、ボタンを再度クリックして動作を確認してください。",
   "prompt.action.indexing": "インデックス設定",
 
-  "speechToText.tooltip.start": "Nano Gatewayで音声入力を開始",
-  "speechToText.tooltip.stop": "音声キャプチャを停止",
-  "speechToText.tooltip.transcribing": "文字起こし中... クリックしてキャンセル。",
-  "speechToText.tooltip.error": "音声入力に失敗しました。クリックしてクリア。",
-  "speechToText.error.title": "音声入力に失敗しました",
-  "speechToText.error.loginRequired": "音声入力を使用するにはNanoにサインインしてください。",
-  "speechToText.error.permission": "マイクの許可が拒否されました。",
-  "speechToText.error.microphone": "マイクを起動できませんでした。",
-  "speechToText.error.recording": "録音に失敗しました。",
-  "speechToText.error.emptyRecording": "音声が録音されていません。",
-  "speechToText.error.emptyTranscript": "音声が検出されませんでした。",
-  "speechToText.error.encoding": "録音をエンコードできませんでした。",
-  "speechToText.toast.transcribed": "文字起こしを挿入しました",
 
   "prompt.toast.pasteUnsupported.title": "サポートされていない貼り付け",
   "prompt.toast.pasteUnsupported.description": "ここでは画像またはPDFのみ貼り付け可能です。",
@@ -1304,11 +1291,6 @@ export const dict = {
   "settings.experimental.batch.description": "複数のツール呼び出しのバッチ処理を有効にする",
   "settings.experimental.codebaseSearch.title": "コードベース検索",
   "settings.experimental.codebaseSearch.description": "コードベース全体でAIによる自然言語検索を有効にする",
-  "settings.experimental.speechToText.title": "音声認識",
-  "settings.experimental.speechToText.description":
-    "Nano Gateway経由でNanoアカウントを使用して、プロンプトフィールドでの音声入力を有効にします。",
-  "settings.models.speechToText.disabledDescription":
-    "Speech to Text を使用するには、Nano プロバイダーを有効にしてサインインしてください。現在、Speech to Text は Nano Gateway でのみサポートされています。",
   "settings.models.speechToTextModel.title": "音声認識モデル",
   "settings.models.speechToTextModel.description": "音声入力に使用するNano Gateway文字起こしモデルを選択します。",
   "settings.experimental.continueOnDeny.title": "拒否時に続行",
@@ -1670,5 +1652,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "一致するブランチがありません",
   "diffViewer.baseBranch.loading": "ブランチを読み込み中…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "プランの準備ができました:",
+  "plan.exit.ready": "プランの準備ができました:"
 }

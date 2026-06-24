@@ -2,7 +2,6 @@ import type { ProviderAuthAuthorization, ProviderAuthMethod } from "@kilocode/sd
 import type { DiffSourceCapabilities, DiffSourceDescriptor } from "../../../../src/diff/sources/types"
 import type { PartBatch, PartRemove, PartUpdate } from "../../../../src/shared/stream-messages"
 import type { SessionMode } from "../../context/worktree-mode"
-import type { MarketplaceItem, MarketplaceInstalledMetadata } from "../marketplace"
 import type { ConnectionState, ServerInfo, SessionStatus } from "./connection"
 import type { FileAttachment, Part } from "./parts"
 import type {
@@ -305,7 +304,7 @@ export interface DeviceAuthCancelledMessage {
 
 export interface NavigateMessage {
   type: "navigate"
-  view: "newTask" | "marketplace" | "history" | "profile" | "settings" | "subAgentViewer"
+  view: "newTask" | "history" | "profile" | "settings" | "subAgentViewer"
   tab?: string
 }
 
@@ -362,29 +361,6 @@ export interface AutocompleteSettingsLoadedMessage {
 export interface ChatCompletionResultMessage {
   type: "chatCompletionResult"
   text: string
-  requestId: string
-}
-
-export interface SpeechToTextResultMessage {
-  type: "speechToTextResult"
-  text: string
-  requestId: string
-}
-
-export interface SpeechToTextStartedMessage {
-  type: "speechToTextStarted"
-  requestId: string
-}
-
-export interface SpeechToTextCancelledMessage {
-  type: "speechToTextCancelled"
-  requestId: string
-}
-
-export interface SpeechToTextErrorMessage {
-  type: "speechToTextError"
-  error: string
-  code?: string
   requestId: string
 }
 
@@ -869,30 +845,6 @@ export interface ExtensionDataReadyMessage {
 }
 
 // ============================================
-// Marketplace Messages
-// ============================================
-
-export interface MarketplaceDataMessage {
-  type: "marketplaceData"
-  marketplaceItems: MarketplaceItem[]
-  marketplaceInstalledMetadata: MarketplaceInstalledMetadata
-  errors?: string[]
-  showAgentMigrationBanner?: boolean
-}
-
-export interface MarketplaceInstallResultMessage {
-  type: "marketplaceInstallResult"
-  success: boolean
-  slug: string
-  error?: string
-}
-
-export interface MarketplaceRemoveResultMessage {
-  type: "marketplaceRemoveResult"
-  success: boolean
-  slug: string
-  error?: string
-}
 
 export interface ProviderOAuthReadyMessage {
   type: "providerOAuthReady"
@@ -996,10 +948,6 @@ export type ExtensionMessage =
   | CommandsLoadedMessage
   | AutocompleteSettingsLoadedMessage
   | ChatCompletionResultMessage
-  | SpeechToTextStartedMessage
-  | SpeechToTextCancelledMessage
-  | SpeechToTextResultMessage
-  | SpeechToTextErrorMessage
   | FileSearchResultMessage
   | TerminalContextResultMessage
   | TerminalContextErrorMessage
@@ -1081,9 +1029,6 @@ export type ExtensionMessage =
   | DiffViewerCapabilitiesMessage
   | DiffViewerNoticeMessage
   | DiffViewerBranchesLoadedMessage
-  | MarketplaceDataMessage
-  | MarketplaceInstallResultMessage
-  | MarketplaceRemoveResultMessage
   | ProviderOAuthReadyMessage
   | ProviderConnectedMessage
   | ProviderDisconnectedMessage

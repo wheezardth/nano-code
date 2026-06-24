@@ -112,18 +112,6 @@
         "icon": "$(organization)"
       },
       {
-        "command": "kilo-code.new.kiloClawOpen",
-        "title": "KiloClaw",
-        "category": "Nano Code",
-        "icon": "$(comment-discussion)"
-      },
-      {
-        "command": "kilo-code.new.marketplaceButtonClicked",
-        "title": "Marketplace",
-        "category": "Nano Code",
-        "icon": "$(extensions)"
-      },
-      {
         "command": "kilo-code.new.historyButtonClicked",
         "title": "History",
         "category": "Nano Code",
@@ -150,16 +138,6 @@
         "command": "kilo-code.new.sidebarTitle.agentManagerOpen",
         "title": "Agent Manager",
         "icon": "$(organization)"
-      },
-      {
-        "command": "kilo-code.new.sidebarTitle.kiloClawOpen",
-        "title": "KiloClaw",
-        "icon": "$(comment-discussion)"
-      },
-      {
-        "command": "kilo-code.new.sidebarTitle.marketplaceButtonClicked",
-        "title": "Marketplace",
-        "icon": "$(extensions)"
       },
       {
         "command": "kilo-code.new.sidebarTitle.historyButtonClicked",
@@ -449,14 +427,6 @@
           "when": "false"
         },
         {
-          "command": "kilo-code.new.sidebarTitle.kiloClawOpen",
-          "when": "false"
-        },
-        {
-          "command": "kilo-code.new.sidebarTitle.marketplaceButtonClicked",
-          "when": "false"
-        },
-        {
           "command": "kilo-code.new.sidebarTitle.profileButtonClicked",
           "when": "false"
         },
@@ -482,23 +452,13 @@
           "when": "view == kilo-code.SidebarProvider"
         },
         {
-          "command": "kilo-code.new.sidebarTitle.kiloClawOpen",
+          "command": "kilo-code.new.sidebarTitle.profileButtonClicked",
           "group": "navigation@3",
           "when": "view == kilo-code.SidebarProvider"
         },
         {
-          "command": "kilo-code.new.sidebarTitle.marketplaceButtonClicked",
-          "group": "navigation@4",
-          "when": "view == kilo-code.SidebarProvider"
-        },
-        {
-          "command": "kilo-code.new.sidebarTitle.profileButtonClicked",
-          "group": "navigation@5",
-          "when": "view == kilo-code.SidebarProvider"
-        },
-        {
           "command": "kilo-code.new.sidebarTitle.settingsButtonClicked",
-          "group": "navigation@6",
+          "group": "navigation@4",
           "when": "view == kilo-code.SidebarProvider"
         }
       ],

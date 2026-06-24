@@ -288,19 +288,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Dugme 'Poboljšaj prompt' pomaže poboljšati vaš zahtjev pružajući dodatni kontekst, pojašnjenje ili preformulaciju. Pokušajte upisati zahtjev ovdje i ponovo kliknite na dugme da vidite kako funkcioniše.",
 
-  "speechToText.tooltip.start": "Započni glasovni unos sa Nano Gateway",
-  "speechToText.tooltip.stop": "Zaustavi hvatanje zvuka",
-  "speechToText.tooltip.transcribing": "Prepisivanje... Kliknite da otkažete.",
-  "speechToText.tooltip.error": "Glasovni unos nije uspio. Kliknite da očistite.",
-  "speechToText.error.title": "Glasovni unos nije uspio",
-  "speechToText.error.loginRequired": "Prijavite se na Nano da koristite glasovni unos.",
-  "speechToText.error.permission": "Dozvola za mikrofon je odbijena.",
-  "speechToText.error.microphone": "Nije moguće pokrenuti mikrofon.",
-  "speechToText.error.recording": "Snimanje nije uspjelo.",
-  "speechToText.error.emptyRecording": "Zvuk nije snimljen.",
-  "speechToText.error.emptyTranscript": "Govor nije otkriven.",
-  "speechToText.error.encoding": "Nije moguće kodirati snimak.",
-  "speechToText.toast.transcribed": "Prijepis ubačen",
 
   "prompt.toast.pasteUnsupported.title": "Nepodržano lijepljenje",
   "prompt.toast.pasteUnsupported.description": "Ovdje se mogu zalijepiti samo slike ili PDF-ovi.",
@@ -1316,11 +1303,6 @@ export const dict = {
   "settings.experimental.batch.description": "Omogući batch obradu poziva alata",
   "settings.experimental.codebaseSearch.title": "Pretraga koda",
   "settings.experimental.codebaseSearch.description": "Omogući AI pretragu prirodnim jezikom kroz bazu koda",
-  "settings.experimental.speechToText.title": "Govor u tekst",
-  "settings.experimental.speechToText.description":
-    "Omogućite glasovni unos u poljima za promptove koristeći vaš Nano račun preko Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Omogućite i prijavite se na Nano provajder da biste koristili Speech to Text. Speech to Text je trenutno podržan samo uz Nano Gateway.",
   "settings.models.speechToTextModel.title": "Model govora u tekst",
   "settings.models.speechToTextModel.description": "Odaberite Nano Gateway model za transkripciju za glasovni unos.",
   "settings.experimental.continueOnDeny.title": "Nastavi pri odbijanju",
@@ -1686,5 +1668,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan je spreman:",
+  "plan.exit.ready": "Plan je spreman:"
 }

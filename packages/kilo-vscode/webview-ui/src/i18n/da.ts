@@ -287,19 +287,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Knappen 'Forbedr prompt' hjælper med at forbedre din forespørgsel ved at give ekstra kontekst, præcisering eller omformulering. Prøv at skrive en forespørgsel her og klik på knappen igen for at se hvordan det virker.",
 
-  "speechToText.tooltip.start": "Start stemmeinput med Nano Gateway",
-  "speechToText.tooltip.stop": "Stop lydoptagelse",
-  "speechToText.tooltip.transcribing": "Transskriberer... Klik for at annullere.",
-  "speechToText.tooltip.error": "Stemmeinput mislykkedes. Klik for at rydde.",
-  "speechToText.error.title": "Stemmeinput mislykkedes",
-  "speechToText.error.loginRequired": "Log ind på Nano for at bruge stemmeinput.",
-  "speechToText.error.permission": "Mikrofontilladelse blev nægtet.",
-  "speechToText.error.microphone": "Kunne ikke starte mikrofonen.",
-  "speechToText.error.recording": "Optagelse mislykkedes.",
-  "speechToText.error.emptyRecording": "Ingen lyd blev optaget.",
-  "speechToText.error.emptyTranscript": "Ingen tale blev registreret.",
-  "speechToText.error.encoding": "Kunne ikke kode optagelsen.",
-  "speechToText.toast.transcribed": "Transskription indsat",
 
   "prompt.toast.pasteUnsupported.title": "Ikke understøttet indsæt",
   "prompt.toast.pasteUnsupported.description": "Kun billeder eller PDF'er kan indsættes her.",
@@ -1310,11 +1297,6 @@ export const dict = {
   "settings.experimental.batch.description": "Aktiver batchbehandling af flere værktøjskald",
   "settings.experimental.codebaseSearch.title": "Kodesøgning",
   "settings.experimental.codebaseSearch.description": "Aktiver AI-drevet naturlig sprogsøgning på tværs af kodebasen",
-  "settings.experimental.speechToText.title": "Tale til tekst",
-  "settings.experimental.speechToText.description":
-    "Aktivér stemmeinput i prompt-felter ved hjælp af din Nano-konto gennem Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Aktivér og log ind på Nano-udbyderen for at bruge Speech to Text. Speech to Text understøttes i øjeblikket kun med Nano Gateway.",
   "settings.models.speechToTextModel.title": "Model til tale til tekst",
   "settings.models.speechToTextModel.description": "Vælg Nano Gateway-transskriptionsmodellen til stemmeinput.",
   "settings.experimental.continueOnDeny.title": "Fortsæt ved afvisning",
@@ -1677,5 +1659,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Planen er klar:",
+  "plan.exit.ready": "Planen er klar:"
 }

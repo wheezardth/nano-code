@@ -286,19 +286,6 @@ export const dict = {
     "ปุ่ม 'ปรับปรุงพรอมต์' ช่วยปรับปรุงพรอมต์ของคุณโดยให้บริบทเพิ่มเติม ชี้แจง หรือเขียนใหม่ ลองพิมพ์พรอมต์ที่นี่และคลิกปุ่มอีกครั้งเพื่อดูว่ามันทำงานอย่างไร",
   "prompt.action.indexing": "การตั้งค่าการสร้างดัชนี",
 
-  "speechToText.tooltip.start": "เริ่มการป้อนข้อมูลด้วยเสียงด้วย Nano Gateway",
-  "speechToText.tooltip.stop": "หยุดจับเสียง",
-  "speechToText.tooltip.transcribing": "กำลังถอดเสียง... คลิกเพื่อยกเลิก",
-  "speechToText.tooltip.error": "การป้อนข้อมูลด้วยเสียงล้มเหลว คลิกเพื่อล้าง",
-  "speechToText.error.title": "การป้อนข้อมูลด้วยเสียงล้มเหลว",
-  "speechToText.error.loginRequired": "ลงชื่อเข้าใช้ Nano เพื่อใช้การป้อนข้อมูลด้วยเสียง",
-  "speechToText.error.permission": "การอนุญาตเข้าถึงไมโครโฟนถูกปฏิเสธ",
-  "speechToText.error.microphone": "ไม่สามารถเริ่มต้นไมโครโฟนได้",
-  "speechToText.error.recording": "การบันทึกล้มเหลว",
-  "speechToText.error.emptyRecording": "ไม่มีการบันทึกเสียง",
-  "speechToText.error.emptyTranscript": "ตรวจไม่พบเสียงพูด",
-  "speechToText.error.encoding": "ไม่สามารถเข้ารหัสการบันทึกได้",
-  "speechToText.toast.transcribed": "แทรกข้อความที่ถอดเสียงแล้ว",
 
   "prompt.toast.pasteUnsupported.title": "การวางไม่รองรับ",
   "prompt.toast.pasteUnsupported.description": "สามารถวางรูปภาพหรือ PDF เท่านั้น",
@@ -1294,11 +1281,6 @@ export const dict = {
   "settings.experimental.batch.description": "เปิดใช้งานการประมวลผลแบทช์ของการเรียกเครื่องมือ",
   "settings.experimental.codebaseSearch.title": "ค้นหาโค้ดเบส",
   "settings.experimental.codebaseSearch.description": "เปิดใช้งานการค้นหาด้วยภาษาธรรมชาติโดย AI ทั่วทั้งโค้ดเบส",
-  "settings.experimental.speechToText.title": "แปลงเสียงเป็นข้อความ",
-  "settings.experimental.speechToText.description":
-    "เปิดใช้งานการป้อนข้อมูลด้วยเสียงในช่องพรอมต์โดยใช้บัญชี Nano ของคุณผ่าน Nano Gateway",
-  "settings.models.speechToText.disabledDescription":
-    "เปิดใช้งานและลงชื่อเข้าใช้ผู้ให้บริการ Nano เพื่อใช้ Speech to Text ปัจจุบัน Speech to Text รองรับเฉพาะกับ Nano Gateway เท่านั้น",
   "settings.models.speechToTextModel.title": "โมเดลแปลงเสียงเป็นข้อความ",
   "settings.models.speechToTextModel.description": "เลือกโมเดลการถอดเสียง Nano Gateway สำหรับการป้อนข้อมูลด้วยเสียง",
   "settings.experimental.continueOnDeny.title": "ดำเนินต่อเมื่อถูกปฏิเสธ",
@@ -1652,5 +1634,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "แผนพร้อมแล้ว:",
+  "plan.exit.ready": "แผนพร้อมแล้ว:"
 }

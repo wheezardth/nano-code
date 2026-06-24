@@ -289,19 +289,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "De knop 'Prompt verbeteren' helpt je prompt te verbeteren door extra context, verduidelijking of herformulering te bieden. Typ hier een prompt en klik nogmaals op de knop om te zien hoe het werkt.",
 
-  "speechToText.tooltip.start": "Spraakinvoer starten met Nano Gateway",
-  "speechToText.tooltip.stop": "Audio vastleggen stoppen",
-  "speechToText.tooltip.transcribing": "Transcriberen... Klik om te annuleren.",
-  "speechToText.tooltip.error": "Spraakinvoer mislukt. Klik om te wissen.",
-  "speechToText.error.title": "Spraakinvoer mislukt",
-  "speechToText.error.loginRequired": "Meld u aan bij Nano om spraakinvoer te gebruiken.",
-  "speechToText.error.permission": "Microfoontoegang is geweigerd.",
-  "speechToText.error.microphone": "Kon de microfoon niet starten.",
-  "speechToText.error.recording": "Opname mislukt.",
-  "speechToText.error.emptyRecording": "Er is geen audio opgenomen.",
-  "speechToText.error.emptyTranscript": "Er is geen spraak gedetecteerd.",
-  "speechToText.error.encoding": "Kon de opname niet coderen.",
-  "speechToText.toast.transcribed": "Transcriptie ingevoegd",
 
   "prompt.toast.pasteUnsupported.title": "Plakken niet ondersteund",
   "prompt.toast.pasteUnsupported.description": "Hier kunnen alleen afbeeldingen of PDF's worden geplakt.",
@@ -1311,11 +1298,6 @@ export const dict = {
   "settings.experimental.codebaseSearch.title": "Codebase Zoeken",
   "settings.experimental.codebaseSearch.description":
     "Schakel AI-aangedreven zoeken in natuurlijke taal door je codebase in",
-  "settings.experimental.speechToText.title": "Spraak naar tekst",
-  "settings.experimental.speechToText.description":
-    "Schakel spraakinvoer in promptvelden in met uw Nano-account via Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Schakel de Nano-provider in en meld u aan om Speech to Text te gebruiken. Speech to Text wordt momenteel alleen ondersteund met Nano Gateway.",
   "settings.models.speechToTextModel.title": "Spraak-naar-tekst-model",
   "settings.models.speechToTextModel.description": "Kies het Nano Gateway-transcriptiemodel voor spraakinvoer.",
   "settings.experimental.continueOnDeny.title": "Doorgaan bij weigering",
@@ -1710,5 +1692,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan is klaar:",
+  "plan.exit.ready": "Plan is klaar:"
 }

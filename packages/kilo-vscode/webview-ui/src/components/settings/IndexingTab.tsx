@@ -2,18 +2,14 @@ import { Component, For, Show, createMemo, createSignal } from "solid-js"
 import { Button } from "@kilocode/kilo-ui/button"
 import { Card } from "@kilocode/kilo-ui/card"
 import { DEFAULT_VECTOR_STORE } from "@kilocode/kilo-indexing/config"
-import { formatKiloEmbeddingModelLabel, getKiloEmbeddingModel } from "@kilocode/kilo-indexing/embedding-models"
 import { Select } from "@kilocode/kilo-ui/select"
 import { Switch } from "@kilocode/kilo-ui/switch"
 import { TextField } from "@kilocode/kilo-ui/text-field"
 import { useConfig } from "../../context/config"
 import { formatIndexingLabel, useIndexing } from "../../context/indexing"
-import { useKiloEmbeddingModels } from "../../context/kilo-embedding-models"
 import { useLanguage } from "../../context/language"
 import { useProvider } from "../../context/provider"
-import { useServer } from "../../context/server"
 import type { IndexingConfig, IndexingProvider as ProviderId } from "../../types/messages"
-import { KILO_PROVIDER_ID } from "../../../../src/shared/provider-model"
 import SettingsRow from "./SettingsRow"
 import {
   indexingConfig,
@@ -31,16 +27,8 @@ type Option = { value: string; label: string }
 type TuningKey = "searchMinScore" | "searchMaxResults" | "embeddingBatchSize" | "scannerMaxBatchRetries"
 
 const allProviders: { value: ProviderId; label: string }[] = [
-  { value: "kilo", label: "Nano" },
-  { value: "openai", label: "OpenAI" },
-  { value: "ollama", label: "Ollama (local)" },
   { value: "openai-compatible", label: "OpenAI-Compatible" },
-  { value: "gemini", label: "Gemini" },
-  { value: "mistral", label: "Mistral" },
-  { value: "vercel-ai-gateway", label: "Vercel AI Gateway" },
-  { value: "bedrock", label: "AWS Bedrock" },
-  { value: "openrouter", label: "OpenRouter" },
-  { value: "voyage", label: "Voyage" },
+  { value: "ollama", label: "Ollama (local)" },
 ]
 
 const stores: Option[] = [
@@ -64,8 +52,6 @@ function sourceLabel(source: IndexingSource) {
 }
 
 function providerFields(provider: ProviderId | undefined): Array<{ key: string; label: string; placeholder: string }> {
-  if (provider === "kilo") return []
-  if (provider === "openai") return [{ key: "apiKey", label: "API Key", placeholder: "sk-..." }]
   if (provider === "ollama") return [{ key: "baseUrl", label: "Base URL", placeholder: "http://localhost:11434" }]
   if (provider === "openai-compatible") {
     return [
@@ -73,32 +59,14 @@ function providerFields(provider: ProviderId | undefined): Array<{ key: string; 
       { key: "apiKey", label: "API Key (optional)", placeholder: "sk-..." },
     ]
   }
-  if (provider === "gemini") return [{ key: "apiKey", label: "API Key", placeholder: "AI..." }]
-  if (provider === "mistral") return [{ key: "apiKey", label: "API Key", placeholder: "..." }]
-  if (provider === "vercel-ai-gateway") return [{ key: "apiKey", label: "API Key", placeholder: "..." }]
-  if (provider === "bedrock") {
-    return [
-      { key: "region", label: "AWS Region", placeholder: "us-east-1" },
-      { key: "profile", label: "AWS Profile", placeholder: "default" },
-    ]
-  }
-  if (provider === "openrouter") {
-    return [
-      { key: "apiKey", label: "API Key", placeholder: "sk-or-..." },
-      { key: "specificProvider", label: "Specific Provider", placeholder: "optional" },
-    ]
-  }
-  if (provider === "voyage") return [{ key: "apiKey", label: "API Key", placeholder: "pa-..." }]
   return []
 }
 
 const IndexingTab: Component = () => {
   const { globalConfig, projectConfig, updateGlobalConfig, updateProjectConfig } = useConfig()
   const indexing = useIndexing()
-  const embeds = useKiloEmbeddingModels()
   const language = useLanguage()
   const provider = useProvider()
-  const server = useServer()
   const [providerDrafts, setProviderDrafts] = createSignal<Record<string, string>>({})
   const [storeDrafts, setStoreDrafts] = createSignal<Record<string, string>>({})
   const [tuningDrafts, setTuningDrafts] = createSignal<Record<string, string>>({})
@@ -132,53 +100,19 @@ const IndexingTab: Component = () => {
   }
 
   const vectorStore = () => cfg().vectorStore ?? DEFAULT_VECTOR_STORE
-  const kiloDefault = () =>
-    getKiloEmbeddingModel(embeds.catalog().defaultModel, embeds.catalog())?.id ?? embeds.catalog().defaultModel
-  const kiloModels = createMemo(() =>
-    embeds.catalog().models.map((model) => ({
-      value: model.id,
-      label: formatKiloEmbeddingModelLabel(model),
-    })),
-  )
-  const knownKiloModel = (model: string | null | undefined) =>
-    getKiloEmbeddingModel(model ?? undefined, embeds.catalog())?.id
-  const kiloValue = () => knownKiloModel(cfg().model) ?? kiloDefault()
-  const kiloAvailable = () => !!server.profileData() || provider.authStates()[KILO_PROVIDER_ID] !== undefined
-  const selectedProvider = () => cfg().provider ?? (kiloAvailable() ? "kilo" : undefined)
-  const staleKiloModel = () => selectedProvider() === "kilo" && !!cfg().model && !knownKiloModel(cfg().model)
-  const providers = createMemo(() =>
-    allProviders.filter((item) => item.value !== "kilo" || kiloAvailable() || selectedProvider() === "kilo"),
-  )
+  const selectedProvider = () => cfg().provider
+  const providers = createMemo(() => allProviders)
   const fields = createMemo(() => providerFields(selectedProvider()))
 
   const saveProvider = (next: ProviderId | undefined) => {
-    if (next === "kilo") {
-      const model = knownKiloModel(cfg().model) ?? (kiloDefault() || null)
-      updateIndexing({
-        provider: next,
-        model,
-        dimension: null,
-      })
-      return
-    }
     updateIndexing({ provider: next, model: null, dimension: null })
   }
 
   const saveEnabled = (enabled: boolean) => {
-    if (enabled && !cfg().provider && kiloAvailable()) {
-      updateIndexing({
-        enabled,
-        provider: "kilo",
-        model: knownKiloModel(cfg().model) ?? (kiloDefault() || null),
-        dimension: null,
-      })
-      return
-    }
     updateIndexing({ enabled })
   }
 
   const saveModel = (value: string) => {
-    if (selectedProvider() === "kilo") return
     const trimmed = value.trim()
     updateIndexing({ model: trimmed || null })
   }
@@ -318,68 +252,26 @@ const IndexingTab: Component = () => {
             placeholder={language.t("settings.providers.notSet")}
           />
         </SettingsRow>
-        <Show when={selectedProvider() === "kilo"}>
-          <Show when={kiloModels().length > 0}>
-            <SettingsRow
-              title={language.t("settings.indexing.kiloModel.title")}
-              description={description(language.t("settings.indexing.kiloModel.description"), [["model"]])}
-              tag={() => tag(scope(), [["model"]])}
-            >
-              <Select
-                options={kiloModels()}
-                current={kiloModels().find((item) => item.value === kiloValue())}
-                value={(item) => item.value}
-                label={(item) => item.label}
-                onSelect={(item) => updateIndexing({ model: item?.value ?? kiloDefault(), dimension: null })}
-                variant="secondary"
-                size="small"
-                triggerVariant="settings"
-                placeholder="Select a model"
-              />
-            </SettingsRow>
-          </Show>
-        </Show>
-        <Show when={selectedProvider() !== "kilo"}>
-          <SettingsRow
-            title={language.t("settings.indexing.model.title")}
-            description={description(language.t("settings.indexing.model.description"), [["model"]])}
-            tag={() => tag(scope(), [["model"]])}
-          >
-            <TextField value={cfg().model ?? ""} placeholder="Enter model ID" onChange={saveModel} />
-          </SettingsRow>
-        </Show>
+        <SettingsRow
+          title={language.t("settings.indexing.model.title")}
+          description={description(language.t("settings.indexing.model.description"), [["model"]])}
+          tag={() => tag(scope(), [["model"]])}
+        >
+          <TextField value={cfg().model ?? ""} placeholder="Enter model ID" onChange={saveModel} />
+        </SettingsRow>
         <SettingsRow
           title={language.t("settings.indexing.dimension.title")}
-          description={
-            selectedProvider() === "kilo"
-              ? language.t("settings.indexing.dimension.description")
-              : description(language.t("settings.indexing.dimension.description"), [["dimension"]])
-          }
-          tag={() => (selectedProvider() === "kilo" ? undefined : tag(scope(), [["dimension"]]))}
-          last={!selectedProvider() || (fields().length === 0 && !(selectedProvider() === "kilo" && !kiloAvailable()))}
+          description={description(language.t("settings.indexing.dimension.description"), [["dimension"]])}
+          tag={() => tag(scope(), [["dimension"]])}
         >
           <TextField
             value={
-              staleKiloModel() || cfg().dimension === undefined || cfg().dimension === null
-                ? ""
-                : String(cfg().dimension)
+              cfg().dimension === undefined || cfg().dimension === null ? "" : String(cfg().dimension)
             }
-            placeholder={
-              selectedProvider() === "kilo" ? "Provided by Nano" : language.t("settings.indexing.dimension.placeholder")
-            }
-            disabled={selectedProvider() === "kilo"}
+            placeholder={language.t("settings.indexing.dimension.placeholder")}
             onChange={(value) => saveNumber("dimension", value, { integer: true, min: 1 })}
           />
         </SettingsRow>
-        <Show when={selectedProvider() === "kilo" && !kiloAvailable()}>
-          <SettingsRow
-            title={language.t("settings.indexing.kiloSignIn.title")}
-            description={language.t("settings.indexing.kiloSignIn.description")}
-            last
-          >
-            <span />
-          </SettingsRow>
-        </Show>
         <Show when={fields().length > 0 ? selectedProvider() : undefined} keyed>
           {(group) => {
             const fields = providerFields(group)

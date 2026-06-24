@@ -288,19 +288,6 @@ export const dict = {
     "O botão 'Aprimorar prompt' ajuda a melhorar seu pedido fornecendo contexto adicional, esclarecimentos ou reformulações. Tente digitar um pedido aqui e clique no botão novamente para ver como funciona.",
   "prompt.action.indexing": "Configurações de indexação",
 
-  "speechToText.tooltip.start": "Iniciar entrada de voz com o Nano Gateway",
-  "speechToText.tooltip.stop": "Parar captura",
-  "speechToText.tooltip.transcribing": "Transcrevendo... Clique para cancelar.",
-  "speechToText.tooltip.error": "Falha na entrada de voz. Clique para limpar.",
-  "speechToText.error.title": "Falha na entrada de voz",
-  "speechToText.error.loginRequired": "Faça login no Nano para usar a entrada de voz.",
-  "speechToText.error.permission": "A permissão do microfone foi negada.",
-  "speechToText.error.microphone": "Não foi possível iniciar o microfone.",
-  "speechToText.error.recording": "A gravação falhou.",
-  "speechToText.error.emptyRecording": "Nenhum áudio foi gravado.",
-  "speechToText.error.emptyTranscript": "Nenhuma fala foi detectada.",
-  "speechToText.error.encoding": "Não foi possível codificar a gravação.",
-  "speechToText.toast.transcribed": "Transcrição inserida",
 
   "prompt.toast.pasteUnsupported.title": "Colagem não suportada",
   "prompt.toast.pasteUnsupported.description": "Somente imagens ou PDFs podem ser colados aqui.",
@@ -1317,11 +1304,6 @@ export const dict = {
   "settings.experimental.codebaseSearch.title": "Pesquisa de código",
   "settings.experimental.codebaseSearch.description":
     "Ativar pesquisa por linguagem natural com IA em toda a base de código",
-  "settings.experimental.speechToText.title": "Fala para texto",
-  "settings.experimental.speechToText.description":
-    "Ative a entrada de voz nos campos de prompt usando sua conta do Nano por meio do Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Ative e faça login no provedor Nano para usar o Speech to Text. Atualmente, o Speech to Text é compatível apenas com o Nano Gateway.",
   "settings.models.speechToTextModel.title": "Modelo de fala para texto",
   "settings.models.speechToTextModel.description":
     "Escolha o modelo de transcrição do Nano Gateway para entrada de voz.",
@@ -1692,5 +1674,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "Nenhum branch correspondente",
   "diffViewer.baseBranch.loading": "Carregando branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plano pronto:",
+  "plan.exit.ready": "Plano pronto:"
 }

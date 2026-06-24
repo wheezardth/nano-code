@@ -285,19 +285,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'增强提示'按钮通过提供额外上下文、澄清或重新表述来帮助改进您的请求。尝试在此处输入请求，然后再次点击按钮查看其工作原理。",
 
-  "speechToText.tooltip.start": "使用 Nano Gateway 开始语音输入",
-  "speechToText.tooltip.stop": "停止捕获音频",
-  "speechToText.tooltip.transcribing": "正在转录... 点击取消。",
-  "speechToText.tooltip.error": "语音输入失败。点击清除。",
-  "speechToText.error.title": "语音输入失败",
-  "speechToText.error.loginRequired": "登录 Nano 以使用语音输入。",
-  "speechToText.error.permission": "麦克风权限被拒绝。",
-  "speechToText.error.microphone": "无法启动麦克风。",
-  "speechToText.error.recording": "录音失败。",
-  "speechToText.error.emptyRecording": "未录制任何音频。",
-  "speechToText.error.emptyTranscript": "未检测到语音。",
-  "speechToText.error.encoding": "无法编码录音。",
-  "speechToText.toast.transcribed": "已插入转录文本",
 
   "prompt.toast.pasteUnsupported.title": "不支持的粘贴",
   "prompt.toast.pasteUnsupported.description": "这里只能粘贴图片或 PDF 文件。",
@@ -1275,10 +1262,6 @@ export const dict = {
   "settings.experimental.batch.description": "启用多个工具调用的批处理",
   "settings.experimental.codebaseSearch.title": "代码库搜索",
   "settings.experimental.codebaseSearch.description": "启用 AI 驱动的自然语言代码库搜索",
-  "settings.experimental.speechToText.title": "语音转文本",
-  "settings.experimental.speechToText.description": "通过 Nano Gateway 使用您的 Nano 帐户在提示词字段中启用语音输入。",
-  "settings.models.speechToText.disabledDescription":
-    "启用并登录 Nano 提供商以使用 Speech to Text。Speech to Text 目前仅支持通过 Nano Gateway 使用。",
   "settings.models.speechToTextModel.title": "语音转文本模型",
   "settings.models.speechToTextModel.description": "选择用于语音输入的 Nano Gateway 转录模型。",
   "settings.experimental.continueOnDeny.title": "拒绝后继续",

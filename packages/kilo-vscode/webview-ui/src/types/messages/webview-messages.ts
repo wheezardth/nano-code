@@ -1,4 +1,3 @@
-import type { InstallMarketplaceItemOptions, MarketplaceFilters, MarketplaceItem } from "../marketplace"
 import type { FileAttachment } from "./parts"
 import type { MessageLoadMode } from "./sessions"
 import type { PermissionFileDiff } from "./permissions"
@@ -208,10 +207,6 @@ export interface OpenConfigFileRequest {
   }
 }
 
-export interface OpenMarketplacePanelRequest {
-  type: "openMarketplacePanel"
-}
-
 export interface OpenAgentManagerRequest {
   type: "openAgentManager"
 }
@@ -336,23 +331,6 @@ export interface RequestAutocompleteSettingsMessage {
 export interface RequestChatCompletionMessage {
   type: "requestChatCompletion"
   text: string
-  requestId: string
-}
-
-export interface SpeechToTextStartMessage {
-  type: "speechToTextStart"
-  requestId: string
-  model: string
-  language?: string
-}
-
-export interface SpeechToTextStopMessage {
-  type: "speechToTextStop"
-  requestId: string
-}
-
-export interface SpeechToTextCancelMessage {
-  type: "speechToTextCancel"
   requestId: string
 }
 
@@ -1065,27 +1043,6 @@ export interface MoveSectionRequest {
   dir: -1 | 1
 }
 
-export interface FetchMarketplaceDataMessage {
-  type: "fetchMarketplaceData"
-}
-
-export interface FilterMarketplaceItemsMessage {
-  type: "filterMarketplaceItems"
-  filters: MarketplaceFilters
-}
-
-export interface InstallMarketplaceItemMessage {
-  type: "installMarketplaceItem"
-  mpItem: MarketplaceItem
-  mpInstallOptions: InstallMarketplaceItemOptions
-}
-
-export interface RemoveInstalledMarketplaceItemMessage {
-  type: "removeInstalledMarketplaceItem"
-  mpItem: MarketplaceItem
-  mpInstallOptions: InstallMarketplaceItemOptions
-}
-
 export interface DismissAgentMigrationBannerMessage {
   type: "dismissAgentMigrationBanner"
 }
@@ -1109,7 +1066,6 @@ export type WebviewMessage =
   | OpenSettingsPanelRequest
   | OpenVSCodeSettingsRequest
   | OpenConfigFileRequest
-  | OpenMarketplacePanelRequest
   | OpenAgentManagerRequest
   | OpenAdvancedWorktreeRequest
   | OpenFileRequest
@@ -1140,9 +1096,6 @@ export type WebviewMessage =
   | ExportSessionTranscriptRequest
   | RequestAutocompleteSettingsMessage
   | RequestChatCompletionMessage
-  | SpeechToTextStartMessage
-  | SpeechToTextStopMessage
-  | SpeechToTextCancelMessage
   | RequestFileSearchMessage
   | RequestTerminalContextMessage
   | RequestGitChangesContextMessage
@@ -1245,10 +1198,6 @@ export type WebviewMessage =
   | AgentManagerOpenSessionsMessage
   | RequestAutoApproveStateMessage
   | ToggleAutoApproveMessage
-  | FetchMarketplaceDataMessage
-  | FilterMarketplaceItemsMessage
-  | InstallMarketplaceItemMessage
-  | RemoveInstalledMarketplaceItemMessage
   | DismissAgentMigrationBannerMessage
   | ConnectProviderMessage
   | AuthorizeProviderOAuthMessage

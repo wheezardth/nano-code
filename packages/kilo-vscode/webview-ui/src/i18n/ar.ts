@@ -284,19 +284,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "زر «حسّن الموجه» يطوّر موجهك بإضافة سياق أو توضيح أو إعادة صياغة. جرّب اكتب موجه هنا ثم اضغط الزر مرة ثانية وشوف النتيجة.",
 
-  "speechToText.tooltip.start": "بدء الإدخال الصوتي باستخدام Nano Gateway",
-  "speechToText.tooltip.stop": "إيقاف التقاط الصوت",
-  "speechToText.tooltip.transcribing": "جاري تحويل الصوت إلى نص... انقر للإلغاء.",
-  "speechToText.tooltip.error": "فشل الإدخال الصوتي. انقر للمسح.",
-  "speechToText.error.title": "فشل الإدخال الصوتي",
-  "speechToText.error.loginRequired": "قم بتسجيل الدخول إلى Nano لاستخدام الإدخال الصوتي.",
-  "speechToText.error.permission": "تم رفض إذن الوصول إلى الميكروفون.",
-  "speechToText.error.microphone": "تعذر بدء تشغيل الميكروفون.",
-  "speechToText.error.recording": "فشل التسجيل.",
-  "speechToText.error.emptyRecording": "لم يتم تسجيل أي صوت.",
-  "speechToText.error.emptyTranscript": "لم يتم اكتشاف أي كلام.",
-  "speechToText.error.encoding": "تعذر تشفير التسجيل.",
-  "speechToText.toast.transcribed": "تم إدراج النص المنسوخ",
 
   "prompt.toast.pasteUnsupported.title": "لصق غير مدعوم",
   "prompt.toast.pasteUnsupported.description": "يمكن لصق الصور أو ملفات PDF فقط هنا.",
@@ -1286,11 +1273,6 @@ export const dict = {
   "settings.experimental.batch.description": "تمكين المعالجة الدفعية لاستدعاءات الأدوات",
   "settings.experimental.codebaseSearch.title": "بحث في قاعدة الكود",
   "settings.experimental.codebaseSearch.description": "تمكين البحث بالذكاء الاصطناعي باللغة الطبيعية عبر قاعدة الكود",
-  "settings.experimental.speechToText.title": "تحويل الصوت إلى نص",
-  "settings.experimental.speechToText.description":
-    "تمكين الإدخال الصوتي في حقول المطالبة باستخدام حساب Nano الخاص بك من خلال Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "قم بتمكين وتسجيل الدخول إلى مزود Nano لاستخدام Speech to Text. ميزة Speech to Text مدعومة حاليًا فقط مع Nano Gateway.",
   "settings.models.speechToTextModel.title": "نموذج تحويل الصوت إلى نص",
   "settings.models.speechToTextModel.description": "اختر نموذج نسخ Nano Gateway للإدخال الصوتي.",
   "settings.experimental.continueOnDeny.title": "المتابعة عند الرفض",
@@ -1647,5 +1629,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "لا توجد فروع مطابقة",
   "diffViewer.baseBranch.loading": "جارٍ تحميل الفروع…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "الخطة جاهزة:",
+  "plan.exit.ready": "الخطة جاهزة:"
 }

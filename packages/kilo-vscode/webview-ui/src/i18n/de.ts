@@ -291,19 +291,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Die Schaltfläche 'Prompt verbessern' hilft, deine Anfrage durch zusätzlichen Kontext, Klarstellungen oder Umformulierungen zu verbessern. Versuche, hier eine Anfrage einzugeben und klicke erneut auf die Schaltfläche, um zu sehen, wie es funktioniert.",
 
-  "speechToText.tooltip.start": "Spracheingabe mit Nano Gateway starten",
-  "speechToText.tooltip.stop": "Audioerfassung beenden",
-  "speechToText.tooltip.transcribing": "Transkribieren... Zum Abbrechen klicken.",
-  "speechToText.tooltip.error": "Spracheingabe fehlgeschlagen. Zum Löschen klicken.",
-  "speechToText.error.title": "Spracheingabe fehlgeschlagen",
-  "speechToText.error.loginRequired": "Melden Sie sich bei Nano an, um die Spracheingabe zu verwenden.",
-  "speechToText.error.permission": "Mikrofonberechtigung wurde verweigert.",
-  "speechToText.error.microphone": "Mikrofon konnte nicht gestartet werden.",
-  "speechToText.error.recording": "Aufnahme fehlgeschlagen.",
-  "speechToText.error.emptyRecording": "Es wurde kein Audio aufgenommen.",
-  "speechToText.error.emptyTranscript": "Es wurde keine Sprache erkannt.",
-  "speechToText.error.encoding": "Aufnahme konnte nicht codiert werden.",
-  "speechToText.toast.transcribed": "Transkription eingefügt",
 
   "prompt.toast.pasteUnsupported.title": "Nicht unterstütztes Einfügen",
   "prompt.toast.pasteUnsupported.description": "Hier können nur Bilder oder PDFs eingefügt werden.",
@@ -1333,11 +1320,6 @@ export const dict = {
   "settings.experimental.codebaseSearch.title": "Codebase-Suche",
   "settings.experimental.codebaseSearch.description":
     "KI-gestützte Suche in natürlicher Sprache über die gesamte Codebasis aktivieren",
-  "settings.experimental.speechToText.title": "Sprache zu Text",
-  "settings.experimental.speechToText.description":
-    "Aktivieren Sie die Spracheingabe in Prompt-Feldern mit Ihrem Nano-Konto über Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Aktivieren Sie den Nano-Anbieter und melden Sie sich an, um Speech to Text zu verwenden. Speech to Text wird derzeit nur mit Nano Gateway unterstützt.",
   "settings.models.speechToTextModel.title": "Sprache-zu-Text-Modell",
   "settings.models.speechToTextModel.description":
     "Wählen Sie das Nano Gateway-Transkriptionsmodell für die Spracheingabe.",

@@ -18,8 +18,6 @@ import { useProvider } from "../src/context/provider"
 import { useConfig } from "../src/context/config"
 import { ModelSelectorBase } from "../src/components/shared/ModelSelector"
 import { ModeSwitcherBase } from "../src/components/shared/ModeSwitcher"
-import { SpeechToTextButton } from "../src/components/speech-to-text/SpeechToTextButton"
-import { canUseSpeechToText, selectedSpeechToTextModel } from "../src/components/speech-to-text/availability"
 import { ThinkingSelectorBase } from "../src/components/shared/ThinkingSelector"
 import {
   MultiModelSelector,
@@ -30,7 +28,6 @@ import {
 } from "./MultiModelSelector"
 import { useLanguage } from "../src/context/language"
 import { useImageAttachments, type ImageAttachment } from "../src/hooks/useImageAttachments"
-import { useSpeechToText } from "../src/components/speech-to-text/useSpeechToText"
 import { convertToMentionPath } from "../src/utils/path-mentions"
 import { insertSpacedText } from "../src/components/chat/prompt-input-utils"
 import { BranchSelect, BranchSelectPopover } from "../src/components/shared/BranchSelect"
@@ -104,9 +101,6 @@ export const NewWorktreeDialog: Component<{ onClose: () => void; defaultBaseBran
   const [compareOpen, setCompareOpen] = createSignal(false)
   const [highlightedIndex, setHighlightedIndex] = createSignal(0)
   const [variant, setVariant] = createSignal<string | undefined>(session.currentVariant())
-  const speech = useSpeechToText(vscode, server, { t })
-  const canUseSpeech = () => canUseSpeechToText(config(), provider.authStates())
-  const speechModel = () => selectedSpeechToTextModel(config())
 
   // Variant list for the currently selected model
   const variants = createMemo(() => {
@@ -459,11 +453,6 @@ export const NewWorktreeDialog: Component<{ onClose: () => void; defaultBaseBran
                         </Button>
                       </Tooltip>
                     </Show>
-                  </Show>
-                </div>
-                <div class="prompt-input-hint-actions">
-                  <Show when={canUseSpeech()}>
-                    <SpeechToTextButton speech={speech} disabled={starting()} start={startSpeech} label={t} />
                   </Show>
                 </div>
               </div>

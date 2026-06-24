@@ -291,19 +291,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Knappen 'Forbedre prompt' hjelper med å forbedre forespørselen din ved å gi ekstra kontekst, avklaring eller omformulering. Prøv å skrive en forespørsel her og klikk på knappen igjen for å se hvordan det fungerer.",
 
-  "speechToText.tooltip.start": "Start taleinndata med Nano Gateway",
-  "speechToText.tooltip.stop": "Stopp lydfangst",
-  "speechToText.tooltip.transcribing": "Transkriberer... Klikk for å avbryte.",
-  "speechToText.tooltip.error": "Taleinndata mislyktes. Klikk for å tømme.",
-  "speechToText.error.title": "Taleinndata mislyktes",
-  "speechToText.error.loginRequired": "Logg på Nano for å bruke taleinndata.",
-  "speechToText.error.permission": "Mikrofontillatelse ble nektet.",
-  "speechToText.error.microphone": "Kunne ikke starte mikrofonen.",
-  "speechToText.error.recording": "Opptak mislyktes.",
-  "speechToText.error.emptyRecording": "Ingen lyd ble tatt opp.",
-  "speechToText.error.emptyTranscript": "Ingen tale ble oppdaget.",
-  "speechToText.error.encoding": "Kunne ikke kode opptaket.",
-  "speechToText.toast.transcribed": "Transkripsjon satt inn",
 
   "prompt.toast.pasteUnsupported.title": "Liming ikke støttet",
   "prompt.toast.pasteUnsupported.description": "Kun bilder eller PDF-er kan limes inn her.",
@@ -1275,11 +1262,6 @@ export const dict = {
   "settings.experimental.batch.description": "Aktiver batchbehandling av verktøykall",
   "settings.experimental.codebaseSearch.title": "Kodesøk",
   "settings.experimental.codebaseSearch.description": "Aktiver AI-drevet naturlig språksøk på tvers av kodebasen",
-  "settings.experimental.speechToText.title": "Tale til tekst",
-  "settings.experimental.speechToText.description":
-    "Aktiver taleinndata i prompt-felt ved å bruke din Nano-konto gjennom Nano Gateway.",
-  "settings.models.speechToText.disabledDescription":
-    "Aktiver og logg på Nano-leverandøren for å bruke Speech to Text. Speech to Text støttes for øyeblikket bare med Nano Gateway.",
   "settings.models.speechToTextModel.title": "Tale-til-tekst-modell",
   "settings.models.speechToTextModel.description": "Velg Nano Gateway-transkripsjonsmodellen for taleinndata.",
   "settings.experimental.continueOnDeny.title": "Fortsett ved avvisning",
