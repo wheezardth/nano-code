@@ -257,6 +257,10 @@ import type {
   RemoteEnableResponses,
   RemoteStatusErrors,
   RemoteStatusResponses,
+  SandboxStatusErrors,
+  SandboxStatusResponses,
+  SandboxToggleErrors,
+  SandboxToggleResponses,
   SessionAbortErrors,
   SessionAbortResponses,
   SessionChildrenErrors,
@@ -3177,6 +3181,8 @@ export class Pty extends HeyApiClient {
       ptyID: string
       directory?: string
       workspace?: string
+      cursor?: string
+      ticket?: string
     },
     options?: Options<never, ThrowOnError>,
   ) {
@@ -3188,6 +3194,8 @@ export class Pty extends HeyApiClient {
             { in: "path", key: "ptyID" },
             { in: "query", key: "directory" },
             { in: "query", key: "workspace" },
+            { in: "query", key: "cursor" },
+            { in: "query", key: "ticket" },
           ],
         },
       ],
@@ -3730,6 +3738,9 @@ export class Session2 extends HeyApiClient {
         providerID: string
         variant?: string
       }
+      metadata?: {
+        [key: string]: unknown
+      }
       permission?: PermissionRuleset
       platform?: string
       workspaceID?: string
@@ -3747,6 +3758,7 @@ export class Session2 extends HeyApiClient {
             { in: "body", key: "title" },
             { in: "body", key: "agent" },
             { in: "body", key: "model" },
+            { in: "body", key: "metadata" },
             { in: "body", key: "permission" },
             { in: "body", key: "platform" },
             { in: "body", key: "workspaceID" },
@@ -3871,6 +3883,9 @@ export class Session2 extends HeyApiClient {
       directory?: string
       workspace?: string
       title?: string
+      metadata?: {
+        [key: string]: unknown
+      }
       permission?: PermissionRuleset
       time?: {
         archived?: number
@@ -3887,6 +3902,7 @@ export class Session2 extends HeyApiClient {
             { in: "query", key: "directory" },
             { in: "query", key: "workspace" },
             { in: "body", key: "title" },
+            { in: "body", key: "metadata" },
             { in: "body", key: "permission" },
             { in: "body", key: "time" },
           ],
@@ -7608,6 +7624,72 @@ export class Remote extends HeyApiClient {
   }
 }
 
+export class Sandbox extends HeyApiClient {
+  /**
+   * Get session sandbox status
+   *
+   * Get the effective sandbox state for one session.
+   */
+  public status<ThrowOnError extends boolean = false>(
+    parameters: {
+      sessionID: string
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "path", key: "sessionID" },
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).get<SandboxStatusResponses, SandboxStatusErrors, ThrowOnError>({
+      url: "/session/{sessionID}/sandbox",
+      ...options,
+      ...params,
+    })
+  }
+
+  /**
+   * Toggle session sandbox
+   *
+   * Toggle the ephemeral sandbox override for one session.
+   */
+  public toggle<ThrowOnError extends boolean = false>(
+    parameters: {
+      sessionID: string
+      directory?: string
+      workspace?: string
+    },
+    options?: Options<never, ThrowOnError>,
+  ) {
+    const params = buildClientParams(
+      [parameters],
+      [
+        {
+          args: [
+            { in: "path", key: "sessionID" },
+            { in: "query", key: "directory" },
+            { in: "query", key: "workspace" },
+          ],
+        },
+      ],
+    )
+    return (options?.client ?? this.client).post<SandboxToggleResponses, SandboxToggleErrors, ThrowOnError>({
+      url: "/session/{sessionID}/sandbox/toggle",
+      ...options,
+      ...params,
+    })
+  }
+}
+
 export class Suggestion extends HeyApiClient {
   /**
    * List pending suggestions
@@ -7979,6 +8061,11 @@ export class KiloClient extends HeyApiClient {
   private _remote?: Remote
   get remote(): Remote {
     return (this._remote ??= new Remote({ client: this.client }))
+  }
+
+  private _sandbox?: Sandbox
+  get sandbox(): Sandbox {
+    return (this._sandbox ??= new Sandbox({ client: this.client }))
   }
 
   private _suggestion?: Suggestion

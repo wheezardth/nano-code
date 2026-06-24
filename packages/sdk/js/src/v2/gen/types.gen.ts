@@ -12,6 +12,7 @@ export type Event =
   | EventTuiCommandExecute
   | EventTuiToastShow1
   | EventTuiSessionSelect
+  | EventSandboxStatusChanged
   | EventKilocodeAgentManagerStart
   | EventIndexingStatus
   | EventIndexingWarning
@@ -93,6 +94,7 @@ export type Event =
   | EventSessionNextCompactionStarted
   | EventSessionNextCompactionDelta
   | EventSessionNextCompactionEnded
+  | EventPluginAdded
   | EventCatalogModelUpdated
   | EventModelsDevRefreshed
   | EventAccountAdded
@@ -757,6 +759,10 @@ export type StepFinishPart = {
   type: "step-finish"
   reason: string
   snapshot?: string
+  model?: {
+    providerID: string
+    modelID: string
+  }
   cost: number
   tokens: {
     total?: number
@@ -888,6 +894,9 @@ export type Session = {
     variant?: string
   }
   version: string
+  metadata?: {
+    [key: string]: unknown
+  }
   time: {
     created: number
     updated: number
@@ -922,6 +931,7 @@ export type GlobalEvent = {
     | EventTuiCommandExecute
     | EventTuiToastShow
     | EventTuiSessionSelect
+    | EventSandboxStatusChanged
     | EventKilocodeAgentManagerStart
     | EventIndexingStatus
     | EventIndexingWarning
@@ -1003,6 +1013,7 @@ export type GlobalEvent = {
     | EventSessionNextCompactionStarted
     | EventSessionNextCompactionDelta
     | EventSessionNextCompactionEnded
+    | EventPluginAdded
     | EventCatalogModelUpdated
     | EventModelsDevRefreshed
     | EventAccountAdded
@@ -1239,11 +1250,15 @@ export type ProviderConfig = {
     enterpriseUrl?: string
     setCacheKey?: boolean
     /**
-     * Timeout in milliseconds for requests to this provider. Default is 300000 (5 minutes). Set to false to disable timeout.
+     * Timeout in milliseconds for full requests to this provider. Set to false to disable timeout.
      */
     timeout?: number | false
+    /**
+     * Timeout in milliseconds to wait for response headers. Provider integrations may set defaults. Set to false to disable timeout.
+     */
+    headerTimeout?: number | false
     chunkTimeout?: number
-    [key: string]: unknown | string | boolean | number | false | number | undefined
+    [key: string]: unknown | string | boolean | number | false | number | false | number | undefined
   }
   models?: {
     [key: string]: {
@@ -1281,8 +1296,8 @@ export type ProviderConfig = {
         output: number
       }
       modalities?: {
-        input: Array<"text" | "audio" | "image" | "video" | "pdf">
-        output: Array<"text" | "audio" | "image" | "video" | "pdf">
+        input?: Array<"text" | "audio" | "image" | "video" | "pdf">
+        output?: Array<"text" | "audio" | "image" | "video" | "pdf">
       }
       experimental?: boolean
       status?: "alpha" | "beta" | "deprecated" | "active"
@@ -1531,7 +1546,10 @@ export type Config = {
     openTelemetry?: boolean
     primary_tools?: Array<string>
     continue_loop_on_deny?: boolean
+    sandbox?: boolean
+    sandbox_restrict_network?: boolean
     mcp_timeout?: number
+    policies?: Array<ConfigV2ExperimentalPolicy>
   }
 }
 
@@ -1764,6 +1782,9 @@ export type GlobalSession = {
     variant?: string
   }
   version: string
+  metadata?: {
+    [key: string]: unknown
+  }
   time: {
     created: number
     updated: number
@@ -2214,6 +2235,13 @@ export type Workspace = {
   timeUsed: number | "NaN" | "Infinity" | "-Infinity" | "Infinity" | "-Infinity" | "NaN"
 }
 
+export type WorkspaceCreateError = {
+  name: "WorkspaceCreateError"
+  data: {
+    message: string
+  }
+}
+
 export type WorkspaceWarpError = {
   name: "WorkspaceWarpError"
   data: {
@@ -2509,6 +2537,9 @@ export type SyncEventSessionUpdated = {
         variant?: string
       } | null
       version?: string | null
+      metadata?: {
+        [key: string]: unknown
+      } | null
       time?: {
         created?: number | null
         updated?: number | null
@@ -2563,7 +2594,7 @@ export type SyncEventSessionNextModelSwitched = {
     model: {
       id: string
       providerID: string
-      variant: string
+      variant?: string
     }
   }
 }
@@ -2635,7 +2666,7 @@ export type SyncEventSessionNextStepStarted = {
     model: {
       id: string
       providerID: string
-      variant: string
+      variant?: string
     }
     snapshot?: string
   }
@@ -2957,6 +2988,19 @@ export type EventGlobalConfigUpdated = {
   type: "global.config.updated"
   properties: {
     [key: string]: unknown
+  }
+}
+
+export type EventSandboxStatusChanged = {
+  id: string
+  type: "sandbox.status.changed"
+  properties: {
+    sessionID: string
+    directory: string
+    enabled: boolean
+    available: boolean
+    reason?: string
+    version: number
   }
 }
 
@@ -3468,7 +3512,7 @@ export type EventSessionNextModelSwitched = {
     model: {
       id: string
       providerID: string
-      variant: string
+      variant?: string
     }
   }
 }
@@ -3556,7 +3600,7 @@ export type EventSessionNextStepStarted = {
     model: {
       id: string
       providerID: string
-      variant: string
+      variant?: string
     }
     snapshot?: string
   }
@@ -3830,6 +3874,14 @@ export type EventSessionNextCompactionEnded = {
   }
 }
 
+export type EventPluginAdded = {
+  id: string
+  type: "plugin.added"
+  properties: {
+    id: string
+  }
+}
+
 export type ModelV2Info = {
   id: string
   apiID: string
@@ -3995,6 +4047,14 @@ export type EventAccountSwitched = {
   }
 }
 
+export type PolicyEffect = "allow" | "deny"
+
+export type ConfigV2ExperimentalPolicy = {
+  action: "provider.use"
+  effect: PolicyEffect
+  resource: string
+}
+
 export type SessionInfo = {
   id: string
   parentID?: string
@@ -4005,7 +4065,7 @@ export type SessionInfo = {
   model?: {
     id: string
     providerID: string
-    variant: string
+    variant?: string
   }
   cost: number
   tokens: {
@@ -4051,7 +4111,7 @@ export type SessionMessageModelSwitched = {
   model: {
     id: string
     providerID: string
-    variant: string
+    variant?: string
   }
 }
 
@@ -4186,7 +4246,7 @@ export type SessionMessageAssistant = {
   model: {
     id: string
     providerID: string
-    variant: string
+    variant?: string
   }
   content: Array<SessionMessageAssistantText | SessionMessageAssistantReasoning | SessionMessageAssistantTool>
   snapshot?: {
@@ -6853,6 +6913,9 @@ export type SessionCreateData = {
       providerID: string
       variant?: string
     }
+    metadata?: {
+      [key: string]: unknown
+    }
     permission?: PermissionRuleset
     platform?: string
     workspaceID?: string
@@ -6984,6 +7047,9 @@ export type SessionGetResponse = SessionGetResponses[keyof SessionGetResponses]
 export type SessionUpdateData = {
   body?: {
     title?: string
+    metadata?: {
+      [key: string]: unknown
+    }
     permission?: PermissionRuleset
     time?: {
       archived?: number
@@ -8875,9 +8941,9 @@ export type ExperimentalWorkspaceCreateData = {
 
 export type ExperimentalWorkspaceCreateErrors = {
   /**
-   * BadRequest | InvalidRequestError
+   * WorkspaceCreateError | BadRequest | InvalidRequestError
    */
-  400: EffectHttpApiErrorBadRequest | InvalidRequestError
+  400: WorkspaceCreateError | EffectHttpApiErrorBadRequest | InvalidRequestError
 }
 
 export type ExperimentalWorkspaceCreateError =
@@ -10669,6 +10735,86 @@ export type RemoteStatusResponses = {
 
 export type RemoteStatusResponse = RemoteStatusResponses[keyof RemoteStatusResponses]
 
+export type SandboxStatusData = {
+  body?: never
+  path: {
+    sessionID: string
+  }
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/session/{sessionID}/sandbox"
+}
+
+export type SandboxStatusErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+  /**
+   * NotFoundError
+   */
+  404: NotFoundError
+}
+
+export type SandboxStatusError = SandboxStatusErrors[keyof SandboxStatusErrors]
+
+export type SandboxStatusResponses = {
+  /**
+   * Session sandbox status
+   */
+  200: {
+    directory: string
+    enabled: boolean
+    available: boolean
+    reason?: string
+    version: number
+  }
+}
+
+export type SandboxStatusResponse = SandboxStatusResponses[keyof SandboxStatusResponses]
+
+export type SandboxToggleData = {
+  body?: never
+  path: {
+    sessionID: string
+  }
+  query?: {
+    directory?: string
+    workspace?: string
+  }
+  url: "/session/{sessionID}/sandbox/toggle"
+}
+
+export type SandboxToggleErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError
+  /**
+   * NotFoundError
+   */
+  404: NotFoundError
+}
+
+export type SandboxToggleError = SandboxToggleErrors[keyof SandboxToggleErrors]
+
+export type SandboxToggleResponses = {
+  /**
+   * Updated session sandbox status
+   */
+  200: {
+    directory: string
+    enabled: boolean
+    available: boolean
+    reason?: string
+    version: number
+  }
+}
+
+export type SandboxToggleResponse = SandboxToggleResponses[keyof SandboxToggleResponses]
+
 export type KilocodeSessionImportProjectData = {
   body?: {
     id: string
@@ -11148,6 +11294,8 @@ export type PtyConnectData = {
   query?: {
     directory?: string
     workspace?: string
+    cursor?: string
+    ticket?: string
   }
   url: "/pty/{ptyID}/connect"
 }
