@@ -814,7 +814,7 @@ export const dict = {
   "settings.providers.action.signInChatGPT": "Увійти через ChatGPT",
   "settings.providers.custom.description": "Додати власного провайдера через базовий URL.",
 
-  "provider.custom.title": "Власний провайдер",
+  "provider.custom.title": "➕ Додати провайдер",
   "provider.custom.description.prefix": "Налаштувати власного провайдера. ",
   "provider.custom.description.link": "Документація щодо налаштування провайдера",
   "provider.custom.description.suffix": ".",

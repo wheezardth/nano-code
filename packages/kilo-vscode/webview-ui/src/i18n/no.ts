@@ -823,7 +823,7 @@ export const dict = {
   "settings.providers.custom.note": "Legg til en egendefinert leverandør via basis-URL.",
   "settings.providers.modeModels.description":
     "Overstyr standardmodellen for bestemte moduser. Hvis ikke angitt, brukes den globale standardmodellen.",
-  "provider.custom.title": "Egendefinert leverandør",
+  "provider.custom.title": "➕ Legg til leverandør",
   "provider.custom.description.prefix": "Konfigurer en egendefinert leverandør. Se ",
   "provider.custom.description.link": "dokumentasjon for leverandørkonfigurasjon",
   "provider.custom.description.suffix": ".",

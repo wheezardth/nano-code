@@ -814,7 +814,7 @@ export const dict = {
   "settings.providers.custom.note": "Base URL로 사용자 정의 공급자를 추가합니다.",
   "settings.providers.modeModels.description":
     "특정 모드의 기본 모델을 재정의합니다. 설정하지 않으면 전역 기본 모델이 사용됩니다.",
-  "provider.custom.title": "사용자 정의 공급자",
+  "provider.custom.title": "➕ 공급자 추가",
   "provider.custom.description.prefix": "사용자 정의 공급자를 구성합니다. ",
   "provider.custom.description.link": "공급자 구성 문서",
   "provider.custom.description.suffix": "를 참조하세요.",

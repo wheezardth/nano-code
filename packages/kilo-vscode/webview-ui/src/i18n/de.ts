@@ -868,7 +868,7 @@ export const dict = {
   "settings.providers.custom.note": "Fügen Sie einen benutzerdefinierten Anbieter per Basis-URL hinzu.",
   "settings.providers.modeModels.description":
     "Überschreiben Sie das Standardmodell für bestimmte Modi. Wenn nicht festgelegt, wird das globale Standardmodell verwendet.",
-  "provider.custom.title": "Benutzerdefinierter Anbieter",
+  "provider.custom.title": "➕ Anbieter hinzufügen",
   "provider.custom.description.prefix": "Konfigurieren Sie einen benutzerdefinierten Anbieter. Siehe die ",
   "provider.custom.description.link": "Anbieterkonfigurationsdokumentation",
   "provider.custom.description.suffix": ".",

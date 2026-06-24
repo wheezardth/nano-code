@@ -815,7 +815,7 @@ export const dict = {
   "settings.providers.action.signInChatGPT": "Inloggen met ChatGPT",
   "settings.providers.custom.description": "Voeg een aangepaste provider toe via basis-URL.",
 
-  "provider.custom.title": "Aangepaste provider",
+  "provider.custom.title": "➕ Provider toevoegen",
   "provider.custom.description.prefix": "Configureer een aangepaste provider. Zie de ",
   "provider.custom.description.link": "provider configuratie documentatie",
   "provider.custom.description.suffix": ".",

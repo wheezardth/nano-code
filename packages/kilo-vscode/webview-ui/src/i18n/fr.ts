@@ -870,7 +870,7 @@ export const dict = {
   "settings.providers.custom.note": "Ajoutez un fournisseur personnalisé par URL de base.",
   "settings.providers.modeModels.description":
     "Remplacez le modèle par défaut pour des modes spécifiques. Si non défini, le modèle par défaut global est utilisé.",
-  "provider.custom.title": "Fournisseur personnalisé",
+  "provider.custom.title": "➕ Ajouter un fournisseur",
   "provider.custom.description.prefix": "Configurez un fournisseur personnalisé. Voir la ",
   "provider.custom.description.link": "documentation de configuration des fournisseurs",
   "provider.custom.description.suffix": ".",

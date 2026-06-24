@@ -809,7 +809,7 @@ export const dict = {
   "settings.providers.custom.note": "أضف مزودًا مخصصًا عبر عنوان URL الأساسي.",
   "settings.providers.modeModels.description":
     "تجاوز النموذج الافتراضي لأوضاع محددة. إذا لم يتم التعيين، يتم استخدام النموذج الافتراضي العام.",
-  "provider.custom.title": "مزود مخصص",
+  "provider.custom.title": "➕ إضافة مزود",
   "provider.custom.description.prefix": "قم بتكوين مزود مخصص. انظر ",
   "provider.custom.description.link": "وثائق تكوين المزود",
   "provider.custom.description.suffix": ".",

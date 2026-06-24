@@ -821,7 +821,7 @@ export const dict = {
   "settings.providers.custom.note": "Dodaj niestandardowego dostawcę przez bazowy URL.",
   "settings.providers.modeModels.description":
     "Zastąp domyślny model dla określonych trybów. Jeśli nie ustawiono, używany jest globalny domyślny model.",
-  "provider.custom.title": "Niestandardowy dostawca",
+  "provider.custom.title": "➕ Dodaj dostawcę",
   "provider.custom.description.prefix": "Skonfiguruj niestandardowego dostawcę. Zobacz ",
   "provider.custom.description.link": "dokumentację konfiguracji dostawcy",
   "provider.custom.description.suffix": ".",

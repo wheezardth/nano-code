@@ -813,7 +813,7 @@ export const dict = {
   "settings.providers.action.signInChatGPT": "ChatGPT ile oturum aç",
   "settings.providers.custom.description": "Temel URL üzerinden özel bir sağlayıcı ekleyin.",
 
-  "provider.custom.title": "Özel sağlayıcı",
+  "provider.custom.title": "➕ Sağlayıcı Ekle",
   "provider.custom.description.prefix": "Özel bir sağlayıcı yapılandırın. ",
   "provider.custom.description.link": "Sağlayıcı yapılandırma dökümanları",
   "provider.custom.description.suffix": " sayfasına bakın.",

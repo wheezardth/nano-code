@@ -856,7 +856,7 @@ export const dict = {
   "settings.providers.custom.note": "Tilføj en brugerdefineret udbyder via basis-URL.",
   "settings.providers.modeModels.description":
     "Tilsidesæt standardmodellen for bestemte tilstande. Hvis ikke angivet, bruges den globale standardmodel.",
-  "provider.custom.title": "Brugerdefineret udbyder",
+  "provider.custom.title": "➕ Tilføj udbyder",
   "provider.custom.description.prefix": "Konfigurer en brugerdefineret udbyder. Se ",
   "provider.custom.description.link": "dokumentation for udbyderkonfiguration",
   "provider.custom.description.suffix": ".",

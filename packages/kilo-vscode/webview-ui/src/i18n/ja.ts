@@ -852,7 +852,7 @@ export const dict = {
   "settings.providers.custom.note": "Base URL でカスタムプロバイダーを追加します。",
   "settings.providers.modeModels.description":
     "特定のモードのデフォルトモデルを上書きします。設定されていない場合、グローバルデフォルトモデルが使用されます。",
-  "provider.custom.title": "カスタムプロバイダー",
+  "provider.custom.title": "➕ プロバイダーを追加",
   "provider.custom.description.prefix": "カスタムプロバイダーを設定します。",
   "provider.custom.description.link": "プロバイダー設定ドキュメント",
   "provider.custom.description.suffix": "を参照してください。",

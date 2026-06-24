@@ -847,7 +847,7 @@ export const dict = {
   "settings.providers.custom.note": "เพิ่มผู้ให้บริการแบบกำหนดเองด้วย Base URL",
   "settings.providers.modeModels.description":
     "แทนที่โมเดลเริ่มต้นสำหรับโหมดที่กำหนด หากไม่ได้ตั้งค่า จะใช้โมเดลเริ่มต้นทั่วไป",
-  "provider.custom.title": "ผู้ให้บริการที่กำหนดเอง",
+  "provider.custom.title": "➕ เพิ่মผู้ให้บริการ",
   "provider.custom.description.prefix": "กำหนดค่าผู้ให้บริการแบบกำหนดเอง ดู",
   "provider.custom.description.link": "เอกสารการกำหนดค่าผู้ให้บริการ",
   "provider.custom.description.suffix": "",

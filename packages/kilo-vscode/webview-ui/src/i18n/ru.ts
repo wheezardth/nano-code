@@ -860,7 +860,7 @@ export const dict = {
   "settings.providers.custom.note": "Добавьте пользовательского провайдера по базовому URL.",
   "settings.providers.modeModels.description":
     "Переопределите модель по умолчанию для определённых режимов. Если не задано, используется глобальная модель по умолчанию.",
-  "provider.custom.title": "Пользовательский провайдер",
+  "provider.custom.title": "➕ Добавить провайдер",
   "provider.custom.description.prefix": "Настройте пользовательский провайдер. См. ",
   "provider.custom.description.link": "документацию по настройке провайдера",
   "provider.custom.description.suffix": ".",

@@ -821,7 +821,7 @@ export const dict = {
   "settings.providers.custom.note": "Adicione um provedor personalizado por URL base.",
   "settings.providers.modeModels.description":
     "Substitua o modelo padrão para modos específicos. Se não definido, o modelo padrão global é usado.",
-  "provider.custom.title": "Provedor personalizado",
+  "provider.custom.title": "➕ Adicionar provedor",
   "provider.custom.description.prefix": "Configure um provedor personalizado. Veja a ",
   "provider.custom.description.link": "documentação de configuração de provedores",
   "provider.custom.description.suffix": ".",

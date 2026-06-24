@@ -293,18 +293,12 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
     isPromptBusy(session.status(), !!props.suggesting?.(), !!props.questioning?.(), session.submitting())
   const isDisabled = () => !server.isConnected()
   const hasInput = () => text().trim().length > 0 || imageAttach.images().length > 0 || reviewComments().length > 0
-  const canSend = () =>
-    !isDisabled() &&
-    !terminal.pending() &&
-    !git.pending() &&
-    !props.blocked?.() &&
-    (speech.state() === "recording" || (hasInput() && !speech.active()))
+  const canSend = () => !isDisabled() && !terminal.pending() && !git.pending() && !props.blocked?.() && hasInput()
   const sendLabel = () => {
     if (props.blocked?.()) return language.t("prompt.action.send.blocked")
-    if (speech.state() === "recording") return language.t("prompt.action.send.recording")
     return language.t("prompt.action.send")
   }
-  const showStop = () => isBusy() && !hasInput() && speech.state() !== "recording"
+  const showStop = () => isBusy() && !hasInput()
   const isAtEnd = () =>
     textareaRef ? atEnd(textareaRef.selectionStart, textareaRef.selectionEnd, textareaRef.value.length) : false
   const highlightMentions = () => {
@@ -658,31 +652,11 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
     ghost.scheduleRequest(result.text, ref)
   }
 
-  const transcribeAndSend = () => {
-    const key = draftKey()
-    const id = sid()
-    const context = ctx()
-    const value = text()
-    const comments = reviewComments()
-    const images = imageAttach.images()
-    speech.stop({
-      done: () => void handleSend(),
-      ready: () =>
-        draftKey() === key &&
-        sid() === id &&
-        ctx() === context &&
-        text() === value &&
-        reviewComments() === comments &&
-        imageAttach.images() === images,
-    })
-  }
-
   const handleSendClick = () => {
-    if (speech.state() !== "recording" || !canSend()) {
+    if (!canSend()) {
       void handleSend()
       return
     }
-    transcribeAndSend()
   }
 
   const handleSend = async () => {
@@ -720,7 +694,6 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
     if (
       (!message && imgs.length === 0) ||
       isDisabled() ||
-      speech.active() ||
       terminal.pending() ||
       git.pending() ||
       props.blocked?.()

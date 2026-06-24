@@ -690,7 +690,7 @@ export const dict = {
   "settings.providers.connected.environmentDescription": "Connesso dalle variabili d'ambiente",
   "settings.providers.action.signInChatGPT": "Accedi con ChatGPT",
   "settings.providers.custom.description": "Aggiungi un provider personalizzato tramite URL base.",
-  "provider.custom.title": "Provider personalizzato",
+  "provider.custom.title": "➕ Aggiungi provider",
   "provider.custom.description.prefix": "Configura un provider personalizzato. Vedi la ",
   "provider.custom.description.link": "documentazione di configurazione provider",
   "provider.custom.description.suffix": ".",

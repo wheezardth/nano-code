@@ -862,7 +862,7 @@ export const dict = {
   "settings.providers.custom.note": "Dodajte prilagođenog provajdera putem osnovnog URL-a.",
   "settings.providers.modeModels.description":
     "Zamijenite podrazumijevani model za određene režime. Ako nije postavljeno, koristi se globalni podrazumijevani model.",
-  "provider.custom.title": "Prilagođeni provajder",
+  "provider.custom.title": "➕ Dodaj pružaoca",
   "provider.custom.description.prefix": "Konfiguriši prilagođeni provajder. Pogledaj ",
   "provider.custom.description.link": "dokumentaciju za konfiguraciju provajdera",
   "provider.custom.description.suffix": ".",

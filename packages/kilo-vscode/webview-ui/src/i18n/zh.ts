@@ -833,7 +833,7 @@ export const dict = {
   "settings.providers.modeModels": "按模式选择模型",
   "settings.providers.custom.note": "通过 Base URL 添加自定义提供商。",
   "settings.providers.modeModels.description": "为特定模式覆盖默认模型。如果未设置，将使用全局默认模型。",
-  "provider.custom.title": "自定义提供商",
+  "provider.custom.title": "➕ 添加提供商",
   "provider.custom.description.prefix": "配置自定义提供商。请参阅",
   "provider.custom.description.link": "提供商配置文档",
   "provider.custom.description.suffix": "。",

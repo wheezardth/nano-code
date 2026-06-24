@@ -801,7 +801,7 @@ export const dict = {
   "settings.providers.modeModels": "按模式選擇模型",
   "settings.providers.custom.note": "透過 Base URL 新增自訂供應商。",
   "settings.providers.modeModels.description": "為特定模式覆寫預設模型。如果未設定，將使用全域預設模型。",
-  "provider.custom.title": "自訂提供商",
+  "provider.custom.title": "➕ 新增提供程式",
   "provider.custom.description.prefix": "設定自訂提供商。請參閱",
   "provider.custom.description.link": "提供商設定文件",
   "provider.custom.description.suffix": "。",

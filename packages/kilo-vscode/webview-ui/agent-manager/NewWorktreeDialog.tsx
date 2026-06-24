@@ -206,7 +206,6 @@ export const NewWorktreeDialog: Component<{ onClose: () => void; defaultBaseBran
 
   const canSubmit = () => {
     if (starting()) return false
-    if (speech.active()) return false
     if (compareMode() && totalAllocations(modelAllocations()) === 0) return false
     return true
   }
@@ -277,10 +276,6 @@ export const NewWorktreeDialog: Component<{ onClose: () => void; defaultBaseBran
     ref.setSelectionRange(result.pos, result.pos)
     ref.focus()
     adjustHeight()
-  }
-
-  const startSpeech = () => {
-    speech.start({ model: speechModel(), insert: insertSpeechText })
   }
 
   // --- Import tab state ---

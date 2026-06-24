@@ -234,7 +234,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(subAgentViewerProvider)
 
   // Register serializers so standalone panels restore on restart
-  const settingsViews = ["settingsPanel", "profilePanel"] as const
+  const settingsViews = ["settingsPanel"] as const
   for (const suffix of settingsViews) {
     context.subscriptions.push(
       vscode.window.registerWebviewPanelSerializer(`kilo-code.new.${suffix}`, {
@@ -277,10 +277,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.agentManagerOpen", () => {
       void vscode.commands.executeCommand("kilo-code.new.agentManagerOpen")
     }),
-    vscode.commands.registerCommand("kilo-code.new.sidebarTitle.profileButtonClicked", () => {
-      void vscode.commands.executeCommand("kilo-code.new.profileButtonClicked")
-    }),
-    vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicked", () => {
+vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicked", () => {
       void vscode.commands.executeCommand("kilo-code.new.settingsButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.plusButtonClicked", () => {
@@ -308,10 +305,7 @@ export function activate(context: vscode.ExtensionContext) {
       else provider.postMessage({ type: "action", action: "cyclePreviousAgentMode" })
       agentManagerProvider.postMessage({ type: "action", action: "cyclePreviousAgentMode" })
     }),
-    vscode.commands.registerCommand("kilo-code.new.profileButtonClicked", () => {
-      settingsEditorProvider.openPanel("profile")
-    }),
-    vscode.commands.registerCommand("kilo-code.new.settingsButtonClicked", (tab?: string) => {
+vscode.commands.registerCommand("kilo-code.new.settingsButtonClicked", (tab?: string) => {
       settingsEditorProvider.openPanel("settings", tab)
     }),
     vscode.commands.registerCommand("kilo-code.new.openIndexingSettings", () => {
