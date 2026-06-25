@@ -1,4 +1,4 @@
-// KilocodeNotification type formerly from @kilocode/kilo-gateway
+// KilocodeNotification type
 
 export interface KilocodeNotification {
   id: string

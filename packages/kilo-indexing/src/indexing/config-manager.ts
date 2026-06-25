@@ -22,21 +22,9 @@ export interface IndexingConfigInput {
   searchMaxResults?: number
   embeddingBatchSize?: number
   scannerMaxBatchRetries?: number
-  kiloApiKey?: string
-  kiloBaseUrl?: string
-  kiloOrganizationId?: string
-  openAiKey?: string
   ollamaBaseUrl?: string
   openAiCompatibleBaseUrl?: string
   openAiCompatibleApiKey?: string
-  geminiApiKey?: string
-  mistralApiKey?: string
-  vercelAiGatewayApiKey?: string
-  bedrockRegion?: string
-  bedrockProfile?: string
-  openRouterApiKey?: string
-  openRouterSpecificProvider?: string
-  voyageApiKey?: string
 }
 
 /**
@@ -49,21 +37,13 @@ export interface IndexingConfigInput {
  */
 export class CodeIndexConfigManager {
   private enabled = false
-  private embedderProvider: EmbedderProvider = "openai"
+  private embedderProvider: EmbedderProvider = "ollama"
   private vectorStoreProvider: "lancedb" | "qdrant" = DEFAULT_VECTOR_STORE
   private lancedbVectorStoreDirectory?: string
   private modelId?: string
   private modelDimension?: number
-  private kiloOptions?: { apiKey: string; baseUrl?: string; organizationId?: string }
-  private openAiOptions?: { apiKey: string }
   private ollamaOptions?: { baseUrl: string; modelId?: string }
   private openAiCompatibleOptions?: { baseUrl: string; apiKey?: string }
-  private geminiOptions?: { apiKey: string }
-  private mistralOptions?: { apiKey: string }
-  private vercelAiGatewayOptions?: { apiKey: string }
-  private bedrockOptions?: { region: string; profile?: string }
-  private openRouterOptions?: { apiKey: string; specificProvider?: string }
-  private voyageOptions?: { apiKey: string }
   private qdrantUrl?: string = "http://localhost:6333"
   private qdrantApiKey?: string
   private searchMinScore?: number
@@ -106,25 +86,11 @@ export class CodeIndexConfigManager {
       this.modelDimension = undefined
     }
 
-    this.kiloOptions = input.kiloApiKey
-      ? { apiKey: input.kiloApiKey, baseUrl: input.kiloBaseUrl, organizationId: input.kiloOrganizationId }
-      : undefined
-    this.openAiOptions = input.openAiKey ? { apiKey: input.openAiKey } : undefined
     const url = input.ollamaBaseUrl ?? (input.embedderProvider === "ollama" ? "http://localhost:11434" : undefined)
     this.ollamaOptions = url ? { baseUrl: url, modelId: input.modelId } : undefined
     this.openAiCompatibleOptions = input.openAiCompatibleBaseUrl
       ? { baseUrl: input.openAiCompatibleBaseUrl, apiKey: input.openAiCompatibleApiKey?.trim() || undefined }
       : undefined
-    this.geminiOptions = input.geminiApiKey ? { apiKey: input.geminiApiKey } : undefined
-    this.mistralOptions = input.mistralApiKey ? { apiKey: input.mistralApiKey } : undefined
-    this.vercelAiGatewayOptions = input.vercelAiGatewayApiKey ? { apiKey: input.vercelAiGatewayApiKey } : undefined
-    this.bedrockOptions = input.bedrockRegion
-      ? { region: input.bedrockRegion, profile: input.bedrockProfile }
-      : undefined
-    this.openRouterOptions = input.openRouterApiKey
-      ? { apiKey: input.openRouterApiKey, specificProvider: input.openRouterSpecificProvider }
-      : undefined
-    this.voyageOptions = input.voyageApiKey ? { apiKey: input.voyageApiKey } : undefined
   }
 
   private captureSnapshot(): PreviousConfigSnapshot {
@@ -136,21 +102,9 @@ export class CodeIndexConfigManager {
       lancedbVectorStoreDirectory: this.lancedbVectorStoreDirectory,
       modelId: this.modelId,
       modelDimension: this.modelDimension,
-      kiloApiKey: this.kiloOptions?.apiKey ?? "",
-      kiloBaseUrl: this.kiloOptions?.baseUrl ?? "",
-      kiloOrganizationId: this.kiloOptions?.organizationId ?? "",
-      openAiKey: this.openAiOptions?.apiKey ?? "",
       ollamaBaseUrl: this.ollamaOptions?.baseUrl ?? "",
       openAiCompatibleBaseUrl: this.openAiCompatibleOptions?.baseUrl ?? "",
       openAiCompatibleApiKey: this.openAiCompatibleOptions?.apiKey ?? "",
-      geminiApiKey: this.geminiOptions?.apiKey ?? "",
-      mistralApiKey: this.mistralOptions?.apiKey ?? "",
-      vercelAiGatewayApiKey: this.vercelAiGatewayOptions?.apiKey ?? "",
-      bedrockRegion: this.bedrockOptions?.region ?? "",
-      bedrockProfile: this.bedrockOptions?.profile ?? "",
-      openRouterApiKey: this.openRouterOptions?.apiKey ?? "",
-      openRouterSpecificProvider: this.openRouterOptions?.specificProvider ?? "",
-      voyageApiKey: this.voyageOptions?.apiKey ?? "",
       qdrantUrl: this.qdrantUrl ?? "",
       qdrantApiKey: this.qdrantApiKey ?? "",
     }
@@ -163,17 +117,8 @@ export class CodeIndexConfigManager {
     // LanceDB doesn't need a qdrant URL; qdrant does
     const hasStore = isLancedb || !!qdrant
 
-    if (provider === "kilo")
-      return !!(this.kiloOptions?.apiKey && this.modelId && this.currentModelDimension && hasStore)
-    if (provider === "openai") return !!(this.openAiOptions?.apiKey && hasStore)
     if (provider === "ollama") return !!(this.ollamaOptions?.baseUrl && hasStore)
     if (provider === "openai-compatible") return !!(this.openAiCompatibleOptions?.baseUrl && hasStore)
-    if (provider === "gemini") return !!(this.geminiOptions?.apiKey && hasStore)
-    if (provider === "mistral") return !!(this.mistralOptions?.apiKey && hasStore)
-    if (provider === "vercel-ai-gateway") return !!(this.vercelAiGatewayOptions?.apiKey && hasStore)
-    if (provider === "bedrock") return !!(this.bedrockOptions?.region && hasStore)
-    if (provider === "openrouter") return !!(this.openRouterOptions?.apiKey && hasStore)
-    if (provider === "voyage") return !!(this.voyageOptions?.apiKey && hasStore)
     return false
   }
 
@@ -182,7 +127,7 @@ export class CodeIndexConfigManager {
 
     const prevEnabled = prev.enabled ?? false
     const prevConfigured = prev.configured ?? false
-    const prevProvider = prev.embedderProvider ?? "openai"
+    const prevProvider = prev.embedderProvider ?? "ollama"
 
     // Enable/disable transitions
     if ((!prevEnabled || !prevConfigured) && this.enabled && nowConfigured) return true
@@ -204,27 +149,12 @@ export class CodeIndexConfigManager {
       return true
 
     // Auth changes
-    if ((prev.kiloApiKey ?? "") !== (this.kiloOptions?.apiKey ?? "")) return true
-    if ((prev.kiloBaseUrl ?? "") !== (this.kiloOptions?.baseUrl ?? "")) return true
-    if ((prev.kiloOrganizationId ?? "") !== (this.kiloOptions?.organizationId ?? "")) return true
-    if ((prev.openAiKey ?? "") !== (this.openAiOptions?.apiKey ?? "")) return true
     if ((prev.ollamaBaseUrl ?? "") !== (this.ollamaOptions?.baseUrl ?? "")) return true
     if (
       (prev.openAiCompatibleBaseUrl ?? "") !== (this.openAiCompatibleOptions?.baseUrl ?? "") ||
       (prev.openAiCompatibleApiKey ?? "") !== (this.openAiCompatibleOptions?.apiKey ?? "")
     )
       return true
-    if ((prev.geminiApiKey ?? "") !== (this.geminiOptions?.apiKey ?? "")) return true
-    if ((prev.mistralApiKey ?? "") !== (this.mistralOptions?.apiKey ?? "")) return true
-    if ((prev.vercelAiGatewayApiKey ?? "") !== (this.vercelAiGatewayOptions?.apiKey ?? "")) return true
-    if (
-      (prev.bedrockRegion ?? "") !== (this.bedrockOptions?.region ?? "") ||
-      (prev.bedrockProfile ?? "") !== (this.bedrockOptions?.profile ?? "")
-    )
-      return true
-    if ((prev.openRouterApiKey ?? "") !== (this.openRouterOptions?.apiKey ?? "")) return true
-    if ((prev.openRouterSpecificProvider ?? "") !== (this.openRouterOptions?.specificProvider ?? "")) return true
-    if ((prev.voyageApiKey ?? "") !== (this.voyageOptions?.apiKey ?? "")) return true
 
     // Qdrant connection changes
     if ((prev.qdrantUrl ?? "") !== (this.qdrantUrl ?? "") || (prev.qdrantApiKey ?? "") !== (this.qdrantApiKey ?? ""))
@@ -260,16 +190,8 @@ export class CodeIndexConfigManager {
       lancedbVectorStoreDirectoryPlaceholder: this.lancedbVectorStoreDirectory,
       modelId: this.modelId,
       modelDimension: this.modelDimension,
-      kiloOptions: this.kiloOptions,
-      openAiOptions: this.openAiOptions,
       ollamaOptions: this.ollamaOptions,
       openAiCompatibleOptions: this.openAiCompatibleOptions,
-      geminiOptions: this.geminiOptions,
-      mistralOptions: this.mistralOptions,
-      vercelAiGatewayOptions: this.vercelAiGatewayOptions,
-      bedrockOptions: this.bedrockOptions,
-      openRouterOptions: this.openRouterOptions,
-      voyageOptions: this.voyageOptions,
       qdrantUrl: this.qdrantUrl,
       qdrantApiKey: this.qdrantApiKey,
       searchMinScore: this.currentSearchMinScore,

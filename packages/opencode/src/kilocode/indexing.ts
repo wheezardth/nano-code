@@ -8,8 +8,6 @@ import { Instance } from "@/kilocode/instance"
 import { Bus } from "@/bus"
 import { Config } from "@/config/config"
 import { AppRuntime } from "@/effect/app-runtime"
-import { Auth } from "@/auth"
-import { makeRuntime } from "@/effect/run-service"
 import { registerDisposer } from "@/effect/instance-registry"
 import { Global } from "@opencode-ai/core/global"
 import * as Log from "@opencode-ai/core/util/log"
@@ -18,11 +16,9 @@ import { WorkspaceContext } from "@/control-plane/workspace-context"
 import { Event as IndexingEvent, Warning as IndexingWarningEvent } from "./indexing-event"
 import { indexingWarningKey, type IndexingWarning } from "./indexing-warning"
 import { IndexingWorker } from "./indexing-worker-client"
-import { LanceDBRuntime } from "./lancedb" // kilocode_change
-import { indexingWithKiloDefault, resolveKiloIndexingAuth, type KiloIndexingAuth } from "./indexing-auth" // kilocode_change
+import { LanceDBRuntime } from "./lancedb"
 
 const log = Log.create({ service: "kilocode-indexing" })
-const auth = makeRuntime(Auth.Service, Auth.defaultLayer)
 const missing = () => disabledIndexingStatus("Indexing plugin is not enabled for this workspace.")
 const noWorkspace = () =>
   disabledIndexingStatus("Codebase indexing is disabled because no workspace folder is open in VS Code.")
@@ -62,28 +58,6 @@ function pending(): z.infer<typeof IndexingStatus> {
     totalFiles: 0,
     percent: 0,
   }
-}
-
-async function kiloAuth(cfg: Config.Info): Promise<KiloIndexingAuth> {
-  const info = await auth.runPromise((svc) => svc.get("kilo"))
-  return resolveKiloIndexingAuth({ config: cfg, auth: info })
-}
-
-function enrichKilo(input: ReturnType<typeof toIndexingConfigInput>, auth: KiloIndexingAuth) {
-  if (input.embedderProvider !== "kilo") return input
-
-  return {
-    ...input,
-    kiloApiKey: input.kiloApiKey ?? auth.apiKey,
-    kiloBaseUrl: input.kiloBaseUrl ?? auth.baseUrl,
-    kiloOrganizationId: input.kiloOrganizationId ?? auth.organizationId,
-  }
-}
-
-async function model(input: ReturnType<typeof toIndexingConfigInput>): ReturnType<typeof toIndexingConfigInput> {
-  if (input.embedderProvider !== "kilo") return input
-  // No catalog available without gateway auth — leave model config as-is.
-  return input
 }
 
 function trackTelemetry(_event: IndexingTelemetryEvent): void {
@@ -159,11 +133,10 @@ export namespace KiloIndexing {
 
     log.info("initializing project indexing", { workspacePath: dir, baselineDirectory: baseline })
     const root = path.join(Global.Path.state, "indexing")
-    const auth = await kiloAuth(cfg)
     const globalConfig = await AppRuntime.runPromise(Config.Service.use((svc) => svc.getGlobal()))
     const global = globalConfig.indexing
-    const merged = indexingWithKiloDefault({ ...global, ...cfg.indexing }, auth)
-    const cfgInput = await model(enrichKilo(input(merged, global), auth), auth)
+    const merged = { ...global, ...cfg.indexing }
+    const cfgInput = input(merged, global)
     const workspaces = new Set<WorkspaceID | undefined>([WorkspaceContext.workspaceID])
     const box = { status: pending() }
     const warnings = new Map<string, IndexingWarning>()

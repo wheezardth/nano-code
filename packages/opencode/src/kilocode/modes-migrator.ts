@@ -8,7 +8,7 @@ import { ConfigPermission } from "../config/permission"
 import { KilocodePaths } from "./paths"
 
 export namespace ModesMigrator {
-  /** Organization mode structure (formerly from @kilocode/kilo-gateway). */
+  /** Organization mode structure for migration. */
   export interface OrganizationMode {
     slug: string
     name: string

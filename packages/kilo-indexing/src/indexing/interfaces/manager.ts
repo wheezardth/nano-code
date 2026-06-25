@@ -36,17 +36,7 @@ export interface ICodeIndexManager {
 
 export type IndexingState = "Standby" | "Indexing" | "Indexed" | "Error"
 
-export type EmbedderProvider =
-  | "kilo"
-  | "openai"
-  | "ollama"
-  | "openai-compatible"
-  | "gemini"
-  | "mistral"
-  | "vercel-ai-gateway"
-  | "bedrock"
-  | "openrouter"
-  | "voyage"
+export type EmbedderProvider = "ollama" | "openai-compatible"
 
 export interface IndexProgressUpdate {
   systemStatus: IndexingState

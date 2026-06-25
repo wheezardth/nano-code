@@ -1,4 +1,3 @@
-// Kilo notification types (mirrored from kilo-gateway)
 export interface KilocodeNotificationAction {
   actionText: string
   actionURL: string
@@ -13,7 +12,6 @@ export interface KilocodeNotification {
   suggestModelId?: string
 }
 
-// Profile types from kilo-gateway
 export interface KilocodeBalance {
   balance: number
 }

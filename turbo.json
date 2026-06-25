@@ -28,9 +28,6 @@
       "outputs": [".artifacts/unit/junit.xml"],
       "passThroughEnv": ["*"]
     },
-    "@kilocode/kilo-gateway#test:ci": {
-      "outputs": [".artifacts/unit/junit.xml"]
-    },
     "@kilocode/kilo-docs#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**"],

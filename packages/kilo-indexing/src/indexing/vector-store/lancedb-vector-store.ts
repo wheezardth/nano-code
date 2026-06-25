@@ -51,7 +51,7 @@ export class LanceDBVectorStore implements IVectorStore {
     this.profile =
       profile ??
       ({
-        provider: "openai",
+        provider: "ollama",
         modelId: "",
         dimension: vectorSize,
       } as EmbeddingProfile)

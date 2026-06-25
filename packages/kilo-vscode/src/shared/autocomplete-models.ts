@@ -1,5 +1,4 @@
-// Autocomplete model definitions formerly from @kilocode/kilo-gateway/autocomplete
-// Stubbed after gateway dependency removal
+// Autocomplete model definitions
 
 export interface AutocompleteModelDef {
   id: string

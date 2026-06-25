@@ -97,7 +97,7 @@ export class QdrantVectorStore implements IVectorStore {
     this.profile =
       profile ??
       ({
-        provider: "openai",
+        provider: "ollama",
         modelId: "",
         dimension: vectorSize,
       } as EmbeddingProfile)

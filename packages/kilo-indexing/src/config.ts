@@ -6,18 +6,7 @@ import type { EmbedderProvider } from "./indexing/interfaces/manager"
 
 export { DEFAULT_VECTOR_STORE } from "./indexing/constants"
 
-const providers = [
-  "kilo",
-  "openai",
-  "ollama",
-  "openai-compatible",
-  "gemini",
-  "mistral",
-  "vercel-ai-gateway",
-  "bedrock",
-  "openrouter",
-  "voyage",
-] as const satisfies readonly EmbedderProvider[]
+const providers = ["ollama", "openai-compatible"] as const satisfies readonly EmbedderProvider[]
 const stores = ["lancedb", "qdrant"] as const
 
 export const IndexingConfig = z
@@ -33,20 +22,6 @@ export const IndexingConfig = z
       .optional()
       .describe("Override embedding vector dimension (auto-detected from model if omitted)"),
     vectorStore: z.enum(stores).optional().describe("Vector store backend (default: lancedb)"),
-    kilo: z
-      .object({
-        apiKey: z.string().optional(),
-        baseUrl: z.string().optional(),
-        organizationId: z.string().optional(),
-      })
-      .strict()
-      .optional()
-      .describe("Kilo-hosted embedding provider options"),
-    openai: z
-      .object({ apiKey: z.string().optional() })
-      .strict()
-      .optional()
-      .describe("OpenAI embedding provider options"),
     ollama: z
       .object({ baseUrl: z.string().optional() })
       .strict()
@@ -60,42 +35,6 @@ export const IndexingConfig = z
       .strict()
       .optional()
       .describe("OpenAI-compatible embedding provider options"),
-    gemini: z
-      .object({ apiKey: z.string().optional() })
-      .strict()
-      .optional()
-      .describe("Gemini embedding provider options"),
-    mistral: z
-      .object({ apiKey: z.string().optional() })
-      .strict()
-      .optional()
-      .describe("Mistral embedding provider options"),
-    "vercel-ai-gateway": z
-      .object({ apiKey: z.string().optional() })
-      .strict()
-      .optional()
-      .describe("Vercel AI Gateway embedding provider options"),
-    bedrock: z
-      .object({
-        region: z.string().optional(),
-        profile: z.string().optional(),
-      })
-      .strict()
-      .optional()
-      .describe("AWS Bedrock embedding provider options"),
-    openrouter: z
-      .object({
-        apiKey: z.string().optional(),
-        specificProvider: z.string().optional(),
-      })
-      .strict()
-      .optional()
-      .describe("OpenRouter embedding provider options"),
-    voyage: z
-      .object({ apiKey: z.string().optional() })
-      .strict()
-      .optional()
-      .describe("Voyage embedding provider options"),
     qdrant: z
       .object({
         url: z.string().optional(),
@@ -235,7 +174,7 @@ export const IndexingSchema = Schema.Struct({
 })
 
 export function toIndexingConfigInput(cfg: IndexingConfig | undefined): IndexingConfigInput {
-  const provider = cfg?.provider ?? "openai"
+  const provider = cfg?.provider ?? "ollama"
 
   return {
     enabled: cfg?.enabled ?? false,
@@ -250,20 +189,8 @@ export function toIndexingConfigInput(cfg: IndexingConfig | undefined): Indexing
     searchMaxResults: cfg?.searchMaxResults,
     embeddingBatchSize: cfg?.embeddingBatchSize,
     scannerMaxBatchRetries: cfg?.scannerMaxBatchRetries,
-    kiloApiKey: cfg?.kilo?.apiKey,
-    kiloBaseUrl: cfg?.kilo?.baseUrl,
-    kiloOrganizationId: cfg?.kilo?.organizationId,
-    openAiKey: cfg?.openai?.apiKey,
     ollamaBaseUrl: cfg?.ollama?.baseUrl,
     openAiCompatibleBaseUrl: cfg?.["openai-compatible"]?.baseUrl,
     openAiCompatibleApiKey: cfg?.["openai-compatible"]?.apiKey,
-    geminiApiKey: cfg?.gemini?.apiKey,
-    mistralApiKey: cfg?.mistral?.apiKey,
-    vercelAiGatewayApiKey: cfg?.["vercel-ai-gateway"]?.apiKey,
-    bedrockRegion: cfg?.bedrock?.region,
-    bedrockProfile: cfg?.bedrock?.profile,
-    openRouterApiKey: cfg?.openrouter?.apiKey,
-    openRouterSpecificProvider: cfg?.openrouter?.specificProvider,
-    voyageApiKey: cfg?.voyage?.apiKey,
   }
 }

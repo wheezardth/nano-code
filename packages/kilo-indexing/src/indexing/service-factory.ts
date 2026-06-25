@@ -4,16 +4,8 @@ import path from "path"
 import { getDefaultModelId } from "./model-registry"
 import { resolveEmbeddingProfile } from "./embedding-profile"
 
-import { OpenAiEmbedder } from "./embedders/openai"
-import { KiloEmbedder } from "./embedders/kilo"
 import { CodeIndexOllamaEmbedder } from "./embedders/ollama"
 import { OpenAICompatibleEmbedder } from "./embedders/openai-compatible"
-import { GeminiEmbedder } from "./embedders/gemini"
-import { MistralEmbedder } from "./embedders/mistral"
-import { VercelAiGatewayEmbedder } from "./embedders/vercel-ai-gateway"
-import { BedrockEmbedder } from "./embedders/bedrock"
-import { OpenRouterEmbedder } from "./embedders/openrouter"
-import { VoyageEmbedder } from "./embedders/voyage"
 import { QdrantVectorStore } from "./vector-store/qdrant-client"
 import { LanceDBVectorStore } from "./vector-store/lancedb-vector-store"
 import { codeParser, DirectoryScanner, FileWatcher } from "./processors"
@@ -65,21 +57,6 @@ export class CodeIndexServiceFactory {
     const config = this.configManager.getConfig()
     const provider = config.embedderProvider
 
-    if (provider === "kilo") {
-      if (!config.kiloOptions?.apiKey) throw new Error("Kilo API key is required for embedding.")
-      if (!config.modelId) throw new Error("Kilo embedding model is required.")
-      return new KiloEmbedder({
-        apiKey: config.kiloOptions.apiKey,
-        baseUrl: config.kiloOptions.baseUrl,
-        organizationId: config.kiloOptions.organizationId,
-        modelId: config.modelId,
-        dimensions: config.modelDimension,
-      })
-    }
-    if (provider === "openai") {
-      if (!config.openAiOptions?.apiKey) throw new Error("OpenAI API key is required for embedding.")
-      return new OpenAiEmbedder(config.openAiOptions.apiKey, config.modelId)
-    }
     if (provider === "ollama") {
       if (!config.ollamaOptions?.baseUrl) throw new Error("Ollama base URL is required for embedding.")
       return new CodeIndexOllamaEmbedder(config.ollamaOptions.baseUrl, config.modelId, config.modelDimension)
@@ -91,37 +68,6 @@ export class CodeIndexServiceFactory {
         config.openAiCompatibleOptions.apiKey,
         config.modelId,
       )
-    }
-    if (provider === "gemini") {
-      if (!config.geminiOptions?.apiKey) throw new Error("Gemini API key is required for embedding.")
-      return new GeminiEmbedder(config.geminiOptions.apiKey, config.modelId)
-    }
-    if (provider === "mistral") {
-      if (!config.mistralOptions?.apiKey) throw new Error("Mistral API key is required for embedding.")
-      return new MistralEmbedder(config.mistralOptions.apiKey, config.modelId)
-    }
-    if (provider === "vercel-ai-gateway") {
-      if (!config.vercelAiGatewayOptions?.apiKey)
-        throw new Error("Vercel AI Gateway API key is required for embedding.")
-      return new VercelAiGatewayEmbedder(config.vercelAiGatewayOptions.apiKey, config.modelId)
-    }
-    if (provider === "bedrock") {
-      if (!config.bedrockOptions?.region) throw new Error("Bedrock region is required for embedding.")
-      return new BedrockEmbedder(config.bedrockOptions.region, config.bedrockOptions.profile, config.modelId)
-    }
-    if (provider === "openrouter") {
-      if (!config.openRouterOptions?.apiKey) throw new Error("OpenRouter API key is required for embedding.")
-      return new OpenRouterEmbedder(
-        config.openRouterOptions.apiKey,
-        config.modelId,
-        undefined,
-        config.openRouterOptions.specificProvider,
-        config.modelDimension,
-      )
-    }
-    if (provider === "voyage") {
-      if (!config.voyageOptions?.apiKey) throw new Error("Voyage API key is required for embedding.")
-      return new VoyageEmbedder(config.voyageOptions.apiKey, config.modelId)
     }
 
     throw new Error(`Unsupported embedder provider: ${provider}`)
