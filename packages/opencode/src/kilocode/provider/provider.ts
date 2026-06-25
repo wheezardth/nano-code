@@ -13,6 +13,12 @@ import { Effect, Schema } from "effect"
 import type { LanguageModelV3 } from "@ai-sdk/provider"
 import { mapValues, omit, pickBy } from "remeda"
 
+/**
+ * Bundled providers from upstream Kilo (gateway). Empty after gateway removal — user
+ * configured providers are the only supported source.
+ */
+export const KILO_BUNDLED_PROVIDERS: Array<Record<string, unknown>> = []
+
 /** Default timeout (ms) for provider HTTP requests (connection phase). */
 export const REQUEST_TIMEOUT_MS = 300_000 // 5 minutes
 

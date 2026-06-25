@@ -338,10 +338,11 @@ export class AutocompleteInlineCompletionProvider implements vscode.InlineComple
     vscode.commands.executeCommand("setContext", "kilo-code.new.autocomplete.hasSuggestions", false)
 
     // Build telemetry context
+    const entry = getAutocompleteModelById(this.contextProvider.modelId)
     const telemetryContext: AutocompleteContext = {
       languageId: document.languageId,
       modelId: this.contextProvider.modelId,
-      provider: getAutocompleteModelById(this.contextProvider.modelId).provider,
+      provider: entry?.provider || "",
     }
 
     this.telemetry?.captureSuggestionRequested(telemetryContext)
@@ -579,10 +580,11 @@ export class AutocompleteInlineCompletionProvider implements vscode.InlineComple
     const startTime = performance.now()
 
     // Build telemetry context for this request
+    const entry = getAutocompleteModelById(this.contextProvider.modelId)
     const telemetryContext: AutocompleteContext = {
       languageId,
       modelId: this.contextProvider.modelId,
-      provider: getAutocompleteModelById(this.contextProvider.modelId).provider,
+      provider: entry?.provider || "",
     }
 
     // Defense-in-depth: credentials may become invalid between the provider gate and the actual

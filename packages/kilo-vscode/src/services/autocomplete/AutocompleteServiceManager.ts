@@ -11,7 +11,7 @@ import { NextEditSuggestionManager } from "./next-edit/NextEditSuggestionManager
 import { toAllowedMercuryRecentSnippets } from "./next-edit/recentSnippetsAdapter"
 import type { KiloConnectionService } from "../cli-backend"
 import { hasValidCredentials } from "./fim"
-import { DEFAULT_AUTOCOMPLETE_MODEL, getAutocompleteModel } from "../../shared/autocomplete-models"
+import { getAutocompleteModel, getAutocompleteModelById } from "../../shared/autocomplete-models"
 
 const CONFIG_SECTION = "kilo-code.new.autocomplete"
 
@@ -26,13 +26,15 @@ export interface AutocompleteServiceSettings {
 
 function readSettings(): AutocompleteServiceSettings {
   const config = vscode.workspace.getConfiguration(CONFIG_SECTION)
-  const info = getAutocompleteModel(config.get<string>("provider"), config.get<string>("model"))
+  const provider = config.get<string>("provider")
+  const model = config.get<string>("model")
+  const info = getAutocompleteModel(provider, model)
   return {
     enableAutoTrigger: config.get<boolean>("enableAutoTrigger") ?? true,
     enableSmartInlineTaskKeybinding: config.get<boolean>("enableSmartInlineTaskKeybinding") ?? true,
     enableChatAutocomplete: config.get<boolean>("enableChatAutocomplete") ?? true,
-    provider: config.get<string>("provider") ?? DEFAULT_AUTOCOMPLETE_MODEL.providerID,
-    model: config.get<string>("model") ?? DEFAULT_AUTOCOMPLETE_MODEL.modelID,
+    provider: provider || "",
+    model: model || "",
     snoozeUntil: config.get<number>("snoozeUntil"),
   }
 }
@@ -91,7 +93,7 @@ export class AutocompleteServiceManager {
     this.codeActionProvider = new AutocompleteCodeActionProvider()
     this.inlineCompletionProvider = new AutocompleteInlineCompletionProvider(
       this.context,
-      DEFAULT_AUTOCOMPLETE_MODEL.id,
+      "",
       connectionService,
       this.updateCostTracking.bind(this),
       () => this.settings,
@@ -108,10 +110,10 @@ export class AutocompleteServiceManager {
     this.nextEditProvider = new NextEditInlineCompletionProvider({
       connectionService,
       suggestionManager: this.nextEditSuggestionManager,
-      getModelSelection: () => {
-        const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-        return { providerId: info.providerID, modelId: info.modelID }
-      },
+       getModelSelection: () => {
+         const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+         return { providerId: info?.providerID || "", modelId: info?.modelID || "" }
+       },
       isFileAllowed: async (fsPath) => {
         const ignore = await this.inlineCompletionProvider.ignoreController
         return ignore.validateAccess(fsPath)
@@ -160,7 +162,7 @@ export class AutocompleteServiceManager {
   public async load() {
     this.settings = readSettings()
 
-    this.inlineCompletionProvider.setModel(getAutocompleteModel(this.settings.provider, this.settings.model).id)
+    this.inlineCompletionProvider.setModel(getAutocompleteModel(this.settings.provider, this.settings.model)?.id || "")
 
     await this.updateGlobalContext()
     this.updateStatusBar()
@@ -173,10 +175,10 @@ export class AutocompleteServiceManager {
    * Only disposes/re-registers when the desired state actually changes, avoiding
    * unnecessary churn that can break VS Code's provider tracking during startup races.
    */
-  private async ensureInlineCompletionProviderRegistration() {
-    const shouldBeRegistered = (this.settings?.enableAutoTrigger ?? false) && !this.isSnoozed()
-    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-    const desiredKind: "classic" | "next-edit" = info.kind === "edit" ? "next-edit" : "classic"
+   private async ensureInlineCompletionProviderRegistration() {
+     const shouldBeRegistered = (this.settings?.enableAutoTrigger ?? false) && !this.isSnoozed()
+     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+     const desiredKind: "classic" | "next-edit" = info?.kind === "edit" ? "next-edit" : "classic"
 
     // Mode change while still enabled requires a swap: tear down the old
     // registration so the new provider takes over.
@@ -343,17 +345,15 @@ export class AutocompleteServiceManager {
     })
   }
 
-  private getCurrentModelName(): string {
-    //const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-    //return info.label
-    return this.settings?.model || getAutocompleteModel(this.settings?.provider, this.settings?.model).label
-  }
+   private getCurrentModelName(): string {
+     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+     return info?.label || this.settings?.model || ""
+   }
 
-  private getCurrentProviderName(): string {
-    //const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-    //return info.provider
-    return this.settings?.provider || getAutocompleteModel(this.settings?.provider, this.settings?.model).provider
-  }
+   private getCurrentProviderName(): string {
+     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+     return info?.provider || this.settings?.provider || ""
+   }
 
   private hasNoUsableProvider(): boolean {
     return !hasValidCredentials(this.connectionService)

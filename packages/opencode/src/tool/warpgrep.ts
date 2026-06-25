@@ -7,11 +7,6 @@ import { Bus } from "../bus"
 import { TuiEvent } from "../cli/cmd/tui/event"
 import DESCRIPTION from "./warpgrep.txt"
 
-// FREE_PERIOD_TODO: Remove KILO_WARPGREP_PROXY_URL constant and the proxy
-// fallback below. After the free period ends, require MORPH_API_KEY and
-// return an error when it is missing.
-const KILO_WARPGREP_PROXY_URL = "https://api.kilo.ai/api/gateway"
-
 const Parameters = Schema.Struct({
   query: Schema.String.annotate({
     description: "Search query describing what code you are looking for. Be specific and descriptive for best results.", // kilocode_change
@@ -35,12 +30,16 @@ export const CodebaseSearchTool = Tool.define(
           // Telemetry.trackToolUsed removed — kept for type compatibility
 
           const apiKey = process.env["MORPH_API_KEY"]
+          if (!apiKey) {
+            return {
+              title: `Codebase Search: ${params.query}`,
+              output: "Codebase search requires an API key. Set MORPH_API_KEY to continue. Get your key at https://www.morphllm.com/",
+              metadata: { count: 0 },
+            }
+          }
 
-          // FREE_PERIOD_TODO: Remove proxy fallback — require apiKey, error if missing:
-          //   if (!apiKey) return { title: ..., output: "Set MORPH_API_KEY to use codebase search.", metadata: {} }
           const client = new WarpGrepClient({
-            morphApiKey: apiKey ?? "kilo-free",
-            ...(apiKey ? {} : { morphApiUrl: KILO_WARPGREP_PROXY_URL }),
+            morphApiKey: apiKey,
             timeout: 60_000,
           })
 
@@ -52,20 +51,14 @@ export const CodebaseSearchTool = Tool.define(
           )
 
           if (!result.success || !result.contexts?.length) {
-            // FREE_PERIOD_TODO: When the proxy stops serving free requests, errors
-            // from the proxy (401/402/429) will surface here. The message below
-            // tells the user exactly what to do.
-            const isAuthOrRateLimit =
-              result.error && /401|402|429|rate.limit|free.period|unauthorized/i.test(result.error) // kilocode_change
-            const apiKeyMsg =
-              "Codebase search unavailable: free period ended. Set MORPH_API_KEY to continue. Get your key at https://www.morphllm.com/"
-            if (isAuthOrRateLimit) {
+            const errorMsg = result.error ?? "No relevant code found."
+            if (/401|402|429|rate.limit|free.period|unauthorized/i.test(errorMsg)) {
               yield* Effect.promise(() =>
                 // kilocode_change start
                 Bus.publish(Instance.current, TuiEvent.ToastShow, {
                   // kilocode_change end
                   title: "Codebase Search Unavailable",
-                  message: "Free period has ended. Set MORPH_API_KEY to continue. Get your key at morphllm.com",
+                  message: "Codebase search unavailable. Set MORPH_API_KEY to continue. Get your key at morphllm.com",
                   variant: "error",
                   duration: 10000,
                 }).catch(() => {}),
@@ -73,7 +66,7 @@ export const CodebaseSearchTool = Tool.define(
             }
             return {
               title: `Codebase Search: ${params.query}`,
-              output: isAuthOrRateLimit ? apiKeyMsg : (result.error ?? "No relevant code found."),
+              output: errorMsg,
               metadata: { count: 0 },
             }
           }

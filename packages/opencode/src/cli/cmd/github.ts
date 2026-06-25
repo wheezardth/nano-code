@@ -358,10 +358,13 @@ export const GithubInstallCommand = effectCmd({
           s.stop("Installed GitHub app")
 
           async function getInstallation() {
-            // kilocode_change start - updated to new endpoint
-            return await fetch(`https://api.kilo.ai/api/integrations/github/check-installation?owner=${app.owner}`)
-              .then((res) => res.json())
-              .then((data) => data.installation)
+            // kilocode_change - gateway dependency removed; fallback to local git check
+            return new Promise<boolean>(resolve => {
+              exec("git remote -v", { cwd: app.root }, (err, stdout) => {
+                if (err || !stdout) return resolve(false)
+                resolve(stdout.includes(app.owner))
+              })
+            })
             // kilocode_change end
           }
         }
@@ -750,7 +753,7 @@ export const GithubRunCommand = effectCmd({
 
       function normalizeOidcBaseUrl(): string {
         const value = process.env["OIDC_BASE_URL"]
-        if (!value) return "https://api.kilo.ai"
+        if (!value) return ""
         return value.replace(/\/+$/, "")
       }
 
