@@ -4,7 +4,6 @@ import { ModelsDev } from "@opencode-ai/core/models-dev"
 import { Provider } from "@/provider/provider"
 import { ProviderID } from "@/provider/schema"
 import { mapValues, pickBy } from "remeda" // kilocode_change
-import { ModelCache } from "@/provider/model-cache" // kilocode_change
 import { disposeAllInstancesAfterProviderAuthCallback } from "@/kilocode/server/provider-auth-lifecycle" // kilocode_change
 import { providerMetadata } from "@/kilocode/provider/metadata" // kilocode_change
 import { filterPromptTrainingModels } from "@/kilocode/provider/model-filter" // kilocode_change
@@ -39,7 +38,6 @@ export const providerHandlers = HttpApiBuilder.group(InstanceHttpApi, "provider"
     const cfg = yield* Config.Service
     const provider = yield* Provider.Service
     const svc = yield* ProviderAuth.Service
-    const cache = yield* ModelCache.Service // kilocode_change
 
     const list = Effect.fn("ProviderHttpApi.list")(function* () {
       const config = yield* cfg.get()
@@ -60,11 +58,8 @@ export const providerHandlers = HttpApiBuilder.group(InstanceHttpApi, "provider"
         config.hide_prompt_training_models === true,
       )
       // kilocode_change end
-      // kilocode_change start
-      const failed = yield* cache.failedProviders()
-      // Note: connected only contains providers with non-empty models after Provider.Service.list(),
-      // so failed must be checked explicitly for providers whose fetch returned an error.
-      const failedSet = new Set(failed)
+      // Model cache removed — no failed providers tracking
+      const failedSet = new Set<string>()
       const validProviders = pickBy(
         providers,
         (item, id) => Object.keys(item.models).length > 0 || id in connected || failedSet.has(id),

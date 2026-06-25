@@ -15,14 +15,6 @@ import { mergeDeep } from "remeda"
 import { DEFAULT_HEADERS } from "@/kilocode/const" // kilocode_change
 // kilocode_change start
 import { getKiloProjectId } from "@/kilocode/project-id"
-import {
-  HEADER_FEATURE,
-  HEADER_PARENT_TASKID,
-  HEADER_PROJECTID,
-  HEADER_MACHINEID,
-  HEADER_TASKID,
-} from "@kilocode/kilo-gateway"
-import { Identity } from "@kilocode/kilo-telemetry"
 import { KiloSession } from "@/kilocode/session"
 // kilocode_change end
 
@@ -161,19 +153,7 @@ export const prepare = Effect.fn("LLMRequestPrep.prepare")(function* (input: Pre
     },
   )
 
-  // kilocode_change start - resolve project ID and machine ID for kilo provider
-  const isKilo = input.model.api.npm === "@kilocode/kilo-gateway"
-  const kiloProjectId = yield* isKilo
-    ? Effect.promise(() => getKiloProjectId().catch(() => undefined))
-    : Effect.succeed(undefined)
-  const machineId = yield* isKilo
-    ? Effect.promise(() => Identity.getMachineId().catch(() => undefined))
-    : Effect.succeed(undefined)
   const parent = input.parentSessionID ?? KiloSession.resolveParent(input.sessionID)
-  // kilocode_change end
-  // kilocode_change start - attribute Kilo gateway usage to the root product session
-  const attr = KiloSession.attribution(input.sessionID)
-  // kilocode_change end
 
   const tools = resolveTools(input)
   if (
@@ -217,16 +197,8 @@ export const prepare = Effect.fn("LLMRequestPrep.prepare")(function* (input: Pre
             "x-session-affinity": input.sessionID,
             ...(input.parentSessionID ? { "x-parent-session-id": input.parentSessionID } : {}),
             "User-Agent": USER_AGENT,
-            ...(input.model.providerID !== "anthropic" ? DEFAULT_HEADERS : undefined), // kilocode_change
+            ...(input.model.providerID !== "anthropic" ? DEFAULT_HEADERS : undefined),
           }),
-      // kilocode_change start - headers for kilo provider
-      ...(isKilo && input.agent.name ? { "x-kilocode-mode": input.agent.name.toLowerCase() } : {}),
-      ...(isKilo && kiloProjectId ? { [HEADER_PROJECTID]: kiloProjectId } : {}),
-      ...(isKilo && machineId ? { [HEADER_MACHINEID]: machineId } : {}),
-      ...(isKilo ? { [HEADER_TASKID]: input.sessionID } : {}),
-      ...(isKilo && parent ? { [HEADER_PARENT_TASKID]: parent } : {}),
-      ...(isKilo && attr.feature ? { [HEADER_FEATURE]: attr.feature } : {}),
-      // kilocode_change end
       ...input.model.headers,
       ...headers,
     },

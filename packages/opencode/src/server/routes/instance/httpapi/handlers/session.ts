@@ -409,11 +409,7 @@ export const sessionHandlers = HttpApiBuilder.group(InstanceHttpApi, "session", 
     })
 
     // kilocode_change start
-    const viewed = Effect.fn("SessionHttpApi.viewed")(function* (ctx: { payload: typeof ViewedPayload.Type }) {
-      const { KiloSessions } = yield* Effect.promise(() => import("@/kilo-sessions/kilo-sessions"))
-      KiloSessions.setViewedSessions({ focused: ctx.payload.focused ?? [], open: ctx.payload.open ?? [] })
-      return true
-    })
+    const viewed = Effect.fn("SessionHttpApi.viewed")((_ctx: { payload: typeof ViewedPayload.Type }) => Effect.succeed(true))
     // kilocode_change end
 
     return handlers

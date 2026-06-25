@@ -101,7 +101,7 @@ describe("indexing feature detection", () => {
   })
 
   it("ignores unrelated plugin lists", () => {
-    expect(configFeatures({ plugin: ["@kilocode/kilo-gateway"] }).indexing).toBe(false)
+    expect(configFeatures({ plugin: [] }).indexing).toBe(false)
     expect(configFeatures({ plugin: ["file:///tmp/.opencode/plugin/index.js"] }).indexing).toBe(false)
     expect(configFeatures({}).indexing).toBe(false)
   })

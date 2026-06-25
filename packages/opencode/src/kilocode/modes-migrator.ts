@@ -6,9 +6,21 @@ import { Config } from "../config/config"
 import { ConfigAgent } from "../config/agent"
 import { ConfigPermission } from "../config/permission"
 import { KilocodePaths } from "./paths"
-import type { OrganizationMode } from "@kilocode/kilo-gateway"
 
 export namespace ModesMigrator {
+  /** Organization mode structure (formerly from @kilocode/kilo-gateway). */
+  export interface OrganizationMode {
+    slug: string
+    name: string
+    config: {
+      roleDefinition: string
+      customInstructions?: string
+      groups?: Array<string | [string, { fileRegex?: string; description?: string }]>
+      description?: string
+      whenToUse?: string
+    }
+  }
+
   // Kilocode mode structure
   export interface KilocodeMode {
     slug: string

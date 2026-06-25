@@ -45,8 +45,7 @@ function sdkKey(npm: string): string | undefined {
       return "gateway"
     case "@openrouter/ai-sdk-provider":
       return "openrouter"
-    case "@kilocode/kilo-gateway": // kilocode_change
-      return "openrouter"
+
     case "ai-gateway-provider":
       // ai-gateway-provider/unified wraps createOpenAICompatible({ name: "Unified" }),
       // and @ai-sdk/openai-compatible parses compatibleOptions from one of
@@ -629,16 +628,6 @@ function googleThinkingBudgetMax(apiId: string) {
 }
 
 export function variants(model: Provider.Model): Record<string, Record<string, any>> {
-  // kilocode_change start
-  if (
-    ["@kilocode/kilo-gateway", "@ai-sdk/openai-compatible"].includes(model.api.npm) &&
-    model.variants &&
-    Object.keys(model.variants).length > 0
-  ) {
-    return model.variants
-  }
-  // kilocode_change end
-
   if (!model.capabilities.reasoning) return {}
 
   const id = model.id.toLowerCase()
@@ -661,8 +650,7 @@ export function variants(model: Provider.Model): Record<string, Record<string, a
 
   // see: https://docs.x.ai/docs/guides/reasoning#control-how-hard-the-model-thinks
   if (id.includes("grok") && id.includes("grok-3-mini")) {
-    if (model.api.npm === "@openrouter/ai-sdk-provider" || model.api.npm === "@kilocode/kilo-gateway") {
-      // kilocode_change - add Kilo Gateway support
+    if (model.api.npm === "@openrouter/ai-sdk-provider") {
       return {
         low: { reasoning: { effort: "low" } },
         high: { reasoning: { effort: "high" } },
@@ -676,25 +664,16 @@ export function variants(model: Provider.Model): Record<string, Record<string, a
   if (id.includes("grok")) return {}
 
   switch (model.api.npm) {
-    case "@kilocode/kilo-gateway": // kilocode_change
     case "@openrouter/ai-sdk-provider":
-      // kilocode_change start
-      if (id.includes("glm") || id.includes("kimi") || id.includes("qwen") || id.includes("minimax")) {
-        return {
-          instant: { reasoning: { enabled: false } },
-          thinking: { reasoning: { enabled: true } },
-        }
-      }
-      // kilocode_change end
       if (
         !id.includes("gpt") &&
         !id.includes("gemini-3") &&
         !id.includes("claude") &&
-        !model.id.includes("mercury") // kilocode_change
+        !model.id.includes("mercury")
       )
         return {}
       return Object.fromEntries(
-        (model.api.npm === "@kilocode/kilo-gateway" || !id.includes("gpt") // kilocode_change
+        (!id.includes("gpt")
           ? OPENAI_EFFORTS
           : openaiCompatibleReasoningEfforts(id)
         ).map((effort) => [effort, { reasoning: { effort } }]),
@@ -1120,8 +1099,7 @@ export function options(input: {
 
   if (
     input.model.api.npm === "@openrouter/ai-sdk-provider" ||
-    input.model.api.npm === "@llmgateway/ai-sdk-provider" ||
-    input.model.api.npm === "@kilocode/kilo-gateway" // kilocode_change
+    input.model.api.npm === "@llmgateway/ai-sdk-provider"
   ) {
     result["usage"] = {
       include: true,
@@ -1200,22 +1178,18 @@ export function options(input: {
       if (
         input.model.api.npm === "@ai-sdk/openai" ||
         input.model.api.npm === "@ai-sdk/azure" ||
-        input.model.api.npm === "@ai-sdk/github-copilot" || // kilocode_change
-        input.model.api.npm === "@openrouter/ai-sdk-provider" || // kilocode_change
-        input.model.api.npm === "@kilocode/kilo-gateway" // kilocode_change
+        input.model.api.npm === "@ai-sdk/github-copilot" ||
+        input.model.api.npm === "@openrouter/ai-sdk-provider"
       ) {
         result["reasoningSummary"] = "auto"
       }
     }
 
     if (
-      // kilocode_change start - gate textVerbosity to Responses-API providers
       (input.model.api.npm === "@ai-sdk/openai" ||
         input.model.api.npm === "@ai-sdk/azure" ||
         input.model.api.npm === "@ai-sdk/github-copilot" ||
-        input.model.api.npm === "@openrouter/ai-sdk-provider" ||
-        input.model.api.npm === "@kilocode/kilo-gateway") &&
-      // kilocode_change end
+        input.model.api.npm === "@openrouter/ai-sdk-provider") &&
       input.model.api.id.includes("gpt-5.") &&
       !input.model.api.id.includes("codex") &&
       !input.model.api.id.includes("-chat") &&
@@ -1257,11 +1231,7 @@ export function smallOptions(model: Provider.Model) {
     const base = { store: false }
     return mergeDeep(base, small)
   }
-  if (
-    model.providerID === "openrouter" ||
-    model.providerID === "llmgateway" ||
-    model.api.npm === "@kilocode/kilo-gateway" // kilocode_change
-  ) {
+  if (model.providerID === "openrouter" || model.providerID === "llmgateway") {
     if (!model.capabilities.reasoning) return {} // kilocode_change - omit unsupported reasoning options
     return { reasoning: { enabled: true } } // kilocode_change - use the model's supported default effort
   }
@@ -1310,12 +1280,6 @@ export function providerOptions(model: Provider.Model, options: { [x: string]: a
 
     return result
   }
-
-  // kilocode_change start
-  if (model.api.npm === "@kilocode/kilo-gateway") {
-    return kiloProviderOptions(options)
-  }
-  // kilocode_change end
 
   // AI SDK packages that resolve providerOptionsName by splitting the
   // provider name on "." (e.g. "wafer.ai" -> "wafer") need the same

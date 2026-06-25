@@ -1,5 +1,4 @@
 // kilocode_change - new file
-import { Telemetry, type ReviewCommand } from "@kilocode/kilo-telemetry"
 import { SessionNetwork } from "@/session/network"
 import type { SessionID } from "@/session/schema"
 import type { SessionStatus } from "@/session/status"
@@ -14,7 +13,7 @@ import { EffectBridge } from "@/effect/bridge"
 export type ReviewTelemetry = {
   mode: "review"
   feature: "code_reviews"
-  command: ReviewCommand
+  command: string
   tool?: "suggest"
 }
 
@@ -93,21 +92,7 @@ export namespace KiloSessionProcessor {
     elapsed: number
     telemetry?: ReviewTelemetry
   }) {
-    const { tokens } = input
-    if (tokens.input > 0 || tokens.output > 0 || tokens.cache.write > 0 || tokens.cache.read > 0) {
-      Telemetry.trackLlmCompletion({
-        taskId: input.sessionID,
-        ...(input.telemetry ?? {}),
-        apiProvider: input.model.providerID,
-        modelId: input.model.id,
-        inputTokens: tokens.input,
-        outputTokens: tokens.output,
-        cacheReadTokens: tokens.cache.read,
-        cacheWriteTokens: tokens.cache.write,
-        cost: input.cost,
-        completionTime: input.elapsed,
-      })
-    }
+    // LLM completion telemetry removed — kept for type compatibility
   }
 
   /**

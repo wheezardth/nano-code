@@ -1,5 +1,4 @@
 import { InstanceStore } from "@/project/instance-store"
-import { ModelCache } from "@/provider/model-cache"
 import { Effect } from "effect"
 
 export const disposeAllInstancesAfterProviderAuthCallback = Effect.fn(
@@ -10,9 +9,8 @@ export const disposeAllInstancesAfterProviderAuthCallback = Effect.fn(
 })
 
 export const invalidateAfterProviderAuthChange = Effect.fn("KiloServer.invalidateAfterProviderAuthChange")(function* (
-  providerID: string,
+  _providerID: string,
 ) {
-  const cache = yield* ModelCache.Service
-  yield* cache.clear(providerID)
+  // Model cache removed — invalidate instances only
   yield* disposeAllInstancesAfterProviderAuthCallback()
 })

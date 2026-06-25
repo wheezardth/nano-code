@@ -21,14 +21,11 @@ import { ImportCommand } from "../cli/cmd/import"
 import { GithubCommand } from "../cli/cmd/github"
 import { PrCommand } from "../cli/cmd/pr"
 import { SessionCommand } from "../cli/cmd/session"
-import { RemoteCommand } from "../cli/cmd/remote"
 import { DbCommand } from "../cli/cmd/db"
 import { ConfigCommand as ConfigCLICommand } from "../cli/cmd/config"
 import { PluginCommand } from "../cli/cmd/plug"
 import { DevSetupCommand, DevAliasCommand } from "./cli/dev-setup"
 import { RollCallCommand } from "./cli/cmd/roll-call"
-import { ProfileCommand } from "./cli/cmd/profile"
-import { DaemonCommand } from "./cli/cmd/daemon"
 import { KiloConsoleCommand } from "./cli/cmd/console"
 import { HelpCommand } from "./help-command"
 import { InstallationBuildKind } from "@opencode-ai/core/installation/version"
@@ -63,15 +60,12 @@ export const commands = [
   WebCommand,
   ModelsCommand,
   RollCallCommand,
-  ProfileCommand,
   StatsCommand,
   ExportCommand,
   ImportCommand,
   GithubCommand,
   PrCommand,
   SessionCommand,
-  RemoteCommand,
-  DaemonCommand,
   KiloConsoleCommand,
   DbCommand,
   ConfigCLICommand,

@@ -7,10 +7,7 @@ import { Plugin } from "../plugin"
 import { ProviderID } from "./schema"
 import { Array as Arr, Effect, Layer, Record, Result, Context, Schema } from "effect"
 
-// kilocode_change start
-import { Telemetry } from "@kilocode/kilo-telemetry"
-import { ModelCache } from "./model-cache"
-// kilocode_change end
+
 
 const When = Schema.Struct({
   key: Schema.String,
@@ -110,14 +107,11 @@ export class Service extends Context.Service<Service, Interface>()("@opencode/Pr
 
 export const use = serviceUse(Service)
 
-// kilocode_change start
-export const layer: Layer.Layer<Service, never, Auth.Service | Plugin.Service | ModelCache.Service> = Layer.effect(
+export const layer: Layer.Layer<Service, never, Auth.Service | Plugin.Service> = Layer.effect(
   Service,
   Effect.gen(function* () {
     const auth = yield* Auth.Service
     const plugin = yield* Plugin.Service
-    const cache = yield* ModelCache.Service
-    // kilocode_change end
     const state = yield* InstanceState.make<State>(
       Effect.fn("ProviderAuth.state")(function* () {
         const plugins = yield* plugin.list()
@@ -224,32 +218,17 @@ export const layer: Layer.Layer<Service, never, Auth.Service | Plugin.Service | 
         })
       }
 
-      // kilocode_change start - Update telemetry identity on Kilo auth
-      if (input.providerID === "kilo") {
-        const info = yield* auth.get(input.providerID)
-        if (info) {
-          const token = info.type === "oauth" ? info.access : info.type === "api" ? info.key : null
-          const accountId = info.type === "oauth" ? info.accountId : undefined
-          yield* Effect.promise(() => Telemetry.updateIdentity(token, accountId))
-        }
-      }
-      Telemetry.trackAuthSuccess(input.providerID)
-      yield* cache.clear(input.providerID)
-      // kilocode_change end
     })
 
     return Service.of({ methods, authorize, callback })
   }),
 )
 
-// kilocode_change start
 export const defaultLayer = Layer.suspend(() =>
   layer.pipe(
     Layer.provide(Auth.defaultLayer),
     Layer.provide(Plugin.defaultLayer),
-    Layer.provide(ModelCache.defaultLayer),
   ),
 )
-// kilocode_change end
 
 export * as ProviderAuth from "./auth"

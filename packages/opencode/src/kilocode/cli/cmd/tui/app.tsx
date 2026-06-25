@@ -20,15 +20,12 @@ import { DialogSelect } from "@tui/ui/dialog-select"
 import { Link } from "@tui/ui/link"
 import { isKiloError, showKiloErrorToast } from "@/kilocode/kilo-errors"
 import { registerKiloCommands } from "@/kilocode/kilo-commands"
-import { initializeTUIDependencies } from "@kilocode/kilo-gateway/tui"
 import { DialogProcessList } from "@/kilocode/cli/cmd/tui/component/dialog-process-list"
 import { useIndexingWarnings } from "@/kilocode/cli/cmd/tui/indexing-warning"
 import { KiloTerminalTitle } from "./terminal-title"
 import type { KiloTitleIcon } from "./title-icon"
 import { Session as SessionApi } from "@/session/session"
 
-// Re-export so upstream can render the route without importing directly
-export { KiloClawView } from "@/kilocode/claw/view"
 export { KiloTerminalTitle } from "./terminal-title"
 
 // Hot reload TUI-local settings (keybinds/theme/ui) when changed from the Kilo Console.
@@ -161,13 +158,6 @@ export function getTerminalTitle(input: {
     }
   }
 
-  if (input.route.data.type === "kiloclaw") {
-    return {
-      title: KiloTerminalTitle.format({ base: input.base, title: "KiloClaw", indicator: "none", icon: input.icon }),
-      active: false,
-      indicator: "none",
-    }
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -193,8 +183,8 @@ export function handleSessionError(error: unknown, toast: ReturnType<typeof useT
 /**
  * One-shot initialiser called from the App component body.
  *
- * - Injects TUI dependencies into kilo-gateway
- * - Registers Kilo Gateway commands (profile, teams, kiloclaw, etc.)
+ * - Injects TUI dependencies
+ * - Registers Kilo commands (indexing, etc.)
  * - Registers the auto-approve toggle command
  */
 export function init() {
@@ -205,22 +195,8 @@ export function init() {
 
   useIndexingWarnings()
 
-  // Inject TUI dependencies for kilo-gateway
-  initializeTUIDependencies({
-    useSync,
-    useDialog,
-    useToast,
-    useTheme,
-    useSDK,
-    DialogAlert,
-    DialogSelect,
-    Link,
-    Clipboard,
-    useKeyboard,
-    TextAttributes,
-  })
+  // TUI dependencies initialization removed with gateway dependency
 
-  // Register Kilo Gateway commands (profile, teams, kiloclaw, remote, etc.)
   registerKiloCommands(useSDK)
 
   // Register auto-approve toggle

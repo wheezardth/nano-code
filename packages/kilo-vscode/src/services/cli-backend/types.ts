@@ -20,29 +20,6 @@ interface ProviderAuthAuthorization {
   instructions: string
 }
 
-// Profile types from kilo-gateway
-export interface KilocodeOrganization {
-  id: string
-  name: string
-  role: string
-}
-
-export interface KilocodeProfile {
-  email: string
-  name?: string
-  organizations?: KilocodeOrganization[]
-}
-
-export interface KilocodeBalance {
-  balance: number
-}
-
-interface ProfileData {
-  profile: KilocodeProfile
-  balance: KilocodeBalance | null
-  currentOrgId: string | null
-}
-
 // Cloud session from the Kilo cloud API (cli_sessions_v2)
 interface CloudSessionInfo {
   session_id: string

@@ -59,7 +59,6 @@ import type {
 import { applyPatch } from "diff"
 import { InstallationVersion } from "@opencode-ai/core/installation/version"
 
-import { fetchDefaultModel } from "@kilocode/kilo-gateway" // kilocode_change
 import { ShellID } from "@/tool/shell/id"
 
 type ModeOption = { id: string; name: string; description?: string }
@@ -1744,17 +1743,6 @@ async function defaultModel(config: ACPConfig, cwd?: string): Promise<{ provider
 
   if (specified) return specified
 
-  // kilocode_change start - prefer kilo free-tier default before erroring.
-  // Only fall back to the Kilo provider if it was present in the available
-  // providers list. When teams configure enabled_providers to use only their
-  // own models, this prevents silently routing requests to an external API.
-  // Note: LiteLLM / custom provider users won't reach here — the function
-  // returns earlier via `specified` (config.model) or the sorted providers list.
-  if (providers.some((p) => p.id === "kilo")) {
-    const freeModel = await fetchDefaultModel()
-    return { providerID: ProviderID.kilo, modelID: ModelID.make(freeModel) }
-  }
-  // kilocode_change end
   throw new Error("No models available")
 }
 

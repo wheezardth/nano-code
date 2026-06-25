@@ -1,7 +1,8 @@
+// kilocode_change - new file
+
 import type { Command } from "@/command"
-import type { ReviewCommand } from "@kilocode/kilo-telemetry"
-import LOCAL_REVIEW from "./local-review.txt"
-import LOCAL_REVIEW_UNCOMMITTED from "./local-review-uncommitted.txt"
+
+export type ReviewCommand = "review" | "local-review" | "local-review-uncommitted"
 
 export function isReviewCommand(command: string | undefined): command is ReviewCommand {
   return command === "review" || command === "local-review" || command === "local-review-uncommitted"
@@ -12,6 +13,9 @@ export function parseReviewCommand(prompt: string | undefined): ReviewCommand | 
   const name = prompt.slice(1).split(/\s/, 1)[0]
   if (isReviewCommand(name)) return name
 }
+
+import LOCAL_REVIEW from "./local-review.txt"
+import LOCAL_REVIEW_UNCOMMITTED from "./local-review-uncommitted.txt"
 
 /**
  * /local-review-uncommitted - local review (uncommitted changes)

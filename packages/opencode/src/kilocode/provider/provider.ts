@@ -6,7 +6,6 @@
 // This module exports patch functions and data that the upstream provider.ts
 // calls at well-defined injection points (each marked with kilocode_change).
 
-import { createKilo, type KiloProvider, AI_SDK_PROVIDERS, PROMPTS } from "@kilocode/kilo-gateway"
 import { DEFAULT_HEADERS } from "@/kilocode/const"
 import { ProviderID, ModelID } from "@/provider/schema"
 import { optionalOmitUndefined } from "@opencode-ai/core/schema"
@@ -18,22 +17,12 @@ import { mapValues, omit, pickBy } from "remeda"
 export const REQUEST_TIMEOUT_MS = 300_000 // 5 minutes
 
 // ---------------------------------------------------------------------------
-// Bundled providers
-// ---------------------------------------------------------------------------
-
-type BundledSDK = { languageModel(modelId: string): LanguageModelV3 }
-
-export const KILO_BUNDLED_PROVIDERS: Record<string, () => Promise<(options: any) => BundledSDK>> = {
-  "@kilocode/kilo-gateway": async () => createKilo as unknown as (options: any) => BundledSDK,
-}
-
-// ---------------------------------------------------------------------------
 // Model schema extensions  (spread into Provider.Model Schema.Struct)
 // ---------------------------------------------------------------------------
 
 export const KILO_MODEL_SCHEMA_EXTENSIONS = {
   recommendedIndex: optionalOmitUndefined(Schema.Finite),
-  prompt: Schema.optional(Schema.Literals(PROMPTS)),
+  prompt: Schema.optional(Schema.String),
   isFree: Schema.optional(Schema.Boolean),
   mayTrainOnYourPrompts: Schema.optional(Schema.Boolean),
   hasUserByokAvailable: Schema.optional(Schema.Boolean),
@@ -43,7 +32,7 @@ export const KILO_MODEL_SCHEMA_EXTENSIONS = {
       avgAttemptCostUsd: Schema.Finite,
     }),
   ),
-  ai_sdk_provider: Schema.optional(Schema.Literals(AI_SDK_PROVIDERS)),
+  ai_sdk_provider: Schema.optional(Schema.String),
 }
 
 // ---------------------------------------------------------------------------
@@ -159,7 +148,7 @@ export function kiloCustomLoaders(dep: CustomDep): Record<string, CustomLoader> 
       return {
         autoload: Object.keys(input.models).length > 0,
         options,
-        async getModel(sdk: KiloProvider, modelID: string) {
+        async getModel(sdk: any, modelID: string) {
           const provider = input.models[modelID]?.ai_sdk_provider
           if (provider === "alibaba") return sdk.alibaba(modelID)
           if (provider === "anthropic") return sdk.anthropic(modelID)

@@ -25,9 +25,6 @@ import { InstanceState } from "@/effect/instance-state"
 import { KiloSession } from "@/kilocode/session"
 import { KiloLLM } from "@/kilocode/session/llm"
 import { KiloSessionOverflow } from "@/kilocode/session/overflow"
-import { SessionExport } from "@/kilocode/session-export"
-import { getActiveOrg } from "@/kilocode/session-export/eligibility"
-import { normalizeUsageForExport, observeFullStreamForExport } from "@/kilocode/session-export/llm"
 // kilocode_change end
 import { EffectBridge } from "@/effect/bridge"
 import { RuntimeFlags } from "@/effect/runtime-flags"
@@ -247,42 +244,6 @@ const live: Layer.Layer<
       }
 
       const instance = yield* InstanceState.context
-      // kilocode_change start - capture eligible session export request start
-      const isKilo = input.model.api.npm === "@kilocode/kilo-gateway"
-      const org = yield* isKilo && input.model.isFree === true
-        ? Effect.promise(() => getActiveOrg())
-        : Effect.succeed({ type: "unknown" as const })
-      const started = Date.now()
-      const parent = input.parentSessionID ?? KiloSession.resolveParent(input.sessionID)
-      const found = KiloSession.resolveRoot(input.sessionID)
-      const root = parent ? (found === input.sessionID ? parent : found) : input.sessionID
-      const exportable =
-        isKilo && input.model.isFree === true && org.type === "personal" && input.agent.name !== "title"
-      if (exportable) {
-        SessionExport.beforeRequest({
-          input: { model: input.model, org },
-          requestMeta: {
-            sessionId: input.sessionID,
-            rootSessionId: root,
-            parentSessionId: parent,
-            requestId: input.user.id,
-            userMessageId: input.user.id,
-            agent: input.agent.name,
-            modeId: input.agent.mode,
-            workspaceKey: instance.directory,
-            agentInfo: SessionExport.agentInfo(input.agent),
-          },
-          assembled: {
-            system: prepared.system,
-            messages: prepared.messages,
-            tools: prepared.tools,
-            permissions: input.permission ?? [],
-            toolChoice: input.toolChoice,
-            params: prepared.params,
-          },
-        })
-      }
-      // kilocode_change end
 
       // Runtime seam: native is an opt-in adapter over @opencode-ai/llm. It
       // either returns a ready LLMEvent stream or a concrete fallback reason.
@@ -400,23 +361,7 @@ const live: Layer.Layer<
         experimental_telemetry: { isEnabled: false },
       })
       // kilocode_change end
-      // kilocode_change start - capture eligible session export request completion off the stream path
-      if (!exportable) return { type: "ai-sdk" as const, result }
-      return {
-        type: "ai-sdk" as const,
-        result: {
-          fullStream: observeFullStreamForExport(result.fullStream, {
-            sessionId: input.sessionID,
-            rootSessionId: root,
-            parentSessionId: parent,
-            requestId: input.user.id,
-            workspaceKey: instance.directory,
-            started,
-            retries: input.retries ?? 0,
-          }),
-        },
-      }
-      // kilocode_change end
+      return { type: "ai-sdk" as const, result }
     })
 
     const stream: Interface["stream"] = (input) =>
@@ -464,9 +409,6 @@ export const defaultLayer = Layer.suspend(() =>
   ),
 )
 
-// kilocode_change start - session export stream observer
-export { normalizeUsageForExport, observeFullStreamForExport }
-// kilocode_change end
 export const hasToolCalls = LLMRequestPrep.hasToolCalls
 
 export * as LLM from "./llm"

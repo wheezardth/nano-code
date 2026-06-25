@@ -15,7 +15,6 @@ import * as Log from "@opencode-ai/core/util/log"
 import type { ProviderMetadata, Usage } from "@opencode-ai/llm"
 import type { Provider } from "@/provider/provider"
 import { zod as toZod } from "@opencode-ai/core/effect-zod"
-import { ENV_FEATURE } from "@kilocode/kilo-gateway"
 import { fn } from "@/kilocode/fn"
 import path from "path"
 
@@ -110,7 +109,7 @@ export namespace KiloSession {
   export function attribution(id: string): { rootID: string; feature?: string } {
     const rootID = resolveRoot(id)
     const platform = resolvePlatform(rootID) ?? process.env["KILO_PLATFORM"]
-    const feature = featureForPlatform(platform) ?? process.env[ENV_FEATURE]
+    const feature = featureForPlatform(platform)
     return { rootID, ...(feature ? { feature } : {}) }
   }
 
@@ -237,23 +236,20 @@ export namespace KiloSession {
   // Session lifecycle hooks (share, unshare, remove)
   // ---------------------------------------------------------------------------
 
-  export function shareSession(id: SessionID) {
-    return EffectBridge.fromPromise(async () => {
-      const { KiloSessions } = await import("@/kilo-sessions/kilo-sessions")
-      return KiloSessions.share(id)
-    }).pipe(Effect.catchCause((cause) => Effect.fail(Cause.squash(cause))))
+  export function shareSession(_id: SessionID) {
+    return Effect.succeed(undefined)
   }
 
-  export function unshareSession(id: SessionID) {
-    return EffectBridge.fromPromise(async () => {
-      const { KiloSessions } = await import("@/kilo-sessions/kilo-sessions")
-      await KiloSessions.unshare(id)
-    }).pipe(Effect.catchCause((cause) => Effect.fail(Cause.squash(cause))))
+  export function unshareSession(_id: SessionID) {
+    return Effect.succeed(undefined)
   }
 
-  export async function removeSession(id: string): Promise<void> {
-    const { KiloSessions } = await import("@/kilo-sessions/kilo-sessions")
-    await KiloSessions.remove(id).catch(() => {})
+  export function removeSession(id: string) {
+    return Effect.sync(() => {
+      Database.use((db) => {
+        db.delete().from(SessionTable).where(eq(SessionTable.id, id)).run()
+      })
+    })
   }
 
   export async function cleanup(id: string): Promise<void> {

@@ -9,7 +9,7 @@
 import type { JSX } from "solid-js"
 import type { RGBA } from "@opentui/core"
 import type { ProviderAuthAuthorization } from "@kilocode/sdk/v2"
-import { KiloAutoMethod } from "@/kilocode/components/dialog-kilo-auto-method"
+
 
 // ---------------------------------------------------------------------------
 // Failed-state gutter/description helpers
@@ -81,33 +81,11 @@ export const LOCAL_API_KEY_PLACEHOLDER = "local"
 // ---------------------------------------------------------------------------
 
 /**
- * If the provider is Kilo Gateway, renders the custom `KiloAutoMethod`
- * component that handles device-auth + org selection.
- *
- * Returns `undefined` for every other provider so the caller can fall
- * through to the default `AutoMethod`.
+ * Returns `undefined` for all providers so the caller uses the default
+ * `AutoMethod` component.
  */
-export function renderAutoMethod(opts: {
-  providerID: string
-  title: string
-  index: number
-  authorization: ProviderAuthAuthorization
-  useSDK: () => any
-  useTheme: () => any
-  DialogModel: any
-}): (() => JSX.Element) | undefined {
-  if (opts.providerID !== "kilo") return undefined
-  return () => (
-    <KiloAutoMethod
-      providerID={opts.providerID}
-      title={opts.title}
-      index={opts.index}
-      authorization={opts.authorization}
-      useSDK={opts.useSDK}
-      useTheme={opts.useTheme}
-      DialogModel={opts.DialogModel}
-    />
-  )
+export function renderAutoMethod(opts: { providerID: string }): (() => JSX.Element) | undefined {
+  return undefined
 }
 
 // ---------------------------------------------------------------------------

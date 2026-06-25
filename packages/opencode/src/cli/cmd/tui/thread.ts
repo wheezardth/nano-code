@@ -13,8 +13,6 @@ import { Filesystem } from "@/util/filesystem"
 import type { GlobalEvent } from "@kilocode/sdk/v2"
 import type { EventSource } from "./context/sdk"
 import { win32DisableProcessedInput, win32InstallCtrlCGuard } from "./win32"
-import { importCloudSession, validateCloudFork } from "@/kilocode/cloud-session" // kilocode_change
-import { createKiloClient } from "@kilocode/sdk/v2" // kilocode_change
 import { writeHeapSnapshot } from "v8"
 import { TuiConfig } from "./config/tui"
 import { KiloTuiThreadDaemon } from "@/kilocode/cli/cmd/tui/thread" // kilocode_change
@@ -155,14 +153,6 @@ export const TuiThreadCommand = cmd({
         process.exitCode = 1
         return
       }
-      // kilocode_change start
-      const cloudForkError = validateCloudFork(args)
-      if (cloudForkError) {
-        UI.error(cloudForkError)
-        process.exitCode = 1
-        return
-      }
-      // kilocode_change end
 
       // Resolve relative --project paths from PWD, then use the real cwd after
       // chdir so the thread and worker share the same directory key.
@@ -333,25 +323,6 @@ export const TuiThreadCommand = cmd({
       }, 1000).unref?.()
 
       try {
-        // kilocode_change start - import cloud session before TUI renders
-        if (args.cloudFork && args.session) {
-          UI.println("Importing session from cloud...")
-          const sdk = createKiloClient({
-            baseUrl: transport.url,
-            fetch: transport.fetch,
-            directory: cwd,
-          })
-          const id = await importCloudSession(sdk, args.session).catch(() => undefined)
-          if (!id) {
-            UI.error("Failed to import session from cloud")
-            shutdownAndExit({ reason: "cloud-fork-failed", code: 1 })
-            return
-          }
-          args.session = id
-          args.cloudFork = false
-        }
-        // kilocode_change end
-
         await start({
           // kilocode_change - shared lazy loader also supports daemon attach
           url: transport.url,

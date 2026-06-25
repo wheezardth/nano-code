@@ -3,16 +3,13 @@ import type { NetworkOptions } from "@/cli/network"
 import { errorMessage } from "@/util/error"
 import { TuiConfig } from "@/cli/cmd/tui/config/tui"
 import { validateSession } from "@/cli/cmd/tui/validate-session"
-import { importCloudSession } from "@/kilocode/cloud-session"
 import { DaemonClient } from "@/kilocode/daemon/client"
-import { createKiloClient } from "@kilocode/sdk/v2"
 
 type TuiInput = Parameters<typeof import("@/cli/cmd/tui/app").tui>[0]
 
 type Args = NetworkOptions & {
   prompt?: string
   session?: string
-  cloudFork?: boolean
   continue?: boolean
   agent?: string
   model?: string
@@ -26,21 +23,9 @@ type Input = {
   start: (input: TuiInput) => Promise<void>
 }
 
-async function session(input: Input, daemon: DaemonClient.Connection) {
-  if (!input.args.cloudFork || !input.args.session) return { ok: true as const, id: input.args.session }
-
-  UI.println("Importing session from cloud...")
-  const client = createKiloClient({
-    baseUrl: daemon.url,
-    directory: input.cwd,
-    headers: daemon.headers,
-  })
-  const id = await importCloudSession(client, input.args.session).catch(() => undefined)
-  if (id) return { ok: true as const, id }
-
-  UI.error("Failed to import session from cloud")
-  process.exitCode = 1
-  return { ok: false as const }
+async function session(input: Input, daemon: DaemonClient.Connection): Promise<{ ok: true; id?: string } | { ok: false }> {
+  if (input.args.session) return { ok: true, id: input.args.session }
+  return { ok: true }
 }
 
 export namespace KiloTuiThreadDaemon {

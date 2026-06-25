@@ -87,9 +87,8 @@ export function ingestBootstrapWarning(sessionId: string, error: unknown) {
   return `Warning: imported session ${sessionId} locally, but ingest bootstrap failed: ${details}`
 }
 
-async function ingestBootstrap(sessionId: string) {
-  const { KiloSessions } = await import("../../kilo-sessions/kilo-sessions")
-  return KiloSessions.bootstrap(sessionId)
+async function ingestBootstrap(_sessionId: string) {
+  // Bootstrap removed — gateway dependency removed
 }
 
 export async function bootstrapImportedSessionIngest(

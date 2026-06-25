@@ -4,8 +4,6 @@ import { type IndexingTelemetryEvent, type VectorStoreSearchResult } from "@kilo
 import { toIndexingConfigInput, type IndexingConfig } from "@kilocode/kilo-indexing/config"
 import { hasIndexingPlugin } from "@kilocode/kilo-indexing/detect"
 import { IndexingStatus, disabledIndexingStatus } from "@kilocode/kilo-indexing/status"
-import { Telemetry } from "@kilocode/kilo-telemetry"
-import { fetchKiloEmbeddingModelCatalog } from "@kilocode/kilo-gateway"
 import { Instance } from "@/kilocode/instance"
 import { Bus } from "@/bus"
 import { Config } from "@/config/config"
@@ -82,106 +80,14 @@ function enrichKilo(input: ReturnType<typeof toIndexingConfigInput>, auth: KiloI
   }
 }
 
-async function model(input: ReturnType<typeof toIndexingConfigInput>, auth: KiloIndexingAuth) {
+async function model(input: ReturnType<typeof toIndexingConfigInput>): ReturnType<typeof toIndexingConfigInput> {
   if (input.embedderProvider !== "kilo") return input
-
-  const catalog = await fetchKiloEmbeddingModelCatalog({ baseURL: auth.baseUrl, token: auth.apiKey })
-  const id = input.modelId ? (catalog.aliases[input.modelId] ?? input.modelId) : catalog.defaultModel
-  const chosen = catalog.models.find((item) => item.id === id)
-  const fallback = catalog.aliases[catalog.defaultModel] ?? catalog.defaultModel
-  const found = chosen ?? catalog.models.find((item) => item.id === fallback)
-
-  if (!found) {
-    if (input.modelId || input.modelDimension) {
-      log.warn("ignoring unsupported Kilo embedding model configuration", { model: input.modelId })
-    }
-    return { ...input, modelId: undefined, modelDimension: undefined }
-  }
-
-  if (input.modelId && !chosen) {
-    log.warn("using default Kilo embedding model instead of unsupported configuration", {
-      model: input.modelId,
-      fallback: found.id,
-    })
-  }
-
-  return {
-    ...input,
-    modelId: found.id,
-    modelDimension: found.dimension,
-    searchMinScore: input.searchMinScore ?? found.scoreThreshold,
-  }
+  // No catalog available without gateway auth — leave model config as-is.
+  return input
 }
 
-function trackTelemetry(event: IndexingTelemetryEvent): void {
-  if (event.type === "started") {
-    Telemetry.trackIndexingStarted({
-      trigger: event.trigger,
-      source: event.source,
-      mode: event.mode,
-      provider: event.provider,
-      vectorStore: event.vectorStore,
-      modelId: event.modelId,
-    })
-    return
-  }
-
-  if (event.type === "completed") {
-    Telemetry.trackIndexingCompleted({
-      trigger: event.trigger,
-      source: event.source,
-      mode: event.mode,
-      provider: event.provider,
-      vectorStore: event.vectorStore,
-      modelId: event.modelId,
-      filesIndexed: event.filesIndexed,
-      filesDiscovered: event.filesDiscovered,
-      totalBlocks: event.totalBlocks,
-      batchErrors: event.batchErrors,
-    })
-    return
-  }
-
-  if (event.type === "file_count") {
-    Telemetry.trackIndexingFileCount({
-      source: event.source,
-      mode: event.mode,
-      provider: event.provider,
-      vectorStore: event.vectorStore,
-      modelId: event.modelId,
-      discovered: event.discovered,
-      candidate: event.candidate,
-    })
-    return
-  }
-
-  if (event.type === "batch_retry") {
-    Telemetry.trackIndexingBatchRetry({
-      source: event.source,
-      mode: event.mode,
-      provider: event.provider,
-      vectorStore: event.vectorStore,
-      modelId: event.modelId,
-      attempt: event.attempt,
-      maxRetries: event.maxRetries,
-      batchSize: event.batchSize,
-      error: event.error,
-    })
-    return
-  }
-
-  Telemetry.trackIndexingError({
-    source: event.source,
-    trigger: event.trigger,
-    mode: event.mode,
-    provider: event.provider,
-    vectorStore: event.vectorStore,
-    modelId: event.modelId,
-    location: event.location,
-    error: event.error,
-    retryCount: event.retryCount,
-    maxRetries: event.maxRetries,
-  })
+function trackTelemetry(_event: IndexingTelemetryEvent): void {
+  // Telemetry disabled after gateway removal
 }
 
 export namespace KiloIndexing {
@@ -469,17 +375,8 @@ export namespace KiloIndexing {
   }
 
   export async function models() {
-    try {
-      const cfg = await AppRuntime.runPromise(Config.Service.use((svc) => svc.getGlobal()))
-      const auth = await kiloAuth(cfg)
-      const catalog = await fetchKiloEmbeddingModelCatalog({ baseURL: auth.baseUrl, token: auth.apiKey })
-      if (catalog.models.length > 0 || (!auth.baseUrl && !auth.apiKey)) return catalog
-      const fallback = await fetchKiloEmbeddingModelCatalog()
-      return fallback.models.length > 0 ? fallback : catalog
-    } catch (err) {
-      log.warn("falling back to public Kilo embedding model catalog", { err })
-      return fetchKiloEmbeddingModelCatalog()
-    }
+    log.info("embedding model catalog unavailable (gateway removed)")
+    return null
   }
 
   export async function warnings(): Promise<IndexingWarning[]> {

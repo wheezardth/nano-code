@@ -141,7 +141,6 @@ import type { Agent } from "@kilocode/sdk/v2/client"
 import { configFeatures } from "./features"
 import { createAutoApproveBridge } from "./kilo-provider/auto-approve"
 import type { KiloProviderOptions } from "./kilo-provider/options"
-import { fetchKiloEmbeddingModelCatalog } from "@kilocode/kilo-gateway"
 import { stopSessionProcesses } from "./kilo-provider/background-process"
 
 type MessageLoadMode = "replace" | "prepend" | "focus" | "reconcile"
@@ -2196,10 +2195,7 @@ export class KiloProvider implements vscode.WebviewViewProvider {
   }
 
   private async fetchAndSendKiloEmbeddingModels(): Promise<void> {
-    const catalog = await fetchKiloEmbeddingModelCatalog()
-    const message = { type: "kiloEmbeddingModelsLoaded", catalog }
-    this.cachedKiloEmbeddingModelsMessage = message
-    this.postMessage(message)
+    // Embedding model catalog removed — gateway dependency removed
   }
 
   /**

@@ -992,11 +992,6 @@ function App(props: { onSnapshot?: () => Promise<string[]> }) {
             <Match when={route.data.type === "session"}>
               <Session />
             </Match>
-            {/* kilocode_change start */}
-            <Match when={route.data.type === "kiloclaw"}>
-              <KiloApp.KiloClawView />
-            </Match>
-            {/* kilocode_change end */}
           </Switch>
           {plugin()}
         </box>

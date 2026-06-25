@@ -14,7 +14,6 @@ import { ConfigError } from "../../config/error"
 import type { Config } from "../../config/config"
 import type { ConfigAgent } from "../../config/agent"
 import { ModesMigrator } from "../modes-migrator"
-import { fetchOrganizationModes } from "@kilocode/kilo-gateway"
 import { RulesMigrator } from "../rules-migrator"
 import { WorkflowsMigrator } from "../workflows-migrator"
 import { McpMigrator } from "../mcp-migrator"
@@ -297,31 +296,11 @@ export namespace KilocodeConfig {
 
   // ── Organization modes ───────────────────────────────────────────────
 
-  /**
-   * Load organization custom modes from the Kilo Cloud API.
-   * Returns empty agents + warnings if the user is not authenticated.
-   */
+  /** Organization modes removed with gateway dependency. */
   export async function loadOrganizationModes(
-    auth: Record<string, any>,
+    _auth: Record<string, any>,
   ): Promise<{ agents: Record<string, ConfigAgent.Info>; warnings: Config.Warning[] }> {
-    const warnings: Config.Warning[] = []
-    try {
-      const kilo = auth["kilo"]
-      if (kilo?.type === "oauth" && kilo.access && kilo.accountId) {
-        const modes = await fetchOrganizationModes(kilo.access, kilo.accountId)
-        if (modes.length > 0) {
-          const agents = ModesMigrator.convertOrganizationModes(modes)
-          log.debug("loaded organization custom modes", {
-            count: modes.length,
-            modes: modes.map((m: any) => m.slug),
-          })
-          return { agents, warnings }
-        }
-      }
-    } catch (err) {
-      log.warn("failed to load organization custom modes", { error: err })
-    }
-    return { agents: {}, warnings }
+    return { agents: {}, warnings: [] }
   }
 
   // ── Bash permission migration ────────────────────────────────────────

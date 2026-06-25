@@ -33,7 +33,6 @@ import { Global } from "@opencode-ai/core/global"
 // kilocode_change start - Kilo session behavior extensions
 import { BackgroundProcess } from "@/kilocode/background-process"
 import { KiloSession, kiloSessionFork } from "@/kilocode/session"
-import { SessionExport } from "@/kilocode/session-export"
 import { baseKey, cumulativeSessionDiff } from "@/kilocode/session-portability/cumulative-diff" // kilocode_change
 // kilocode_change end
 import { Effect, Layer, Option, Context, Schema, Types } from "effect"
@@ -650,9 +649,6 @@ export const layer: Layer.Layer<
         }
         // kilocode_change end
         yield* sync.run(Event.Deleted, { sessionID, info: session }, { publish: hasInstance })
-        // kilocode_change - capture final session-export workspace delta on close/delete
-        const workspaceKey = hasInstance ? yield* InstanceState.directory : undefined // kilocode_change
-        yield* Effect.promise(() => SessionExport.onSessionClose(sessionID, workspaceKey)) // kilocode_change
         yield* sync.remove(sessionID)
       } catch (e) {
         log.error(e)
