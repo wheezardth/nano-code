@@ -1192,10 +1192,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "ข้อมูลเวอร์ชัน",
   "settings.aboutKiloCode.version.label": "เวอร์ชัน:",
   "settings.aboutKiloCode.extensionName": "ส่วนขยาย Nano Code",
-  "settings.aboutKiloCode.community": "ชุมชนและการสนับสนุน",
-  "settings.aboutKiloCode.feedback.prefix": "หากคุณมีคำถามหรือข้อเสนอแนะ สามารถเปิด issue ได้ที่",
-  "settings.aboutKiloCode.feedback.or": "หรือ",
-  "settings.aboutKiloCode.support.prefix": "สำหรับคำถามเกี่ยวกับการเรียกเก็บเงินหรือบัญชี ติดต่อฝ่ายสนับสนุนลูกค้าที่",
   "settings.aboutKiloCode.resetSettings.title": "รีเซ็ตการตั้งค่า",
   "settings.aboutKiloCode.resetSettings.description":
     "การดำเนินการนี้จะรีเซ็ตเฉพาะการตั้งค่าเฉพาะของส่วนขยาย VS Code กลับเป็นค่าเริ่มต้นเท่านั้น การตั้งค่าที่ใช้ร่วมกับ CLI เช่น โหมดและกฎการอนุมัติอัตโนมัติ จะถูกเก็บไว้ในการกำหนดค่า CLI และจะไม่ถูกรีเซ็ต",

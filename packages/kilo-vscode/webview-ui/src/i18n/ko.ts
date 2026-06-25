@@ -1195,10 +1195,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "버전 정보",
   "settings.aboutKiloCode.version.label": "버전:",
   "settings.aboutKiloCode.extensionName": "Nano Code 확장 프로그램",
-  "settings.aboutKiloCode.community": "커뮤니티 및 지원",
-  "settings.aboutKiloCode.feedback.prefix": "질문이나 피드백이 있으시면 다음에서 이슈를 열어주세요",
-  "settings.aboutKiloCode.feedback.or": "또는",
-  "settings.aboutKiloCode.support.prefix": "결제 또는 계정 관련 문의는 고객 지원팀에 문의하세요",
   "settings.aboutKiloCode.resetSettings.title": "설정 초기화",
   "settings.aboutKiloCode.resetSettings.description":
     "이 기능은 VS Code 확장 프로그램 전용 설정만 기본값으로 초기화합니다. 모드 및 자동 승인 규칙과 같이 CLI와 공유되는 설정은 CLI 구성에 저장되며 초기화되지 않습니다.",

@@ -1170,10 +1170,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Versjonsinformasjon",
   "settings.aboutKiloCode.version.label": "Versjon:",
   "settings.aboutKiloCode.extensionName": "Nano Code-utvidelse",
-  "settings.aboutKiloCode.community": "Fellesskap og støtte",
-  "settings.aboutKiloCode.feedback.prefix": "Hvis du har spørsmål eller tilbakemeldinger, åpne gjerne en issue på",
-  "settings.aboutKiloCode.feedback.or": "eller",
-  "settings.aboutKiloCode.support.prefix": "For fakturerings- eller kontospørsmål, kontakt kundestøtte på",
   "settings.aboutKiloCode.resetSettings.title": "Tilbakestill innstillinger",
   "settings.aboutKiloCode.resetSettings.description":
     "Dette tilbakestiller kun VS Code-utvidelsesspecifikke innstillinger til standardverdiene. Innstillinger som deles med CLI, som modi og regler for automatisk godkjenning, lagres i CLI-konfigurasjonen og vil ikke tilbakestilles.",

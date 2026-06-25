@@ -1197,11 +1197,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Versie-informatie",
   "settings.aboutKiloCode.version.label": "Versie:",
   "settings.aboutKiloCode.extensionName": "Nano Code Extensie",
-  "settings.aboutKiloCode.community": "Community & Ondersteuning",
-  "settings.aboutKiloCode.feedback.prefix": "Als je vragen of feedback hebt, voel je vrij om een issue aan te maken op",
-  "settings.aboutKiloCode.feedback.or": "of",
-  "settings.aboutKiloCode.support.prefix":
-    "Voor vragen over facturering of je account, neem contact op met Klantenservice op",
   "settings.aboutKiloCode.resetSettings.title": "Instellingen resetten",
   "settings.aboutKiloCode.resetSettings.description":
     "Dit reset alleen VS Code-extensiespecifieke instellingen naar hun standaardwaarden. Instellingen die gedeeld worden met de CLI, zoals modi en regels voor automatisch goedkeuren, worden opgeslagen in de CLI-configuratie en worden niet gereset.",

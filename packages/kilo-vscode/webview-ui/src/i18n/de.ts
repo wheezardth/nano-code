@@ -1221,11 +1221,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Versionsinformationen",
   "settings.aboutKiloCode.version.label": "Version:",
   "settings.aboutKiloCode.extensionName": "Nano Code Erweiterung",
-  "settings.aboutKiloCode.community": "Community & Support",
-  "settings.aboutKiloCode.feedback.prefix": "Bei Fragen oder Feedback können Sie ein Issue eröffnen auf",
-  "settings.aboutKiloCode.feedback.or": "oder",
-  "settings.aboutKiloCode.support.prefix":
-    "Bei Abrechnungs- oder Kontofragen wenden Sie sich an den Kundensupport unter",
   "settings.aboutKiloCode.resetSettings.title": "Einstellungen zurücksetzen",
   "settings.aboutKiloCode.resetSettings.description":
     "Dies setzt nur VS Code-erweiterungsspezifische Einstellungen auf ihre Standardwerte zurück. Einstellungen, die mit der CLI geteilt werden, wie Modi und Regeln für die automatische Genehmigung, werden in der CLI-Konfiguration gespeichert und nicht zurückgesetzt.",

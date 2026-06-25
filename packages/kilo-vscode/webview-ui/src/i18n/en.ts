@@ -1185,10 +1185,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Version Information",
   "settings.aboutKiloCode.version.label": "Version:",
   "settings.aboutKiloCode.extensionName": "Nano Code Extension",
-  "settings.aboutKiloCode.community": "Community & Support",
-  "settings.aboutKiloCode.feedback.prefix": "If you have any questions or feedback, feel free to open an issue on",
-  "settings.aboutKiloCode.feedback.or": "or",
-  "settings.aboutKiloCode.support.prefix": "For billing or account questions, contact Customer Support at",
   "settings.aboutKiloCode.resetSettings.title": "Reset Settings",
   "settings.aboutKiloCode.resetSettings.description":
     "This resets only VS Code extension-specific settings to their default values. Settings shared with the CLI, such as modes and auto-approve rules, are stored in the CLI configuration and will not be reset.",

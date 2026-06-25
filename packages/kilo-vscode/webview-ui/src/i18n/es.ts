@@ -1216,10 +1216,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Información de versión",
   "settings.aboutKiloCode.version.label": "Versión:",
   "settings.aboutKiloCode.extensionName": "Extensión Nano Code",
-  "settings.aboutKiloCode.community": "Comunidad y soporte",
-  "settings.aboutKiloCode.feedback.prefix": "Si tienes preguntas o comentarios, abre un issue en",
-  "settings.aboutKiloCode.feedback.or": "o",
-  "settings.aboutKiloCode.support.prefix": "Para preguntas de facturación o cuenta, contacta al Soporte al Cliente en",
   "settings.aboutKiloCode.resetSettings.title": "Restablecer configuración",
   "settings.aboutKiloCode.resetSettings.description":
     "Esto restablece únicamente las configuraciones específicas de la extensión VS Code a sus valores predeterminados. Las configuraciones compartidas con el CLI, como los modos y las reglas de aprobación automática, se almacenan en la configuración del CLI y no serán restablecidas.",

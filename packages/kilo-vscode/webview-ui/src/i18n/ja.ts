@@ -1198,11 +1198,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "バージョン情報",
   "settings.aboutKiloCode.version.label": "バージョン：",
   "settings.aboutKiloCode.extensionName": "Nano Code拡張機能",
-  "settings.aboutKiloCode.community": "コミュニティとサポート",
-  "settings.aboutKiloCode.feedback.prefix": "ご質問やフィードバックがありましたら、お気軽にissueを作成してください",
-  "settings.aboutKiloCode.feedback.or": "または",
-  "settings.aboutKiloCode.support.prefix":
-    "請求やアカウントに関するご質問は、カスタマーサポートまでお問い合わせください",
   "settings.aboutKiloCode.resetSettings.title": "設定をリセット",
   "settings.aboutKiloCode.resetSettings.description":
     "これはVS Code拡張機能固有の設定のみをデフォルト値にリセットします。モードや自動承認ルールなど、CLIと共有される設定はCLI設定ファイルに保存されており、リセットされません。",

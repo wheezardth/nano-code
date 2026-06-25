@@ -1144,10 +1144,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "版本資訊",
   "settings.aboutKiloCode.version.label": "版本：",
   "settings.aboutKiloCode.extensionName": "Nano Code 擴充功能",
-  "settings.aboutKiloCode.community": "社群與支援",
-  "settings.aboutKiloCode.feedback.prefix": "如果您有任何問題或回饋，歡迎在以下平台提交 issue",
-  "settings.aboutKiloCode.feedback.or": "或",
-  "settings.aboutKiloCode.support.prefix": "如有帳單或帳戶問題，請聯繫客戶支援",
   "settings.aboutKiloCode.resetSettings.title": "重置設定",
   "settings.aboutKiloCode.resetSettings.description":
     "此操作僅將 VS Code 擴充功能專屬設定重置為預設值。與 CLI 共享的設定（例如模式和自動核准規則）儲存在 CLI 設定中，不會被重置。",

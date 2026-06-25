@@ -1176,10 +1176,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "版本信息",
   "settings.aboutKiloCode.version.label": "版本：",
   "settings.aboutKiloCode.extensionName": "Nano Code 扩展",
-  "settings.aboutKiloCode.community": "社区与支持",
-  "settings.aboutKiloCode.feedback.prefix": "如果您有任何问题或反馈，欢迎在以下平台提交 issue",
-  "settings.aboutKiloCode.feedback.or": "或",
-  "settings.aboutKiloCode.support.prefix": "如有账单或账户问题，请联系客户支持",
   "settings.aboutKiloCode.resetSettings.title": "重置设置",
   "settings.aboutKiloCode.resetSettings.description":
     "此操作仅将 VS Code 扩展专属设置重置为默认值。与 CLI 共享的设置（如模式和自动审批规则）存储在 CLI 配置中，不会被重置。",

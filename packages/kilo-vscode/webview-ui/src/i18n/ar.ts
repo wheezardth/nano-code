@@ -1186,10 +1186,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "معلومات الإصدار",
   "settings.aboutKiloCode.version.label": "الإصدار:",
   "settings.aboutKiloCode.extensionName": "إضافة Nano Code",
-  "settings.aboutKiloCode.community": "المجتمع والدعم",
-  "settings.aboutKiloCode.feedback.prefix": "إذا كان لديك أي أسئلة أو ملاحظات، لا تتردد في فتح مشكلة على",
-  "settings.aboutKiloCode.feedback.or": "أو",
-  "settings.aboutKiloCode.support.prefix": "لأسئلة الفوترة أو الحساب، تواصل مع دعم العملاء على",
   "settings.aboutKiloCode.resetSettings.title": "إعادة تعيين الإعدادات",
   "settings.aboutKiloCode.resetSettings.description":
     "يؤدي هذا إلى إعادة تعيين الإعدادات الخاصة بامتداد VS Code فقط إلى قيمها الافتراضية. الإعدادات المشتركة مع CLI، مثل الأوضاع وقواعد الموافقة التلقائية، مخزّنة في تكوين CLI ولن تتأثر.",

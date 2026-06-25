@@ -1211,10 +1211,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Informacije o verziji",
   "settings.aboutKiloCode.version.label": "Verzija:",
   "settings.aboutKiloCode.extensionName": "Nano Code ekstenzija",
-  "settings.aboutKiloCode.community": "Zajednica i podrška",
-  "settings.aboutKiloCode.feedback.prefix": "Ako imate pitanja ili povratne informacije, slobodno otvorite issue na",
-  "settings.aboutKiloCode.feedback.or": "ili",
-  "settings.aboutKiloCode.support.prefix": "Za pitanja o naplati ili računu, kontaktirajte korisničku podršku na",
   "settings.aboutKiloCode.resetSettings.title": "Resetovanje postavki",
   "settings.aboutKiloCode.resetSettings.description":
     "Ovo resetuje samo postavke specifične za VS Code ekstenziju na njihove zadane vrijednosti. Postavke koje se dijele s CLI-jem, kao što su načini rada i pravila automatskog odobravanja, pohranjene su u CLI konfiguraciji i neće biti resetovane.",

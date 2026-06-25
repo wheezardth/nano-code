@@ -1227,12 +1227,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Informations de version",
   "settings.aboutKiloCode.version.label": "Version :",
   "settings.aboutKiloCode.extensionName": "Extension Nano Code",
-  "settings.aboutKiloCode.community": "Communauté et support",
-  "settings.aboutKiloCode.feedback.prefix":
-    "Si vous avez des questions ou des commentaires, n'hésitez pas à ouvrir un ticket sur",
-  "settings.aboutKiloCode.feedback.or": "ou",
-  "settings.aboutKiloCode.support.prefix":
-    "Pour les questions de facturation ou de compte, contactez le support client à",
   "settings.aboutKiloCode.resetSettings.title": "Réinitialiser les paramètres",
   "settings.aboutKiloCode.resetSettings.description":
     "Ceci réinitialise uniquement les paramètres spécifiques à l'extension VS Code à leurs valeurs par défaut. Les paramètres partagés avec le CLI, tels que les modes et les règles d'approbation automatique, sont stockés dans la configuration du CLI et ne seront pas réinitialisés.",

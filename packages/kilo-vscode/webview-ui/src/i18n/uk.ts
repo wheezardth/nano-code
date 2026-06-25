@@ -1193,10 +1193,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Інформація про версію",
   "settings.aboutKiloCode.version.label": "Версія:",
   "settings.aboutKiloCode.extensionName": "Розширення Nano Code",
-  "settings.aboutKiloCode.community": "Спільнота і підтримка",
-  "settings.aboutKiloCode.feedback.prefix": "Якщо у вас є питання або відгуки, будь ласка, відкрийте тікет на:",
-  "settings.aboutKiloCode.feedback.or": "або",
-  "settings.aboutKiloCode.support.prefix": "З питань виставлення рахунків або акаунту зверніться до служби підтримки:",
   "settings.aboutKiloCode.resetSettings.title": "Скидання налаштувань",
   "settings.aboutKiloCode.resetSettings.description":
     "Це скине лише налаштування, специфічні для розширення VS Code, до стандартних значень. Налаштування, що зберігаються в конфігурації CLI (такі як режими та правила автоматичного схвалення), не будуть скинуті.",

@@ -1211,10 +1211,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Информация о версии",
   "settings.aboutKiloCode.version.label": "Версия:",
   "settings.aboutKiloCode.extensionName": "Расширение Nano Code",
-  "settings.aboutKiloCode.community": "Сообщество и поддержка",
-  "settings.aboutKiloCode.feedback.prefix": "Если у вас есть вопросы или отзывы, создайте issue на",
-  "settings.aboutKiloCode.feedback.or": "или",
-  "settings.aboutKiloCode.support.prefix": "По вопросам оплаты или аккаунта обращайтесь в службу поддержки по адресу",
   "settings.aboutKiloCode.resetSettings.title": "Сброс настроек",
   "settings.aboutKiloCode.resetSettings.description":
     "Это сбрасывает только настройки, специфичные для расширения VS Code, до значений по умолчанию. Настройки, общие с CLI, такие как режимы и правила автоматического утверждения, хранятся в конфигурации CLI и не будут сброшены.",

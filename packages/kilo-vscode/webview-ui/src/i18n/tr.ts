@@ -1195,11 +1195,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Sürüm Bilgisi",
   "settings.aboutKiloCode.version.label": "Sürüm:",
   "settings.aboutKiloCode.extensionName": "Nano Code Uzantısı",
-  "settings.aboutKiloCode.community": "Topluluk ve Destek",
-  "settings.aboutKiloCode.feedback.prefix":
-    "Herhangi bir sorunuz veya geri bildiriminiz varsa, lütfen şu adreste bir sorun açın:",
-  "settings.aboutKiloCode.feedback.or": "veya",
-  "settings.aboutKiloCode.support.prefix": "Faturalama veya hesap soruları için Müşteri Desteği ile iletişime geçin:",
   "settings.aboutKiloCode.resetSettings.title": "Ayarları Sıfırla",
   "settings.aboutKiloCode.resetSettings.description":
     "Bu, yalnızca VS Code uzantısına özgü ayarları varsayılan değerlerine sıfırlar. Modlar ve otomatik onay kuralları gibi CLI ile paylaşılan ayarlar, CLI yapılandırmasında depolanır ve sıfırlanmaz.",

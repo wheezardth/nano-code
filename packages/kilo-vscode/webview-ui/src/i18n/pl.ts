@@ -1170,11 +1170,6 @@ export const dict = {
   "settings.aboutKiloCode.versionInfo": "Informacje o wersji",
   "settings.aboutKiloCode.version.label": "Wersja:",
   "settings.aboutKiloCode.extensionName": "Rozszerzenie Nano Code",
-  "settings.aboutKiloCode.community": "Społeczność i wsparcie",
-  "settings.aboutKiloCode.feedback.prefix": "Jeśli masz pytania lub uwagi, śmiało otwórz zgłoszenie na",
-  "settings.aboutKiloCode.feedback.or": "lub",
-  "settings.aboutKiloCode.support.prefix":
-    "W sprawach rozliczeń lub konta skontaktuj się z obsługą klienta pod adresem",
   "settings.aboutKiloCode.resetSettings.title": "Resetuj ustawienia",
   "settings.aboutKiloCode.resetSettings.description":
     "To resetuje tylko ustawienia specyficzne dla rozszerzenia VS Code do ich domyślnych wartości. Ustawienia współdzielone z CLI, takie jak tryby i reguły automatycznego zatwierdzania, są przechowywane w konfiguracji CLI i nie zostaną zresetowane.",
