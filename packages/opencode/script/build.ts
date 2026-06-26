@@ -104,31 +104,35 @@ async function copyKiloConsole(input: string, outputDir: string) {
 // kilocode_change end
 
 // kilocode_change start - validate compiled binaries load the embedded models snapshot
-function smokeEnv(root: string) {
-  const env = { ...process.env }
-  delete env.KILO_MODELS_PATH
-  delete env.KILO_MODELS_URL
-  delete env.KILO_CONFIG
-  delete env.KILO_CONFIG_DIR
-  return {
-    ...env,
-    XDG_DATA_HOME: path.join(root, "data"),
-    XDG_CACHE_HOME: path.join(root, "cache"),
-    XDG_CONFIG_HOME: path.join(root, "config"),
-    XDG_STATE_HOME: path.join(root, "state"),
-    KILO_DISABLE_MODELS_FETCH: "1",
-    KILO_DISABLE_PROJECT_CONFIG: "1",
-    KILO_CONFIG_CONTENT: JSON.stringify({ enabled_providers: ["anthropic"] }),
-    ANTHROPIC_API_KEY: "dummy",
-  }
-}
+const smokeTestProviders = ["anthropic", "openai", "google", "minerva", "ws", "ws2"]
 
 async function smokeModels(binaryPath: string) {
   const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "kilo-models-"))
   try {
-    const out = await $`${binaryPath} --pure models anthropic`.env(smokeEnv(root)).text()
-    if (out.split(/\r?\n/).some((line) => line.startsWith("anthropic/"))) return
-    throw new Error("Compiled binary did not list Anthropic models from the embedded snapshot")
+    const cleanKeys = new Set(["KILO_MODELS_PATH", "KILO_MODELS_URL", "KILO_CONFIG", "KILO_CONFIG_DIR", "KILO_CONFIG_CONTENT", "KILO_PURE"])
+    const env: string[] = []
+    for (const [k, v] of Object.entries(process.env)) {
+      if (!v || cleanKeys.has(k)) continue
+      env.push(k + "=" + v)
+    }
+    env.push(
+      "XDG_DATA_HOME=" + path.join(root, "data"),
+      "XDG_CACHE_HOME=" + path.join(root, "cache"),
+      "XDG_CONFIG_HOME=" + path.join(root, "config"),
+      "XDG_STATE_HOME=" + path.join(root, "state"),
+      "KILO_DISABLE_MODELS_FETCH=1",
+      "KILO_DISABLE_PROJECT_CONFIG=1",
+      "KILO_CONFIG_CONTENT=" + JSON.stringify({ enabled_providers: smokeTestProviders }),
+    )
+    const proc = Bun.spawn([binaryPath, "models"], { env, cwd: dir })
+    const [out, err] = await Promise.all([
+      new Response(proc.stdout).text(),
+      new Response(proc.stderr).text(),
+    ])
+    const exitCode = await proc.exited
+    if (exitCode !== 0 || !out.trim()) {
+      throw new Error("Compiled binary did not list any models from the embedded snapshot" + (err ? " stderr: " + err.trim() : ""))
+    }
   } finally {
     await fs.promises
       .rm(root, { recursive: true, force: true })
