@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import posthog from "posthog-js"
 
 import { CopyPageButton, PageFooter, PageVersionSwitcher, SideNav, TableOfContents, TopNav } from "../components"
 
@@ -79,19 +78,13 @@ export default function MyApp({ Component, pageProps }: AppProps<MyAppProps>) {
   const is404 = router.pathname === "/404"
   const isFullPageLayout = isHomepage || is404
 
-  // Track initial pageview (routeChangeComplete doesn't fire on first load)
-  useEffect(() => {
-    posthog.capture("$pageview")
-  }, [])
-
-  // Close mobile menu on route change, track pageviews, and reset scroll position
+  // Close mobile menu on route change and reset scroll position
   useEffect(() => {
     const handleRouteChange = () => {
       setIsMobileMenuOpen(false)
     }
 
     const handleRouteComplete = () => {
-      posthog.capture("$pageview")
       // Reset scroll position of the main content container on navigation
       const mainContent = document.querySelector(".main-content")
       if (mainContent) {

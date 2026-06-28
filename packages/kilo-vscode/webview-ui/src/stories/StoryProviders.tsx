@@ -261,8 +261,6 @@ export function mockSessionValue(overrides?: {
     renameSession: noop,
     syncSession: noop,
     exportSessionTranscript: noop,
-    cloudPreviewId: () => null,
-    selectCloudSession: noop,
   }
 }
 

@@ -103,12 +103,6 @@ import {
   type AuthContext,
 } from "./kilo-provider/handlers/auth"
 import {
-  handleRequestCloudSessions,
-  handleRequestCloudSessionData,
-  handleImportAndSend,
-  type CloudSessionContext,
-} from "./kilo-provider/handlers/cloud-session"
-import {
   handlePermissionResponse,
   fetchAndSendPendingPermissions,
   type PermissionContext,
@@ -721,10 +715,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  public openCloudSession(sessionId: string): void {
-    this.postMessage({ type: "openCloudSession", sessionId })
-  }
-
   public selectKiloModel(modelID?: string, agent?: string): void {
     if (!modelID && !agent) return
     this.pendingKiloModel = { ...(modelID && { modelID }), ...(agent && { agent }) }
@@ -1128,35 +1118,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
             console.error("[Kilo New] fetchAndSendNotifications failed:", e),
           )
           break
-        case "requestCloudSessions":
-          await handleRequestCloudSessions(this.cloudSessionCtx, message)
-          break
-        case "requestGitRemoteUrl":
-          void this.getGitRemoteUrl().then((url) => {
-            this.postMessage({ type: "gitRemoteUrlLoaded", gitUrl: url ?? null })
-          })
-          break
-        case "requestCloudSessionData":
-          void handleRequestCloudSessionData(this.cloudSessionCtx, message.sessionId)
-          break
-        case "importAndSend": {
-          const files = parseMessageFiles(message.files)
-          void handleImportAndSend(
-            this.cloudSessionCtx,
-            message.cloudSessionId,
-            message.text,
-            typeof message.messageID === "string" ? message.messageID : undefined,
-            message.providerID,
-            message.modelID,
-            message.agent,
-            message.variant,
-            files,
-            parseReview(message.review, message.text),
-            typeof message.command === "string" ? message.command : undefined,
-            typeof message.commandArgs === "string" ? message.commandArgs : undefined,
-          )
-          break
-        }
         case "dismissNotification":
           await this.handleDismissNotification(message.notificationId)
           break
@@ -2877,29 +2838,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     }
   }
 
-  // Cloud session handlers extracted to kilo-provider/handlers/cloud-session.ts
-
-  private get cloudSessionCtx(): CloudSessionContext {
-    const self = this
-    return {
-      client: this.client,
-      get currentSession() {
-        return self.currentSession
-      },
-      set currentSession(session) {
-        self.stopCurrentSessionProcesses(session?.id)
-        self.setCurrentSession(session)
-        if (session) self.contextSessionID = session.id
-      },
-      trackedSessionIds: this.trackedSessionIds,
-      connectionService: this.connectionService,
-      postMessage: (msg) => this.postMessage(msg),
-      getWorkspaceDirectory: (sid) => this.getWorkspaceDirectory(sid),
-      gatherEditorContext: () => this.gatherEditorContext(),
-      runWithMessageConfirmation: (id, label, run) => runWithMessageConfirmation(this.confirmations, id, label, run),
-    }
-  }
-
   // Auth handlers extracted to kilo-provider/handlers/auth.ts
 
   private get authCtx(): AuthContext {
@@ -3328,26 +3266,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
 
     for (const entry of pending) {
       this.postMessage({ type: "appendReviewComments", comments: entry.comments, autoSend: entry.autoSend })
-    }
-  }
-
-  /**
-   * Get the git remote URL for the current workspace using VS Code's built-in Git API.
-   * Returns undefined if not in a git repo or no remotes are configured.
-   */
-  private async getGitRemoteUrl(): Promise<string | undefined> {
-    try {
-      const extension = vscode.extensions.getExtension("vscode.git")
-      if (!extension) return undefined
-      const api = extension.isActive ? extension.exports?.getAPI(1) : (await extension.activate())?.getAPI(1)
-      if (!api) return undefined
-      const repo = api.repositories?.[0]
-      if (!repo) return undefined
-      const remote = repo.state?.remotes?.find((r: { name: string }) => r.name === "origin")
-      return remote?.fetchUrl ?? remote?.pushUrl
-    } catch (error) {
-      console.warn("[Kilo New] KiloProvider: Failed to get git remote URL:", error)
-      return undefined
     }
   }
 

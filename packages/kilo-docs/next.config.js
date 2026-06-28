@@ -5,7 +5,6 @@ module.exports = withMarkdoc(/* config: https://markdoc.io/docs/nextjs#options *
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdoc"],
   basePath: "/docs",
   turbopack: {},
-  skipTrailingSlashRedirect: true, // PostHog sends trailing-slash requests that Next.js would otherwise 308-redirect
   async redirects() {
     return [
       {
@@ -36,15 +35,7 @@ module.exports = withMarkdoc(/* config: https://markdoc.io/docs/nextjs#options *
           destination: "/api/sitemap.xml",
         },
       ],
-      afterFiles: [
-        {
-          source: "/ingest/static/:path*",
-          destination: "https://us-assets.i.posthog.com/static/:path*",
-          basePath: false,
-        },
-        { source: "/ingest/decide", destination: "https://us.i.posthog.com/decide", basePath: false },
-        { source: "/ingest/:path*", destination: "https://us.i.posthog.com/:path*", basePath: false }, // catch-all must be last
-      ],
+      afterFiles: [],
     }
   },
 })
