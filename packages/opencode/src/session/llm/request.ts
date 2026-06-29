@@ -156,23 +156,7 @@ export const prepare = Effect.fn("LLMRequestPrep.prepare")(function* (input: Pre
   const parent = input.parentSessionID ?? KiloSession.resolveParent(input.sessionID)
 
   const tools = resolveTools(input)
-  if (
-    input.model.providerID.includes("github-copilot") &&
-    Object.keys(tools).length === 0 &&
-    hasToolCalls(input.messages)
-  ) {
-    // Copilot needs a tools field when replaying prior tool calls, even if no tools are currently enabled.
-    tools["_noop"] = aiTool({
-      description: "Do not call this tool. It exists only for API compatibility and must never be invoked.",
-      inputSchema: jsonSchema({
-        type: "object",
-        properties: {
-          reason: { type: "string", description: "Unused" },
-        },
-      }),
-      execute: async () => ({ output: "", title: "", metadata: {} }),
-    })
-  }
+  // kilocode_change - github-copilot tool placeholder removed
 
   const kiloProjectID = input.model.providerID.startsWith("kilo") // kilocode_change
     ? (yield* InstanceState.context).project.id

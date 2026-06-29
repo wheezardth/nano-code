@@ -120,16 +120,6 @@ export function patchKiloProviderPrivacy(provider: { options?: Record<string, an
 
 export function kiloCustomLoaders(dep: CustomDep): Record<string, CustomLoader> {
   return {
-    "github-copilot-enterprise": () =>
-      Effect.succeed({
-        autoload: false,
-        async getModel(sdk: any, modelID: string, _options?: Record<string, any>) {
-          if (useLanguageModel(sdk)) return sdk.languageModel(modelID)
-          return shouldUseCopilotResponsesApi(modelID) ? sdk.responses(modelID) : sdk.chat(modelID)
-        },
-        options: {},
-      }),
-
     kilo: Effect.fnUntraced(function* (input: any) {
       const env = yield* dep.env()
       const config = yield* dep.config()
@@ -182,44 +172,11 @@ export function kiloCustomLoaders(dep: CustomDep): Record<string, CustomLoader> 
 // ---------------------------------------------------------------------------
 
 export function patchCustomLoaderResult(
-  providerID: string,
-  result: { options?: Record<string, any> },
-  env: Record<string, string | undefined>,
+  _providerID: string,
+  _result: { options?: Record<string, any> },
+  _env: Record<string, string | undefined>,
 ) {
-  if (!result.options) return
-
-  switch (providerID) {
-    case "openrouter":
-    case "vercel":
-    case "zenmux":
-      result.options.headers = { ...result.options.headers, ...DEFAULT_HEADERS }
-      break
-    case "cerebras":
-      result.options.headers = {
-        ...result.options.headers,
-        "X-Cerebras-3rd-Party-Integration": "kilo",
-      }
-      break
-    case "azure": {
-      // Extend env var lookup for Azure baseURL / resource name
-      const url = result.options.baseURL ?? env["AZURE_OPENAI_ENDPOINT"]
-      const resource = (() => {
-        const name = result.options.resourceName
-        if (typeof name === "string" && name.trim() !== "") return name
-        return env["AZURE_RESOURCE_NAME"] ?? env["AZURE_OPENAI_RESOURCE_NAME"]
-      })()
-      if (url) {
-        result.options.baseURL = url
-        delete result.options.resourceName
-      } else if (resource) {
-        result.options.resourceName = resource
-        delete result.options.baseURL
-      }
-      break
-    }
-    // gitlab User-Agent and cloudflare error message are patched inline
-    // in provider.ts with single-line kilocode_change markers
-  }
+  // kilocode_change - all provider-specific header patches removed in decloud
 }
 
 // ---------------------------------------------------------------------------

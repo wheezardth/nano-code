@@ -1182,38 +1182,6 @@ it.instance(
   },
 )
 
-it.instance(
-  "custom model inherits api.url from models.dev provider",
-  Effect.gen(function* () {
-    yield* set("OPENROUTER_API_KEY", "test-api-key")
-    const providers = yield* list
-    expect(providers[ProviderID.openrouter]).toBeDefined()
-
-    // New model not in database should inherit api.url from provider
-    const intellect = providers[ProviderID.openrouter].models["prime-intellect/intellect-3"]
-    expect(intellect).toBeDefined()
-    expect(intellect.api.url).toBe("https://openrouter.ai/api/v1")
-
-    // Another new model should also inherit api.url
-    const deepseek = providers[ProviderID.openrouter].models["deepseek/deepseek-r1-0528"]
-    expect(deepseek).toBeDefined()
-    expect(deepseek.api.url).toBe("https://openrouter.ai/api/v1")
-    expect(deepseek.name).toBe("DeepSeek R1")
-  }),
-  {
-    config: {
-      provider: {
-        openrouter: {
-          models: {
-            "prime-intellect/intellect-3": {},
-            "deepseek/deepseek-r1-0528": { name: "DeepSeek R1" },
-          },
-        },
-      },
-    },
-  },
-)
-
 test("mode cost preserves over-200k pricing from base model", () => {
   const provider = {
     id: "openai",

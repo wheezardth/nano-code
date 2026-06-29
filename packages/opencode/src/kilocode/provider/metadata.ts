@@ -11,7 +11,6 @@ const notes: Record<string, string> = {
   opencode: "settings.providers.note.opencode",
   anthropic: "settings.providers.note.anthropic",
   deepseek: "settings.providers.note.deepseek",
-  "github-copilot": "settings.providers.note.copilot",
   openai: "settings.providers.note.openai",
   google: "settings.providers.note.google",
   openrouter: "settings.providers.note.openrouter",
@@ -24,13 +23,8 @@ const priority = new Map<string, number>(order.map((id, index) => [id, index]))
 
 const icons = new Set<string>(iconNames)
 
-function key(id: string) {
-  if (id.startsWith("github-copilot")) return "github-copilot"
-  return id
-}
-
 export function providerMetadata(id: string): ProviderMetadata {
-  const name = key(id)
+  const name = id // kilocode_change - github-copilot key-mapping removed
   const note = notes[name]
   return {
     noteKey: note,

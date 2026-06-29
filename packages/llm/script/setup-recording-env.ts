@@ -7,7 +7,6 @@ import { AwsV4Signer } from "aws4fetch"
 import { Config, ConfigProvider, Effect, FileSystem, PlatformError, Redacted } from "effect"
 import { FetchHttpClient, HttpClient, HttpClientRequest, type HttpClientResponse } from "effect/unstable/http"
 import * as ProviderShared from "../src/protocols/shared"
-import * as Cloudflare from "../src/providers/cloudflare"
 
 type Provider = {
   readonly id: string
@@ -102,48 +101,6 @@ const PROVIDERS: ReadonlyArray<Provider> = [
     note: "OpenAI-compatible xAI chat endpoint",
     vars: [{ name: "XAI_API_KEY" }],
     validate: (env) => validateBearer("https://api.x.ai/v1/models", Redacted.make(env.XAI_API_KEY)),
-  },
-  {
-    id: "cloudflare-ai-gateway",
-    label: "Cloudflare AI Gateway",
-    tier: "canary",
-    note: "Cloudflare Unified/OpenAI-compatible gateway; supports provider/model ids like workers-ai/@cf/...",
-    vars: [
-      { name: "CLOUDFLARE_ACCOUNT_ID", label: "Cloudflare account ID", secret: false },
-      {
-        name: "CLOUDFLARE_GATEWAY_ID",
-        label: "Cloudflare AI Gateway ID (defaults to default)",
-        optional: true,
-        secret: false,
-      },
-      { name: "CLOUDFLARE_API_TOKEN", label: "Cloudflare AI Gateway token" },
-    ],
-    validate: (env) =>
-      validateChat({
-        url: `${Cloudflare.aiGatewayBaseURL({
-          accountId: env.CLOUDFLARE_ACCOUNT_ID,
-          gatewayId: env.CLOUDFLARE_GATEWAY_ID || undefined,
-        })}/chat/completions`,
-        token: Redacted.make(envValue(env, Cloudflare.aiGatewayAuthEnvVars)),
-        tokenHeader: "cf-aig-authorization",
-        model: "workers-ai/@cf/meta/llama-3.1-8b-instruct",
-      }),
-  },
-  {
-    id: "cloudflare-workers-ai",
-    label: "Cloudflare Workers AI",
-    tier: "canary",
-    note: "Direct Workers AI OpenAI-compatible endpoint; supports model ids like @cf/meta/...",
-    vars: [
-      { name: "CLOUDFLARE_ACCOUNT_ID", label: "Cloudflare account ID", secret: false },
-      { name: "CLOUDFLARE_API_KEY", label: "Cloudflare Workers AI API token" },
-    ],
-    validate: (env) =>
-      validateChat({
-        url: `${Cloudflare.workersAIBaseURL({ accountId: env.CLOUDFLARE_ACCOUNT_ID })}/chat/completions`,
-        token: Redacted.make(envValue(env, Cloudflare.workersAIAuthEnvVars)),
-        model: "@cf/meta/llama-3.1-8b-instruct",
-      }),
   },
   {
     id: "deepseek",

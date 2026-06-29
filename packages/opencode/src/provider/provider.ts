@@ -100,43 +100,16 @@ function wrapSSE(res: Response, ms: number, ctl: AbortController) {
   })
 }
 
-function googleVertexAnthropicBaseURL(project: string | undefined, location: string | undefined) {
-  if (!project) return
-  if (location !== "eu" && location !== "us") return
-  // Continental multi-regions require Regional Endpoint Platform domains.
-  return `https://aiplatform.${location}.rep.googleapis.com/v1/projects/${project}/locations/${location}/publishers/anthropic/models`
-}
+// kilocode_change - googleVertexAnthropicBaseURL removed in decloud (unreachable)
 
 type BundledSDK = {
   languageModel(modelId: string): LanguageModelV3
 }
 
 const BUNDLED_PROVIDERS: Record<string, () => Promise<(opts: any) => BundledSDK>> = {
-  "@ai-sdk/amazon-bedrock": () => import("@ai-sdk/amazon-bedrock").then((m) => m.createAmazonBedrock),
-  "@ai-sdk/anthropic": () => import("@ai-sdk/anthropic").then((m) => m.createAnthropic),
-  "@ai-sdk/azure": () => import("@ai-sdk/azure").then((m) => m.createAzure),
-  "@ai-sdk/google": () => import("@ai-sdk/google").then((m) => m.createGoogleGenerativeAI),
-  "@ai-sdk/google-vertex": () => import("@ai-sdk/google-vertex").then((m) => m.createVertex),
-  "@ai-sdk/google-vertex/anthropic": () =>
-    import("@ai-sdk/google-vertex/anthropic").then((m) => m.createVertexAnthropic),
   "@ai-sdk/openai": () => import("@ai-sdk/openai").then((m) => m.createOpenAI),
   "@ai-sdk/openai-compatible": () => import("@ai-sdk/openai-compatible").then((m) => m.createOpenAICompatible),
-  "@openrouter/ai-sdk-provider": () => import("@openrouter/ai-sdk-provider").then((m) => m.createOpenRouter),
-  "@ai-sdk/xai": () => import("@ai-sdk/xai").then((m) => m.createXai),
-  "@ai-sdk/mistral": () => import("@ai-sdk/mistral").then((m) => m.createMistral),
-  "@ai-sdk/groq": () => import("@ai-sdk/groq").then((m) => m.createGroq),
-  "@ai-sdk/deepinfra": () => import("@ai-sdk/deepinfra").then((m) => m.createDeepInfra),
-  "@ai-sdk/cerebras": () => import("@ai-sdk/cerebras").then((m) => m.createCerebras),
-  "@ai-sdk/cohere": () => import("@ai-sdk/cohere").then((m) => m.createCohere),
-  "@ai-sdk/gateway": () => import("@ai-sdk/gateway").then((m) => m.createGateway),
-  "@ai-sdk/togetherai": () => import("@ai-sdk/togetherai").then((m) => m.createTogetherAI),
-  "@ai-sdk/perplexity": () => import("@ai-sdk/perplexity").then((m) => m.createPerplexity),
-  "@ai-sdk/vercel": () => import("@ai-sdk/vercel").then((m) => m.createVercel),
-  "@ai-sdk/alibaba": () => import("@ai-sdk/alibaba").then((m) => m.createAlibaba),
   "gitlab-ai-provider": () => import("gitlab-ai-provider").then((m) => m.createGitLab),
-  "@ai-sdk/github-copilot": () =>
-    import("@opencode-ai/core/github-copilot/copilot-provider").then((m) => m.createOpenaiCompatible),
-  "venice-ai-sdk-provider": () => import("venice-ai-sdk-provider").then((m) => m.createVenice),
   ...KILO_BUNDLED_PROVIDERS, // kilocode_change
 }
 
@@ -162,25 +135,8 @@ function useLanguageModel(sdk: any) {
   return sdk.responses === undefined && sdk.chat === undefined
 }
 
-function selectAzureLanguageModel(sdk: any, modelID: string, useChat: boolean) {
-  if (useChat && sdk.chat) return sdk.chat(modelID)
-  if (sdk.responses) return sdk.responses(modelID)
-  if (sdk.messages) return sdk.messages(modelID)
-  if (sdk.chat) return sdk.chat(modelID)
-  return sdk.languageModel(modelID)
-}
-
 function custom(dep: CustomDep): Record<string, CustomLoader> {
   return {
-    anthropic: () =>
-      Effect.succeed({
-        autoload: false,
-        options: {
-          headers: {
-            "anthropic-beta": "interleaved-thinking-2025-05-14,fine-grained-tool-streaming-2025-05-14",
-          },
-        },
-      }),
     opencode: Effect.fnUntraced(function* (input: Info) {
       const env = yield* dep.env()
       const hasKey = iife(() => {
@@ -212,353 +168,8 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         },
         options: {},
       }),
-    xai: () =>
-      Effect.succeed({
-        autoload: false,
-        async getModel(sdk: any, modelID: string, _options?: Record<string, any>) {
-          return sdk.responses(modelID)
-        },
-        options: {},
-      }),
-    "github-copilot": () =>
-      Effect.succeed({
-        autoload: false,
-        async getModel(sdk: any, modelID: string, _options?: Record<string, any>) {
-          if (useLanguageModel(sdk)) return sdk.languageModel(modelID)
-          return shouldUseCopilotResponsesApi(modelID) ? sdk.responses(modelID) : sdk.chat(modelID)
-        },
-        options: {},
-      }),
-    azure: Effect.fnUntraced(function* (provider: Info) {
-      const env = yield* dep.env()
-      const auth = yield* dep.auth(provider.id)
-      // kilocode_change start - prefer explicit Azure endpoint over resource name to avoid conflicting SDK options
-      const endpoint = iife(() => {
-        return [
-          provider.options?.baseURL,
-          auth?.type === "api" ? auth.metadata?.baseURL : undefined,
-          env["AZURE_OPENAI_ENDPOINT"],
-        ].find((url) => typeof url === "string" && url.trim() !== "")
-      })
-      const resource = endpoint
-        ? undefined
-        : iife(() => {
-            return [
-              provider.options?.resourceName,
-              auth?.type === "api" ? auth.metadata?.resourceName : undefined,
-              env["AZURE_RESOURCE_NAME"],
-              env["AZURE_OPENAI_RESOURCE_NAME"],
-            ].find((name) => typeof name === "string" && name.trim() !== "")
-          })
-      // kilocode_change end
-
-      if (!resource && !endpoint) {
-        // kilocode_change
-        return {
-          autoload: false,
-          async getModel() {
-            throw new Error(
-              "Azure resource name or endpoint is missing. Set AZURE_RESOURCE_NAME, AZURE_OPENAI_RESOURCE_NAME, AZURE_OPENAI_ENDPOINT, or reconnect the azure provider.", // kilocode_change
-            )
-          },
-        }
-      }
-
-      return {
-        autoload: false,
-        async getModel(sdk: any, modelID: string, options?: Record<string, any>) {
-          return selectAzureLanguageModel(sdk, modelID, Boolean(options?.["useCompletionUrls"]))
-        },
-        options: {
-          ...(endpoint ? { baseURL: endpoint } : { resourceName: resource }), // kilocode_change
-        },
-        vars(_options): Record<string, string> {
-          if (resource) {
-            return {
-              AZURE_RESOURCE_NAME: resource,
-            }
-          }
-          return {}
-        },
-      }
-    }),
-    "azure-cognitive-services": Effect.fnUntraced(function* () {
-      const resourceName = yield* dep.get("AZURE_COGNITIVE_SERVICES_RESOURCE_NAME")
-      return {
-        autoload: false,
-        async getModel(sdk: any, modelID: string, options?: Record<string, any>) {
-          return selectAzureLanguageModel(sdk, modelID, Boolean(options?.["useCompletionUrls"]))
-        },
-        options: {
-          baseURL: resourceName ? `https://${resourceName}.cognitiveservices.azure.com/openai` : undefined,
-        },
-      }
-    }),
-    "amazon-bedrock": Effect.fnUntraced(function* () {
-      const providerConfig = (yield* dep.config()).provider?.["amazon-bedrock"]
-      const auth = yield* dep.auth("amazon-bedrock")
-      const env = yield* dep.env()
-
-      // Region precedence: 1) config file, 2) env var, 3) default
-      const configRegion = providerConfig?.options?.region
-      const envRegion = env["AWS_REGION"]
-      const defaultRegion = configRegion ?? envRegion ?? "us-east-1"
-
-      // Profile: config file takes precedence over env var
-      const configProfile = providerConfig?.options?.profile
-      const envProfile = env["AWS_PROFILE"]
-      const profile = configProfile ?? envProfile
-
-      const awsAccessKeyId = env["AWS_ACCESS_KEY_ID"]
-
-      // TODO: Using process.env directly because Env.set only updates a process.env shallow copy,
-      // until the scope of the Env API is clarified (test only or runtime?)
-      const awsBearerToken = iife(() => {
-        const envToken = process.env.AWS_BEARER_TOKEN_BEDROCK
-        if (envToken) return envToken
-        if (auth?.type === "api") {
-          process.env.AWS_BEARER_TOKEN_BEDROCK = auth.key
-          return auth.key
-        }
-        return undefined
-      })
-
-      const awsWebIdentityTokenFile = env["AWS_WEB_IDENTITY_TOKEN_FILE"]
-
-      const containerCreds = Boolean(
-        process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI || process.env.AWS_CONTAINER_CREDENTIALS_FULL_URI,
-      )
-
-      if (!profile && !awsAccessKeyId && !awsBearerToken && !awsWebIdentityTokenFile && !containerCreds)
-        return { autoload: false }
-
-      const { fromNodeProviderChain } = yield* Effect.promise(() => import("@aws-sdk/credential-providers"))
-
-      const providerOptions: Record<string, any> = {
-        region: defaultRegion,
-      }
-
-      // Only use credential chain if no bearer token exists
-      // Bearer token takes precedence over credential chain (profiles, access keys, IAM roles, web identity tokens)
-      if (!awsBearerToken) {
-        // Build credential provider options (only pass profile if specified)
-        const credentialProviderOptions = profile ? { profile } : {}
-
-        providerOptions.credentialProvider = fromNodeProviderChain(credentialProviderOptions)
-      }
-
-      // Add custom endpoint if specified (endpoint takes precedence over baseURL)
-      const endpoint = providerConfig?.options?.endpoint ?? providerConfig?.options?.baseURL
-      if (endpoint) {
-        providerOptions.baseURL = endpoint
-      }
-
-      return {
-        autoload: true,
-        options: providerOptions,
-        async getModel(sdk: any, modelID: string, options?: Record<string, any>) {
-          // Skip region prefixing if model already has a cross-region inference profile prefix
-          // Models from models.dev may already include prefixes like us., eu., global., etc.
-          const crossRegionPrefixes = ["global.", "us.", "eu.", "jp.", "apac.", "au."]
-          if (crossRegionPrefixes.some((prefix) => modelID.startsWith(prefix))) {
-            return sdk.languageModel(modelID)
-          }
-
-          // Region resolution precedence (highest to lowest):
-          // 1. options.region from opencode.json provider config
-          // 2. defaultRegion from AWS_REGION environment variable
-          // 3. Default "us-east-1" (baked into defaultRegion)
-          const region = options?.region ?? defaultRegion
-
-          let regionPrefix = region.split("-")[0]
-
-          switch (regionPrefix) {
-            case "us": {
-              const modelRequiresPrefix = [
-                "nova-micro",
-                "nova-lite",
-                "nova-pro",
-                "nova-premier",
-                "nova-2",
-                "claude",
-                "deepseek",
-              ].some((m) => modelID.includes(m))
-              const isGovCloud = region.startsWith("us-gov")
-              if (modelRequiresPrefix && !isGovCloud) {
-                modelID = `${regionPrefix}.${modelID}`
-              }
-              break
-            }
-            case "eu": {
-              const regionRequiresPrefix = [
-                "eu-west-1",
-                "eu-west-2",
-                "eu-west-3",
-                "eu-north-1",
-                "eu-central-1",
-                "eu-south-1",
-                "eu-south-2",
-              ].some((r) => region.includes(r))
-              const modelRequiresPrefix = ["claude", "nova-lite", "nova-micro", "llama3", "pixtral"].some((m) =>
-                modelID.includes(m),
-              )
-              if (regionRequiresPrefix && modelRequiresPrefix) {
-                modelID = `${regionPrefix}.${modelID}`
-              }
-              break
-            }
-            case "ap": {
-              const isAustraliaRegion = ["ap-southeast-2", "ap-southeast-4"].includes(region)
-              const isTokyoRegion = region === "ap-northeast-1"
-              if (
-                isAustraliaRegion &&
-                ["anthropic.claude-sonnet-4-5", "anthropic.claude-haiku"].some((m) => modelID.includes(m))
-              ) {
-                regionPrefix = "au"
-                modelID = `${regionPrefix}.${modelID}`
-              } else if (isTokyoRegion) {
-                // Tokyo region uses jp. prefix for cross-region inference
-                const modelRequiresPrefix = ["claude", "nova-lite", "nova-micro", "nova-pro"].some((m) =>
-                  modelID.includes(m),
-                )
-                if (modelRequiresPrefix) {
-                  regionPrefix = "jp"
-                  modelID = `${regionPrefix}.${modelID}`
-                }
-              } else {
-                // Other APAC regions use apac. prefix
-                const modelRequiresPrefix = ["claude", "nova-lite", "nova-micro", "nova-pro"].some((m) =>
-                  modelID.includes(m),
-                )
-                if (modelRequiresPrefix) {
-                  regionPrefix = "apac"
-                  modelID = `${regionPrefix}.${modelID}`
-                }
-              }
-              break
-            }
-          }
-
-          return sdk.languageModel(modelID)
-        },
-      }
-    }),
-    openrouter: () =>
-      Effect.succeed({
-        autoload: false,
-        options: {},
-      }),
-    nvidia: (provider) =>
-      Effect.succeed({
-        autoload: provider.source === "config",
-        options: {},
-      }),
-    vercel: () =>
-      Effect.succeed({
-        autoload: false,
-        options: {},
-      }),
-    "google-vertex": Effect.fnUntraced(function* (provider: Info) {
-      const env = yield* dep.env()
-      // models.dev advertises GOOGLE_VERTEX_PROJECT for Vertex; keep the wider
-      // Google Cloud project env names as fallbacks for existing ADC setups.
-      const project =
-        provider.options?.project ??
-        env["GOOGLE_VERTEX_PROJECT"] ??
-        env["GOOGLE_CLOUD_PROJECT"] ??
-        env["GCP_PROJECT"] ??
-        env["GCLOUD_PROJECT"]
-
-      const location = String(
-        provider.options?.location ??
-          env["GOOGLE_VERTEX_LOCATION"] ??
-          env["GOOGLE_CLOUD_LOCATION"] ??
-          env["VERTEX_LOCATION"] ??
-          "us-central1",
-      )
-
-      const autoload = Boolean(project)
-      if (!autoload) return { autoload: false }
-      return {
-        autoload: true,
-        vars(_options: Record<string, any>) {
-          const endpoint = location === "global" ? "aiplatform.googleapis.com" : `${location}-aiplatform.googleapis.com`
-          return {
-            ...(project && { GOOGLE_VERTEX_PROJECT: project }),
-            GOOGLE_VERTEX_LOCATION: location,
-            GOOGLE_VERTEX_ENDPOINT: endpoint,
-          }
-        },
-        options: {
-          project,
-          location,
-          fetch: async (input: RequestInfo | URL, init?: RequestInit) => {
-            const { GoogleAuth } = await import("google-auth-library")
-            const auth = new GoogleAuth()
-            const client = await auth.getApplicationDefault()
-            const token = await client.credential.getAccessToken()
-
-            const headers = new Headers(init?.headers)
-            headers.set("Authorization", `Bearer ${token.token}`)
-
-            return fetch(input, { ...init, headers })
-          },
-        },
-        async getModel(sdk: any, modelID: string) {
-          const id = String(modelID).trim()
-          return sdk.languageModel(id)
-        },
-      }
-    }),
-    "google-vertex-anthropic": Effect.fnUntraced(function* () {
-      const env = yield* dep.env()
-      const project = env["GOOGLE_CLOUD_PROJECT"] ?? env["GCP_PROJECT"] ?? env["GCLOUD_PROJECT"]
-      const location = env["GOOGLE_CLOUD_LOCATION"] ?? env["VERTEX_LOCATION"] ?? "global"
-      const autoload = Boolean(project)
-      if (!autoload) return { autoload: false }
-      const baseURL = googleVertexAnthropicBaseURL(project, location)
-      return {
-        autoload: true,
-        options: {
-          project,
-          location,
-          ...(baseURL && { baseURL }),
-        },
-        async getModel(sdk: any, modelID) {
-          const id = String(modelID).trim()
-          return sdk.languageModel(id)
-        },
-      }
-    }),
-    "sap-ai-core": Effect.fnUntraced(function* () {
-      const auth = yield* dep.auth("sap-ai-core")
-      // TODO: Using process.env directly because Env.set only updates a shallow copy (not process.env),
-      // until the scope of the Env API is clarified (test only or runtime?)
-      const envServiceKey = iife(() => {
-        const envAICoreServiceKey = process.env.AICORE_SERVICE_KEY
-        if (envAICoreServiceKey) return envAICoreServiceKey
-        if (auth?.type === "api") {
-          process.env.AICORE_SERVICE_KEY = auth.key
-          return auth.key
-        }
-        return undefined
-      })
-      const deploymentId = process.env.AICORE_DEPLOYMENT_ID
-      const resourceGroup = process.env.AICORE_RESOURCE_GROUP
-
-      return {
-        autoload: !!envServiceKey,
-        options: envServiceKey ? { deploymentId, resourceGroup } : {},
-        async getModel(sdk: any, modelID: string) {
-          return sdk(modelID)
-        },
-      }
-    }),
-    zenmux: () =>
-      Effect.succeed({
-        autoload: false,
-        options: {},
-      }),
+    // kilocode_change - nvidia loader removed in decloud (@ai-sdk/nvidia never existed)
+    // kilocode_change - zenmux loader removed in decloud
     gitlab: Effect.fnUntraced(function* (input: Info) {
       const {
         VERSION: GITLAB_PROVIDER_VERSION,
@@ -703,134 +314,6 @@ function custom(dep: CustomDep): Record<string, CustomLoader> {
         },
       }
     }),
-    "cloudflare-workers-ai": Effect.fnUntraced(function* (input: Info) {
-      // When baseURL is already configured (e.g. corporate config routing through a proxy/gateway),
-      // skip the account ID check because the URL is already fully specified.
-      if (input.options?.baseURL) return { autoload: false }
-
-      const auth = yield* dep.auth(input.id)
-      const env = yield* dep.env()
-      const accountId = env["CLOUDFLARE_ACCOUNT_ID"] || (auth?.type === "api" ? auth.metadata?.accountId : undefined)
-      if (!accountId)
-        return {
-          autoload: false,
-          async getModel() {
-            throw new Error(
-              "CLOUDFLARE_ACCOUNT_ID is missing. Set it with: export CLOUDFLARE_ACCOUNT_ID=<your-account-id>",
-            )
-          },
-        }
-
-      const apiKey = yield* Effect.gen(function* () {
-        const envToken = env["CLOUDFLARE_API_KEY"]
-        if (envToken) return envToken
-        if (auth?.type === "api") return auth.key
-        return undefined
-      })
-
-      return {
-        autoload: !!apiKey,
-        options: {
-          apiKey,
-          headers: {
-            "User-Agent": `opencode/${InstallationVersion} cloudflare-workers-ai (${os.platform()} ${os.release()}; ${os.arch()})`,
-          },
-        },
-        async getModel(sdk: any, modelID: string) {
-          return sdk.languageModel(modelID)
-        },
-        vars(_options) {
-          return {
-            CLOUDFLARE_ACCOUNT_ID: accountId,
-          }
-        },
-      }
-    }),
-    "cloudflare-ai-gateway": Effect.fnUntraced(function* (input: Info) {
-      // When baseURL is already configured (e.g. corporate config), skip the ID checks.
-      if (input.options?.baseURL) return { autoload: false }
-
-      const auth = yield* dep.auth(input.id)
-      const env = yield* dep.env()
-      const accountId = env["CLOUDFLARE_ACCOUNT_ID"] || (auth?.type === "api" ? auth.metadata?.accountId : undefined)
-      // The Cloudflare auth prompt stores this value as gatewayId metadata.
-      const gateway = env["CLOUDFLARE_GATEWAY_ID"] || (auth?.type === "api" ? auth.metadata?.gatewayId : undefined)
-
-      if (!accountId || !gateway) {
-        const missing = [
-          !accountId ? "CLOUDFLARE_ACCOUNT_ID" : undefined,
-          !gateway ? "CLOUDFLARE_GATEWAY_ID" : undefined,
-        ].filter((x): x is string => Boolean(x))
-        return {
-          autoload: false,
-          async getModel() {
-            throw new Error(
-              `${missing.join(" and ")} missing. Set with: ${missing.map((x) => `export ${x}=<value>`).join(" && ")}`,
-            )
-          },
-        }
-      }
-
-      // Get API token from env or auth - required for authenticated gateways
-      const apiToken = yield* Effect.gen(function* () {
-        const envToken = env["CLOUDFLARE_API_TOKEN"] || env["CF_AIG_TOKEN"]
-        if (envToken) return envToken
-        if (auth?.type === "api") return auth.key
-        return undefined
-      })
-
-      if (!apiToken) {
-        throw new Error(
-          "CLOUDFLARE_API_TOKEN (or CF_AIG_TOKEN) is required for Cloudflare AI Gateway. " +
-            "Set it via environment variable or run `kilo auth cloudflare-ai-gateway`.", // kilocode_change
-        )
-      }
-
-      // Use official ai-gateway-provider package (v2.x for AI SDK v5 compatibility)
-      const { createAiGateway } = yield* Effect.promise(() => import("ai-gateway-provider"))
-      const { createUnified } = yield* Effect.promise(() => import("ai-gateway-provider/providers/unified"))
-
-      const metadata = iife(() => {
-        if (input.options?.metadata) return input.options.metadata
-        try {
-          return JSON.parse(input.options?.headers?.["cf-aig-metadata"])
-        } catch {
-          return undefined
-        }
-      })
-      const opts = {
-        metadata,
-        cacheTtl: input.options?.cacheTtl,
-        cacheKey: input.options?.cacheKey,
-        skipCache: input.options?.skipCache,
-        collectLog: input.options?.collectLog,
-        headers: {
-          "User-Agent": `opencode/${InstallationVersion} cloudflare-ai-gateway (${os.platform()} ${os.release()}; ${os.arch()})`,
-        },
-      }
-
-      const aigateway = createAiGateway({
-        accountId,
-        gateway,
-        apiKey: apiToken,
-        ...(Object.values(opts).some((v) => v !== undefined) ? { options: opts } : {}),
-      })
-      const unified = createUnified()
-
-      return {
-        autoload: true,
-        async getModel(_sdk: any, modelID: string, _options?: Record<string, any>) {
-          // Model IDs use Unified API format: provider/model (e.g., "anthropic/claude-sonnet-4-5")
-          return aigateway(unified(modelID))
-        },
-        options: {},
-      }
-    }),
-    cerebras: () =>
-      Effect.succeed({
-        autoload: false,
-        options: {},
-      }),
   }
 }
 
@@ -1503,11 +986,7 @@ export const layer = Layer.effect(
             if (
               // These chat aliases are invalid for the special handling in the
               // built-in providers below, but custom providers may support them.
-              (modelID === "gpt-5-chat-latest" &&
-                (providerID === ProviderID.openai ||
-                  providerID === ProviderID.githubCopilot ||
-                  providerID === ProviderID.openrouter)) ||
-              (providerID === ProviderID.openrouter && modelID === "openai/gpt-5-chat")
+              modelID === "gpt-5-chat-latest" && providerID === ProviderID.openai
             )
               delete provider.models[modelID]
             if (model.status === "alpha" && !runtimeFlags.enableExperimentalModels) delete provider.models[modelID]
@@ -1562,17 +1041,7 @@ export const layer = Layer.effect(
         const provider = s.providers[model.providerID]
         const options = { ...provider.options }
 
-        if (
-          model.providerID === "google-vertex" &&
-          model.api.npm === "@ai-sdk/google-vertex/anthropic" &&
-          !options.baseURL
-        ) {
-          const baseURL = googleVertexAnthropicBaseURL(
-            typeof options.project === "string" ? options.project : undefined,
-            typeof options.location === "string" ? options.location : undefined,
-          )
-          if (baseURL) options.baseURL = baseURL
-        }
+        // kilocode_change - google-vertex/anthropic baseURL block removed in decloud
 
         if (model.providerID === "google-vertex" && !model.api.npm.includes("@ai-sdk/openai-compatible")) {
           delete options.fetch
@@ -1812,36 +1281,14 @@ export const layer = Layer.effect(
       if (providerID.startsWith("opencode")) {
         priority = ["gpt-5-nano"]
       }
-      if (providerID.startsWith("github-copilot")) {
-        priority = ["gpt-5-mini", "claude-haiku-4.5", ...priority]
-      }
+      // kilocode_change
       // kilocode_change start
       const kiloPriority = kiloSmallModelPriority(providerID)
       if (kiloPriority) priority = kiloPriority
       // kilocode_change end
       for (const item of priority) {
-        if (providerID === ProviderID.amazonBedrock) {
-          const crossRegionPrefixes = ["global.", "us.", "eu."]
-          const candidates = Object.keys(provider.models).filter((m) => m.includes(item))
-
-          const globalMatch = candidates.find((m) => m.startsWith("global."))
-          if (globalMatch) return provider.models[globalMatch]
-
-          const region = provider.options?.region
-          if (region) {
-            const regionPrefix = region.split("-")[0]
-            if (regionPrefix === "us" || regionPrefix === "eu") {
-              const regionalMatch = candidates.find((m) => m.startsWith(`${regionPrefix}.`))
-              if (regionalMatch) return provider.models[regionalMatch]
-            }
-          }
-
-          const unprefixed = candidates.find((m) => !crossRegionPrefixes.some((p) => m.startsWith(p)))
-          if (unprefixed) return provider.models[unprefixed]
-        } else {
-          for (const model of Object.keys(provider.models)) {
-            if (model.includes(item)) return provider.models[model]
-          }
+        for (const model of Object.keys(provider.models)) {
+          if (model.includes(item)) return provider.models[model]
         }
       }
 

@@ -31,17 +31,6 @@ export interface ProviderMapping {
  * Providers absent from this map are flagged as unsupported.
  */
 export const PROVIDER_MAP: Record<string, ProviderMapping> = {
-  anthropic: {
-    id: "anthropic",
-    key: "apiKey",
-    name: "Anthropic",
-  },
-  openrouter: {
-    id: "openrouter",
-    key: "openRouterApiKey",
-    name: "OpenRouter",
-    modelField: "openRouterModelId",
-  },
   openai: {
     id: "openai-compatible",
     key: "openAiApiKey",
@@ -60,68 +49,6 @@ export const PROVIDER_MAP: Record<string, ProviderMapping> = {
     key: "openAiApiKey",
     name: "OpenAI",
     modelField: "openAiModelId",
-  },
-  gemini: {
-    id: "google",
-    key: "geminiApiKey",
-    name: "Google Gemini",
-    urlField: "googleGeminiBaseUrl",
-  },
-  vertex: {
-    id: "google-vertex",
-    key: "vertexJsonCredentials",
-    name: "Google Vertex AI",
-    skipAuth: true,
-    configFields: [
-      { from: "vertexProjectId", option: "project" },
-      { from: "vertexRegion", option: "location" },
-    ],
-  },
-  bedrock: {
-    id: "amazon-bedrock",
-    key: "awsAccessKey",
-    name: "AWS Bedrock",
-  },
-  deepseek: {
-    id: "deepseek",
-    key: "deepSeekApiKey",
-    name: "DeepSeek",
-    urlField: "deepSeekBaseUrl",
-  },
-  mistral: {
-    id: "mistral",
-    key: "mistralApiKey",
-    name: "Mistral",
-  },
-  groq: {
-    id: "groq",
-    key: "groqApiKey",
-    name: "Groq",
-  },
-  xai: {
-    id: "xai",
-    key: "xaiApiKey",
-    name: "xAI",
-  },
-  fireworks: {
-    id: "fireworks",
-    key: "fireworksApiKey",
-    name: "Fireworks",
-  },
-  featherless: {
-    id: "featherless",
-    key: "featherlessApiKey",
-    name: "Featherless",
-  },
-  cerebras: {
-    id: "cerebras",
-    key: "cerebrasApiKey",
-    name: "Cerebras",
-  },
-  sambanova: {
-    id: "sambanova",
-    key: "sambaNovaApiKey",
-    name: "SambaNova",
   },
   ollama: {
     id: "ollama",
@@ -151,144 +78,10 @@ export const PROVIDER_MAP: Record<string, ProviderMapping> = {
     modelField: "litellmModelId",
     urlField: "litellmBaseUrl",
   },
-  deepinfra: {
-    id: "deepinfra",
-    key: "deepInfraApiKey",
-    name: "DeepInfra",
-    modelField: "deepInfraModelId",
-    urlField: "deepInfraBaseUrl",
-  },
-  chutes: {
-    id: "chutes",
-    key: "chutesApiKey",
-    name: "Chutes",
-  },
-  baseten: {
-    id: "baseten",
-    key: "basetenApiKey",
-    name: "Baseten",
-  },
-  corethink: {
-    id: "corethink",
-    key: "corethinkApiKey",
-    name: "Corethink",
-  },
-  unbound: {
-    id: "unbound",
-    key: "unboundApiKey",
-    name: "Unbound",
-    modelField: "unboundModelId",
-  },
-  requesty: {
-    id: "requesty",
-    key: "requestyApiKey",
-    name: "Requesty",
-    modelField: "requestyModelId",
-    urlField: "requestyBaseUrl",
-  },
-  huggingface: {
-    id: "huggingface",
-    key: "huggingFaceApiKey",
-    name: "Hugging Face",
-    modelField: "huggingFaceModelId",
-  },
-  "io-intelligence": {
-    id: "io-intelligence",
-    key: "ioIntelligenceApiKey",
-    name: "IO Intelligence",
-    modelField: "ioIntelligenceModelId",
-  },
-  "vercel-ai-gateway": {
-    id: "vercel-ai-gateway",
-    key: "vercelAiGatewayApiKey",
-    name: "Vercel AI Gateway",
-    modelField: "vercelAiGatewayModelId",
-  },
-  zai: {
-    id: "zai",
-    key: "zaiApiKey",
-    name: "Z.ai",
-  },
-  moonshot: {
-    id: "moonshot",
-    key: "moonshotApiKey",
-    name: "Moonshot",
-    urlField: "moonshotBaseUrl",
-  },
-  doubao: {
-    id: "doubao",
-    key: "doubaoApiKey",
-    name: "Doubao",
-    urlField: "doubaoBaseUrl",
-  },
-  minimax: {
-    id: "minimax",
-    key: "minimaxApiKey",
-    name: "MiniMax",
-    urlField: "minimaxBaseUrl",
-  },
-  ovhcloud: {
-    id: "ovhcloud",
-    key: "ovhCloudAiEndpointsApiKey",
-    name: "OVHcloud AI Endpoints",
-    modelField: "ovhCloudAiEndpointsModelId",
-    urlField: "ovhCloudAiEndpointsBaseUrl",
-  },
-  inception: {
-    id: "inception",
-    key: "inceptionLabsApiKey",
-    name: "Inception Labs",
-    modelField: "inceptionLabsModelId",
-    urlField: "inceptionLabsBaseUrl",
-  },
   "sap-ai-core": {
     id: "sap-ai-core",
     key: "sapAiCoreServiceKey",
     name: "SAP AI Core",
-  },
-  synthetic: {
-    id: "synthetic",
-    key: "syntheticApiKey",
-    name: "Synthetic",
-  },
-  apertis: {
-    id: "apertis",
-    key: "apertisApiKey",
-    name: "Apertis",
-    modelField: "apertisModelId",
-    urlField: "apertisBaseUrl",
-  },
-  "openai-codex": {
-    id: "openai",
-    key: "",
-    name: "OpenAI (ChatGPT Plus/Pro)",
-    oauthSecretKey: "openai-codex-oauth-credentials",
-  },
-  "nano-gpt": {
-    id: "nano-gpt",
-    key: "nanoGptApiKey",
-    name: "NanoGPT",
-    modelField: "nanoGptModelId",
-  },
-  poe: {
-    id: "poe",
-    key: "poeApiKey",
-    name: "Poe",
-    modelField: "poeModelId",
-  },
-  aihubmix: {
-    id: "aihubmix",
-    key: "aihubmixApiKey",
-    name: "AiHubMix",
-    modelField: "aihubmixModelId",
-    urlField: "aihubmixBaseUrl",
-  },
-  zenmux: {
-    id: "zenmux",
-    key: "zenmuxApiKey",
-    name: "ZenMux",
-    modelField: "zenmuxModelId",
-    urlField: "zenmuxBaseUrl",
   },
 }
 

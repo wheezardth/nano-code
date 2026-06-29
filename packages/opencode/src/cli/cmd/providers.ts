@@ -367,11 +367,9 @@ export const ProvidersLoginCommand = effectCmd({
     }
     const hooks = yield* pluginSvc.list()
 
-    // kilocode_change start
     const priority: Record<string, number> = {
       kilo: 0,
-      anthropic: 2,
-      "github-copilot": 3,
+      // kilocode_change
       openai: 4,
       google: 5,
       openrouter: 6,

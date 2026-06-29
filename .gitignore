@@ -43,6 +43,7 @@ opencode-dev
 UPCOMING_CHANGELOG.md
 logs/
 *.bun-build
+kiloconfig.json
 
 # Telemetry ID
 telemetry-id

@@ -48,9 +48,8 @@ export function failedDescription(providerID: string, failed: string[]): string 
 export const PROVIDER_PRIORITY: Record<string, number> = {
   kilo: -1,
   anthropic: 0,
-  "github-copilot": 1,
-  openai: 2,
-  google: 3,
+  openai: 1,
+  google: 2,
 }
 
 // ---------------------------------------------------------------------------

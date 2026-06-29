@@ -749,15 +749,8 @@ export const toModelMessagesEffect = Effect.fnUntraced(function* (
   // Only apply this workaround if the model actually supports that media input -
   // otherwise unsupportedParts() will turn it into a user-visible error.
   const supportsMediaInToolResult = (attachment: { mime: string }) => {
-    if (model.api.npm === "@ai-sdk/anthropic") return true
     if (model.api.npm === "@ai-sdk/openai") return true
-    if (model.api.npm === "@ai-sdk/amazon-bedrock") return attachment.mime.startsWith("image/")
-    if (model.api.npm === "@ai-sdk/xai") return attachment.mime.startsWith("image/")
-    if (model.api.npm === "@ai-sdk/google-vertex/anthropic") return true
-    if (model.api.npm === "@ai-sdk/google") {
-      const id = model.api.id.toLowerCase()
-      return id.includes("gemini-3") && !id.includes("gemini-2")
-    }
+    // kilocode_change - all other provider checks removed in decloud (npm packages gone)
     return false
   }
 

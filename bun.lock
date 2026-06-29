@@ -192,10 +192,6 @@
         "typescript": "catalog:",
       },
     },
-    "packages/kilo-jetbrains": {
-      "name": "@kilocode/kilo-jetbrains",
-      "version": "7.3.49",
-    },
     "packages/kilo-ui": {
       "name": "@kilocode/kilo-ui",
       "version": "7.3.49",
@@ -320,9 +316,6 @@
       "name": "@opencode-ai/llm",
       "version": "7.3.49",
       "dependencies": {
-        "@smithy/eventstream-codec": "4.2.14",
-        "@smithy/util-utf8": "4.2.2",
-        "aws4fetch": "1.0.20",
         "effect": "catalog:",
       },
       "devDependencies": {
@@ -345,26 +338,10 @@
         "@actions/core": "1.11.1",
         "@actions/github": "6.0.1",
         "@agentclientprotocol/sdk": "0.21.0",
-        "@ai-sdk/alibaba": "1.0.17",
-        "@ai-sdk/amazon-bedrock": "4.0.96",
-        "@ai-sdk/anthropic": "3.0.71",
-        "@ai-sdk/azure": "3.0.49",
-        "@ai-sdk/cerebras": "2.0.54",
-        "@ai-sdk/cohere": "3.0.27",
-        "@ai-sdk/deepinfra": "2.0.41",
-        "@ai-sdk/gateway": "3.0.104",
-        "@ai-sdk/google": "3.0.63",
-        "@ai-sdk/google-vertex": "4.0.112",
-        "@ai-sdk/groq": "3.0.31",
-        "@ai-sdk/mistral": "3.0.27",
         "@ai-sdk/openai": "3.0.53",
         "@ai-sdk/openai-compatible": "2.0.48",
-        "@ai-sdk/perplexity": "3.0.26",
         "@ai-sdk/provider": "3.0.8",
         "@ai-sdk/provider-utils": "4.0.23",
-        "@ai-sdk/togetherai": "2.0.41",
-        "@ai-sdk/vercel": "2.0.39",
-        "@ai-sdk/xai": "3.0.92",
         "@aws-sdk/credential-providers": "3.1025.0",
         "@clack/prompts": "1.0.0-alpha.1",
         "@effect/opentelemetry": "catalog:",
@@ -1197,8 +1174,6 @@
     "@kilocode/kilo-i18n": ["@kilocode/kilo-i18n@workspace:packages/kilo-i18n"],
 
     "@kilocode/kilo-indexing": ["@kilocode/kilo-indexing@workspace:packages/kilo-indexing"],
-
-    "@kilocode/kilo-jetbrains": ["@kilocode/kilo-jetbrains@workspace:packages/kilo-jetbrains"],
 
     "@kilocode/kilo-ui": ["@kilocode/kilo-ui@workspace:packages/kilo-ui"],
 

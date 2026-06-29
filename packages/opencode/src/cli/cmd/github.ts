@@ -206,8 +206,7 @@ export const GithubInstallCommand = effectCmd({
         await installGitHubApp()
 
         const providers = await Effect.runPromise(modelsDev.get()).then((p) => {
-          // TODO: add guide for copilot, for now just hide it
-          delete p["github-copilot"]
+          // kilocode_change
           return p
         })
 
