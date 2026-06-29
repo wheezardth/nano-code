@@ -251,9 +251,9 @@ The current VSCode extension reads the legacy `custom_modes.yaml` file from its 
 
 | OS | Path |
 |---|---|
-| macOS | `~/Library/Application Support/Code/User/globalStorage/kilocode.kilo-code/settings/custom_modes.yaml` |
-| Linux | `~/.config/Code/User/globalStorage/kilocode.kilo-code/settings/custom_modes.yaml` |
-| Windows | `%APPDATA%\Code\User\globalStorage\kilocode.kilo-code\settings\custom_modes.yaml` |
+| macOS | `~/Library/Application Support/Code/User/globalStorage/nano.kilo-code/settings/custom_modes.yaml` |
+| Linux | `~/.config/Code/User/globalStorage/nano.kilo-code/settings/custom_modes.yaml` |
+| Windows | `%APPDATA%\Code\User\globalStorage\nano.kilo-code\settings\custom_modes.yaml` |
 
 Project-level `.kilocodemodes` and workspace-scoped files are handled by the CLI backend that the extension delegates to — see the [CLI tab](#cli) for the full load-order table. After the extension migrates on startup, the legacy file is no longer consulted; remove new modes through the extension UI instead of editing `custom_modes.yaml` directly.
 

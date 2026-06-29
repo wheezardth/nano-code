@@ -1,6 +1,6 @@
 import path from "path"
 import { pathToFileURL } from "url"
-import { existsSync } from "fs"
+import { existsSync, writeFileSync } from "fs"
 import { Effect, Schema } from "effect"
 import { applyEdits, modify, parse as parseJsonc } from "jsonc-parser"
 import { mergeDeep } from "remeda"
@@ -19,6 +19,17 @@ import { WorkflowsMigrator } from "../workflows-migrator"
 import { McpMigrator } from "../mcp-migrator"
 import { IgnoreMigrator } from "../ignore-migrator"
 
+// Write local JSON Schema for editor autocomplete
+import * as CoreConfig from "../../config/config"
+try {
+  writeFileSync(
+    path.join(Global.Path.config, "config-schema.json"),
+    JSON.stringify(Schema.toJsonSchemaDocument(CoreConfig.Config.Info, { additionalProperties: true }).schema, null, 2),
+  )
+} catch {
+  // If write fails, proceed anyway (no editor autocomplete)
+}
+
 export namespace KilocodeConfig {
   const log = Log.create({ service: "kilocode.config" })
 
@@ -36,23 +47,25 @@ export namespace KilocodeConfig {
 
   // ── Config file constants ────────────────────────────────────────────
 
-  /** Kilo-specific config file names (highest-to-lowest precedence within kilo). */
-  export const KILO_CONFIG_FILES = ["kilo.jsonc", "kilo.json"] as const
+  /** Nano-specific config file names (highest-to-lowest precedence within nano). */
+  export const KILO_CONFIG_FILES = ["nano.jsonc", "nano.json", "kilo.jsonc", "kilo.json"] as const
 
-  /** All config file names in precedence order (kilo + opencode). */
-  export const ALL_CONFIG_FILES = ["kilo.jsonc", "kilo.json", "opencode.jsonc", "opencode.json"] as const
+  /** All config file names in precedence order (nano + opencode). */
+  export const ALL_CONFIG_FILES = ["nano.jsonc", "nano.json", "kilo.jsonc", "kilo.json", "opencode.jsonc", "opencode.json"] as const
 
-  /** Directory suffixes that Kilo recognizes in addition to .opencode. */
-  export const KILO_DIR_SUFFIXES = [".kilo", ".kilocode"] as const
+  /** Directory suffixes that Nano recognizes in addition to .opencode. */
+  export const KILO_DIR_SUFFIXES = [".nano", ".kilo", ".kilocode"] as const
 
-  /** All config directory suffixes Kilo can update, including upstream .opencode. */
-  export const ALL_CONFIG_DIR_SUFFIXES = [".kilo", ".kilocode", ".opencode"] as const
+  /** All config directory suffixes Nano can update, including upstream .opencode. */
+  export const ALL_CONFIG_DIR_SUFFIXES = [".nano", ".kilo", ".kilocode", ".opencode"] as const
 
-  /** Path patterns for resolving kilo agent names from file paths. */
-  export const AGENT_PATTERNS = ["/.kilo/agent/", "/.kilo/agents/", "/.kilocode/agent/", "/.kilocode/agents/"] as const
+  /** Path patterns for resolving nano agent names from file paths. */
+  export const AGENT_PATTERNS = ["/.nano/agent/", "/.nano/agents/", "/.kilo/agent/", "/.kilo/agents/", "/.kilocode/agent/", "/.kilocode/agents/"] as const
 
-  /** Path patterns for resolving kilo command names from file paths. */
+  /** Path patterns for resolving nano command names from file paths. */
   export const COMMAND_PATTERNS = [
+    "/.nano/command/",
+    "/.nano/commands/",
     "/.kilo/command/",
     "/.kilo/commands/",
     "/.kilocode/command/",
@@ -78,7 +91,7 @@ export namespace KilocodeConfig {
       .up({ targets: [...ALL_CONFIG_FILES], start: input.directory, stop: input.worktree })
       .pipe(Effect.orDie)
     const files = [...dirs.flatMap((dir) => ALL_CONFIG_FILES.map((file) => path.join(dir, file))), ...roots]
-    return files.find((file) => existsSync(file)) ?? path.join(input.directory, ".kilo", "kilo.jsonc")
+    return files.find((file) => existsSync(file)) ?? path.join(input.directory, ".nano", "nano.jsonc")
   })
 
   export const updateProjectConfig = Effect.fn("KilocodeConfig.updateProjectConfig")(function* (input: {

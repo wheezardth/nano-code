@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">L'agent de codage open source pour construire avec l'IA dans VS Code, JetBrains ou la CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code est un agent de codage avec IA qui vous accompagne partout où vous travaillez : [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) et la [CLI](https://kilo.ai/cli). Il est open source avec une tarification ouverte. Vous choisissez parmi plus de 500 modèles, vous pouvez en changer en cours de tâche et vous payez le tarif du fournisseur du modèle sans majoration. Aucune clé API n'est nécessaire pour commencer.
+Nano Code est un agent de codage avec IA qui vous accompagne partout où vous travaillez : [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) et la [CLI](https://kilo.ai/cli). Il est open source avec une tarification ouverte. Vous choisissez parmi plus de 500 modèles, vous pouvez en changer en cours de tâche et vous payez le tarif du fournisseur du modèle sans majoration. Aucune clé API n'est nécessaire pour commencer.
 
 ### Installation
 
@@ -32,7 +32,7 @@ Choisissez où vous voulez exécuter Kilo.
 
 <br>
 
-Installez directement l'[extension Kilo Code](vscode:extension/kilocode.kilo-code), ou récupérez-la sur le [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Créez un compte et vous aurez accès à plus de 500 modèles, dont GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 et Gemini 3.1 Pro Preview, tous au prix fournisseur.
+Installez directement l'[extension Nano Code](vscode:extension/nano.kilo-code), ou récupérez-la sur le [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Créez un compte et vous aurez accès à plus de 500 modèles, dont GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 et Gemini 3.1 Pro Preview, tous au prix fournisseur.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Exécutez ensuite `kilo` dans n'importe quel répertoire de projet pour commencer.
+Exécutez ensuite `nanocode` dans n'importe quel répertoire de projet pour commencer.
 
 </details>
 
@@ -70,7 +70,7 @@ Exécutez ensuite `kilo` dans n'importe quel répertoire de projet pour commence
 
 <br>
 
-Installez le [plugin Kilo Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) depuis JetBrains Marketplace, ou recherchez "Kilo Code" dans `Settings → Plugins` dans n'importe quel IDE JetBrains.
+Installez le [plugin Nano Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) depuis JetBrains Marketplace, ou recherchez "Nano Code" dans `Settings → Plugins` dans n'importe quel IDE JetBrains.
 
 </details>
 
@@ -141,10 +141,10 @@ En savoir plus sur les [agents et agents personnalisés](https://kilo.ai/docs/co
 
 ### Mode autonome (CI/CD)
 
-Exécutez `kilo run` avec `--auto` pour un fonctionnement entièrement autonome sans prompts, conçu pour les pipelines CI/CD :
+Exécutez `nanocode run` avec `--auto` pour un fonctionnement entièrement autonome sans prompts, conçu pour les pipelines CI/CD :
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` désactive toutes les demandes d'autorisation et permet à l'agent d'exécuter n'importe quelle action sans confirmation. Utilisez-le uniquement dans des environnements de confiance.

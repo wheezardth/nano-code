@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">Open source-агент для програмування з AI у VS Code, JetBrains або CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code — це AI-агент для програмування, який працює там, де працюєте ви: у [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) і [CLI](https://kilo.ai/cli). Він має відкритий код і відкриту модель ціноутворення. Ви обираєте з понад 500 моделей, перемикаєтеся між ними під час завдання і платите тариф постачальника моделі без націнки. Для старту API-ключі не потрібні.
+Nano Code — це AI-агент для програмування, який працює там, де працюєте ви: у [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) і [CLI](https://kilo.ai/cli). Він має відкритий код і відкриту модель ціноутворення. Ви обираєте з понад 500 моделей, перемикаєтеся між ними під час завдання і платите тариф постачальника моделі без націнки. Для старту API-ключі не потрібні.
 
 ### Встановлення
 
@@ -32,7 +32,7 @@ Kilo Code — це AI-агент для програмування, який п�
 
 <br>
 
-Встановіть [розширення Kilo Code](vscode:extension/kilocode.kilo-code) напряму або завантажте його з [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Створіть обліковий запис і отримайте доступ до понад 500 моделей, зокрема GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 і Gemini 3.1 Pro Preview, усі за цінами постачальників.
+Встановіть [розширення Nano Code](vscode:extension/nano.kilo-code) напряму або завантажте його з [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Створіть обліковий запис і отримайте доступ до понад 500 моделей, зокрема GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 і Gemini 3.1 Pro Preview, усі за цінами постачальників.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Потім запустіть `kilo` у будь-якому каталозі проєкту.
+Потім запустіть `nanocode` у будь-якому каталозі проєкту.
 
 </details>
 
@@ -70,7 +70,7 @@ paru -S kilo-bin
 
 <br>
 
-Встановіть [плагін Kilo Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) з JetBrains Marketplace або знайдіть "Kilo Code" у `Settings → Plugins` у будь-якій JetBrains IDE.
+Встановіть [плагін Nano Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) з JetBrains Marketplace або знайдіть "Nano Code" у `Settings → Plugins` у будь-якій JetBrains IDE.
 
 </details>
 
@@ -141,10 +141,10 @@ Kilo постачається зі спеціалізованими agents, мі
 
 ### Автономний режим (CI/CD)
 
-Запустіть `kilo run` з `--auto` для повністю автономної роботи без prompts, створеної для CI/CD-пайплайнів:
+Запустіть `nanocode run` з `--auto` для повністю автономної роботи без prompts, створеної для CI/CD-пайплайнів:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` вимикає всі запити дозволів і дає агенту змогу виконувати будь-яку дію без підтвердження. Використовуйте лише в довірених середовищах.

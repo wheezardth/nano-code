@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">VS Code、JetBrains、CLI で AI を使って開発するためのオープンソースのコーディングエージェント。</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code は、[VS Code](https://kilo.ai/landing/vs-code)、[JetBrains](https://kilo.ai/features/jetbrains-native)、[CLI](https://kilo.ai/cli) など、あなたが作業する場所で使える AI コーディングエージェントです。オープンソースで、透明な価格体系を採用しています。500 以上のモデルから選択し、タスクの途中で切り替え、追加料金なしでモデルプロバイダーの料金を支払います。開始に API キーは不要です。
+Nano Code は、[VS Code](https://kilo.ai/landing/vs-code)、[JetBrains](https://kilo.ai/features/jetbrains-native)、[CLI](https://kilo.ai/cli) など、あなたが作業する場所で使える AI コーディングエージェントです。オープンソースで、透明な価格体系を採用しています。500 以上のモデルから選択し、タスクの途中で切り替え、追加料金なしでモデルプロバイダーの料金を支払います。開始に API キーは不要です。
 
 ### インストール
 
@@ -32,7 +32,7 @@ Kilo を実行する場所を選んでください。
 
 <br>
 
-[Kilo Code 拡張機能](vscode:extension/kilocode.kilo-code)を直接インストールするか、[VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code) から入手してください。アカウントを作成すると、GPT-5.5、Claude Opus 4.7、Claude Sonnet 4.6、Gemini 3.1 Pro Preview を含む 500 以上のモデルを、すべてプロバイダー価格で利用できます。
+[Nano Code 拡張機能](vscode:extension/nano.kilo-code)を直接インストールするか、[VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code) から入手してください。アカウントを作成すると、GPT-5.5、Claude Opus 4.7、Claude Sonnet 4.6、Gemini 3.1 Pro Preview を含む 500 以上のモデルを、すべてプロバイダー価格で利用できます。
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-その後、任意のプロジェクトディレクトリで `kilo` を実行して開始します。
+その後、任意のプロジェクトディレクトリで `nanocode` を実行して開始します。
 
 </details>
 
@@ -70,7 +70,7 @@ paru -S kilo-bin
 
 <br>
 
-JetBrains Marketplace から [Kilo Code プラグイン](https://plugins.jetbrains.com/plugin/28350-kilo-code)をインストールするか、任意の JetBrains IDE の `Settings → Plugins` で "Kilo Code" を検索してください。
+JetBrains Marketplace から [Nano Code プラグイン](https://plugins.jetbrains.com/plugin/28350-kilo-code)をインストールするか、任意の JetBrains IDE の `Settings → Plugins` で "Nano Code" を検索してください。
 
 </details>
 
@@ -141,10 +141,10 @@ Kilo には、タスクに応じて切り替えられる特化型 agents が含�
 
 ### 自律モード（CI/CD）
 
-CI/CD パイプライン向けに、プロンプトなしで完全自律動作させるには `kilo run` に `--auto` を指定します。
+CI/CD パイプライン向けに、プロンプトなしで完全自律動作させるには `nanocode run` に `--auto` を指定します。
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` はすべての権限プロンプトを無効にし、エージェントが確認なしで任意の操作を実行できるようにします。信頼できる環境でのみ使用してください。

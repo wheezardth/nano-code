@@ -5,13 +5,13 @@
 <div dir="rtl">
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">وكيل برمجة مفتوح المصدر للبناء باستخدام الذكاء الاصطناعي في VS Code أو JetBrains أو CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -23,7 +23,7 @@
 
 ---
 
-Kilo Code هو وكيل برمجة بالذكاء الاصطناعي يعمل معك أينما تعمل: [VS Code](https://kilo.ai/landing/vs-code) و[JetBrains](https://kilo.ai/features/jetbrains-native) و[CLI](https://kilo.ai/cli). إنه مفتوح المصدر وبتسعير مفتوح. يمكنك الاختيار من بين أكثر من 500 نموذج، والتبديل بينها أثناء المهمة، ودفع سعر مزود النموذج من دون أي هامش إضافي. لا تحتاج إلى مفاتيح API للبدء.
+Nano Code هو وكيل برمجة بالذكاء الاصطناعي يعمل معك أينما تعمل: [VS Code](https://kilo.ai/landing/vs-code) و[JetBrains](https://kilo.ai/features/jetbrains-native) و[CLI](https://kilo.ai/cli). إنه مفتوح المصدر وبتسعير مفتوح. يمكنك الاختيار من بين أكثر من 500 نموذج، والتبديل بينها أثناء المهمة، ودفع سعر مزود النموذج من دون أي هامش إضافي. لا تحتاج إلى مفاتيح API للبدء.
 
 ### التثبيت
 
@@ -34,7 +34,7 @@ Kilo Code هو وكيل برمجة بالذكاء الاصطناعي يعمل م
 
 <br>
 
-ثبّت [إضافة Kilo Code](vscode:extension/kilocode.kilo-code) مباشرة، أو احصل عليها من [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). أنشئ حسابًا وستحصل على إمكانية الوصول إلى أكثر من 500 نموذج، بما في ذلك GPT-5.5 وClaude Opus 4.7 وClaude Sonnet 4.6 وGemini 3.1 Pro Preview، كلها بسعر المزود.
+ثبّت [إضافة Nano Code](vscode:extension/nano.kilo-code) مباشرة، أو احصل عليها من [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). أنشئ حسابًا وستحصل على إمكانية الوصول إلى أكثر من 500 نموذج، بما في ذلك GPT-5.5 وClaude Opus 4.7 وClaude Sonnet 4.6 وGemini 3.1 Pro Preview، كلها بسعر المزود.
 
 </details>
 
@@ -63,7 +63,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-بعد ذلك شغّل `kilo` في أي مجلد مشروع للبدء.
+بعد ذلك شغّل `nanocode` في أي مجلد مشروع للبدء.
 
 </details>
 
@@ -72,7 +72,7 @@ paru -S kilo-bin
 
 <br>
 
-ثبّت [إضافة Kilo Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) من JetBrains Marketplace، أو ابحث عن "Kilo Code" في `Settings → Plugins` داخل أي JetBrains IDE.
+ثبّت [إضافة Nano Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) من JetBrains Marketplace، أو ابحث عن "Nano Code" في `Settings → Plugins` داخل أي JetBrains IDE.
 
 </details>
 
@@ -143,10 +143,10 @@ paru -S kilo-bin
 
 ### الوضع المستقل (CI/CD)
 
-شغّل `kilo run` مع `--auto` للعمل بشكل مستقل بالكامل ومن دون prompts، وهو مصمم لخطوط CI/CD:
+شغّل `nanocode run` مع `--auto` للعمل بشكل مستقل بالكامل ومن دون prompts، وهو مصمم لخطوط CI/CD:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 يعطّل `--auto` كل مطالبات الأذونات ويسمح للوكيل بتنفيذ أي إجراء من دون تأكيد. استخدمه فقط في بيئات موثوقة.

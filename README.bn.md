@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">VS Code, JetBrains বা CLI-তে AI দিয়ে তৈরি করার জন্য ওপেন সোর্স কোডিং এজেন্ট।</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code হলো একটি AI কোডিং এজেন্ট যা আপনি যেখানে কাজ করেন সেখানেই কাজ করে: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) এবং [CLI](https://kilo.ai/cli)। এটি ওপেন সোর্স এবং খোলা মূল্যনীতির। আপনি 500টির বেশি মডেল থেকে বেছে নিতে পারেন, কাজের মাঝখানে মডেল বদলাতে পারেন এবং কোনো অতিরিক্ত চার্জ ছাড়াই মডেল প্রদানকারীর রেট পরিশোধ করেন। শুরু করতে API key দরকার নেই।
+Nano Code হলো একটি AI কোডিং এজেন্ট যা আপনি যেখানে কাজ করেন সেখানেই কাজ করে: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) এবং [CLI](https://kilo.ai/cli)। এটি ওপেন সোর্স এবং খোলা মূল্যনীতির। আপনি 500টির বেশি মডেল থেকে বেছে নিতে পারেন, কাজের মাঝখানে মডেল বদলাতে পারেন এবং কোনো অতিরিক্ত চার্জ ছাড়াই মডেল প্রদানকারীর রেট পরিশোধ করেন। শুরু করতে API key দরকার নেই।
 
 ### ইনস্টলেশন
 
@@ -32,7 +32,7 @@ Kilo Code হলো একটি AI কোডিং এজেন্ট যা �
 
 <br>
 
-[Kilo Code extension](vscode:extension/kilocode.kilo-code) সরাসরি ইনস্টল করুন, অথবা [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code) থেকে নিন। একটি অ্যাকাউন্ট তৈরি করলে GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 এবং Gemini 3.1 Pro Preview সহ 500টির বেশি মডেলে প্রদানকারীর দামে অ্যাক্সেস পাবেন।
+[Nano Code extension](vscode:extension/nano.kilo-code) সরাসরি ইনস্টল করুন, অথবা [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code) থেকে নিন। একটি অ্যাকাউন্ট তৈরি করলে GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 এবং Gemini 3.1 Pro Preview সহ 500টির বেশি মডেলে প্রদানকারীর দামে অ্যাক্সেস পাবেন।
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-তারপর শুরু করতে যেকোনো প্রজেক্ট ডিরেক্টরিতে `kilo` চালান।
+তারপর শুরু করতে যেকোনো প্রজেক্ট ডিরেক্টরিতে `nanocode` চালান।
 
 </details>
 
@@ -70,7 +70,7 @@ paru -S kilo-bin
 
 <br>
 
-JetBrains Marketplace থেকে [Kilo Code plugin](https://plugins.jetbrains.com/plugin/28350-kilo-code) ইনস্টল করুন, অথবা যেকোনো JetBrains IDE-তে `Settings → Plugins`-এ "Kilo Code" খুঁজুন।
+JetBrains Marketplace থেকে [Nano Code plugin](https://plugins.jetbrains.com/plugin/28350-kilo-code) ইনস্টল করুন, অথবা যেকোনো JetBrains IDE-তে `Settings → Plugins`-এ "Nano Code" খুঁজুন।
 
 </details>
 
@@ -141,10 +141,10 @@ Kilo বিশেষায়িত agents সহ আসে, কাজ অনু
 
 ### Autonomous Mode (CI/CD)
 
-CI/CD pipeline-এর জন্য prompts ছাড়া পুরোপুরি autonomous operation পেতে `kilo run`-এর সাথে `--auto` ব্যবহার করুন:
+CI/CD pipeline-এর জন্য prompts ছাড়া পুরোপুরি autonomous operation পেতে `nanocode run`-এর সাথে `--auto` ব্যবহার করুন:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` সব permission prompt বন্ধ করে এবং agent-কে confirmation ছাড়া যেকোনো action execute করতে দেয়। শুধু trusted environment-এ ব্যবহার করুন।

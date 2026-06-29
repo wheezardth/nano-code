@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">VS Code, JetBrains veya CLI'de AI ile geliştirme yapmak için açık kaynak kodlama ajanı.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code, çalıştığınız her yerde size eşlik eden bir AI kodlama ajanıdır: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) ve [CLI](https://kilo.ai/cli). Açık kaynaktır ve açık fiyatlandırma sunar. 500'den fazla model arasından seçim yapabilir, görev sırasında model değiştirebilir ve hiçbir ek ücret olmadan model sağlayıcısının fiyatını ödersiniz. Başlamak için API anahtarı gerekmez.
+Nano Code, çalıştığınız her yerde size eşlik eden bir AI kodlama ajanıdır: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) ve [CLI](https://kilo.ai/cli). Açık kaynaktır ve açık fiyatlandırma sunar. 500'den fazla model arasından seçim yapabilir, görev sırasında model değiştirebilir ve hiçbir ek ücret olmadan model sağlayıcısının fiyatını ödersiniz. Başlamak için API anahtarı gerekmez.
 
 ### Kurulum
 
@@ -32,7 +32,7 @@ Kilo'yu nerede çalıştırmak istediğinizi seçin.
 
 <br>
 
-[Kilo Code uzantısını](vscode:extension/kilocode.kilo-code) doğrudan kurun veya [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code) üzerinden edinin. Bir hesap oluşturduğunuzda GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 ve Gemini 3.1 Pro Preview dahil 500'den fazla modele sağlayıcı fiyatıyla erişebilirsiniz.
+[Nano Code uzantısını](vscode:extension/nano.kilo-code) doğrudan kurun veya [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code) üzerinden edinin. Bir hesap oluşturduğunuzda GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 ve Gemini 3.1 Pro Preview dahil 500'den fazla modele sağlayıcı fiyatıyla erişebilirsiniz.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Ardından başlamak için herhangi bir proje dizininde `kilo` çalıştırın.
+Ardından başlamak için herhangi bir proje dizininde `nanocode` çalıştırın.
 
 </details>
 
@@ -70,7 +70,7 @@ Ardından başlamak için herhangi bir proje dizininde `kilo` çalıştırın.
 
 <br>
 
-[Kilo Code eklentisini](https://plugins.jetbrains.com/plugin/28350-kilo-code) JetBrains Marketplace'ten kurun veya herhangi bir JetBrains IDE içinde `Settings → Plugins` bölümünde "Kilo Code" arayın.
+[Nano Code eklentisini](https://plugins.jetbrains.com/plugin/28350-kilo-code) JetBrains Marketplace'ten kurun veya herhangi bir JetBrains IDE içinde `Settings → Plugins` bölümünde "Nano Code" arayın.
 
 </details>
 
@@ -141,10 +141,10 @@ Kilo, göreve göre aralarında geçiş yapabileceğiniz özelleşmiş agents il
 
 ### Otonom Mod (CI/CD)
 
-CI/CD pipeline'ları için prompts olmadan tamamen otonom çalıştırmak üzere `kilo run` komutunu `--auto` ile çalıştırın:
+CI/CD pipeline'ları için prompts olmadan tamamen otonom çalıştırmak üzere `nanocode run` komutunu `--auto` ile çalıştırın:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` tüm izin istemlerini devre dışı bırakır ve ajanın herhangi bir işlemi onay olmadan yürütmesine izin verir. Yalnızca güvenilir ortamlarda kullanın.

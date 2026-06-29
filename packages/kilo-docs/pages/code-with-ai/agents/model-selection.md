@@ -151,9 +151,9 @@ The VS Code extension supports a `vscode://` protocol handler that lets you open
 Include at least one of the `model` or `agent` parameters:
 
 ```
-vscode://kilocode.kilo-code/kilocode/switch?model=<modelID>
-vscode://kilocode.kilo-code/kilocode/switch?agent=<agentName>
-vscode://kilocode.kilo-code/kilocode/switch?model=<modelID>&agent=<agentName>
+vscode://nano.kilo-code/kilocode/switch?model=<modelID>
+vscode://nano.kilo-code/kilocode/switch?agent=<agentName>
+vscode://nano.kilo-code/kilocode/switch?model=<modelID>&agent=<agentName>
 ```
 
 Replace `<modelID>` with a Kilo Gateway model ID such as `kilo-auto/free`. Replace `<agentName>` with a visible primary agent ID such as `code` or `plan`, rather than its display name.
@@ -163,19 +163,19 @@ Replace `<modelID>` with a Kilo Gateway model ID such as `kilo-auto/free`. Repla
 To open Kilo Code and switch to the [Auto Free](/docs/code-with-ai/agents/auto-model) tier (`kilo-auto/free`), use:
 
 ```
-vscode://kilocode.kilo-code/kilocode/switch?model=kilo-auto%2Ffree
+vscode://nano.kilo-code/kilocode/switch?model=kilo-auto%2Ffree
 ```
 
 To switch only to Plan and use its normal model selection, specify the agent without a model:
 
 ```
-vscode://kilocode.kilo-code/kilocode/switch?agent=plan
+vscode://nano.kilo-code/kilocode/switch?agent=plan
 ```
 
 To select both at the same time, include both parameters:
 
 ```
-vscode://kilocode.kilo-code/kilocode/switch?model=kilo-auto%2Ffree&agent=plan
+vscode://nano.kilo-code/kilocode/switch?model=kilo-auto%2Ffree&agent=plan
 ```
 
 {% callout type="tip" %}
@@ -196,7 +196,7 @@ URL-encode the `/` in model IDs as `%2F` when embedding this URL in HTML links o
 You can embed these links in a web page:
 
 ```html
-<a href="vscode://kilocode.kilo-code/kilocode/switch?model=kilo-auto%2Ffree&amp;agent=plan">
+<a href="vscode://nano.kilo-code/kilocode/switch?model=kilo-auto%2Ffree&amp;agent=plan">
   Open Kilo Code with Auto Free in Plan
 </a>
 ```

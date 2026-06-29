@@ -56,8 +56,8 @@ export namespace KilocodeConfigSources {
 
   type Pending = Omit<Source, "order">
 
-  const roots = [".kilocode", ".kilo", ".opencode"] as const
-  const global = ["config.json", "kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc"] as const
+  const roots = [".nano", ".kilocode", ".kilo", ".opencode"] as const
+  const global = ["config.json", "nano.json", "nano.jsonc", "kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc"] as const
 
   export async function list(input: Input): Promise<Result> {
     const project = Flag.KILO_DISABLE_PROJECT_CONFIG ? [] : await projectSources(input)

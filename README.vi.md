@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">Tác nhân lập trình mã nguồn mở để xây dựng với AI trong VS Code, JetBrains hoặc CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code là một tác nhân lập trình AI đồng hành với bạn ở mọi nơi bạn làm việc: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) và [CLI](https://kilo.ai/cli). Dự án là mã nguồn mở với giá minh bạch. Bạn chọn trong hơn 500 mô hình, chuyển đổi giữa chúng giữa chừng một tác vụ và trả theo giá của nhà cung cấp mô hình, không có phụ phí. Không cần API key để bắt đầu.
+Nano Code là một tác nhân lập trình AI đồng hành với bạn ở mọi nơi bạn làm việc: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) và [CLI](https://kilo.ai/cli). Dự án là mã nguồn mở với giá minh bạch. Bạn chọn trong hơn 500 mô hình, chuyển đổi giữa chúng giữa chừng một tác vụ và trả theo giá của nhà cung cấp mô hình, không có phụ phí. Không cần API key để bắt đầu.
 
 ### Cài đặt
 
@@ -32,7 +32,7 @@ Chọn nơi bạn muốn chạy Kilo.
 
 <br>
 
-Cài trực tiếp [tiện ích Kilo Code](vscode:extension/kilocode.kilo-code), hoặc tải từ [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Tạo tài khoản và bạn sẽ có quyền truy cập hơn 500 mô hình, bao gồm GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 và Gemini 3.1 Pro Preview, tất cả theo giá của nhà cung cấp.
+Cài trực tiếp [tiện ích Nano Code](vscode:extension/nano.kilo-code), hoặc tải từ [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Tạo tài khoản và bạn sẽ có quyền truy cập hơn 500 mô hình, bao gồm GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 và Gemini 3.1 Pro Preview, tất cả theo giá của nhà cung cấp.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Sau đó chạy `kilo` trong bất kỳ thư mục dự án nào để bắt đầu.
+Sau đó chạy `nanocode` trong bất kỳ thư mục dự án nào để bắt đầu.
 
 </details>
 
@@ -70,7 +70,7 @@ Sau đó chạy `kilo` trong bất kỳ thư mục dự án nào để bắt đ�
 
 <br>
 
-Cài [plugin Kilo Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) từ JetBrains Marketplace, hoặc tìm "Kilo Code" trong `Settings → Plugins` bên trong bất kỳ JetBrains IDE nào.
+Cài [plugin Nano Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) từ JetBrains Marketplace, hoặc tìm "Nano Code" trong `Settings → Plugins` bên trong bất kỳ JetBrains IDE nào.
 
 </details>
 
@@ -141,10 +141,10 @@ Tìm hiểu thêm về [agents và agents tùy chỉnh](https://kilo.ai/docs/cod
 
 ### Chế độ tự động (CI/CD)
 
-Chạy `kilo run` với `--auto` để hoạt động hoàn toàn tự động không có prompts, dành cho pipeline CI/CD:
+Chạy `nanocode run` với `--auto` để hoạt động hoàn toàn tự động không có prompts, dành cho pipeline CI/CD:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` tắt mọi prompt xin quyền và cho phép agent thực hiện bất kỳ hành động nào mà không cần xác nhận. Chỉ dùng trong môi trường đáng tin cậy.

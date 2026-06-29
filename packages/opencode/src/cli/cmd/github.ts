@@ -1415,7 +1415,7 @@ export const GithubRunCommand = effectCmd({
       function footer(opts?: { image?: boolean }) {
         // kilocode_change start - simplified footer with text branding (no image backend yet)
         const share = shareId ? `[kilo session](${shareBaseUrl}/s/${shareId})&nbsp;&nbsp;|&nbsp;&nbsp;` : ""
-        return `\n\n---\n*Powered by [Kilo](https://kilo.ai)*&nbsp;&nbsp;|&nbsp;&nbsp;${share}[github run](${runUrl})`
+        return `\n\n---\n${share}[github run](${runUrl})`
         // kilocode_change end
       }
 

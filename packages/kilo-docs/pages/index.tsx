@@ -8,7 +8,7 @@ const terminalContent = {
     <>
       <span className="terminal-comment"># Install Kilo Code VS Code Extension</span>
       {"\n"}
-      <span className="terminal-prompt">$</span> code --install-extension kilocode.kilo-code
+      <span className="terminal-prompt">$</span> code --install-extension nano.kilo-code
       {"\n"}
       {"\n"}
       <span className="terminal-comment"># Or install via CLI</span>

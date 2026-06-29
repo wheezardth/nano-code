@@ -19,8 +19,7 @@
     "db": "bun drizzle-kit"
   },
   "bin": {
-    "kilo": "./bin/kilo",
-    "kilocode": "./bin/kilo"
+    "nanocode": "./bin/kilo"
   },
   "exports": {
     "./*": "./src/*.ts"
@@ -170,8 +169,6 @@
     "agent",
     "assistant",
     "coding-agent",
-    "kilo-code",
-    "kilo",
     "opencode",
     "ink",
     "react",

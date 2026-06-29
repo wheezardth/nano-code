@@ -10,9 +10,10 @@ import { KilocodePaths } from "./paths"
 export namespace WorkflowsMigrator {
   const home = () => process.env.HOME || process.env.USERPROFILE || os.homedir()
 
-  // .kilocode first (lower precedence), .kilo second (higher precedence / wins)
-  const KILO_WORKFLOWS_DIRS = [".kilocode/workflows", ".kilo/workflows"]
+  // .nano first (highest precedence), .kilocode (lower), .kilo (highest)
+  const KILO_WORKFLOWS_DIRS = [".nano/workflows", ".kilocode/workflows", ".kilo/workflows"]
   const globalWorkflowsDirs = () => [
+    path.join(home(), ".nano", "workflows"),
     path.join(home(), ".kilocode", "workflows"),
     path.join(home(), ".kilo", "workflows"),
   ]

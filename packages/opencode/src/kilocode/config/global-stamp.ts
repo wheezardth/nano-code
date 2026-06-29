@@ -3,7 +3,7 @@ import type { AppFileSystem } from "@opencode-ai/core/filesystem"
 import { Effect } from "effect"
 
 export namespace KilocodeGlobalConfigStamp {
-  const files = ["config.json", "kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc", "config"]
+  const files = ["config.json", "nano.json", "nano.jsonc", "kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc", "config"]
 
   export const read = Effect.fnUntraced(function* (
     fs: Pick<AppFileSystem.Interface, "readFileStringSafe">,

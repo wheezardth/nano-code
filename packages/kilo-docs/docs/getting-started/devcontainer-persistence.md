@@ -26,7 +26,7 @@ The Kilo Code dev container is pre-configured with named volumes to preserve you
   "mounts": [
     {
       "source": "kilocode-global-storage",
-      "target": "/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code",
+      "target": "/root/.vscode-remote/data/User/globalStorage/nano.kilo-code",
       "type": "volume"
     },
     {
@@ -42,10 +42,10 @@ The Kilo Code dev container is pre-configured with named volumes to preserve you
 
 | Data Type | Container Path |
 |---|---|
-| Threads | `/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code/tasks/` |
+| Threads | `/root/.vscode-remote/data/User/globalStorage/nano.kilo-code/tasks/` |
 | Settings | `/root/.vscode-remote/data/User/settings/` |
-| Cache | `/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code/cache/` |
-| Vector Store | `/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code/vector/` |
+| Cache | `/root/.vscode-remote/data/User/globalStorage/nano.kilo-code/cache/` |
+| Vector Store | `/root/.vscode-remote/data/User/globalStorage/nano.kilo-code/vector/` |
 
 ## Troubleshooting
 
@@ -69,7 +69,7 @@ To manually back up your threads:
 
 ```bash
 # Copy thread data from the container
-docker cp <container-name>:/root/.vscode-remote/data/User/globalStorage/kilocode.kilo-code ./kilocode-backup
+docker cp <container-name>:/root/.vscode-remote/data/User/globalStorage/nano.kilo-code ./kilocode-backup
 ```
 
 ## Custom Storage Path

@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">用於在 VS Code、JetBrains 或 CLI 中運用 AI 建構的開源編碼代理。</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code 是一個 AI 編碼代理，可在你工作的任何地方使用：[VS Code](https://kilo.ai/landing/vs-code)、[JetBrains](https://kilo.ai/features/jetbrains-native) 和 [CLI](https://kilo.ai/cli)。它是開源專案，並採用開放定價。你可以從 500 多個模型中選擇，在任務中途切換模型，並按模型供應商的價格付費，沒有加價。開始使用不需要 API 金鑰。
+Nano Code 是一個 AI 編碼代理，可在你工作的任何地方使用：[VS Code](https://kilo.ai/landing/vs-code)、[JetBrains](https://kilo.ai/features/jetbrains-native) 和 [CLI](https://kilo.ai/cli)。它是開源專案，並採用開放定價。你可以從 500 多個模型中選擇，在任務中途切換模型，並按模型供應商的價格付費，沒有加價。開始使用不需要 API 金鑰。
 
 ### 安裝
 
@@ -32,7 +32,7 @@ Kilo Code 是一個 AI 編碼代理，可在你工作的任何地方使用：[VS
 
 <br>
 
-直接安裝 [Kilo Code 擴充功能](vscode:extension/kilocode.kilo-code)，或從 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code) 取得。建立帳戶後，你可以按供應商價格使用 500 多個模型，包括 GPT-5.5、Claude Opus 4.7、Claude Sonnet 4.6 和 Gemini 3.1 Pro Preview。
+直接安裝 [Nano Code 擴充功能](vscode:extension/nano.kilo-code)，或從 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code) 取得。建立帳戶後，你可以按供應商價格使用 500 多個模型，包括 GPT-5.5、Claude Opus 4.7、Claude Sonnet 4.6 和 Gemini 3.1 Pro Preview。
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-然後在任何專案目錄中執行 `kilo` 即可開始。
+然後在任何專案目錄中執行 `nanocode` 即可開始。
 
 </details>
 
@@ -70,7 +70,7 @@ paru -S kilo-bin
 
 <br>
 
-從 JetBrains Marketplace 安裝 [Kilo Code 外掛](https://plugins.jetbrains.com/plugin/28350-kilo-code)，或在任何 JetBrains IDE 的 `Settings → Plugins` 中搜尋 "Kilo Code"。
+從 JetBrains Marketplace 安裝 [Nano Code 外掛](https://plugins.jetbrains.com/plugin/28350-kilo-code)，或在任何 JetBrains IDE 的 `Settings → Plugins` 中搜尋 "Nano Code"。
 
 </details>
 
@@ -141,10 +141,10 @@ Kilo 內建可依任務切換的專用 Agents。你也可以建立自己的自�
 
 ### 自主模式（CI/CD）
 
-使用 `--auto` 執行 `kilo run`，可在 CI/CD 管線中進行無提示的完全自主操作：
+使用 `--auto` 執行 `nanocode run`，可在 CI/CD 管線中進行無提示的完全自主操作：
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` 會停用所有權限提示，並允許代理在無需確認的情況下執行任何操作。僅在可信任環境中使用。

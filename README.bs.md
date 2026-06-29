@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">Open source agent za kodiranje s AI-jem u VS Codeu, JetBrainsu ili CLI-ju.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code je AI agent za kodiranje koji vas prati svugdje gdje radite: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) i [CLI](https://kilo.ai/cli). Open source je i ima otvorene cijene. Birate između više od 500 modela, mijenjate ih usred zadatka i plaćate cijenu pružaoca modela bez dodatne marže. API ključevi nisu potrebni za početak.
+Nano Code je AI agent za kodiranje koji vas prati svugdje gdje radite: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) i [CLI](https://kilo.ai/cli). Open source je i ima otvorene cijene. Birate između više od 500 modela, mijenjate ih usred zadatka i plaćate cijenu pružaoca modela bez dodatne marže. API ključevi nisu potrebni za početak.
 
 ### Instalacija
 
@@ -32,7 +32,7 @@ Odaberite gdje želite pokrenuti Kilo.
 
 <br>
 
-Instalirajte [Kilo Code ekstenziju](vscode:extension/kilocode.kilo-code) direktno ili je preuzmite sa [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Kreirajte račun i imat ćete pristup za više od 500 modela, uključujući GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 i Gemini 3.1 Pro Preview, sve po cijenama pružaoca.
+Instalirajte [Nano Code ekstenziju](vscode:extension/nano.kilo-code) direktno ili je preuzmite sa [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Kreirajte račun i imat ćete pristup za više od 500 modela, uključujući GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 i Gemini 3.1 Pro Preview, sve po cijenama pružaoca.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Zatim pokrenite `kilo` u bilo kojem direktoriju projekta.
+Zatim pokrenite `nanocode` u bilo kojem direktoriju projekta.
 
 </details>
 
@@ -70,7 +70,7 @@ Zatim pokrenite `kilo` u bilo kojem direktoriju projekta.
 
 <br>
 
-Instalirajte [Kilo Code plugin](https://plugins.jetbrains.com/plugin/28350-kilo-code) sa JetBrains Marketplacea ili potražite "Kilo Code" u `Settings → Plugins` unutar bilo kojeg JetBrains IDE-a.
+Instalirajte [Nano Code plugin](https://plugins.jetbrains.com/plugin/28350-kilo-code) sa JetBrains Marketplacea ili potražite "Nano Code" u `Settings → Plugins` unutar bilo kojeg JetBrains IDE-a.
 
 </details>
 
@@ -141,10 +141,10 @@ Saznajte više o [agents i prilagođenim agents](https://kilo.ai/docs/code-with-
 
 ### Autonomni način rada (CI/CD)
 
-Pokrenite `kilo run` s `--auto` za potpuno autonoman rad bez promptova, napravljen za CI/CD pipelineove:
+Pokrenite `nanocode run` s `--auto` za potpuno autonoman rad bez promptova, napravljen za CI/CD pipelineove:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` isključuje sve upite za dozvole i dopušta agentu da izvrši bilo koju radnju bez potvrde. Koristite samo u pouzdanim okruženjima.

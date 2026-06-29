@@ -25,7 +25,7 @@ interface RemovalTargets {
 
 export const UninstallCommand = {
   command: "uninstall",
-  describe: "uninstall kilo and remove all related files", // kilocode_change
+  describe: "uninstall nanocode and remove all related files", // kilocode_change
   builder: (yargs: Argv) =>
     yargs
       .option("keep-config", {

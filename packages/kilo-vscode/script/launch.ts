@@ -318,7 +318,7 @@ async function launch() {
 
   if (mode === "dev") {
     args.push(`--extensionDevelopmentPath=${root}`)
-    args.push("--disable-extension=kilocode.kilo-code")
+    args.push("--disable-extension=nano.kilo-code")
   }
 
   if (mode === "vsix") {

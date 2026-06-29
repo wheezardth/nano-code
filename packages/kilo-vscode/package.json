@@ -74,7 +74,7 @@
    "kilo-logo": {
     "description": "Nano Code logo",
     "default": {
-     "fontPath": "assets/icons/kilo-icon-font.woff2",
+      "fontPath": "assets/icons/nano-icon-font.woff2",
      "fontCharacter": "\\F101"
     }
    }
@@ -84,8 +84,8 @@
     {
      "id": "kilo-code-ActivityBar",
      "title": "Nano Code",
-     "icon": "assets/icons/kilo-light.png",
-     "darkIcon": "assets/icons/kilo-dark.png"
+      "icon": "assets/icons/nano-light.png",
+      "darkIcon": "assets/icons/nano-dark.png"
     }
    ]
   },
@@ -148,8 +148,8 @@
     "title": "Open in Tab",
     "category": "Nano Code",
     "icon": {
-     "light": "assets/icons/kilo-light.svg",
-     "dark": "assets/icons/kilo-dark.svg"
+     "light": "assets/icons/nano-light.svg",
+     "dark": "assets/icons/nano-dark.svg"
     }
    },
    {
@@ -321,8 +321,8 @@
     "title": "Generate Commit Message",
     "category": "Nano Code",
     "icon": {
-     "light": "assets/icons/kilo-light.svg",
-     "dark": "assets/icons/kilo-dark.svg"
+     "light": "assets/icons/nano-light.svg",
+     "dark": "assets/icons/nano-dark.svg"
     }
    },
    {

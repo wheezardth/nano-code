@@ -7,31 +7,31 @@ export namespace KilocodePaths {
 
   /**
    * Get the platform-specific VSCode global storage path for Kilocode extension.
-   * - macOS: ~/Library/Application Support/Code/User/globalStorage/kilocode.kilo-code
-   * - Windows: %APPDATA%/Code/User/globalStorage/kilocode.kilo-code
-   * - Linux: ~/.config/Code/User/globalStorage/kilocode.kilo-code
+   * - macOS: ~/Library/Application Support/Code/User/globalStorage/nano.kilo-code
+   * - Windows: %APPDATA%/Code/User/globalStorage/nano.kilo-code
+   * - Linux: ~/.config/Code/User/globalStorage/nano.kilo-code
    */
   export function vscodeGlobalStorage(): string {
     const home = os.homedir()
     switch (process.platform) {
       case "darwin":
-        return path.join(home, "Library", "Application Support", "Code", "User", "globalStorage", "kilocode.kilo-code")
+        return path.join(home, "Library", "Application Support", "Code", "User", "globalStorage", "nano.kilo-code")
       case "win32":
         return path.join(
           process.env.APPDATA || path.join(home, "AppData", "Roaming"),
           "Code",
           "User",
           "globalStorage",
-          "kilocode.kilo-code",
+          "nano.kilo-code",
         )
       default:
-        return path.join(home, ".config", "Code", "User", "globalStorage", "kilocode.kilo-code")
+        return path.join(home, ".config", "Code", "User", "globalStorage", "nano.kilo-code")
     }
   }
 
-  /** Global Kilo directories in user home: ~/.kilocode and ~/.kilo (legacy first, .kilo wins later) */
+  /** Global Nano directories in user home: ~/.nano, ~/.kilocode and ~/.kilo */
   export function globalDirs(): string[] {
-    return [path.join(home(), ".kilocode"), path.join(home(), ".kilo")]
+    return [path.join(home(), ".nano"), path.join(home(), ".kilocode"), path.join(home(), ".kilo")]
   }
 
   /**
@@ -69,11 +69,11 @@ export namespace KilocodePaths {
       }
     }
 
-    // 3. Walk up from project dir to worktree root for .kilocode/ and .kilo/
+    // 3. Walk up from project dir to worktree root for .nano/, .kilocode/, and .kilo/
     // Returns parent directories (not skills/) because
     // the glob pattern "skills/[*]/SKILL.md" is applied from the parent
     // Loaded last so project-level skills take precedence over global
-    for (const target of [".kilocode", ".kilo"] as const) {
+    for (const target of [".nano", ".kilocode", ".kilo"] as const) {
       const projectDirs = await Array.fromAsync(
         Filesystem.up({
           targets: [target],

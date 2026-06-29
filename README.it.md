@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">L'agente di coding open source per creare con l'IA in VS Code, JetBrains o nella CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code è un agente di coding con IA che ti segue ovunque lavori: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) e la [CLI](https://kilo.ai/cli). È open source con prezzi trasparenti. Puoi scegliere tra oltre 500 modelli, passare da uno all'altro durante un'attività e pagare la tariffa del provider del modello senza ricarichi. Non servono chiavi API per iniziare.
+Nano Code è un agente di coding con IA che ti segue ovunque lavori: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) e la [CLI](https://kilo.ai/cli). È open source con prezzi trasparenti. Puoi scegliere tra oltre 500 modelli, passare da uno all'altro durante un'attività e pagare la tariffa del provider del modello senza ricarichi. Non servono chiavi API per iniziare.
 
 ### Installazione
 
@@ -32,7 +32,7 @@ Scegli dove vuoi eseguire Kilo.
 
 <br>
 
-Installa direttamente l'[estensione Kilo Code](vscode:extension/kilocode.kilo-code), oppure scaricala dal [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Crea un account e avrai accesso a oltre 500 modelli, inclusi GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 e Gemini 3.1 Pro Preview, tutti al prezzo del provider.
+Installa direttamente l'[estensione Nano Code](vscode:extension/nano.kilo-code), oppure scaricala dal [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Crea un account e avrai accesso a oltre 500 modelli, inclusi GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 e Gemini 3.1 Pro Preview, tutti al prezzo del provider.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Poi esegui `kilo` in qualsiasi directory di progetto per iniziare.
+Poi esegui `nanocode` in qualsiasi directory di progetto per iniziare.
 
 </details>
 
@@ -70,7 +70,7 @@ Poi esegui `kilo` in qualsiasi directory di progetto per iniziare.
 
 <br>
 
-Installa il [plugin Kilo Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) dal JetBrains Marketplace, oppure cerca "Kilo Code" in `Settings → Plugins` dentro qualsiasi IDE JetBrains.
+Installa il [plugin Nano Code](https://plugins.jetbrains.com/plugin/28350-kilo-code) dal JetBrains Marketplace, oppure cerca "Nano Code" in `Settings → Plugins` dentro qualsiasi IDE JetBrains.
 
 </details>
 
@@ -141,10 +141,10 @@ Scopri di più su [agents e agents personalizzati](https://kilo.ai/docs/code-wit
 
 ### Modalità autonoma (CI/CD)
 
-Esegui `kilo run` con `--auto` per un funzionamento completamente autonomo senza prompt, pensato per pipeline CI/CD:
+Esegui `nanocode run` con `--auto` per un funzionamento completamente autonomo senza prompt, pensato per pipeline CI/CD:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` disabilita tutti i prompt di autorizzazione e consente all'agente di eseguire qualsiasi azione senza conferma. Usalo solo in ambienti attendibili.

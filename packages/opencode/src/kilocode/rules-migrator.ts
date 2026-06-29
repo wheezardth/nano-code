@@ -7,9 +7,9 @@ export namespace RulesMigrator {
   const LEGACY_RULE_FILE = ".kilocoderules"
   const home = () => process.env.KILO_TEST_HOME || process.env.HOME || process.env.USERPROFILE || os.homedir()
 
-  // Directory-based rules (read from both .kilo and .kilocode)
-  const KILO_RULES_DIRS = [".kilo/rules", ".kilocode/rules"]
-  const globalRulesDirs = () => [path.join(home(), ".kilo", "rules"), path.join(home(), ".kilocode", "rules")]
+  // Directory-based rules (read from .nano first, then .kilocode, then .kilo)
+  const KILO_RULES_DIRS = [".nano/rules", ".kilocode/rules", ".kilo/rules"]
+  const globalRulesDirs = () => [path.join(home(), ".nano", "rules"), path.join(home(), ".kilocode", "rules"), path.join(home(), ".kilo", "rules")]
 
   // Known modes for mode-specific rule discovery
   const KNOWN_MODES = ["code", "architect", "ask", "debug", "orchestrator"]
@@ -87,9 +87,9 @@ export namespace RulesMigrator {
 
     // 4. Mode-specific rules
     for (const mode of KNOWN_MODES) {
-      // Mode-specific directories (.kilo/rules-{mode}/*.md and .kilocode/rules-{mode}/*.md)
+      // Mode-specific directories (.nano/rules-{mode}/*.md, .kilocode/rules-{mode}/*.md, .kilo/rules-{mode}/*.md)
       const modeSeen = new Set<string>()
-      for (const prefix of [".kilo", ".kilocode"]) {
+      for (const prefix of [".nano", ".kilocode", ".kilo"]) {
         const modeDir = path.join(projectDir, `${prefix}/rules-${mode}`)
         if (await isDirectory(modeDir)) {
           const files = await findMarkdownFiles(modeDir)

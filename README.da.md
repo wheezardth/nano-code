@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="https://kilo.ai"><img width="250" alt="Kilo Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
+  <a href="https://kilo.ai"><img width="250" alt="Nano Code logo" src="https://github.com/user-attachments/assets/bdb0c174-b9fd-40ad-a47b-f3aab9b54e8d" /></a>
 </p>
 
 <p align="center">Den open source-kodeagent til at bygge med AI i VS Code, JetBrains eller CLI.</p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code"><img src="https://raster.shields.io/badge/VS_Code_Marketplace-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Marketplace" height="20"></a>
   <a href="https://www.npmjs.com/package/@kilocode/cli"><img alt="npm" src="https://raster.shields.io/npm/v/@kilocode/cli?style=flat" height="20" /></a>
   <a href="https://x.com/kilocode"><img src="https://raster.shields.io/badge/kilocode-000000?style=flat&logo=x&logoColor=white" alt="X (Twitter)" height="20"></a>
   <a href="https://blog.kilo.ai"><img src="https://raster.shields.io/badge/Blog-555?style=flat&logo=substack&logoColor=white" alt="Blog" height="20"></a>
@@ -21,7 +21,7 @@
 
 ---
 
-Kilo Code er en AI-kodeagent, der møder dig overalt, hvor du arbejder: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) og [CLI](https://kilo.ai/cli). Den er open source med åben prissætning. Du vælger mellem mere end 500 modeller, skifter mellem dem midt i en opgave og betaler modeludbyderens pris uden tillæg. Ingen API-nøgler kræves for at komme i gang.
+Nano Code er en AI-kodeagent, der møder dig overalt, hvor du arbejder: [VS Code](https://kilo.ai/landing/vs-code), [JetBrains](https://kilo.ai/features/jetbrains-native) og [CLI](https://kilo.ai/cli). Den er open source med åben prissætning. Du vælger mellem mere end 500 modeller, skifter mellem dem midt i en opgave og betaler modeludbyderens pris uden tillæg. Ingen API-nøgler kræves for at komme i gang.
 
 ### Installation
 
@@ -32,7 +32,7 @@ Vælg, hvor du vil køre Kilo.
 
 <br>
 
-Installer [Kilo Code-udvidelsen](vscode:extension/kilocode.kilo-code) direkte, eller hent den fra [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code). Opret en konto, og du får adgang til mere end 500 modeller, herunder GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 og Gemini 3.1 Pro Preview, alle til udbyderpris.
+Installer [Nano Code-udvidelsen](vscode:extension/nano.kilo-code) direkte, eller hent den fra [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nano.Nano-Code). Opret en konto, og du får adgang til mere end 500 modeller, herunder GPT-5.5, Claude Opus 4.7, Claude Sonnet 4.6 og Gemini 3.1 Pro Preview, alle til udbyderpris.
 
 </details>
 
@@ -61,7 +61,7 @@ brew install Kilo-Org/tap/kilo
 paru -S kilo-bin
 ```
 
-Kør derefter `kilo` i en vilkårlig projektmappe for at starte.
+Kør derefter `nanocode` i en vilkårlig projektmappe for at starte.
 
 </details>
 
@@ -70,7 +70,7 @@ Kør derefter `kilo` i en vilkårlig projektmappe for at starte.
 
 <br>
 
-Installer [Kilo Code-pluginet](https://plugins.jetbrains.com/plugin/28350-kilo-code) fra JetBrains Marketplace, eller søg efter "Kilo Code" i `Settings → Plugins` i en JetBrains IDE.
+Installer [Nano Code-pluginet](https://plugins.jetbrains.com/plugin/28350-kilo-code) fra JetBrains Marketplace, eller søg efter "Nano Code" i `Settings → Plugins` i en JetBrains IDE.
 
 </details>
 
@@ -141,10 +141,10 @@ Læs mere om [agents og brugerdefinerede agents](https://kilo.ai/docs/code-with-
 
 ### Autonom tilstand (CI/CD)
 
-Kør `kilo run` med `--auto` for fuldt autonom drift uden prompts, bygget til CI/CD-pipelines:
+Kør `nanocode run` med `--auto` for fuldt autonom drift uden prompts, bygget til CI/CD-pipelines:
 
 ```bash
-kilo run --auto "run tests and fix any failures"
+nanocode run --auto "run tests and fix any failures"
 ```
 
 `--auto` deaktiverer alle tilladelsesprompts og lader agenten udføre enhver handling uden bekræftelse. Brug det kun i betroede miljøer.

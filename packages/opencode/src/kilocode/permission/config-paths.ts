@@ -7,7 +7,7 @@ export namespace ConfigProtection {
    * Config directory prefixes (relative paths, forward-slash normalized).
    * Matches .kilo/, .kilocode/, .opencode/ at any depth within the project.
    */
-  const CONFIG_DIRS = [".kilo/", ".kilocode/", ".opencode/"]
+  const CONFIG_DIRS = [".nano/", ".kilo/", ".kilocode/", ".opencode/"]
 
   /**
    * Subdirectories under CONFIG_DIRS that are NOT config files (e.g. plan files).
@@ -19,7 +19,7 @@ export namespace ConfigProtection {
    * Root-level config files that must be protected.
    * Matched only when the relative path has no directory component.
    */
-  const CONFIG_ROOT_FILES = new Set(["kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc", "AGENTS.md"])
+  const CONFIG_ROOT_FILES = new Set(["nano.json", "nano.jsonc", "kilo.json", "kilo.jsonc", "opencode.json", "opencode.jsonc", "AGENTS.md"])
 
   /** Metadata key used to signal the UI to hide the "Allow always" option. */
   export const DISABLE_ALWAYS_KEY = "disableAlways" as const
@@ -67,7 +67,7 @@ export namespace ConfigProtection {
 
   function configs(): string[] {
     return Array.from(
-      new Set([Global.Path.config, process.env.XDG_CONFIG_HOME ? path.join(process.env.XDG_CONFIG_HOME, "kilo") : ""]),
+      new Set([Global.Path.config, process.env.XDG_CONFIG_HOME ? path.join(process.env.XDG_CONFIG_HOME, "nanocode") : ""]),
     ).filter(Boolean)
   }
 
@@ -75,6 +75,10 @@ export namespace ConfigProtection {
     if (process.platform !== "win32") return false
     return keys(p).some(
       (key) =>
+        key.endsWith("/config/nanocode") ||
+        key.includes("/config/nanocode/") ||
+        key.endsWith("/.config/nanocode") ||
+        key.includes("/.config/nanocode/") ||
         key.endsWith("/config/kilo") ||
         key.includes("/config/kilo/") ||
         key.endsWith("/.config/kilo") ||
