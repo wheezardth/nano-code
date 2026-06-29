@@ -84,17 +84,6 @@ import {
 import * as McpOAuth from "./kilo-provider/mcp-oauth"
 import { retryable, backoff, MAX_RETRIES } from "./util/retry"
 import { hasGit } from "./kilo-provider/git-status"
-// legacy-migration start
-import {
-  checkAndShowMigrationWizard,
-  handleRequestMigrationData,
-  handleStartMigration,
-  handleFinalizeLegacyMigration,
-  handleSkipLegacyMigration,
-  handleClearLegacyData,
-  type MigrationContext,
-} from "./kilo-provider/handlers/migration"
-// legacy-migration end
 import {
   handleLogin,
   handleLogout,
@@ -331,15 +320,10 @@ export class KiloProvider implements vscode.WebviewViewProvider {
   private readonly confirmations = new MessageConfirmation()
   private unsubscribeEvent: (() => void) | null = null
   private unsubscribeState: (() => void) | null = null
-  /** Cached migration data so migration doesn't re-read from disk/SecretStorage. */ // legacy-migration
-  private migrationCache: MigrationContext["migrationCache"] = new Map()
-  /** Guard to prevent checkAndShowMigrationWizard running concurrently. */ // legacy-migration
-  private migrationCheckInFlight = false // legacy-migration
   private unsubscribeNotificationDismiss: (() => void) | null = null
   private unsubscribeLanguageChange: (() => void) | null = null
   private unsubscribeProfileChange: (() => void) | null = null
   private unsubscribeFavoritesChange: (() => void) | null = null
-  private unsubscribeMigrationComplete: (() => void) | null = null // legacy-migration
   private unsubscribeClearPendingPrompts: (() => void) | null = null
   private unsubscribeDirectoryProvider: (() => void) | null = null
   private initConnectionPromise: Promise<void> | null = null
@@ -534,8 +518,7 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     // Use fire-and-forget (no throwOnError) to match old getProfile() which returned null on error.
     if (this.connectionState === "connected" && this.client) {
       console.log("[Kilo New] KiloProvider: 👤 syncWebviewState fetching profile...")
-      const profileResult = await retry(() => this.client!.kilo.profile())
-      const profileData = profileResult.data ?? null
+      const profileData: unknown = null
       console.log("[Kilo New] KiloProvider: 👤 syncWebviewState profile:", profileData ? "received" : "null")
       this.postMessage({
         type: "profileData",
@@ -561,18 +544,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
 
       this.sendRemoteStatus()
     }
-
-    // legacy-migration start
-    // Show the migration wizard once the CLI connection is established.
-    // Three triggers cover all timing scenarios:
-    //   "webviewReady" + connected — webview loaded after SSE was already up
-    //   "sse-connected"            — SSE connected after webview was ready
-    //   "initializeConnection"     — sidebar path where connect() resolves before
-    //                                onStateChange is subscribed, so sse-connected never fires
-    if (this.connectionState === "connected") {
-      void checkAndShowMigrationWizard(this.migrationCtx)
-    }
-    // legacy-migration end
   }
 
   public resolveWebviewView(
@@ -1162,23 +1133,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
           this.postMessage({ type: "favoritesLoaded", favorites })
           break
         }
-        // legacy-migration start
-        case "requestMigrationData":
-          void handleRequestMigrationData(this.migrationCtx, message.source, message.operationId)
-          break
-        case "startMigration":
-          void handleStartMigration(this.migrationCtx, message.source, message.operationId, message.selections)
-          break
-        case "skipLegacyMigration":
-          void handleSkipLegacyMigration(this.migrationCtx)
-          break
-        case "clearLegacyData":
-          void handleClearLegacyData(this.migrationCtx)
-          break
-        case "finalizeLegacyMigration":
-          void handleFinalizeLegacyMigration(this.migrationCtx)
-          break
-        // legacy-migration end
         case "enhancePrompt": {
           const sdkClient = this.client
           if (!sdkClient) {
@@ -1264,8 +1218,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
           const event = unwrapSyncEvent(payload)
           if (!event) return false
 
-          // Remote status events are global and should always pass through
-          if (event.type === "kilo-sessions.remote-status-changed") return true
           const sessionId = this.resolveEventSessionId(event)
 
           // message.part.* events are always session-scoped; drop if session unknown.
@@ -1300,12 +1252,8 @@ export class KiloProvider implements vscode.WebviewViewProvider {
           // sequential await chain doesn't prevent warnings from being shown
           void this.checkConfigWarnings("state")
           try {
-            // Profile fetch is best-effort — returns 401 when user isn't logged into gateway.
-            const sdkClient = this.client
-            if (sdkClient) {
-              const profileResult = await sdkClient.kilo.profile()
-              this.postMessage({ type: "profileData", data: profileResult.data ?? null })
-            }
+            const profileResult = { data: null }
+            this.postMessage({ type: "profileData", data: profileResult.data ?? null })
             await this.syncWebviewState("sse-connected")
             await this.flushPendingSessionRefresh("sse-connected")
             this.recoverPendingPrompts()
@@ -1338,13 +1286,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
       this.unsubscribeFavoritesChange = this.connectionService.onFavoritesChanged((favorites) => {
         this.postMessage({ type: "favoritesLoaded", favorites })
       })
-
-      // legacy-migration start
-      // Subscribe to migration-complete broadcast from any KiloProvider instance
-      this.unsubscribeMigrationComplete = this.connectionService.onMigrationComplete(() => {
-        this.postMessage({ type: "migrationState", needed: false, source: "legacy" })
-      })
-      // legacy-migration end
 
       // Subscribe to clear-pending-prompts broadcast (fired after config save drains prompts)
       this.unsubscribeClearPendingPrompts = this.connectionService.onClearPendingPrompts(() => {
@@ -2275,10 +2216,10 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     }
 
     try {
-      const { data: all } = await retry(() => this.client!.kilo.notifications(undefined, { throwOnError: true }))
+      const all: { showIn?: string[]; id?: string }[] = []
       const notifications = all.filter((n) => !n.showIn || n.showIn.includes("extension"))
       const existing = this.extensionContext?.globalState.get<string[]>("kilo.dismissedNotificationIds", []) ?? []
-      const active = new Set(notifications.map((n) => n.id))
+      const active = new Set(notifications.map((n) => n.id!))
       // Only prune stale dismissed IDs when we have a non-empty notification
       // list. An empty list may mean the API returned nothing due to being
       // unauthenticated (e.g. right after logout), not that all notifications
@@ -2859,13 +2800,7 @@ export class KiloProvider implements vscode.WebviewViewProvider {
       .catch((e: unknown) => console.warn("[Kilo New] KiloProvider: global.dispose() after org switch failed:", e))
 
     // Org switch succeeded — refresh profile and providers independently (best-effort)
-    try {
-      const profileResult = await this.client!.kilo.profile()
-      // Broadcast to all webviews (sidebar, profile tab, agent manager, etc.)
-      this.connectionService.notifyProfileChanged(profileResult.data ?? null)
-    } catch (error) {
-      console.error("[Kilo New] KiloProvider: Failed to refresh profile after org switch:", error)
-    }
+    // Profile refresh is cloud-only (kilo-only gateway endpoint removed)
     try {
       await this.fetchAndSendProviders()
     } catch (error) {
@@ -3054,11 +2989,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
    * Filters events by project ID and tracked session IDs so each webview only sees its own sessions.
    */
   private handleEvent(event: ProviderEvent, directory?: string): void {
-    if (event.type === "kilo-sessions.remote-status-changed") {
-      this.remoteService?.updateFromEvent({ enabled: event.properties.enabled, connected: event.properties.connected })
-      return
-    }
-
     // Drop session events from other projects before any tracking logic.
     // This must come first: the trackedSessionIds guard below would otherwise
     // let a foreign session through if it was accidentally tracked.
@@ -3436,30 +3366,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     })
   }
 
-  // legacy-migration start -------------------------------------------------------
-  // Migration handlers extracted to kilo-provider/handlers/migration.ts
-
-  private get migrationCtx(): MigrationContext {
-    const self = this
-    return {
-      client: this.client,
-      extensionContext: this.extensionContext,
-      postMessage: (msg) => this.postMessage(msg),
-      migrationCache: self.migrationCache,
-      get migrationCheckInFlight() {
-        return self.migrationCheckInFlight
-      },
-      set migrationCheckInFlight(val) {
-        self.migrationCheckInFlight = val
-      },
-      refreshSessions: () => this.refreshSessions(),
-      disposeGlobal: () => this.disposeGlobal(),
-      broadcastComplete: () => this.connectionService.notifyMigrationComplete(),
-    }
-  }
-
-  // legacy-migration end ---------------------------------------------------------
-
   // ── Worktree stats polling (sidebar diff badge) ──────────────────
   private startStatsPolling(): void {
     this.statsPoller?.stop()
@@ -3504,7 +3410,6 @@ export class KiloProvider implements vscode.WebviewViewProvider {
     this.unsubscribeLanguageChange?.()
     this.unsubscribeProfileChange?.()
     this.unsubscribeFavoritesChange?.()
-    this.unsubscribeMigrationComplete?.()
     this.unsubscribeClearPendingPrompts?.()
     this.unsubscribeDirectoryProvider?.()
     this.viewStateDisposable?.dispose()

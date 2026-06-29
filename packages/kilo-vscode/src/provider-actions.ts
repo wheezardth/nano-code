@@ -59,10 +59,7 @@ export async function fetchProviderData(client: KiloClient, dir: string) {
           .then((r) => r.data ?? {})
           .catch(() => ({}))
       : Promise.resolve({})
-  const kiloRequest = client.kilo
-    .authStatus({ directory: dir }, { throwOnError: true })
-    .then((r) => (r.data?.authenticated ? (r.data.type ?? null) : null))
-    .catch(() => null)
+  const kiloRequest = Promise.resolve(null)
 
   const [{ data: response }, authMethods, kiloAuth] = await Promise.all([
     client.provider.list({ directory: dir }, { throwOnError: true }),

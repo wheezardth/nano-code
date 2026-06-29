@@ -37,11 +37,6 @@ import type {
   MigrationSessionProgress,
 } from "./legacy-types"
 import type { MigrationResultItem } from "./migration-types"
-import { runSessionBatch } from "./session-batch"
-import { listSessions, resolveSession, scanTaskStore } from "./task-store"
-import { createSessionID } from "./sessions/lib/ids"
-import type { LegacyHistoryItem } from "./sessions/lib/legacy-types"
-import { migrate as migrateSession } from "./sessions/migrate"
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -79,7 +74,7 @@ export async function detectLegacyData(context: vscode.ExtensionContext): Promis
   const customModes = await readLegacyCustomModes(context)
   const prompts = readLegacyCustomModePrompts(context)
   const settings = readLegacySettings(context)
-  const sessions = listSessions(await readSessionCatalog(context))
+  const sessions: MigrationSessionInfo[] = []
 
   const oauthProviders = new Set<string>()
   const codexRaw = await context.secrets.get(CODEX_OAUTH_SECRET_KEY)
@@ -118,12 +113,6 @@ export async function detectLegacyData(context: vscode.ExtensionContext): Promis
   }
 }
 
-async function readSessionCatalog(context: vscode.ExtensionContext) {
-  const items = context.globalState.get<LegacyHistoryItem[]>("taskHistory", [])
-  const dir = vscode.Uri.joinPath(context.globalStorageUri, "tasks").fsPath
-  return (await scanTaskStore(dir, items, { mode: "history" })).catalog
-}
-
 // ---------------------------------------------------------------------------
 // Migration
 // ---------------------------------------------------------------------------
@@ -157,8 +146,7 @@ export async function migrate(
   const customModes = await readLegacyCustomModes(context)
   const prompts = readLegacyCustomModePrompts(context)
   const legacySettings = cachedSettings ?? readLegacySettings(context)
-  const catalog = await readSessionCatalog(context)
-  const sessions = cachedSessions ?? listSessions(catalog)
+  const sessions: MigrationSessionInfo[] = []
 
   const results: MigrationResultItem[] = []
 
@@ -256,19 +244,6 @@ export async function migrate(
     if (Object.keys(agentConfig).length > 0) {
       await client.global.config.update({ config: { agent: agentConfig } })
     }
-  }
-
-  if (selections.sessions?.length) {
-    results.push(
-      ...(await runSessionBatch({
-        selections: selections.sessions,
-        sessions,
-        resolve: (id) => resolveSession(catalog, id),
-        migrate: (selection, source, progress) => migrateSession(selection, context, client, progress, source),
-        onProgress,
-        onSessionProgress,
-      })),
-    )
   }
 
   // Migrate default model

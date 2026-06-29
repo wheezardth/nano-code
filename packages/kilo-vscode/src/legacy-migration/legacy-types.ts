@@ -360,3 +360,13 @@ export interface MigrationSessionProgress {
   phase: MigrationSessionPhase
   error?: string
 }
+
+export interface LegacyHistoryItem {
+  id: string
+  rootTaskId?: string
+  parentTaskId?: string
+  ts?: number
+  task?: string
+  workspace?: string
+  mode?: string
+}

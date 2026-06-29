@@ -12,20 +12,14 @@ import { DialogPrompt } from "@tui/ui/dialog-prompt"
 import { DEFAULT_VECTOR_STORE } from "@kilocode/kilo-indexing/config"
 import { useSync } from "@tui/context/sync"
 import { useToast } from "@tui/ui/toast"
-import { createEffect, createMemo, createResource, createSignal, Show } from "solid-js"
+import { createMemo, createResource, Show } from "solid-js"
 import { reconcile } from "solid-js/store"
 import type { IndexingConfig, Config } from "@kilocode/sdk/v2"
-import * as Log from "@opencode-ai/core/util/log"
-import { hasKiloIndexingAuth, resolveKiloIndexingAuth, shouldDefaultIndexingToKilo } from "../indexing-auth"
 import {
   createIndexingDialogState,
-  currentKiloModel,
   indexingInheritance,
   indexingPatch,
-  indexingScopeConfig,
   inheritedDescription,
-  kiloModelOptions,
-  loadKiloEmbeddingModels,
   mergeIndexingConfig,
   type IndexingScope,
 } from "./indexing-dialog-state"
@@ -36,43 +30,19 @@ type SDK = any
 
 type EmbeddingProvider = NonNullable<IndexingConfig["provider"]>
 
-const log = Log.create({ service: "indexing-model-select" })
-
 const PROVIDER_LABELS: Record<EmbeddingProvider, string> = {
-  kilo: "Kilo",
-  openai: "OpenAI",
   ollama: "Ollama (local)",
   "openai-compatible": "OpenAI-Compatible",
-  gemini: "Gemini",
-  mistral: "Mistral",
-  "vercel-ai-gateway": "Vercel AI Gateway",
-  bedrock: "AWS Bedrock",
-  openrouter: "OpenRouter",
-  voyage: "Voyage",
 }
 
 type ProviderFieldDef = { key: string; label: string; placeholder: string; sensitive?: boolean }
 
 const PROVIDER_FIELDS: Record<EmbeddingProvider, ProviderFieldDef[]> = {
-  kilo: [],
-  openai: [{ key: "apiKey", label: "API Key", placeholder: "sk-...", sensitive: true }],
   ollama: [{ key: "baseUrl", label: "Base URL", placeholder: "http://localhost:11434" }],
   "openai-compatible": [
     { key: "baseUrl", label: "Base URL", placeholder: "https://api.example.com/v1" },
     { key: "apiKey", label: "API Key (optional)", placeholder: "sk-...", sensitive: true },
   ],
-  gemini: [{ key: "apiKey", label: "API Key", placeholder: "AI...", sensitive: true }],
-  mistral: [{ key: "apiKey", label: "API Key", placeholder: "...", sensitive: true }],
-  "vercel-ai-gateway": [{ key: "apiKey", label: "API Key", placeholder: "...", sensitive: true }],
-  bedrock: [
-    { key: "region", label: "AWS Region", placeholder: "us-east-1" },
-    { key: "profile", label: "AWS Profile", placeholder: "default" },
-  ],
-  openrouter: [
-    { key: "apiKey", label: "API Key", placeholder: "sk-or-...", sensitive: true },
-    { key: "specificProvider", label: "Specific Provider", placeholder: "optional" },
-  ],
-  voyage: [{ key: "apiKey", label: "API Key", placeholder: "pa-...", sensitive: true }],
 }
 
 const VECTOR_STORE_LABELS: Record<string, string> = {
@@ -90,23 +60,13 @@ function scopedIndexing(data: Config | undefined): IndexingConfig {
   return data?.indexing ?? {}
 }
 
-function hasKiloAuth(sync: ReturnType<typeof useSync>, scope: IndexingScope, indexing: IndexingConfig): boolean {
-  const provider = sync.data.provider_next.all.find((item) => item.id === "kilo")
-  const config = indexingScopeConfig(scope, sync.data.config, sync.data.globalConfig, indexing)
-  return hasKiloIndexingAuth({ config, provider })
-}
-
 function defaultIndexing(
   sync: ReturnType<typeof useSync>,
   scope: IndexingScope,
   indexing: IndexingConfig,
   global?: IndexingConfig,
 ): IndexingConfig {
-  const provider = sync.data.provider_next.all.find((item) => item.id === "kilo")
-  const config = indexingScopeConfig(scope, sync.data.config, sync.data.globalConfig, indexing)
-  const auth = resolveKiloIndexingAuth({ config, provider })
-  if (!shouldDefaultIndexingToKilo({ ...global, ...indexing }, auth)) return indexing
-  return { ...indexing, provider: "kilo", model: null, dimension: null }
+  return indexing
 }
 
 async function saveScopedIndexing(
@@ -168,13 +128,11 @@ function ProviderSelect(props: SubDialogProps) {
 
   const options: DialogSelectOption<EmbeddingProvider>[] = (
     Object.entries(PROVIDER_LABELS) as [EmbeddingProvider, string][]
-  )
-    .filter(([value]) => value !== "kilo" || hasKiloAuth(sync, props.scope, indexing) || indexing.provider === "kilo")
-    .map(([value, title]) => ({
-      value,
-      title,
-      description: value === indexing.provider ? "(current)" : undefined,
-    }))
+  ).map(([value, title]) => ({
+    value,
+    title,
+    description: value === indexing.provider ? "(current)" : undefined,
+  }))
 
   return (
     <DialogSelect
@@ -195,65 +153,6 @@ function ProviderSelect(props: SubDialogProps) {
           return
         }
         showProviderSettings(dialog, sync, sdk, toast, provider, props.useSDK, props.scope, updated, updated)
-      }}
-    />
-  )
-}
-
-function KiloModelSelect(props: SubDialogProps) {
-  const dialog = useDialog()
-  const sync = useSync()
-  const sdk = props.useSDK()
-  const toast = useToast()
-  const indexing = props.indexing
-  const [error, setError] = createSignal<string>()
-  const [catalog] = createResource(() => loadKiloEmbeddingModels(setError))
-  const seen = { error: undefined as string | undefined, state: "" }
-  createEffect(() => {
-    const message = error()
-    if (!message || seen.error === message) return
-    seen.error = message
-    toast.show({
-      title: "Code Indexing Error",
-      message,
-      variant: "error",
-      duration: 10000,
-    })
-  })
-  createEffect(() => {
-    const cfg = catalog()
-    const state = `${catalog.state}:${cfg?.models.length ?? 0}`
-    if (seen.state === state) return
-    seen.state = state
-    log.info("Kilo embedding model resource changed", {
-      state: catalog.state,
-      models: cfg?.models.length ?? 0,
-      current: currentKiloModel(cfg, indexing.model),
-      defaultModel: cfg?.defaultModel || undefined,
-      scope: props.scope,
-    })
-  })
-  const options = createMemo(() => kiloModelOptions(catalog()))
-  const current = createMemo(() => currentKiloModel(catalog(), indexing.model))
-
-  return (
-    <DialogSelect
-      title="Kilo Embedding Model"
-      options={options()}
-      current={current()}
-      renderFilter={(catalog()?.models.length ?? 0) > 0}
-      onSelect={async (option) => {
-        if (!option.value || !catalog()?.models.some((model) => model.id === option.value)) return
-        log.info("selected Kilo embedding model", { model: option.value, scope: props.scope })
-        await saveScopedIndexing(
-          sdk,
-          sync,
-          props.scope,
-          props.raw,
-          { ...props.raw, model: option.value, dimension: null },
-          toast,
-        )
-        dialog.replace(() => <DialogIndexing useSDK={props.useSDK} scope={props.scope} />)
       }}
     />
   )
@@ -558,20 +457,13 @@ export function DialogIndexing(props: DialogIndexingProps) {
         value: "model",
         title: "Embedding Model",
         category: "Embedding",
-        description: mark(
-          indexing.provider === "kilo" ? (indexing.model ?? "Kilo catalog") : (indexing.model ?? "default"),
-          [["model"]],
-        ),
+        description: mark(indexing.model ?? "default", [["model"]]),
       },
       {
         value: "dimension",
         title: "Vector Dimension",
         category: "Embedding",
-        description:
-          indexing.provider === "kilo"
-            ? "provided by Kilo"
-            : mark(indexing.dimension ? String(indexing.dimension) : "auto", [["dimension"]]),
-        disabled: indexing.provider === "kilo",
+        description: mark(indexing.dimension ? String(indexing.dimension) : "auto", [["dimension"]]),
       },
       {
         value: "vectorStore",
@@ -636,12 +528,6 @@ export function DialogIndexing(props: DialogIndexingProps) {
             }
             break
           case "model": {
-            if (indexing.provider === "kilo") {
-              dialog.replace(() => (
-                <KiloModelSelect useSDK={props.useSDK} scope={scope()} indexing={indexing} raw={raw} />
-              ))
-              break
-            }
             const result = await DialogPrompt.show(dialog, "Embedding Model", {
               value: indexing.model ?? "",
               placeholder: "Enter model ID",
@@ -654,7 +540,6 @@ export function DialogIndexing(props: DialogIndexingProps) {
             break
           }
           case "dimension": {
-            if (indexing.provider === "kilo") break
             const result = await DialogPrompt.show(dialog, "Vector Dimension", {
               value: indexing.dimension ? String(indexing.dimension) : "",
               placeholder: "Leave empty for auto-detection",

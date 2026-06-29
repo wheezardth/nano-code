@@ -1,7 +1,6 @@
 import * as path from "node:path"
 import * as vscode from "vscode"
-import type { MigrationSessionInfo } from "./legacy-types"
-import type { LegacyHistoryItem } from "./sessions/lib/legacy-types"
+import type { MigrationSessionInfo, LegacyHistoryItem } from "./legacy-types"
 
 const API_FILE = "api_conversation_history.json"
 const UI_FILE = "ui_messages.json"

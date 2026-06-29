@@ -1266,7 +1266,6 @@ export const layer = Layer.effect(
           const pluginAuth = yield* auth.get(providerID).pipe(Effect.orDie)
 
           provider.models = yield* Effect.promise(async () => {
-            // @ts-expect-error — kilo prompt field is string; SDK expects a literal union
             const next = await models(toPublicInfo(provider), { auth: pluginAuth })
             return Object.fromEntries(
               Object.entries(next).map(([id, model]) => [

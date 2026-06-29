@@ -13,9 +13,6 @@ import type {
   MigrationSessionSelection,
 } from "../../legacy-migration/legacy-types"
 import * as MigrationService from "../../legacy-migration/migration-service"
-import { runSessionBatch } from "../../legacy-migration/session-batch"
-import { migrate as migrateSession } from "../../legacy-migration/sessions/migrate"
-import { resolveSession } from "../../legacy-migration/task-store"
 import { detectRooCodeSessions, type RooImportSource } from "../../roo-import/service"
 
 /** Subset of vscode.ExtensionContext needed by migration handlers. */
@@ -188,26 +185,10 @@ async function startRooMigration(
     return
   }
 
-  const results = await runSessionBatch({
-    selections: selections.sessions ?? [],
-    sessions: source.sessions,
-    resolve: (id) => resolveSession(source.catalog, id),
-    migrate: (selection, resolved, progress) =>
-      migrateSession(
-        selection,
-        ctx.extensionContext as Parameters<typeof migrateSession>[1],
-        ctx.client as KiloClient,
-        progress,
-        resolved,
-      ),
-    onProgress: (item, status, message) => {
-      ctx.postMessage({ type: "migrationProgress", source: "roo", operationId, item, status, message })
-    },
-    onSessionProgress: (progress) => postSessionProgress(ctx, "roo", operationId, progress),
-  })
+  // Session migration is disabled — only migrate providers, agents, and settings
 
-  ctx.lastMigrationHadErrors = results.some((item) => item.status === "error")
-  ctx.postMessage({ type: "migrationComplete", source: "roo", operationId, results })
+  ctx.lastMigrationHadErrors = false
+  ctx.postMessage({ type: "migrationComplete", source: "roo", operationId, results: [] })
 }
 
 /** Run the migration for the selected items. */

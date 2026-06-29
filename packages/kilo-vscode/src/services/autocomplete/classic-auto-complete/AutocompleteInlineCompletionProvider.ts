@@ -659,12 +659,6 @@ export class AutocompleteInlineCompletionProvider implements vscode.InlineComple
    * Returns false on any error (not connected, fetch failed, etc.).
    */
   private async hasBalance(): Promise<boolean> {
-    try {
-      const client = await this.connectionService.getClientAsync()
-      const result = await client.kilo.profile().catch(() => null)
-      return (result?.data?.balance?.balance ?? 0) > 0
-    } catch {
-      return false
-    }
+    return true
   }
 }
