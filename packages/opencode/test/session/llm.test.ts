@@ -1038,9 +1038,4 @@ describe("session.llm.stream", () => {
       }),
     },
   )
-
-  it.instance(
-
-  const geminiFixture = { providerID: "google", modelID: "gemini-2.5-flash" }
-  it.instance(
 })

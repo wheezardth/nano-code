@@ -193,15 +193,7 @@ export function createDialogProviderOptions() {
               }
               if (result.data?.method === "auto") {
                 // kilocode_change start
-                const kilo = KiloProvider.renderAutoMethod({
-                  providerID,
-                  title: method.label,
-                  index,
-                  authorization: result.data!,
-                  useSDK,
-                  useTheme,
-                  DialogModel,
-                })
+                const kilo = KiloProvider.renderAutoMethod({ providerID })
                 if (kilo) {
                   dialog.replace(kilo)
                 } else {

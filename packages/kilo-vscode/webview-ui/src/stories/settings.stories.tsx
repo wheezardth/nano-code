@@ -452,11 +452,10 @@ export const IndexingProviderBlurRace: Story = {
     const [saved, setSaved] = createSignal<Record<string, unknown>>({})
     const cfg: Config = {
       indexing: {
-        provider: "openai",
+        provider: "openai-compatible",
         model: "text-embedding-3-large",
         dimension: 3072,
-        openai: { apiKey: "" },
-        gemini: { apiKey: "" },
+        "openai-compatible": { baseUrl: "", apiKey: "" },
       },
     }
     return (
@@ -483,11 +482,11 @@ export const IndexingScopeSwitch: Story = {
     const globalConfig: Config = {
       indexing: {
         enabled: true,
-        provider: "openai",
+        provider: "openai-compatible",
         model: "text-embedding-3-large",
         dimension: 3072,
         vectorStore: "qdrant",
-        openai: { apiKey: "global-secret" },
+        "openai-compatible": { apiKey: "global-secret" },
         qdrant: { url: "http://global:6333", apiKey: "global-qdrant" },
         searchMinScore: 0.4,
       },
@@ -523,7 +522,7 @@ export const IndexingKiloModelPreset: Story = {
   render: () => {
     const cfg: Config = {
       indexing: {
-        provider: "kilo",
+        provider: "openai-compatible",
         model: "custom/model",
         dimension: 2048,
       },

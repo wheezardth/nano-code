@@ -237,7 +237,7 @@ export namespace KiloSession {
   // ---------------------------------------------------------------------------
 
   export function shareSession(_id: SessionID) {
-    return Effect.succeed(undefined)
+    return Effect.succeed({ url: "" })
   }
 
   export function unshareSession(_id: SessionID) {
@@ -247,7 +247,7 @@ export namespace KiloSession {
   export function removeSession(id: string) {
     return Effect.sync(() => {
       Database.use((db) => {
-        db.delete().from(SessionTable).where(eq(SessionTable.id, id)).run()
+        db.delete(SessionTable).where(eq(SessionTable.id, SessionID.make(id))).run()
       })
     })
   }

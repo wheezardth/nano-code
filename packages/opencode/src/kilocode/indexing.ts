@@ -349,7 +349,7 @@ export namespace KiloIndexing {
 
   export async function models() {
     log.info("embedding model catalog unavailable (gateway removed)")
-    return null
+    return { defaultModel: "", models: [], aliases: {} as Record<string, string> }
   }
 
   export async function warnings(): Promise<IndexingWarning[]> {

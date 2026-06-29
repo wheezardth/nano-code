@@ -213,7 +213,7 @@ export const layer = Layer.effect(
             yield* sync(info.sessionID, [{ type: "message", data: info }])
             if (info.role !== "user") return
             const model = yield* provider.getModel(info.model.providerID, info.model.modelID)
-            yield* sync(info.sessionID, [{ type: "model", data: [model] }])
+            yield* sync(info.sessionID, [{ type: "model", data: [model] as unknown as SDK.Model[] }])
           }),
         )
         yield* watch(MessageV2.Event.PartUpdated, (evt) =>
@@ -312,7 +312,7 @@ export const layer = Layer.effect(
         ...messages.map((item) => ({ type: "message" as const, data: item.info })),
         ...messages.flatMap((item) => item.parts.map((part) => ({ type: "part" as const, data: part }))),
         { type: "session_diff", data: diffs },
-        { type: "model", data: models },
+        { type: "model", data: models as unknown as SDK.Model[] },
       ])
     })
 

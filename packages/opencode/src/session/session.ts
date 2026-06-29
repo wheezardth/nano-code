@@ -639,7 +639,7 @@ export const layer: Layer.Layer<
         }
 
         // kilocode_change start
-        yield* Effect.promise(() => KiloSession.removeSession(sessionID)).pipe(Effect.ignore)
+        yield* KiloSession.removeSession(sessionID).pipe(Effect.ignore)
         KiloSession.clearPlatformOverride(sessionID)
         if (hasInstance) {
           yield* Effect.promise(() => BackgroundProcess.stopSession(sessionID)).pipe(Effect.ignore)

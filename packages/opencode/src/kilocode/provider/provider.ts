@@ -17,7 +17,7 @@ import { mapValues, omit, pickBy } from "remeda"
  * Bundled providers from upstream Kilo (gateway). Empty after gateway removal — user
  * configured providers are the only supported source.
  */
-export const KILO_BUNDLED_PROVIDERS: Array<Record<string, unknown>> = []
+export const KILO_BUNDLED_PROVIDERS: Record<string, () => Promise<(opts: any) => any>> = {}
 
 /** Default timeout (ms) for provider HTTP requests (connection phase). */
 export const REQUEST_TIMEOUT_MS = 300_000 // 5 minutes

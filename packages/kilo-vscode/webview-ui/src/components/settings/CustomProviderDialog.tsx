@@ -38,8 +38,6 @@ const SEARCH_DEBOUNCE_MS = 150
 
 const PACKAGE_OPTIONS: Array<{ value: CustomProviderPackage; label: string }> = [
   { value: "@ai-sdk/openai-compatible", label: "OpenAI Compatible" },
-  { value: "@ai-sdk/openai", label: "OpenAI Responses" },
-  { value: "@ai-sdk/anthropic", label: "Anthropic Messages" },
 ]
 
 /** Subsequence fuzzy match — "gpt4o" matches "gpt-4o-mini". */
@@ -203,7 +201,7 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
     setFetchStatus(undefined)
     setSearch("")
 
-    if (npm === "@ai-sdk/anthropic" || !/^https?:\/\//.test(url.trim())) return
+    if (!/^https?:\/\//.test(url.trim())) return
 
     fetchVersion++
     const version = fetchVersion

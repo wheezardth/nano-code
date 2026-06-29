@@ -155,8 +155,8 @@ describe("config overlay routes", () => {
     const global: Config.Info = {
       indexing: {
         enabled: true,
-        provider: "openai",
-        openai: { apiKey: "global-secret" },
+        provider: "openai-compatible",
+        "openai-compatible": { apiKey: "global-secret" },
       },
     }
     const local: Config.Info = {
@@ -177,8 +177,8 @@ describe("config overlay routes", () => {
     })
 
     expect(body.fields["indexing.enabled"]).toMatchObject({ source: "global", value: true })
-    expect(body.fields["indexing.provider"]).toMatchObject({ source: "global", value: "openai" })
-    expect(body.fields["indexing.openai.apiKey"]).toMatchObject({ source: "global", value: "global-secret" })
+    expect(body.fields["indexing.provider"]).toMatchObject({ source: "global", value: "openai-compatible" })
+    expect(body.fields["indexing.openai-compatible.apiKey"]).toMatchObject({ source: "global", value: "global-secret" })
     expect(body.fields["indexing.ollama.baseUrl"]).toMatchObject({ source: "default" })
     expect(body.fields["indexing.ollama.baseUrl"].value).toBeUndefined()
   })
@@ -186,7 +186,7 @@ describe("config overlay routes", () => {
   test.serial("writes project indexing overrides to .kilo/kilo.jsonc", async () => {
     await using global = await tmpdir()
     await using project = await tmpdir()
-    await setGlobal(global.path, { indexing: { enabled: true, provider: "openai" } })
+    await setGlobal(global.path, { indexing: { enabled: true, provider: "openai-compatible" } })
 
     await json(
       await req(project.path, "/config/overlay", {

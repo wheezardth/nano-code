@@ -1,11 +1,10 @@
 // Stubbed — plan followup logic removed
 import { Effect } from "effect"
 import type { SessionID } from "@/session/schema"
-import type { MessageID } from "@/session/message-v2"
 
 export namespace PlanFollowup {
-  export const ask = (_input: { sessionId: string; messages: unknown[]; abort: AbortSignal }) =>
-    Effect.succeed("skip" as const)
+  export const ask = (_input: unknown): Promise<"skip" | "continue" | "break"> =>
+    Promise.resolve("skip" as const)
   export const abort = (_sessionId: SessionID) => Effect.void
 }
 

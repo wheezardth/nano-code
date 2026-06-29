@@ -224,7 +224,7 @@ describe("kilocode indexing config", () => {
     const merged = KilocodeConfig.mergeConfig(
       {
         indexing: {
-          provider: "openai",
+          provider: "openai-compatible",
           model: "text-embedding-3-large",
           dimension: 3072,
         },
@@ -233,7 +233,7 @@ describe("kilocode indexing config", () => {
     )
     const input = KiloIndexing.input(patch.indexing)
 
-    expect(merged.indexing).toEqual({ provider: "openai" })
+    expect(merged.indexing).toEqual({ provider: "openai-compatible" })
     expect(input.modelId).toBeUndefined()
     expect(input.modelDimension).toBeUndefined()
   })

@@ -1,14 +1,14 @@
 export type { IndexingConfig } from "@kilocode/kilo-indexing/config"
 
 // Stubbed — gateway dependency removed
-export function hasKiloIndexingAuth(): boolean {
+export function hasKiloIndexingAuth(_opts: unknown): boolean {
   return false
 }
 
-export function resolveKiloIndexingAuth(): Promise<{ baseUrl: string; apiKey: string } | null> {
-  return Promise.resolve(null)
+export function resolveKiloIndexingAuth(_opts: unknown): null {
+  return null
 }
 
-export function shouldDefaultIndexingToKilo(): boolean {
+export function shouldDefaultIndexingToKilo(_indexing: unknown, _auth: unknown): boolean {
   return false
 }

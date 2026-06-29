@@ -1,6 +1,6 @@
 import { ProviderAuth } from "@/provider/auth"
 import { Config } from "@/config/config"
-import { ModelsDev } from "@opencode-ai/core/models-dev"
+import * as ModelsDev from "@/provider/models"
 import { Provider } from "@/provider/provider"
 import { ProviderID } from "@/provider/schema"
 import { mapValues, pickBy } from "remeda" // kilocode_change
@@ -71,7 +71,7 @@ export const providerHandlers = HttpApiBuilder.group(InstanceHttpApi, "provider"
         })), // kilocode_change
         default: Provider.defaultModelIDs(pickBy(validProviders, (item) => Object.keys(item.models).length > 0)),
         connected: Object.keys(connected),
-        failed,
+        failed: Array.from(failedSet),
       }
       // kilocode_change end
     })

@@ -14,7 +14,7 @@ export interface ModelsDevCost {
     output: number
     cache_read?: number
     cache_write?: number
-    tier: number
+    tier: { type: "context"; size: number }
   }>
   context_over_200k?: {
     cache_read: number
@@ -29,7 +29,7 @@ export interface ModelsDevModel {
   name: string
   family: string
   provider?: { api: string; npm: string }
-  status: string
+  status: "active" | "alpha" | "beta" | "deprecated"
   cost: ModelsDevCost
   limit: { context: number; input: number; output: number }
   temperature: boolean
@@ -39,10 +39,19 @@ export interface ModelsDevModel {
   modalities?: { input: string[]; output: string[] }
   interleaved: boolean
   release_date: string
+  experimental?: {
+    modes?: Record<string, {
+      cost?: ModelsDevCost
+      provider?: { body?: Record<string, unknown>; headers?: Record<string, string> }
+    }>
+  }
 }
 
 export interface ModelsDevProvider {
   id: string
+  name: string
+  description?: string
+  env: string[]
   api: string
   npm: string
   models: Record<string, ModelsDevModel>
@@ -51,6 +60,9 @@ export interface ModelsDevProvider {
 export interface ModelsDevInterface {
   get: () => Effect.Effect<Record<string, ModelsDevProvider>>
 }
+
+export type Model = ModelsDevModel
+export type Provider = ModelsDevProvider
 
 // Service returns a record of providers; after gateway removal this is empty.
 export class Service extends Context.Service<Service, ModelsDevInterface>()("@opencode/ModelsDev") {}
@@ -67,4 +79,3 @@ export function patchModelsDevModel(_ctx: unknown, _model: ModelsDevModel): Mode
 export function patchConfigModel(_ctx: unknown, _model: ModelsDevModel): ModelsDevModel {
   return _model
 }
-

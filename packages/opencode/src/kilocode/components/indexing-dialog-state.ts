@@ -1,32 +1,86 @@
 // Stubbed — gateway dependency removed
+import type { IndexingConfig } from "@kilocode/sdk/v2"
+import { createMemo } from "solid-js"
 
-export const inheritedDescription = false
-export const kiloModelOptions = {}
-export const loadKiloEmbeddingModels = () => Promise.resolve([])
-export const mergeIndexingConfig = (a: Record<string, unknown>, b: Record<string, unknown>) => ({ ...a, ...b })
-export type IndexingScope = "global" | "local"
+export type IndexingScope = "global" | "project"
 
-// Additional stubs required by dialog-indexing.tsx
-export function createIndexingDialogState() {
-  const [state, setState] = {} as { enabled: boolean }
-  return {
-    state: state as { enabled: boolean },
-    setState: (_s: typeof state) => setState(_s),
-  }
+export function inheritedDescription(value: string, _inheritance: "none" | "inherited" | "partial"): string {
+  return value
 }
 
-export function currentKiloModel() {
-  return null as unknown as { id: string; name: string }
-}
-
-export function indexingInheritance(_scope: string, _paths: readonly (readonly string[])[]): "none" | "inherited" | "partial" {
+export function indexingInheritance(
+  _scope: IndexingScope,
+  _global: unknown,
+  _project: unknown,
+  _paths: readonly (readonly string[])[],
+): "none" | "inherited" | "partial" {
   return "none"
 }
 
-export function indexingPatch(_scope: string, _global: Record<string, unknown>, _project: Record<string, unknown>, _patch: Record<string, unknown>) {
-  return {}
+export function indexingScopeConfig(
+  _scope: IndexingScope,
+  _config: unknown,
+  _globalConfig: unknown,
+  indexing: IndexingConfig,
+): IndexingConfig {
+  return indexing
 }
 
-export function indexingScopeConfig(_scope: string) {
-  return {}
+export function indexingPatch(
+  _before: IndexingConfig,
+  after: IndexingConfig,
+): { indexing: Partial<IndexingConfig>; unset: string[] } {
+  return { indexing: after, unset: [] }
+}
+
+export function mergeIndexingConfig(a: IndexingConfig, b: IndexingConfig): IndexingConfig {
+  return { ...a, ...b }
+}
+
+export function loadKiloEmbeddingModels(
+  _setError?: (msg: string) => void,
+): Promise<{ models: Array<{ id: string; name: string; dimension: number; scoreThreshold: number }>; defaultModel: string; aliases: Record<string, string> }> {
+  return Promise.resolve({ models: [], defaultModel: "", aliases: {} })
+}
+
+export function kiloModelOptions(
+  _catalog: { models: Array<{ id: string; name: string }> } | undefined,
+): Array<{ value: string; title: string }> {
+  return []
+}
+
+export function currentKiloModel(
+  _catalog: { models: Array<{ id: string; name: string }> } | undefined,
+  modelId: string | null | undefined,
+): string | undefined {
+  return modelId ?? undefined
+}
+
+export interface IndexingDialogState {
+  config: () => IndexingConfig
+  raw: () => IndexingConfig
+  enabled: () => boolean
+  inherited: (paths: readonly (readonly string[])[]) => "none" | "inherited" | "partial"
+  unset: () => string[]
+}
+
+export function createIndexingDialogState(opts: {
+  scope: () => IndexingScope
+  global: () => IndexingConfig
+  project: () => IndexingConfig | undefined
+  resolve: (current: IndexingConfig, global?: IndexingConfig) => IndexingConfig
+}): IndexingDialogState {
+  const raw = createMemo<IndexingConfig>(() => {
+    const s = opts.scope()
+    return s === "project" ? (opts.project() ?? {}) : opts.global()
+  })
+  const config = createMemo(() => opts.resolve(raw(), opts.global()))
+
+  return {
+    config,
+    raw,
+    enabled: () => !!(config() as IndexingConfig & { enabled?: boolean }).enabled,
+    inherited: (_paths) => "none",
+    unset: () => [],
+  }
 }

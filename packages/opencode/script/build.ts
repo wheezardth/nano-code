@@ -110,20 +110,20 @@ async function smokeModels(binaryPath: string) {
   const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "kilo-models-"))
   try {
     const cleanKeys = new Set(["KILO_MODELS_PATH", "KILO_MODELS_URL", "KILO_CONFIG", "KILO_CONFIG_DIR", "KILO_CONFIG_CONTENT", "KILO_PURE"])
-    const env: string[] = []
+    const env: Record<string, string> = {}
     for (const [k, v] of Object.entries(process.env)) {
       if (!v || cleanKeys.has(k)) continue
-      env.push(k + "=" + v)
+      env[k] = v
     }
-    env.push(
-      "XDG_DATA_HOME=" + path.join(root, "data"),
-      "XDG_CACHE_HOME=" + path.join(root, "cache"),
-      "XDG_CONFIG_HOME=" + path.join(root, "config"),
-      "XDG_STATE_HOME=" + path.join(root, "state"),
-      "KILO_DISABLE_MODELS_FETCH=1",
-      "KILO_DISABLE_PROJECT_CONFIG=1",
-      "KILO_CONFIG_CONTENT=" + JSON.stringify({ enabled_providers: smokeTestProviders }),
-    )
+    Object.assign(env, {
+      XDG_DATA_HOME: path.join(root, "data"),
+      XDG_CACHE_HOME: path.join(root, "cache"),
+      XDG_CONFIG_HOME: path.join(root, "config"),
+      XDG_STATE_HOME: path.join(root, "state"),
+      KILO_DISABLE_MODELS_FETCH: "1",
+      KILO_DISABLE_PROJECT_CONFIG: "1",
+      KILO_CONFIG_CONTENT: JSON.stringify({ enabled_providers: smokeTestProviders }),
+    })
     const proc = Bun.spawn([binaryPath, "models"], { env, cwd: dir })
     const [out, err] = await Promise.all([
       new Response(proc.stdout).text(),

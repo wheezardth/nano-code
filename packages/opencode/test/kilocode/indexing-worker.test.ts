@@ -16,7 +16,7 @@ test("runs indexing engine requests in its worker", async () => {
   })
 
   try {
-    const status = await engine.init({ enabled: false, embedderProvider: "openai" })
+    const status = await engine.init({ enabled: false, embedderProvider: "openai-compatible" })
     expect(status.state).toBe("Disabled")
   } finally {
     await engine.dispose()
@@ -44,8 +44,8 @@ test("routes multiple directories through the shared indexing worker", async () 
 
   try {
     const statuses = await Promise.all([
-      left.init({ enabled: false, embedderProvider: "openai" }),
-      right.init({ enabled: false, embedderProvider: "openai" }),
+      left.init({ enabled: false, embedderProvider: "openai-compatible" }),
+      right.init({ enabled: false, embedderProvider: "openai-compatible" }),
     ])
     expect(statuses.map((status) => status.state)).toEqual(["Disabled", "Disabled"])
   } finally {
@@ -65,11 +65,11 @@ test("allows same-directory recreation while disposal is pending", async () => {
     failure() {},
   }
   const first = IndexingWorker.create(tmp.path, tmp.path, hooks)
-  await first.init({ enabled: false, embedderProvider: "openai" })
+  await first.init({ enabled: false, embedderProvider: "openai-compatible" })
 
   const disposing = first.dispose()
   const second = IndexingWorker.create(tmp.path, tmp.path, hooks)
-  const status = await second.init({ enabled: false, embedderProvider: "openai" })
+  const status = await second.init({ enabled: false, embedderProvider: "openai-compatible" })
   await disposing
   await second.dispose()
 
@@ -125,7 +125,7 @@ test("releases enabled workers after provider initialization errors", async () =
     log() {},
     failure() {},
   })
-  const status = await engine.init({ enabled: false, embedderProvider: "openai" })
+  const status = await engine.init({ enabled: false, embedderProvider: "openai-compatible" })
   await engine.dispose()
 
   expect(status.state).toBe("Disabled")

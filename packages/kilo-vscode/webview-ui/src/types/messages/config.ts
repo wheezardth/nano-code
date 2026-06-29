@@ -50,17 +50,7 @@ export interface CommitMessageConfig {
   prompt?: string
 }
 
-export type IndexingProvider =
-  | "kilo"
-  | "openai"
-  | "ollama"
-  | "openai-compatible"
-  | "gemini"
-  | "mistral"
-  | "vercel-ai-gateway"
-  | "bedrock"
-  | "openrouter"
-  | "voyage"
+export type IndexingProvider = "ollama" | "openai-compatible"
 
 export interface IndexingConfig {
   enabled?: boolean
@@ -68,16 +58,8 @@ export interface IndexingConfig {
   model?: string | null
   dimension?: number | null
   vectorStore?: "lancedb" | "qdrant"
-  kilo?: { apiKey?: string; baseUrl?: string; organizationId?: string }
-  openai?: { apiKey?: string }
   ollama?: { baseUrl?: string }
   "openai-compatible"?: { baseUrl?: string; apiKey?: string }
-  gemini?: { apiKey?: string }
-  mistral?: { apiKey?: string }
-  "vercel-ai-gateway"?: { apiKey?: string }
-  bedrock?: { region?: string; profile?: string }
-  openrouter?: { apiKey?: string; specificProvider?: string }
-  voyage?: { apiKey?: string }
   qdrant?: { url?: string; apiKey?: string }
   lancedb?: { directory?: string }
   searchMinScore?: number
