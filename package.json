@@ -21,7 +21,21 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*",
+      "packages/core",
+      "packages/http-recorder",
+      "packages/kilo-console",
+      "packages/kilo-docs",
+      "packages/kilo-i18n",
+      "packages/kilo-indexing",
+      "packages/kilo-ui",
+      "packages/kilo-vscode",
+      "packages/kilo-web-ui",
+      "packages/llm",
+      "packages/opencode",
+      "packages/plugin-atomic-chat",
+      "packages/plugin",
+      "packages/script",
+      "packages/ui",
       "packages/sdk/js"
     ],
     "catalog": {

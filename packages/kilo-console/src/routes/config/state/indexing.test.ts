@@ -5,29 +5,29 @@ describe("indexing config state", () => {
   test("merges project settings over nested global settings", () => {
     expect(
       merge(
-        { enabled: true, provider: "openai", openai: { apiKey: "global" }, qdrant: { url: "http://global" } },
-        { enabled: false, provider: "ollama", qdrant: { apiKey: "project" } },
+        { enabled: true, provider: "ollama", ollama: { baseUrl: "global" }, qdrant: { url: "http://global" } },
+        { enabled: false, provider: "openai-compatible", qdrant: { apiKey: "project" } },
       ),
     ).toEqual({
       enabled: false,
-      provider: "ollama",
-      openai: { apiKey: "global" },
+      provider: "openai-compatible",
+      ollama: { baseUrl: "global" },
       qdrant: { url: "http://global", apiKey: "project" },
     })
   })
 
   test("cleans empty fields and returns unset paths", () => {
     const before = {
-      provider: "openai" as const,
-      model: "text-embedding-3-small",
-      openai: { apiKey: "secret" },
+      provider: "ollama" as const,
+      model: "nomic-embed-text",
+      ollama: { baseUrl: "http://old:11434" },
     }
-    const after = clean({ provider: "openai", model: "", openai: { apiKey: "" } })
+    const after = clean({ provider: "ollama", model: "", ollama: { baseUrl: "" } })
 
-    expect(after).toEqual({ provider: "openai" })
+    expect(after).toEqual({ provider: "ollama" })
     expect(removed(before, after)).toEqual([
       ["indexing", "model"],
-      ["indexing", "openai"],
+      ["indexing", "ollama"],
     ])
   })
 
@@ -38,11 +38,6 @@ describe("indexing config state", () => {
   })
 
   test("builds provider patches for custom selector changes", () => {
-    expect(providerPatch("kilo", "default-embedding")).toEqual({
-      provider: "kilo",
-      model: "default-embedding",
-      dimension: undefined,
-    })
     expect(providerPatch("ollama", "ignored")).toEqual({
       provider: "ollama",
       model: undefined,

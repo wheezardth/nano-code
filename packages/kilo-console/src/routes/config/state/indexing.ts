@@ -42,7 +42,7 @@ export function clean(input: IndexingConfig): IndexingConfig {
 export function providerPatch(provider: IndexingConfig["provider"] | "", model?: string): IndexingConfig {
   return {
     provider: provider || undefined,
-    model: provider === "kilo" ? model || undefined : undefined,
+    model: undefined,
     dimension: undefined,
   }
 }

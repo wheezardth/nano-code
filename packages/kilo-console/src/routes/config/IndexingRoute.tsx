@@ -15,16 +15,8 @@ type Field = { key: string; label: string; placeholder: string; secret?: boolean
 
 const providers = [
   { value: "", label: "Automatic" },
-  { value: "kilo", label: "Kilo" },
-  { value: "openai", label: "OpenAI" },
   { value: "ollama", label: "Ollama (local)" },
   { value: "openai-compatible", label: "OpenAI-compatible" },
-  { value: "gemini", label: "Gemini" },
-  { value: "mistral", label: "Mistral" },
-  { value: "vercel-ai-gateway", label: "Vercel AI Gateway" },
-  { value: "bedrock", label: "AWS Bedrock" },
-  { value: "openrouter", label: "OpenRouter" },
-  { value: "voyage", label: "Voyage" },
 ] satisfies SelectOption<ProviderValue>[]
 
 const stores = [
@@ -33,25 +25,11 @@ const stores = [
 ] satisfies SelectOption<Store>[]
 
 const fields: Record<Provider, Field[]> = {
-  kilo: [],
-  openai: [{ key: "apiKey", label: "API key", placeholder: "sk-...", secret: true }],
   ollama: [{ key: "baseUrl", label: "Base URL", placeholder: "http://localhost:11434" }],
   "openai-compatible": [
     { key: "baseUrl", label: "Base URL", placeholder: "https://api.example.com/v1" },
     { key: "apiKey", label: "API key", placeholder: "sk-...", secret: true },
   ],
-  gemini: [{ key: "apiKey", label: "API key", placeholder: "AI...", secret: true }],
-  mistral: [{ key: "apiKey", label: "API key", placeholder: "...", secret: true }],
-  "vercel-ai-gateway": [{ key: "apiKey", label: "API key", placeholder: "...", secret: true }],
-  bedrock: [
-    { key: "region", label: "AWS region", placeholder: "us-east-1" },
-    { key: "profile", label: "AWS profile", placeholder: "default" },
-  ],
-  openrouter: [
-    { key: "apiKey", label: "API key", placeholder: "sk-or-...", secret: true },
-    { key: "specificProvider", label: "Specific provider", placeholder: "Optional routing provider" },
-  ],
-  voyage: [{ key: "apiKey", label: "API key", placeholder: "pa-...", secret: true }],
 }
 
 function options(input: IndexingConfig, provider: Provider) {
@@ -124,20 +102,6 @@ export function IndexingRoute() {
   const provider = createMemo(() => view().provider)
   const store = createMemo<Store>(() => view().vectorStore ?? "lancedb")
   const [catalog] = createResource(ctx.query, loadEmbeddingModels)
-  const kiloModels = createMemo<SelectOption<string>[]>(() => {
-    const models = catalog()?.models ?? []
-    if (models.length === 0) return [{ value: "", label: "No Kilo embedding models available", disabled: true }]
-    return models.map((model) => ({
-      value: model.id,
-      label: `${model.name} (${model.note ? `${model.note}, ` : ""}${model.dimension}d)`,
-    }))
-  })
-  const kiloModel = createMemo(() => {
-    const data = catalog()
-    if (!data) return ""
-    const model = view().model ?? data.defaultModel
-    return data.aliases[model] ?? model
-  })
   const errors = createMemo(() => validate(clean(draft())))
   const overridden = createMemo(() => Object.keys(local()).length > 0)
 
@@ -252,7 +216,7 @@ export function IndexingRoute() {
             <div class="ui-form agent-builder-form">
               <FieldCard
                 label="Provider"
-                description="Automatic uses Kilo when signed in, otherwise the provider runtime default."
+                description="Automatic uses the server's provider configuration when available."
                 actions={
                   <SourceBadge
                     source={field("provider")?.source}
@@ -273,11 +237,7 @@ export function IndexingRoute() {
 
               <FieldCard
                 label="Model"
-                description={
-                  provider() === "kilo"
-                    ? "Select a Kilo-hosted embedding model."
-                    : "Leave empty to use the provider's default embedding model."
-                }
+                description="Leave empty to use the provider's default embedding model."
                 actions={
                   <SourceBadge
                     source={field("model")?.source}
@@ -286,26 +246,12 @@ export function IndexingRoute() {
                   />
                 }
               >
-                <Show
-                  when={provider() === "kilo"}
-                  fallback={
-                    <input
-                      value={view().model ?? ""}
-                      placeholder="Provider default"
-                      disabled={Boolean(ctx.saving())}
-                      onInput={(event) => text("model", event.currentTarget.value)}
-                    />
-                  }
-                >
-                  <CustomSelect
-                    class="indexing-select"
-                    label="Kilo embedding model"
-                    value={kiloModel()}
-                    options={kiloModels()}
-                    disabled={Boolean(ctx.saving()) || !catalog()?.models.length}
-                    onSelect={(value) => update({ model: value, dimension: undefined })}
-                  />
-                </Show>
+                <input
+                  value={view().model ?? ""}
+                  placeholder="Provider default"
+                  disabled={Boolean(ctx.saving())}
+                  onInput={(event) => text("model", event.currentTarget.value)}
+                />
               </FieldCard>
 
               <FieldCard
@@ -325,17 +271,10 @@ export function IndexingRoute() {
                   step="1"
                   value={view().dimension ?? ""}
                   placeholder="Auto-detect"
-                  disabled={Boolean(ctx.saving()) || provider() === "kilo"}
+                  disabled={Boolean(ctx.saving())}
                   onInput={(event) => number("dimension", event.currentTarget.value)}
                 />
               </FieldCard>
-
-              <Show when={provider() === "kilo"}>
-                <div class="indexing-note">
-                  Kilo embeddings use the account currently signed in to this Kilo server. Model dimensions are supplied
-                  by the catalog.
-                </div>
-              </Show>
 
               <Show when={provider()} keyed>
                 {(group) => (
