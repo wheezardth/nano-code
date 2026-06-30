@@ -285,7 +285,6 @@ export const dict = {
     "「プロンプトを強化」ボタンは、追加コンテキスト、説明、または言い換えを提供することで、リクエストを改善します。ここにリクエストを入力し、ボタンを再度クリックして動作を確認してください。",
   "prompt.action.indexing": "インデックス設定",
 
-
   "prompt.toast.pasteUnsupported.title": "サポートされていない貼り付け",
   "prompt.toast.pasteUnsupported.description": "ここでは画像またはPDFのみ貼り付け可能です。",
   "prompt.toast.modelAgentRequired.title": "エージェントとモデルを選択",
@@ -956,13 +955,15 @@ export const dict = {
   "settings.config.noWorkspace": "ローカルのNano構成ファイルを編集するには、ワークスペースフォルダーを開いてください。",
   "settings.config.openFailed": "{{scope}}のNano構成ファイルを開けませんでした: {{message}}",
   "settings.config.source.xdg": "XDGグローバル構成",
-  "settings.config.source.homeKilo": "Homeの.kilo構成",
+  "settings.config.source.homeNano": "Homeの.nano構成",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Homeの.kilocode構成",
   "settings.config.source.homeOpencode": "Homeの.opencode構成",
   "settings.config.source.envFile": "KILO_CONFIG環境ファイル",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "インライン環境構成",
-  "settings.config.source.projectKilo": "プロジェクトの.kilo構成",
+  "settings.config.source.projectNano": "プロジェクトの.nano構成",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "プロジェクトルート構成",
   "settings.config.source.projectKilocode": "旧.kilocode構成",
   "settings.config.source.projectOpencode": "旧.opencode構成",
@@ -1647,5 +1648,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "一致するブランチがありません",
   "diffViewer.baseBranch.loading": "ブランチを読み込み中…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "プランの準備ができました:"
+  "plan.exit.ready": "プランの準備ができました:",
 }

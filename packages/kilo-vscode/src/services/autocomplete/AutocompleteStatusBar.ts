@@ -71,7 +71,6 @@ export class AutocompleteStatusBar {
           count: this.props.completionCount,
           startTime: sessionStartTime,
           endTime: now,
-          cost: this.humanFormatSessionCost(),
         }),
         this.props.model && this.props.provider
           ? t("kilocode:autocomplete.statusBar.tooltip.providerInfo", {

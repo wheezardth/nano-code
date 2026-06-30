@@ -4,13 +4,7 @@ import type { PartBatch, PartRemove, PartUpdate } from "../../../../src/shared/s
 import type { SessionMode } from "../../context/worktree-mode"
 import type { ConnectionState, ServerInfo, SessionStatus } from "./connection"
 import type { FileAttachment, Part } from "./parts"
-import type {
-  Message,
-  MessageLoadMode,
-  SessionCloseReason,
-  SessionInfo,
-  SessionUpdate,
-} from "./sessions"
+import type { Message, MessageLoadMode, SessionCloseReason, SessionInfo, SessionUpdate } from "./sessions"
 import type { PermissionRequest } from "./permissions"
 import type { QuestionRequest, SuggestionRequest, TodoItem } from "./questions"
 import type { ModelSelection, Provider, ProviderAuthState } from "./providers"

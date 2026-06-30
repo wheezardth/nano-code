@@ -284,7 +284,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "زر «حسّن الموجه» يطوّر موجهك بإضافة سياق أو توضيح أو إعادة صياغة. جرّب اكتب موجه هنا ثم اضغط الزر مرة ثانية وشوف النتيجة.",
 
-
   "prompt.toast.pasteUnsupported.title": "لصق غير مدعوم",
   "prompt.toast.pasteUnsupported.description": "يمكن لصق الصور أو ملفات PDF فقط هنا.",
   "prompt.toast.modelAgentRequired.title": "حدد وكيلاً ونموذجاً",
@@ -912,13 +911,15 @@ export const dict = {
   "settings.config.noWorkspace": "افتح مجلد مساحة عمل لتحرير ملف تكوين Nano المحلي.",
   "settings.config.openFailed": "فشل فتح ملف تكوين Nano {{scope}}: {{message}}",
   "settings.config.source.xdg": "تكوين XDG العالمي",
-  "settings.config.source.homeKilo": "تكوين .kilo في Home",
+  "settings.config.source.homeNano": "تكوين .nano في Home",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "تكوين .kilocode في Home",
   "settings.config.source.homeOpencode": "تكوين .opencode في Home",
   "settings.config.source.envFile": "ملف بيئة KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "تكوين البيئة المضمن",
-  "settings.config.source.projectKilo": "تكوين .kilo للمشروع",
+  "settings.config.source.projectNano": "تكوين .nano للمشروع",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "تكوين جذر المشروع",
   "settings.config.source.projectKilocode": "تكوين .kilocode القديم",
   "settings.config.source.projectOpencode": "تكوين .opencode القديم",
@@ -1625,5 +1626,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "لا توجد فروع مطابقة",
   "diffViewer.baseBranch.loading": "جارٍ تحميل الفروع…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "الخطة جاهزة:"
+  "plan.exit.ready": "الخطة جاهزة:",
 }

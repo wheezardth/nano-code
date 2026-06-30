@@ -288,7 +288,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Dugme 'Poboljšaj prompt' pomaže poboljšati vaš zahtjev pružajući dodatni kontekst, pojašnjenje ili preformulaciju. Pokušajte upisati zahtjev ovdje i ponovo kliknite na dugme da vidite kako funkcioniše.",
 
-
   "prompt.toast.pasteUnsupported.title": "Nepodržano lijepljenje",
   "prompt.toast.pasteUnsupported.description": "Ovdje se mogu zalijepiti samo slike ili PDF-ovi.",
   "prompt.toast.modelAgentRequired.title": "Odaberi agenta i model",
@@ -969,13 +968,15 @@ export const dict = {
   "settings.config.noWorkspace": "Otvorite fasciklu radnog prostora da uredite lokalnu Nano konfiguracijsku datoteku.",
   "settings.config.openFailed": "Nije uspjelo otvaranje {{scope}} Nano konfiguracijske datoteke: {{message}}",
   "settings.config.source.xdg": "XDG globalna konfiguracija",
-  "settings.config.source.homeKilo": "Home .kilo konfiguracija",
+  "settings.config.source.homeNano": "Home .nano konfiguracija",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode konfiguracija",
   "settings.config.source.homeOpencode": "Home .opencode konfiguracija",
   "settings.config.source.envFile": "KILO_CONFIG datoteka okruženja",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Ugrađena konfiguracija okruženja",
-  "settings.config.source.projectKilo": "Projektna .kilo konfiguracija",
+  "settings.config.source.projectNano": "Projektna .nano konfiguracija",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Konfiguracija korijena projekta",
   "settings.config.source.projectKilocode": "Zastarjela .kilocode konfiguracija",
   "settings.config.source.projectOpencode": "Zastarjela .opencode konfiguracija",
@@ -1664,5 +1665,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan je spreman:"
+  "plan.exit.ready": "Plan je spreman:",
 }

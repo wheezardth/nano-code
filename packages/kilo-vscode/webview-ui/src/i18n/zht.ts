@@ -284,7 +284,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "「強化提示詞」按鈕可透過提供額外內容、說明或改寫來協助改善提示詞。試著在這裡輸入提示詞，再點選一次按鈕以了解其運作方式。",
 
-
   "prompt.toast.pasteUnsupported.title": "不支援的貼上",
   "prompt.toast.pasteUnsupported.description": "這裡只能貼上圖片或 PDF 檔案。",
   "prompt.toast.modelAgentRequired.title": "請選擇 Agent 和模型",
@@ -904,13 +903,15 @@ export const dict = {
   "settings.config.noWorkspace": "開啟工作區資料夾以編輯本地 Nano 設定檔。",
   "settings.config.openFailed": "無法開啟 {{scope}} Nano 設定檔：{{message}}",
   "settings.config.source.xdg": "XDG 全域設定",
-  "settings.config.source.homeKilo": "主目錄 .kilo 設定",
+  "settings.config.source.homeNano": "主目錄 .nano 設定",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "主目錄 .kilocode 設定",
   "settings.config.source.homeOpencode": "主目錄 .opencode 設定",
   "settings.config.source.envFile": "KILO_CONFIG 環境變數檔案",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "內聯環境設定",
-  "settings.config.source.projectKilo": "專案 .kilo 設定",
+  "settings.config.source.projectNano": "專案 .nano 設定",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "專案根目錄設定",
   "settings.config.source.projectKilocode": "舊版 .kilocode 設定",
   "settings.config.source.projectOpencode": "舊版 .opencode 設定",

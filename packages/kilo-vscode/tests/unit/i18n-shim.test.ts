@@ -31,12 +31,10 @@ describe("t()", () => {
       count: "5",
       startTime: "10:00",
       endTime: "11:00",
-      cost: "$0.05",
     })
     expect(result).toContain("5")
     expect(result).toContain("10:00")
     expect(result).toContain("11:00")
-    expect(result).toContain("$0.05")
     expect(result).not.toContain("{{")
   })
 

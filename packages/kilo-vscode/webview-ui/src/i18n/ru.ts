@@ -286,7 +286,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Кнопка 'Улучшить запрос' помогает сделать ваш запрос лучше, предоставляя дополнительный контекст, уточнения или переформулировку. Попробуйте ввести запрос и снова нажать кнопку, чтобы увидеть, как это работает.",
 
-
   "prompt.toast.pasteUnsupported.title": "Неподдерживаемая вставка",
   "prompt.toast.pasteUnsupported.description": "Сюда можно вставлять только изображения или PDF.",
   "prompt.toast.modelAgentRequired.title": "Выберите агента и модель",
@@ -967,13 +966,15 @@ export const dict = {
     "Откройте папку рабочей области для редактирования локального файла конфигурации Nano.",
   "settings.config.openFailed": "Не удалось открыть файл конфигурации Nano ({{scope}}): {{message}}",
   "settings.config.source.xdg": "Глобальная конфигурация XDG",
-  "settings.config.source.homeKilo": "Конфигурация .kilo (Home)",
+  "settings.config.source.homeNano": "Конфигурация .nano (Home)",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Конфигурация .kilocode (Home)",
   "settings.config.source.homeOpencode": "Конфигурация .opencode (Home)",
   "settings.config.source.envFile": "Файл среды KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Встроенная конфигурация среды",
-  "settings.config.source.projectKilo": "Конфигурация .kilo проекта",
+  "settings.config.source.projectNano": "Конфигурация .nano проекта",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Корневая конфигурация проекта",
   "settings.config.source.projectKilocode": "Устаревшая конфигурация .kilocode",
   "settings.config.source.projectOpencode": "Устаревшая конфигурация .opencode",
@@ -1661,5 +1662,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "Нет подходящих веток",
   "diffViewer.baseBranch.loading": "Загрузка веток…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "План готов:"
+  "plan.exit.ready": "План готов:",
 }

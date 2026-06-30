@@ -653,7 +653,7 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
   }
 
   const handleSendClick = () => {
-    if (!canSend()) {
+    if (canSend()) {
       void handleSend()
       return
     }
@@ -691,13 +691,7 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
     const review = pending.length > 0 ? formatReviewCommentsMarkdown(pending) : ""
     const message = draft && review ? `${review}\n\n${draft}` : draft || review
     const data = review ? { version: 1 as const, comments: pending } : undefined
-    if (
-      (!message && imgs.length === 0) ||
-      isDisabled() ||
-      terminal.pending() ||
-      git.pending() ||
-      props.blocked?.()
-    )
+    if ((!message && imgs.length === 0) || isDisabled() || terminal.pending() || git.pending() || props.blocked?.())
       return
 
     const mentionFiles = mention.parseFileAttachments(draft)

@@ -3,7 +3,6 @@ import { $ } from "bun"
 import { join, relative, dirname, basename } from "node:path"
 import { chmodSync, statSync, rmSync, readdirSync, existsSync } from "node:fs"
 import { copyTreeSitterResources, hasTreeSitterResources } from "../src/services/cli-backend/cli-resources"
-import { currentFfmpegTarget, ensureFfmpegForTarget } from "./ffmpeg-helper"
 
 const forceRebuild = process.argv.includes("--force")
 
@@ -39,10 +38,7 @@ async function cliSourceHash(): Promise<string | null> {
     const opencodeResult = await $`git log -1 --format=%H -- .`.cwd(opencodeDir).quiet()
     const coreResult = await $`git log -1 --format=%H -- .`.cwd(coreDir).quiet()
     const indexingResult = await $`git log -1 --format=%H -- .`.cwd(indexingDir).quiet()
-    return (
-      `${opencodeResult.text().trim()}-${coreResult.text().trim()}-${indexingResult.text().trim()}` ||
-      null
-    )
+    return `${opencodeResult.text().trim()}-${coreResult.text().trim()}-${indexingResult.text().trim()}` || null
   } catch {
     return null
   }
@@ -181,7 +177,6 @@ async function writeSourceWrapper() {
     ].join("\n"),
   )
   chmodSync(targetBinPath, 0o755)
-  await ensureFfmpegForTarget(currentFfmpegTarget(), targetBinDir)
 
   const hash = await cliSourceHash()
   if (hash) await Bun.write(versionFile, hash + "\n")
@@ -203,7 +198,6 @@ async function main() {
     log(
       `CLI binary already present at ${relative(kiloVscodeDir, targetBinPath)} (${Math.round(st.size / 1024 / 1024)}MB). Use --force to rebuild.`,
     )
-    await ensureFfmpegForTarget(currentFfmpegTarget(), targetBinDir)
     return
   }
 
@@ -234,7 +228,6 @@ async function main() {
   await $`cp ${sourceBinPath} ${targetBinPath}`
   await copyTreeSitterResources(sourceBinPath, targetBinPath)
   chmodSync(targetBinPath, 0o755)
-  await ensureFfmpegForTarget(currentFfmpegTarget(), targetBinDir)
 
   // Record the CLI source version so future runs detect when a rebuild is needed
   const hash = await cliSourceHash()

@@ -1,7 +1,7 @@
 import * as fs from "node:fs"
 import * as path from "node:path"
 
-// TODO: Remove the legacy .kilocode -> .kilo migration helpers below after the
+// TODO: Remove the legacy .kilocode -> .nano migration helpers below after the
 // GA release cleanup tracked in https://github.com/Kilo-Org/kilocode/issues/6986.
 
 /**
@@ -16,13 +16,16 @@ export const PLATFORM = "agent-manager" as const
 /** Keep baseline snapshots without interrupting concurrently started agents. */
 export const SNAPSHOT_INITIALIZATION = "wait" as const
 
-/** Kilo config directory name (project-level and inside worktrees). */
-export const KILO_DIR = ".kilo"
+/** Current config directory name (project-level and inside worktrees). */
+export const KILO_DIR = ".nano"
 
 /** Legacy config directory name for backward compatibility reads. */
 export const LEGACY_DIR = ".kilocode"
 
-/** Agent Manager files that should be migrated from .kilocode/ to .kilo/. */
+/** Intermediate config directory name (migration from .kilocode → .nano). */
+export const MIDDLE_DIR = ".kilo"
+
+/** Agent Manager files that should be migrated from .kilocode/ to .nano/. */
 const AGENT_MANAGER_ITEMS = [
   "agent-manager.json",
   "worktrees",
@@ -35,20 +38,20 @@ const AGENT_MANAGER_ITEMS = [
 
 /** Result of the migration so callers can react (e.g. refresh VS Code git). */
 export interface MigrationResult {
-  /** Number of git worktree refs that were rewritten from .kilocode → .kilo. */
+  /** Number of git worktree refs that were rewritten from .kilocode → .nano. */
   refsFixed: number
 }
 
 /**
- * Migrate Agent Manager data from .kilocode/ to .kilo/.
+ * Migrate Agent Manager data from .kilocode/ to .nano/.
  *
  * Moves individual Agent Manager files/directories (worktrees, state,
- * setup scripts) from the legacy .kilocode/ into .kilo/. Skips items
- * that already exist in .kilo/ (the new location wins). This is safe
+ * setup scripts) from the legacy .kilocode/ into .nano/. Skips items
+ * that already exist in .nano/ (the new location wins). This is safe
  * because Agent Manager exclusively owns these files.
  *
  * Fixes git worktree internal references (.git/worktrees/{name}/gitdir)
- * whenever .kilo/worktrees/ exists so partially migrated repos recover too.
+ * whenever .nano/worktrees/ exists so partially migrated repos recover too.
  *
  * Idempotent: safe to call on every startup.
  */
@@ -57,7 +60,7 @@ export async function migrateAgentManagerData(root: string, log: (msg: string) =
   const target = path.join(root, KILO_DIR)
 
   if (await isDirectory(legacy)) {
-    // Ensure .kilo/ exists
+    // Ensure .nano/ exists
     try {
       await fs.promises.mkdir(target, { recursive: true })
     } catch {
@@ -135,11 +138,11 @@ async function resolveGitDir(root: string): Promise<string | undefined> {
 }
 
 /**
- * After moving worktrees from .kilocode/ to .kilo/, fix git internal refs.
+ * After moving worktrees from .kilocode/ to .nano/, fix git internal refs.
  *
  * Git stores absolute paths in .git/worktrees/{name}/gitdir. When the
  * worktree directory moves, those paths become stale. This rewrites any
- * gitdir files that reference the old .kilocode path.
+ * gitdir files that reference the old .kilocode or .kilo paths.
  *
  * Returns the number of refs that were successfully fixed so callers can
  * tell whether a VS Code git refresh is warranted.
@@ -160,7 +163,8 @@ async function fixGitWorktreeRefs(root: string, log: (msg: string) => void): Pro
     return 0
   }
 
-  const oldSegment = path.join(root, LEGACY_DIR) + path.sep
+  const legacySegment = path.join(root, LEGACY_DIR) + path.sep
+  const middleSegment = path.join(root, MIDDLE_DIR) + path.sep
   const newSegment = path.join(root, KILO_DIR) + path.sep
   let fixed = 0
 
@@ -171,9 +175,9 @@ async function fixGitWorktreeRefs(root: string, log: (msg: string) => void): Pro
       const gitdirFile = path.join(gitWorktreesDir, entry.name, "gitdir")
       try {
         const content = await fs.promises.readFile(gitdirFile, "utf-8")
-        if (!content.includes(oldSegment)) continue
+        if (!content.includes(legacySegment) && !content.includes(middleSegment)) continue
 
-        const updated = content.replaceAll(oldSegment, newSegment)
+        const updated = content.replaceAll(legacySegment, newSegment).replaceAll(middleSegment, newSegment)
         await fs.promises.writeFile(gitdirFile, updated)
 
         // Verify the write persisted — catch silent FS failures (e.g. read-only mount)

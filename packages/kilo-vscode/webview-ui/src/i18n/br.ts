@@ -288,7 +288,6 @@ export const dict = {
     "O botão 'Aprimorar prompt' ajuda a melhorar seu pedido fornecendo contexto adicional, esclarecimentos ou reformulações. Tente digitar um pedido aqui e clique no botão novamente para ver como funciona.",
   "prompt.action.indexing": "Configurações de indexação",
 
-
   "prompt.toast.pasteUnsupported.title": "Colagem não suportada",
   "prompt.toast.pasteUnsupported.description": "Somente imagens ou PDFs podem ser colados aqui.",
   "prompt.toast.modelAgentRequired.title": "Selecione um agente e modelo",
@@ -927,13 +926,15 @@ export const dict = {
     "Abra uma pasta de espaço de trabalho para editar o arquivo de configuração local do Nano.",
   "settings.config.openFailed": "Falha ao abrir o arquivo de configuração {{scope}} do Nano: {{message}}",
   "settings.config.source.xdg": "Configuração global do XDG",
-  "settings.config.source.homeKilo": "Configuração .kilo da Home",
+  "settings.config.source.homeNano": "Configuração .nano da Home",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Configuração .kilocode da Home",
   "settings.config.source.homeOpencode": "Configuração .opencode da Home",
   "settings.config.source.envFile": "Arquivo de ambiente KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Configuração de ambiente embutida",
-  "settings.config.source.projectKilo": "Configuração .kilo do projeto",
+  "settings.config.source.projectNano": "Configuração .nano do projeto",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Configuração raiz do projeto",
   "settings.config.source.projectKilocode": "Configuração .kilocode legada",
   "settings.config.source.projectOpencode": "Configuração .opencode legada",
@@ -1669,5 +1670,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "Nenhum branch correspondente",
   "diffViewer.baseBranch.loading": "Carregando branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plano pronto:"
+  "plan.exit.ready": "Plano pronto:",
 }

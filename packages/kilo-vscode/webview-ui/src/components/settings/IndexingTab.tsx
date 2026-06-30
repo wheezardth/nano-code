@@ -265,9 +265,7 @@ const IndexingTab: Component = () => {
           tag={() => tag(scope(), [["dimension"]])}
         >
           <TextField
-            value={
-              cfg().dimension === undefined || cfg().dimension === null ? "" : String(cfg().dimension)
-            }
+            value={cfg().dimension === undefined || cfg().dimension === null ? "" : String(cfg().dimension)}
             placeholder={language.t("settings.indexing.dimension.placeholder")}
             onChange={(value) => saveNumber("dimension", value, { integer: true, min: 1 })}
           />

@@ -289,7 +289,6 @@ export const dict = {
     "El botón 'Mejorar el mensaje' ayuda a mejorar tu petición proporcionando contexto adicional, aclaraciones o reformulaciones. Intenta escribir una petición aquí y haz clic en el botón nuevamente para ver cómo funciona.",
   "prompt.action.indexing": "Configuración de indexación",
 
-
   "prompt.toast.pasteUnsupported.title": "Pegado no soportado",
   "prompt.toast.pasteUnsupported.description": "Solo se pueden pegar imágenes o PDFs aquí.",
   "prompt.toast.modelAgentRequired.title": "Selecciona un agente y modelo",
@@ -971,13 +970,15 @@ export const dict = {
     "Abre una carpeta de espacio de trabajo para editar el archivo de configuración Nano local.",
   "settings.config.openFailed": "Error al abrir el archivo de configuración Nano {{scope}}: {{message}}",
   "settings.config.source.xdg": "Configuración global XDG",
-  "settings.config.source.homeKilo": "Configuración .kilo de Home",
+  "settings.config.source.homeNano": "Configuración .nano de Home",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Configuración .kilocode de Home",
   "settings.config.source.homeOpencode": "Configuración .opencode de Home",
   "settings.config.source.envFile": "Archivo de entorno KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Configuración de entorno en línea",
-  "settings.config.source.projectKilo": "Configuración .kilo del proyecto",
+  "settings.config.source.projectNano": "Configuración .nano del proyecto",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Configuración raíz del proyecto",
   "settings.config.source.projectKilocode": "Configuración heredada .kilocode",
   "settings.config.source.projectOpencode": "Configuración heredada .opencode",
@@ -1678,5 +1679,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "Sin ramas que coincidan",
   "diffViewer.baseBranch.loading": "Cargando ramas…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "El plan está listo:"
+  "plan.exit.ready": "El plan está listo:",
 }

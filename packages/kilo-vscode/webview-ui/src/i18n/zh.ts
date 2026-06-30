@@ -285,7 +285,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'增强提示'按钮通过提供额外上下文、澄清或重新表述来帮助改进您的请求。尝试在此处输入请求，然后再次点击按钮查看其工作原理。",
 
-
   "prompt.toast.pasteUnsupported.title": "不支持的粘贴",
   "prompt.toast.pasteUnsupported.description": "这里只能粘贴图片或 PDF 文件。",
   "prompt.toast.modelAgentRequired.title": "请选择智能体和模型",
@@ -936,13 +935,15 @@ export const dict = {
   "settings.config.noWorkspace": "打开工作区文件夹以编辑本地 Nano 配置文件。",
   "settings.config.openFailed": "无法打开 {{scope}} Nano 配置文件：{{message}}",
   "settings.config.source.xdg": "XDG 全局配置",
-  "settings.config.source.homeKilo": "主目录 .kilo 配置",
+  "settings.config.source.homeNano": "主目录 .nano 配置",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "主目录 .kilocode 配置",
   "settings.config.source.homeOpencode": "主目录 .opencode 配置",
   "settings.config.source.envFile": "KILO_CONFIG 环境变量文件",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "内联环境配置",
-  "settings.config.source.projectKilo": "项目 .kilo 配置",
+  "settings.config.source.projectNano": "项目 .nano 配置",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "项目根目录配置",
   "settings.config.source.projectKilocode": "旧版 .kilocode 配置",
   "settings.config.source.projectOpencode": "旧版 .opencode 配置",

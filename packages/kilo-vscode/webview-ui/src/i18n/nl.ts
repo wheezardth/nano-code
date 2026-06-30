@@ -289,7 +289,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "De knop 'Prompt verbeteren' helpt je prompt te verbeteren door extra context, verduidelijking of herformulering te bieden. Typ hier een prompt en klik nogmaals op de knop om te zien hoe het werkt.",
 
-
   "prompt.toast.pasteUnsupported.title": "Plakken niet ondersteund",
   "prompt.toast.pasteUnsupported.description": "Hier kunnen alleen afbeeldingen of PDF's worden geplakt.",
   "prompt.toast.modelAgentRequired.title": "Selecteer een agent en model",
@@ -921,13 +920,15 @@ export const dict = {
   "settings.config.noWorkspace": "Open een werkruimtemap om het lokale Nano-configuratiebestand te bewerken.",
   "settings.config.openFailed": "Kan {{scope}} Nano-configuratiebestand niet openen: {{message}}",
   "settings.config.source.xdg": "XDG globale configuratie",
-  "settings.config.source.homeKilo": "Home .kilo-configuratie",
+  "settings.config.source.homeNano": "Home .nano-configuratie",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode-configuratie",
   "settings.config.source.homeOpencode": "Home .opencode-configuratie",
   "settings.config.source.envFile": "KILO_CONFIG omgevingsbestand",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Inline omgevingsconfiguratie",
-  "settings.config.source.projectKilo": "Project .kilo-configuratie",
+  "settings.config.source.projectNano": "Project .nano-configuratie",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Project root configuratie",
   "settings.config.source.projectKilocode": "Verouderde .kilocode-configuratie",
   "settings.config.source.projectOpencode": "Verouderde .opencode-configuratie",
@@ -1687,5 +1688,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan is klaar:"
+  "plan.exit.ready": "Plan is klaar:",
 }

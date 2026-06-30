@@ -3,7 +3,38 @@ import { $ } from "bun"
 import { join } from "node:path"
 import { existsSync, mkdirSync, rmSync, chmodSync } from "node:fs"
 import { copyTreeSitterResources } from "../src/services/cli-backend/cli-resources"
-import { ensureFfmpegForTarget } from "./ffmpeg-helper"
+
+// Parse --target flag from CLI args (e.g., --target linux-x64 --target win32-x64)
+// Supports both --target=value and --target value forms
+const rawTargets = process.argv.flatMap((arg, i) => {
+  if (arg.startsWith("--target=")) return [arg.slice("--target=".length)]
+  if (arg === "--target" && process.argv[i + 1]) return [process.argv[i + 1]]
+  return []
+})
+
+// Define all available targets (keep the original array)
+const allTargets = [
+  { target: "linux-x64", cliDir: "@kilocode/cli-linux-x64", binary: "kilo" },
+  { target: "linux-arm64", cliDir: "@kilocode/cli-linux-arm64", binary: "kilo" },
+  { target: "alpine-x64", cliDir: "@kilocode/cli-linux-x64-musl", binary: "kilo" },
+  { target: "alpine-arm64", cliDir: "@kilocode/cli-linux-arm64-musl", binary: "kilo" },
+  { target: "darwin-x64", cliDir: "@kilocode/cli-darwin-x64", binary: "kilo" },
+  { target: "darwin-arm64", cliDir: "@kilocode/cli-darwin-arm64", binary: "kilo" },
+  { target: "win32-x64", cliDir: "@kilocode/cli-windows-x64", binary: "kilo.exe" },
+  { target: "win32-arm64", cliDir: "@kilocode/cli-windows-arm64", binary: "kilo.exe" },
+]
+
+// Filter to selected targets; default to linux-x64 + win32-x64 when no flags given
+const selectedTargets = rawTargets.length > 0
+  ? rawTargets.map((t) => {
+      const match = allTargets.find((a) => a.target === t)
+      if (!match) {
+        console.error(`Unknown target: ${t}. Valid: ${allTargets.map((a) => a.target).join(", ")}`)
+        process.exit(1)
+      }
+      return match
+    })
+  : allTargets.filter((t) => t.target === "linux-x64" || t.target === "win32-x64")
 
 const packageJsonPath = join(import.meta.dir, "..", "package.json")
 const packageJson = await Bun.file(packageJsonPath).json()
@@ -24,17 +55,6 @@ console.log(`Using CLI dist directory: ${cliDistDir}`)
 if (!existsSync(cliDistDir)) {
   throw new Error(`CLI dist directory not found: ${cliDistDir}`)
 }
-
-const targets = [
-  { target: "linux-x64", cliDir: "@kilocode/cli-linux-x64", binary: "kilo" },
-  { target: "linux-arm64", cliDir: "@kilocode/cli-linux-arm64", binary: "kilo" },
-  { target: "alpine-x64", cliDir: "@kilocode/cli-linux-x64-musl", binary: "kilo" },
-  { target: "alpine-arm64", cliDir: "@kilocode/cli-linux-arm64-musl", binary: "kilo" },
-  { target: "darwin-x64", cliDir: "@kilocode/cli-darwin-x64", binary: "kilo" },
-  { target: "darwin-arm64", cliDir: "@kilocode/cli-darwin-arm64", binary: "kilo" },
-  { target: "win32-x64", cliDir: "@kilocode/cli-windows-x64", binary: "kilo.exe" },
-  { target: "win32-arm64", cliDir: "@kilocode/cli-windows-arm64", binary: "kilo.exe" },
-]
 
 const binDir = join(import.meta.dir, "..", "bin")
 const distDir = join(import.meta.dir, "..", "dist")
@@ -59,7 +79,26 @@ await $`bun run check-types`
 await $`bun run lint`
 await $`node ${join(import.meta.dir, "..", "esbuild.js")} --production`
 
-for (const config of targets) {
+// Helper: resolve current OS/arch to a target descriptor
+function currentPlatformTarget() {
+  const isWin = process.platform === "win32"
+  const arch = process.arch === "x64" ? "x64" : process.arch === "arm64" ? "arm64" : process.arch
+  if (isWin && arch === "x64") return allTargets[6] // win32-x64
+  if (process.platform === "linux" && arch === "x64") return allTargets[0] // linux-x64
+  return null
+}
+
+// If current platform target is selected and binary not in dist, build from source
+const currentTarget = currentPlatformTarget()
+if (currentTarget && selectedTargets.includes(currentTarget)) {
+  const binPath = join(cliDistDir, currentTarget.cliDir, "bin", currentTarget.binary)
+  if (!existsSync(binPath)) {
+    console.log(`CLI binary not in dist for ${currentTarget.target} — building from source via local-bin.ts...`)
+    await $`bun run ${join(import.meta.dir, "script/local-bin.ts")}`.cwd(join(import.meta.dir, ".."))
+  }
+}
+
+for (const config of selectedTargets) {
   console.log(`\n🎯 Processing target: ${config.target}`)
 
   if (existsSync(binDir)) {
@@ -84,14 +123,11 @@ for (const config of targets) {
 
   console.log(`  ✅ Binary ready at ${targetBinary}`)
 
-  console.log("Adding bundled FFmpeg helper...")
-  await ensureFfmpegForTarget(config.target, binDir)
-
-  console.log(`  📦 Packaging .vsix for ${config.target}${prerelease ? " (pre-release)" : ""}...`)
+  console.log(`  📦 Packaging .vsix for ${config.target}`)
   const vsixPath = join(outDir, `kilo-vscode-${config.target}.vsix`)
   const args = ["--no-dependencies", "--skip-license", "--target", config.target, "-o", vsixPath]
   if (prerelease) args.push("--pre-release")
-  await $`npx --yes vsce package ${args}`.env({
+  await $`bunx --package=@vscode/vsce vsce package ${args}`.env({
     ...process.env,
     npm_config_ignore_scripts: "true",
   })

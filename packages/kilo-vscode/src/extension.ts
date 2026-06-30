@@ -277,7 +277,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("kilo-code.new.sidebarTitle.agentManagerOpen", () => {
       void vscode.commands.executeCommand("kilo-code.new.agentManagerOpen")
     }),
-vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicked", () => {
+    vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicked", () => {
       void vscode.commands.executeCommand("kilo-code.new.settingsButtonClicked")
     }),
     vscode.commands.registerCommand("kilo-code.new.plusButtonClicked", () => {
@@ -305,7 +305,7 @@ vscode.commands.registerCommand("kilo-code.new.sidebarTitle.settingsButtonClicke
       else provider.postMessage({ type: "action", action: "cyclePreviousAgentMode" })
       agentManagerProvider.postMessage({ type: "action", action: "cyclePreviousAgentMode" })
     }),
-vscode.commands.registerCommand("kilo-code.new.settingsButtonClicked", (tab?: string) => {
+    vscode.commands.registerCommand("kilo-code.new.settingsButtonClicked", (tab?: string) => {
       settingsEditorProvider.openPanel("settings", tab)
     }),
     vscode.commands.registerCommand("kilo-code.new.openIndexingSettings", () => {

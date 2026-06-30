@@ -163,12 +163,14 @@ export interface OpenConfigFileRequest {
     noWorkspace: string
     openFailed: string
     sourceXdg: string
+    sourceHomeNano: string
     sourceHomeKilo: string
     sourceHomeKilocode: string
     sourceHomeOpencode: string
     sourceEnvFile: string
     sourceEnvDir: string
     sourceEnvContent: string
+    sourceProjectNano: string
     sourceProjectKilo: string
     sourceProjectRoot: string
     sourceProjectKilocode: string

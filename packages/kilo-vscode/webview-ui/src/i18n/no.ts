@@ -291,7 +291,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Knappen 'Forbedre prompt' hjelper med å forbedre forespørselen din ved å gi ekstra kontekst, avklaring eller omformulering. Prøv å skrive en forespørsel her og klikk på knappen igjen for å se hvordan det fungerer.",
 
-
   "prompt.toast.pasteUnsupported.title": "Liming ikke støttet",
   "prompt.toast.pasteUnsupported.description": "Kun bilder eller PDF-er kan limes inn her.",
   "prompt.toast.modelAgentRequired.title": "Velg en agent og modell",
@@ -928,13 +927,15 @@ export const dict = {
   "settings.config.noWorkspace": "Åpne en arbeidsområdemappe for å redigere den lokale Nano-konfigurasjonsfilen.",
   "settings.config.openFailed": "Klarte ikke å åpne {{scope}} Nano-konfigurasjonsfil: {{message}}",
   "settings.config.source.xdg": "XDG global konfigurasjon",
-  "settings.config.source.homeKilo": "Home .kilo-konfigurasjon",
+  "settings.config.source.homeNano": "Home .nano-konfigurasjon",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode-konfigurasjon",
   "settings.config.source.homeOpencode": "Home .opencode-konfigurasjon",
   "settings.config.source.envFile": "KILO_CONFIG miljøfil",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Innebygd miljøkonfigurasjon",
-  "settings.config.source.projectKilo": "Prosjekt .kilo-konfigurasjon",
+  "settings.config.source.projectNano": "Prosjekt .nano-konfigurasjon",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Prosjektets rotkonfigurasjon",
   "settings.config.source.projectKilocode": "Eldre .kilocode-konfigurasjon",
   "settings.config.source.projectOpencode": "Eldre .opencode-konfigurasjon",

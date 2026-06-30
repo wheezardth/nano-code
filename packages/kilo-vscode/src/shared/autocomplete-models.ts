@@ -27,7 +27,10 @@ export const AUTOCOMPLETE_EMBEDDING_MODEL_ID = ""
  * list of autocomplete model options. Each provider's first FIM-capable model
  * becomes an autocomplete option.
  */
-export async function fetchAutocompleteModels(providerId: string, models: Record<string, { id: string }>): Promise<AutocompleteModelDef[]> {
+export async function fetchAutocompleteModels(
+  providerId: string,
+  models: Record<string, { id: string }>,
+): Promise<AutocompleteModelDef[]> {
   const results: AutocompleteModelDef[] = []
   const providerName = providerId || "Custom"
 
@@ -87,7 +90,10 @@ export async function populateAutocompleteModels(
   return catalog
 }
 
-export function getAutocompleteModel(_provider: string | undefined, _modelID: string | undefined): AutocompleteModelDef | undefined {
+export function getAutocompleteModel(
+  _provider: string | undefined,
+  _modelID: string | undefined,
+): AutocompleteModelDef | undefined {
   if (_provider && _modelID) {
     const id = `${_provider}/${_modelID}`
     return AUTOCOMPLETE_MODELS[id]

@@ -287,7 +287,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Knappen 'Forbedr prompt' hjælper med at forbedre din forespørgsel ved at give ekstra kontekst, præcisering eller omformulering. Prøv at skrive en forespørgsel her og klik på knappen igen for at se hvordan det virker.",
 
-
   "prompt.toast.pasteUnsupported.title": "Ikke understøttet indsæt",
   "prompt.toast.pasteUnsupported.description": "Kun billeder eller PDF'er kan indsættes her.",
   "prompt.toast.modelAgentRequired.title": "Vælg en agent og model",
@@ -961,13 +960,15 @@ export const dict = {
   "settings.config.noWorkspace": "Åbn en arbejdsområdemappe for at redigere den lokale Nano konfigurationsfil.",
   "settings.config.openFailed": "Kunne ikke åbne {{scope}} Nano konfigurationsfil: {{message}}",
   "settings.config.source.xdg": "XDG global konfiguration",
-  "settings.config.source.homeKilo": "Home .kilo konfiguration",
+  "settings.config.source.homeNano": "Home .nano konfiguration",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode konfiguration",
   "settings.config.source.homeOpencode": "Home .opencode konfiguration",
   "settings.config.source.envFile": "KILO_CONFIG miljøfil",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Indbygget miljøkonfiguration",
-  "settings.config.source.projectKilo": "Projekt .kilo konfiguration",
+  "settings.config.source.projectNano": "Projekt .nano konfiguration",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Projekt rodkonfiguration",
   "settings.config.source.projectKilocode": "Forældet .kilocode konfiguration",
   "settings.config.source.projectOpencode": "Forældet .opencode konfiguration",
@@ -1654,5 +1655,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Planen er klar:"
+  "plan.exit.ready": "Planen er klar:",
 }

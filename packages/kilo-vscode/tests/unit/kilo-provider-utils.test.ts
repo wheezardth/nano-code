@@ -799,7 +799,7 @@ describe("getErrorMessage", () => {
     const err = {
       name: "ConfigInvalidError",
       data: {
-        path: "/Users/me/.config/kilo/kilo.json",
+        path: "/Users/me/.config/nanocode/nano.json",
         issues: [
           { code: "unrecognized_keys", keys: ["indexing"], path: [], message: 'Unrecognized key: "indexing"' },
           { code: "invalid_type", path: ["timeout"], message: "Expected number" },
@@ -872,11 +872,13 @@ describe("getConfigErrorDetails", () => {
   it("formats a single-issue ConfigInvalidError", () => {
     const err = {
       data: {
-        path: "/home/me/.config/kilo/kilo.json",
+        path: "/home/me/.config/nanocode/nano.json",
         issues: [{ code: "unrecognized_keys", keys: ["indexing"], path: [], message: 'Unrecognized key: "indexing"' }],
       },
     }
-    expect(getConfigErrorDetails(err)).toBe('File: /home/me/.config/kilo/kilo.json\n\n✖ Unrecognized key: "indexing"')
+    expect(getConfigErrorDetails(err)).toBe(
+      'File: /home/me/.config/nanocode/nano.json\n\n✖ Unrecognized key: "indexing"',
+    )
   })
 
   it("formats a multi-issue ConfigInvalidError with paths (including array indices)", () => {

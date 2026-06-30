@@ -885,13 +885,15 @@ export const dict = {
   "settings.config.noWorkspace": "Open a workspace folder to edit the local Nano config file.",
   "settings.config.openFailed": "Failed to open {{scope}} Nano config file: {{message}}",
   "settings.config.source.xdg": "XDG global config",
-  "settings.config.source.homeKilo": "Home .kilo config",
+  "settings.config.source.homeNano": "Home .nano config",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode config",
   "settings.config.source.homeOpencode": "Home .opencode config",
   "settings.config.source.envFile": "KILO_CONFIG environment file",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Inline environment config",
-  "settings.config.source.projectKilo": "Project .kilo config",
+  "settings.config.source.projectNano": "Project .nano config",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Project root config",
   "settings.config.source.projectKilocode": "Legacy .kilocode config",
   "settings.config.source.projectOpencode": "Legacy .opencode config",
@@ -1654,5 +1656,5 @@ export const dict = {
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
 
-  "plan.exit.ready": "Plan is ready:"
+  "plan.exit.ready": "Plan is ready:",
 }

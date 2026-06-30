@@ -291,7 +291,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Die Schaltfläche 'Prompt verbessern' hilft, deine Anfrage durch zusätzlichen Kontext, Klarstellungen oder Umformulierungen zu verbessern. Versuche, hier eine Anfrage einzugeben und klicke erneut auf die Schaltfläche, um zu sehen, wie es funktioniert.",
 
-
   "prompt.toast.pasteUnsupported.title": "Nicht unterstütztes Einfügen",
   "prompt.toast.pasteUnsupported.description": "Hier können nur Bilder oder PDFs eingefügt werden.",
   "prompt.toast.modelAgentRequired.title": "Wählen Sie einen Agenten und ein Modell",
@@ -976,13 +975,15 @@ export const dict = {
     "Öffnen Sie einen Arbeitsbereichsordner, um die lokale Nano-Konfigurationsdatei zu bearbeiten.",
   "settings.config.openFailed": "Fehler beim Öffnen der {{scope}} Nano-Konfigurationsdatei: {{message}}",
   "settings.config.source.xdg": "Globale XDG-Konfiguration",
-  "settings.config.source.homeKilo": "Home .kilo-Konfiguration",
+  "settings.config.source.homeNano": "Home .nano-Konfiguration",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode-Konfiguration",
   "settings.config.source.homeOpencode": "Home .opencode-Konfiguration",
   "settings.config.source.envFile": "KILO_CONFIG Umgebungsdatei",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Inline-Umgebungskonfiguration",
-  "settings.config.source.projectKilo": "Projekt .kilo-Konfiguration",
+  "settings.config.source.projectNano": "Projekt .nano-Konfiguration",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Projektstamm-Konfiguration",
   "settings.config.source.projectKilocode": "Veraltete .kilocode-Konfiguration",
   "settings.config.source.projectOpencode": "Veraltete .opencode-Konfiguration",

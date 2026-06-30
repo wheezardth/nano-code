@@ -124,8 +124,7 @@ describe("FileIgnoreController", () => {
       // On macOS, path.resolve joins "c:/..." relative to the workspace,
       // producing "c:/Users/..." as the relative portion — still detected as
       // a Windows drive letter by ignore's setupWindows() regex.
-      const cross =
-        "c:/Users/User/AppData/Roaming/Code/User/globalStorage/nano.kilo-code/settings/mcp_settings.json"
+      const cross = "c:/Users/User/AppData/Roaming/Code/User/globalStorage/nano.kilo-code/settings/mcp_settings.json"
 
       expect(() => controller.validateAccess(cross)).not.toThrow()
       expect(controller.validateAccess(cross)).toBe(false)

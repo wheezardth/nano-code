@@ -286,7 +286,6 @@ export const dict = {
     "ปุ่ม 'ปรับปรุงพรอมต์' ช่วยปรับปรุงพรอมต์ของคุณโดยให้บริบทเพิ่มเติม ชี้แจง หรือเขียนใหม่ ลองพิมพ์พรอมต์ที่นี่และคลิกปุ่มอีกครั้งเพื่อดูว่ามันทำงานอย่างไร",
   "prompt.action.indexing": "การตั้งค่าการสร้างดัชนี",
 
-
   "prompt.toast.pasteUnsupported.title": "การวางไม่รองรับ",
   "prompt.toast.pasteUnsupported.description": "สามารถวางรูปภาพหรือ PDF เท่านั้น",
   "prompt.toast.modelAgentRequired.title": "เลือกเอเจนต์และโมเดล",
@@ -952,13 +951,15 @@ export const dict = {
   "settings.config.noWorkspace": "เปิดโฟลเดอร์พื้นที่ทำงานเพื่อแก้ไขไฟล์การตั้งค่า Nano ภายใน",
   "settings.config.openFailed": "ไม่สามารถเปิดไฟล์การตั้งค่า Nano ({{scope}}): {{message}}",
   "settings.config.source.xdg": "การตั้งค่า XDG ทั่วโลก",
-  "settings.config.source.homeKilo": "การตั้งค่า .kilo ของ Home",
+  "settings.config.source.homeNano": "การตั้งค่า .nano ของ Home",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "การตั้งค่า .kilocode ของ Home",
   "settings.config.source.homeOpencode": "การตั้งค่า .opencode ของ Home",
   "settings.config.source.envFile": "ไฟล์สภาพแวดล้อม KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "การตั้งค่าสภาพแวดล้อมแบบอินไลน์",
-  "settings.config.source.projectKilo": "การตั้งค่า .kilo ของโปรเจกต์",
+  "settings.config.source.projectNano": "การตั้งค่า .nano ของโปรเจกต์",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "การตั้งค่ารูทของโปรเจกต์",
   "settings.config.source.projectKilocode": "การตั้งค่า .kilocode แบบเก่า",
   "settings.config.source.projectOpencode": "การตั้งค่า .opencode แบบเก่า",
@@ -1630,5 +1631,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "แผนพร้อมแล้ว:"
+  "plan.exit.ready": "แผนพร้อมแล้ว:",
 }

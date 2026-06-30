@@ -288,7 +288,6 @@ export const dict = {
     "Przycisk 'Ulepsz podpowiedź' pomaga ulepszyć Twoją prośbę, dostarczając dodatkowy kontekst, wyjaśnienia lub przeformułowania. Spróbuj wpisać prośbę tutaj i kliknij przycisk ponownie, aby zobaczyć, jak to działa.",
   "prompt.action.indexing": "Ustawienia indeksowania",
 
-
   "prompt.toast.pasteUnsupported.title": "Nieobsługiwane wklejanie",
   "prompt.toast.pasteUnsupported.description": "Tylko obrazy lub pliki PDF mogą być tutaj wklejane.",
   "prompt.toast.modelAgentRequired.title": "Wybierz agenta i model",
@@ -928,13 +927,15 @@ export const dict = {
   "settings.config.noWorkspace": "Otwórz folder obszaru roboczego, aby edytować lokalny plik konfiguracyjny Nano.",
   "settings.config.openFailed": "Nie udało się otworzyć pliku konfiguracyjnego Nano ({{scope}}): {{message}}",
   "settings.config.source.xdg": "Globalna konfiguracja XDG",
-  "settings.config.source.homeKilo": "Konfiguracja .kilo (Home)",
+  "settings.config.source.homeNano": "Konfiguracja .nano (Home)",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Konfiguracja .kilocode (Home)",
   "settings.config.source.homeOpencode": "Konfiguracja .opencode (Home)",
   "settings.config.source.envFile": "Plik środowiskowy KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Wbudowana konfiguracja środowiska",
-  "settings.config.source.projectKilo": "Konfiguracja .kilo projektu",
+  "settings.config.source.projectNano": "Konfiguracja .nano projektu",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Konfiguracja główna projektu",
   "settings.config.source.projectKilocode": "Przestarzała konfiguracja .kilocode",
   "settings.config.source.projectOpencode": "Przestarzała konfiguracja .opencode",
@@ -1660,5 +1661,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan jest gotowy:"
+  "plan.exit.ready": "Plan jest gotowy:",
 }

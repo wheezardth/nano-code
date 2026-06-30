@@ -287,7 +287,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'프롬프트 향상' 버튼은 추가 컨텍스트, 명확화 또는 재구성을 제공하여 요청을 개선합니다. 여기에 요청을 입력한 다음 버튼을 다시 클릭하여 작동 방식을 확인해보세요.",
 
-
   "prompt.toast.pasteUnsupported.title": "지원되지 않는 붙여넣기",
   "prompt.toast.pasteUnsupported.description": "이미지나 PDF만 붙여넣을 수 있습니다.",
   "prompt.toast.modelAgentRequired.title": "에이전트 및 모델 선택",
@@ -918,13 +917,15 @@ export const dict = {
   "settings.config.noWorkspace": "로컬 Nano 구성 파일을 편집하려면 작업 영역 폴더를 엽니다.",
   "settings.config.openFailed": "{{scope}} Nano 구성 파일을 열지 못했습니다: {{message}}",
   "settings.config.source.xdg": "XDG 글로벌 구성",
-  "settings.config.source.homeKilo": "Home .kilo 구성",
+  "settings.config.source.homeNano": "Home .nano 구성",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode 구성",
   "settings.config.source.homeOpencode": "Home .opencode 구성",
   "settings.config.source.envFile": "KILO_CONFIG 환경 파일",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "인라인 환경 구성",
-  "settings.config.source.projectKilo": "프로젝트 .kilo 구성",
+  "settings.config.source.projectNano": "프로젝트 .nano 구성",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "프로젝트 루트 구성",
   "settings.config.source.projectKilocode": "레거시 .kilocode 구성",
   "settings.config.source.projectOpencode": "레거시 .opencode 구성",
@@ -1632,5 +1633,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "일치하는 브랜치 없음",
   "diffViewer.baseBranch.loading": "브랜치 로딩 중…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "계획이 준비되었습니다:"
+  "plan.exit.ready": "계획이 준비되었습니다:",
 }

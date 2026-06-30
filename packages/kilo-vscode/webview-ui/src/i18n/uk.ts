@@ -288,7 +288,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "Кнопка 'Покращити запит' допомагає вдосконалити ваш запит, надаючи додатковий контекст, уточнення або перефразування. Введіть запит тут і натисніть кнопку ще раз, щоб побачити, як це працює.",
 
-
   "prompt.toast.pasteUnsupported.title": "Вставка не підтримується",
   "prompt.toast.pasteUnsupported.description": "Сюди можна вставляти лише зображення або PDF.",
   "prompt.toast.modelAgentRequired.title": "Виберіть агента і модель",
@@ -920,13 +919,15 @@ export const dict = {
   "settings.config.noWorkspace": "Відкрийте папку робочої області, щоб відредагувати локальний файл конфігурації Nano.",
   "settings.config.openFailed": "Не вдалося відкрити файл конфігурації Nano ({{scope}}): {{message}}",
   "settings.config.source.xdg": "Глобальна конфігурація XDG",
-  "settings.config.source.homeKilo": "Конфігурація .kilo (Home)",
+  "settings.config.source.homeNano": "Конфігурація .nano (Home)",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Конфігурація .kilocode (Home)",
   "settings.config.source.homeOpencode": "Конфігурація .opencode (Home)",
   "settings.config.source.envFile": "Файл середовища KILO_CONFIG",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Вбудована конфігурація середовища",
-  "settings.config.source.projectKilo": "Конфігурація .kilo проєкту",
+  "settings.config.source.projectNano": "Конфігурація .nano проєкту",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Коренева конфігурація проєкту",
   "settings.config.source.projectKilocode": "Застаріла конфігурація .kilocode",
   "settings.config.source.projectOpencode": "Застаріла конфігурація .opencode",
@@ -1675,5 +1676,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "План готовий:"
+  "plan.exit.ready": "План готовий:",
 }

@@ -15,7 +15,7 @@ export const dict = {
   "kilocode:autocomplete.statusBar.tooltip.profile": "Profile: ",
   "kilocode:autocomplete.statusBar.tooltip.defaultProfile": "Default",
   "kilocode:autocomplete.statusBar.tooltip.completionSummary":
-    "Performed {{count}} completions between {{startTime}} and {{endTime}}, for a total cost of {{cost}}.",
+    "Performed {{count}} completions between {{startTime}} and {{endTime}}.",
   "kilocode:autocomplete.statusBar.tooltip.providerInfo": "Autocompletions provided by {{model}} via {{provider}}.",
   "kilocode:autocomplete.statusBar.cost.zero": "$0.00",
   "kilocode:autocomplete.statusBar.cost.lessThanCent": "<$0.01",

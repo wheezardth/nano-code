@@ -82,7 +82,7 @@ function stripRemotePrefix(ref: string): { branch: string; remote?: string } {
   return { branch: ref }
 }
 
-import { KILO_DIR, LEGACY_DIR, migrateAgentManagerData } from "./constants"
+import { KILO_DIR, MIDDLE_DIR, LEGACY_DIR, migrateAgentManagerData } from "./constants"
 
 const SESSION_ID_FILE = "session-id"
 const METADATA_FILE = "metadata.json"
@@ -473,8 +473,8 @@ export class WorktreeManager {
     const current = await this.readCurrentMetadata(worktreePath)
     if (current) return current
 
-    // Check .kilo/ first, then legacy .kilocode/
-    for (const dirName of [KILO_DIR, LEGACY_DIR]) {
+    // Check .nano/ first, then intermediate .kilo/, then legacy .kilocode/
+    for (const dirName of [KILO_DIR, MIDDLE_DIR, LEGACY_DIR]) {
       const result = await this.readMetadataFrom(worktreePath, dirName)
       if (result) return result
     }

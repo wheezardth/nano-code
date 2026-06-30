@@ -110,10 +110,10 @@ export class AutocompleteServiceManager {
     this.nextEditProvider = new NextEditInlineCompletionProvider({
       connectionService,
       suggestionManager: this.nextEditSuggestionManager,
-       getModelSelection: () => {
-         const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-         return { providerId: info?.providerID || "", modelId: info?.modelID || "" }
-       },
+      getModelSelection: () => {
+        const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+        return { providerId: info?.providerID || "", modelId: info?.modelID || "" }
+      },
       isFileAllowed: async (fsPath) => {
         const ignore = await this.inlineCompletionProvider.ignoreController
         return ignore.validateAccess(fsPath)
@@ -175,10 +175,10 @@ export class AutocompleteServiceManager {
    * Only disposes/re-registers when the desired state actually changes, avoiding
    * unnecessary churn that can break VS Code's provider tracking during startup races.
    */
-   private async ensureInlineCompletionProviderRegistration() {
-     const shouldBeRegistered = (this.settings?.enableAutoTrigger ?? false) && !this.isSnoozed()
-     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-     const desiredKind: "classic" | "next-edit" = info?.kind === "edit" ? "next-edit" : "classic"
+  private async ensureInlineCompletionProviderRegistration() {
+    const shouldBeRegistered = (this.settings?.enableAutoTrigger ?? false) && !this.isSnoozed()
+    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+    const desiredKind: "classic" | "next-edit" = info?.kind === "edit" ? "next-edit" : "classic"
 
     // Mode change while still enabled requires a swap: tear down the old
     // registration so the new provider takes over.
@@ -345,15 +345,15 @@ export class AutocompleteServiceManager {
     })
   }
 
-   private getCurrentModelName(): string {
-     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-     return info?.label || this.settings?.model || ""
-   }
+  private getCurrentModelName(): string {
+    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+    return info?.label || this.settings?.model || ""
+  }
 
-   private getCurrentProviderName(): string {
-     const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
-     return info?.provider || this.settings?.provider || ""
-   }
+  private getCurrentProviderName(): string {
+    const info = getAutocompleteModel(this.settings?.provider, this.settings?.model)
+    return info?.provider || this.settings?.provider || ""
+  }
 
   private hasNoUsableProvider(): boolean {
     return !hasValidCredentials(this.connectionService)

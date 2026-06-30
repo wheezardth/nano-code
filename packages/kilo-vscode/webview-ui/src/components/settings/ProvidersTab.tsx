@@ -30,9 +30,7 @@ const ProvidersTab: Component = () => {
   const connectedProviders = createMemo(() => {
     const ids = visibleConnectedIds(provider.connected(), provider.authStates())
     const all = provider.providers()
-    return ids
-      .map((id) => all[id])
-      .filter((item): item is Provider => !!item)
+    return ids.map((id) => all[id]).filter((item): item is Provider => !!item)
   })
 
   function source(item: Provider): ProviderSource | undefined {

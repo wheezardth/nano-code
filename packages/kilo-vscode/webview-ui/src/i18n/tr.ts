@@ -286,7 +286,6 @@ export const dict = {
   "prompt.action.enhanceDescription":
     "'Komutu Geliştir' düğmesi, ek bağlam, açıklama veya yeniden ifadelendirme sağlayarak komutunuzu iyileştirmeye yardımcı olur. Buraya bir komut yazıp düğmeye tekrar tıklayarak nasıl çalıştığını görebilirsiniz.",
 
-
   "prompt.toast.pasteUnsupported.title": "Desteklenmeyen yapıştırma",
   "prompt.toast.pasteUnsupported.description": "Buraya sadece görsel veya PDF yapıştırılabilir.",
   "prompt.toast.modelAgentRequired.title": "Bir ajan ve model seçin",
@@ -920,13 +919,15 @@ export const dict = {
   "settings.config.noWorkspace": "Yerel Nano yapılandırma dosyasını düzenlemek için bir çalışma alanı klasörü açın.",
   "settings.config.openFailed": "{{scope}} Nano yapılandırma dosyası açılamadı: {{message}}",
   "settings.config.source.xdg": "XDG küresel yapılandırma",
-  "settings.config.source.homeKilo": "Home .kilo yapılandırması",
+  "settings.config.source.homeNano": "Home .nano yapılandırması",
+  "settings.config.source.homeKilo": "Home .kilo config (legacy)",
   "settings.config.source.homeKilocode": "Home .kilocode yapılandırması",
   "settings.config.source.homeOpencode": "Home .opencode yapılandırması",
   "settings.config.source.envFile": "KILO_CONFIG ortam dosyası",
   "settings.config.source.envDir": "KILO_CONFIG_DIR",
   "settings.config.source.envContent": "Satır içi ortam yapılandırması",
-  "settings.config.source.projectKilo": "Proje .kilo yapılandırması",
+  "settings.config.source.projectNano": "Proje .nano yapılandırması",
+  "settings.config.source.projectKilo": "Project .kilo config (legacy)",
   "settings.config.source.projectRoot": "Proje kök yapılandırması",
   "settings.config.source.projectKilocode": "Eski .kilocode yapılandırması",
   "settings.config.source.projectOpencode": "Eski .opencode yapılandırması",
@@ -1676,5 +1677,5 @@ export const dict = {
   "diffViewer.baseBranch.empty": "No matching branches",
   "diffViewer.baseBranch.loading": "Loading branches…",
   "diffViewer.baseBranch.none": "—",
-  "plan.exit.ready": "Plan hazır:"
+  "plan.exit.ready": "Plan hazır:",
 }
