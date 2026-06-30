@@ -231,7 +231,7 @@
     },
     "packages/kilo-vscode": {
       "name": "nano-code",
-      "version": "100.1.0",
+      "version": "100.90.0",
       "dependencies": {
         "@anthropic-ai/sdk": "^0.39.0",
         "@kilocode/kilo-i18n": "workspace:*",
@@ -331,8 +331,7 @@
       "name": "@kilocode/cli",
       "version": "7.3.49",
       "bin": {
-        "kilo": "./bin/kilo",
-        "kilocode": "./bin/kilo",
+        "nanocode": "./bin/kilo",
       },
       "dependencies": {
         "@actions/core": "1.11.1",

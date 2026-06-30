@@ -46,7 +46,7 @@ const KiloLogo = (): JSX.Element => {
   const iconsBaseUri = (window as { ICONS_BASE_URI?: string }).ICONS_BASE_URI || ""
   const isLight =
     document.body.classList.contains("vscode-light") || document.body.classList.contains("vscode-high-contrast-light")
-  const icon = isLight ? "kilo-light.svg" : "kilo-dark.svg"
+  const icon = isLight ? "nano-light.svg" : "nano-dark.svg"
   return (
     <div class="migration-wizard__logo">
       <img src={`${iconsBaseUri}/${icon}`} alt="Nano Code" />

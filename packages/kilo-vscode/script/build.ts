@@ -91,7 +91,7 @@ for (const config of targets) {
   const vsixPath = join(outDir, `kilo-vscode-${config.target}.vsix`)
   const args = ["--no-dependencies", "--skip-license", "--target", config.target, "-o", vsixPath]
   if (prerelease) args.push("--pre-release")
-  await $`vsce package ${args}`.env({
+  await $`npx --yes vsce package ${args}`.env({
     ...process.env,
     npm_config_ignore_scripts: "true",
   })

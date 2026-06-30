@@ -165,15 +165,18 @@ async function writeSourceWrapper() {
     throw new Error("Compiled CLI build failed and source wrapper fallback is not supported on Windows.")
   }
 
-  const bun = Bun.which("bun") ?? "bun"
   await $`mkdir -p ${targetBinDir}`
   await Bun.write(
     targetBinPath,
     [
       "#!/usr/bin/env bash",
       "set -euo pipefail",
-      `cd ${JSON.stringify(opencodeDir)}`,
-      `exec ${JSON.stringify(bun)} --conditions=browser src/index.ts "$@"`,
+      'DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"',
+      'OPencodeDir="${DIR}/../opencode"',
+      'Bun="bun"',
+      'BunExt="${DIR}/../../node_modules/.bin/bun"',
+      'if [ -x "${BunExt}" ]; then Bun="${BunExt}"; fi',
+      'exec "${Bun}" --conditions=browser "${OPencodeDir}/src/index.ts" "$@"',
       "",
     ].join("\n"),
   )
