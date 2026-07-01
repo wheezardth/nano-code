@@ -27,6 +27,7 @@ export const CustomProviderConfigSchema = z
   .object({
     npm: z.enum(CUSTOM_PROVIDER_PACKAGES).default(CUSTOM_PROVIDER_PACKAGE),
     name: z.string().trim().min(1).max(200),
+    contextLength: z.number().int().min(1024, "Context length must be at least 1024 tokens"),
     env: z.array(EnvSchema).max(1).optional(),
     options: z
       .object({
@@ -58,12 +59,13 @@ export const CustomProviderConfigSchema = z
 export type SanitizedProviderConfig = {
   npm: CustomProviderPackage
   name: string
+  contextLength: number
   env?: string[]
   options: {
     baseURL: string
     headers?: Record<string, string>
   }
-  models: Record<string, { name: string; reasoning?: true; variants?: Record<string, VariantConfig> }>
+  models: Record<string, { name: string; limit?: { context: number; output: number }; reasoning?: true; variants?: Record<string, VariantConfig> }>
 }
 
 export type CustomProviderAuthChange = { mode: "preserve" } | { mode: "clear" } | { mode: "set"; key: string }
@@ -123,6 +125,7 @@ export function normalizeCustomProviderConfig(
   return {
     npm: config.npm,
     name: config.name.trim(),
+    contextLength: config.contextLength,
     ...(config.env ? { env: config.env.map((item) => item.trim()) } : {}),
     options: {
       baseURL: config.options.baseURL.trim(),
@@ -133,6 +136,7 @@ export function normalizeCustomProviderConfig(
         id.trim(),
         {
           name: model.name.trim(),
+          limit: { context: config.contextLength, output: 4096 },
           ...(model.reasoning ? { reasoning: true as const } : {}),
           ...(model.variants && Object.keys(model.variants).length > 0 ? { variants: model.variants } : {}),
         },
@@ -158,6 +162,7 @@ type ProviderPatch = Omit<SanitizedProviderConfig, "models"> & {
     string,
     null | {
       name: string
+      limit?: { context: number; output: number }
       reasoning?: true | null
       variants?: Record<string, VariantConfig | VariantPatch | null>
     }

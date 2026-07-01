@@ -305,13 +305,16 @@ export const layer = Layer.effect(
           Stream.mkString,
           Effect.orDie,
         )
-      const cleaned = text
+      const rawLine = text
         .replace(/<think>[\s\S]*?<\/think>\s*/g, "")
         .split("\n")
         .map((line) => line.trim())
         .find((line) => line.length > 0)
+      if (!rawLine) return
+      const cleaned = rawLine.replace(/^["']|["']$/g, "").trim()
       if (!cleaned) return
-      const t = cleaned.length > 100 ? cleaned.substring(0, 97) + "..." : cleaned
+      const words = cleaned.split(/\s+/).filter(Boolean)
+      const t = words.length > 10 ? words.slice(0, 10).join(" ") : cleaned
       yield* sessions
         .setTitle({ sessionID: input.session.id, title: t })
         .pipe(Effect.catchCause((cause) => elog.error("failed to generate title", { error: Cause.squash(cause) })))

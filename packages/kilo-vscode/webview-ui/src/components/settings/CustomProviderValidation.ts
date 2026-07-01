@@ -13,6 +13,7 @@ export type FormState = {
   name: string
   npm: CustomProviderPackage
   baseURL: string
+  contextLength: string
   apiKey: string
   models: ModelEntry[]
   headers: HeaderRow[]
@@ -23,6 +24,7 @@ export type FormErrors = {
   providerID: string | undefined
   name: string | undefined
   baseURL: string | undefined
+  contextLength: string | undefined
   models: Array<{ id?: string; name?: string; variants?: Array<{ name?: string }> }>
   headers: Array<{ key?: string; value?: string }>
 }
@@ -46,6 +48,7 @@ type ValidateResult = {
     config: {
       npm: CustomProviderPackage
       name: string
+      contextLength: number
       env?: string[]
       options: { baseURL: string; headers?: Record<string, string> }
       models: Record<string, unknown>
@@ -133,6 +136,7 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
   const name = input.form.name.trim()
   const baseURL = input.form.baseURL.trim()
   const apiKey = input.form.apiKey.trim()
+  const contextLengthRaw = input.form.contextLength.trim()
 
   const rawEnv = apiKey.match(/^\{env:([^}]+)\}$/)?.[1]?.trim()
   // When editing and apiKey is empty, preserve existing env from the original config
@@ -154,6 +158,13 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
       ? input.t("provider.custom.error.baseURL.format")
       : undefined
 
+  const parsedContextLength = parseInt(contextLengthRaw, 10)
+  const contextLengthError = !contextLengthRaw
+    ? input.t("provider.custom.error.contextLength.required")
+    : !Number.isInteger(parsedContextLength) || parsedContextLength < 1024
+      ? input.t("provider.custom.error.contextLength.format")
+      : undefined
+
   const seenModels = new Set<string>()
   const modelErrors = input.form.models.map((m) => checkModel(m, seenModels, input.t))
   const modelsValid = modelErrors.every((m) => !m.id && !m.name && m.variants.every((v) => !v.name))
@@ -166,11 +177,12 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
     providerID: idErr ?? existsErr,
     name: nameError,
     baseURL: urlError,
+    contextLength: contextLengthError,
     models: modelErrors,
     headers: headerErrors,
   }
 
-  const ok = !idErr && !existsErr && !nameError && !urlError && modelsValid && headersValid
+  const ok = !idErr && !existsErr && !nameError && !urlError && !contextLengthError && modelsValid && headersValid
   if (!ok) return { errors }
 
   const headers = Object.fromEntries(
@@ -194,6 +206,7 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
       config: {
         npm: input.form.npm,
         name,
+        contextLength: parsedContextLength,
         ...resolveEnv(rawEnv, savedEnv),
         options,
         models: Object.fromEntries(input.form.models.map(serializeModel)),

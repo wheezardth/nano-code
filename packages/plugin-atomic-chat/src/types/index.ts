@@ -4,6 +4,7 @@ export interface AtomicChatModel {
   object: string
   created: number
   owned_by: string
+  max_model_len?: number
 }
 
 export interface AtomicChatModelsResponse {

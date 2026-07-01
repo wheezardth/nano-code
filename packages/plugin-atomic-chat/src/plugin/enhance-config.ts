@@ -112,6 +112,10 @@ export async function enhanceConfig(
             name: formatModelName(model),
           }
 
+          if (model.max_model_len && model.max_model_len > 0) {
+            modelConfig.limit = { context: model.max_model_len, output: 4096 }
+          }
+
           if (owner) {
             modelConfig.organizationOwner = owner
           }

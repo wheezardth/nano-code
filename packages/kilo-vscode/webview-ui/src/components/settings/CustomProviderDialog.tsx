@@ -115,6 +115,7 @@ function initForm(existing: ExistingProvider | undefined, auth: ProviderAuthStat
     name: existing?.name ?? "",
     npm: isCustomProviderPackage(npm) ? npm : CUSTOM_PROVIDER_PACKAGE,
     baseURL: (existing?.config?.options as { baseURL?: string } | undefined)?.baseURL ?? "",
+    contextLength: String((existing?.config as { contextLength?: number } | undefined)?.contextLength ?? ""),
     apiKey: resolveCustomProviderKey(auth),
     models: initModels(existing?.config),
     headers: initHeaders(existing?.config),
@@ -146,6 +147,7 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
     providerID: undefined,
     name: undefined,
     baseURL: undefined,
+    contextLength: undefined,
     models: form.models.map((m) => ({ variants: m.variants.map(() => ({})) })),
     headers: form.headers.map(() => ({})),
   })
@@ -562,6 +564,14 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
               }}
               validationState={errors.baseURL ? "invalid" : undefined}
               error={errors.baseURL}
+            />
+            <TextField
+              label={language.t("provider.custom.field.contextLength.label")}
+              placeholder={language.t("provider.custom.field.contextLength.placeholder")}
+              value={form.contextLength}
+              onChange={(v) => setForm("contextLength", v)}
+              validationState={errors.contextLength ? "invalid" : undefined}
+              error={errors.contextLength}
             />
             <TextField
               type="password"
