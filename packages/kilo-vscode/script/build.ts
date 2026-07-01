@@ -124,7 +124,7 @@ for (const config of selectedTargets) {
   console.log(`  ✅ Binary ready at ${targetBinary}`)
 
   console.log(`  📦 Packaging .vsix for ${config.target}`)
-  const vsixPath = join(outDir, `kilo-vscode-${config.target}.vsix`)
+  const vsixPath = join(outDir, `nano-vscode-${config.target}-${version}.vsix`)
   const args = ["--no-dependencies", "--skip-license", "--target", config.target, "-o", vsixPath]
   if (prerelease) args.push("--pre-release")
   await $`bunx --package=@vscode/vsce vsce package ${args}`.env({

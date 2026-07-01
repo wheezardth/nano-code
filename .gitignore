@@ -44,6 +44,7 @@ UPCOMING_CHANGELOG.md
 logs/
 *.bun-build
 kiloconfig.json
+.kilo/
 
 # Telemetry ID
 telemetry-id
