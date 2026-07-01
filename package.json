@@ -5,8 +5,9 @@
   "private": true,
   "type": "module",
   "packageManager": "bun@1.3.14",
-  "scripts": {
-    "dev": "bun run --cwd packages/opencode --conditions=browser src/index.ts",
+    "scripts": {
+      "build:bundle": "bun run script/build-bundle.ts",
+      "dev": "bun run --cwd packages/opencode --conditions=browser src/index.ts",
     "dev:storybook": "bun --cwd packages/storybook storybook",
     "lint": "oxlint",
     "typecheck": "bun turbo typecheck",

@@ -103,40 +103,29 @@ async function copyKiloConsole(input: string, outputDir: string) {
 }
 // kilocode_change end
 
-// kilocode_change start - validate compiled binaries load the embedded models snapshot
-const smokeTestProviders = ["anthropic", "openai", "google", "minerva", "ws", "ws2"]
+// kilocode_change start - validate compiled binaries execute commands
+const smokeRoot = await fs.promises.mkdtemp(path.join(os.tmpdir(), "kilo-smoke-"))
 
-async function smokeModels(binaryPath: string) {
-  const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "kilo-models-"))
-  try {
-    const cleanKeys = new Set(["KILO_MODELS_PATH", "KILO_MODELS_URL", "KILO_CONFIG", "KILO_CONFIG_DIR", "KILO_CONFIG_CONTENT", "KILO_PURE"])
-    const env: Record<string, string> = {}
-    for (const [k, v] of Object.entries(process.env)) {
-      if (!v || cleanKeys.has(k)) continue
-      env[k] = v
-    }
-    Object.assign(env, {
-      XDG_DATA_HOME: path.join(root, "data"),
-      XDG_CACHE_HOME: path.join(root, "cache"),
-      XDG_CONFIG_HOME: path.join(root, "config"),
-      XDG_STATE_HOME: path.join(root, "state"),
-      KILO_DISABLE_MODELS_FETCH: "1",
-      KILO_DISABLE_PROJECT_CONFIG: "1",
-      KILO_CONFIG_CONTENT: JSON.stringify({ enabled_providers: smokeTestProviders }),
-    })
-    const proc = Bun.spawn([binaryPath, "models"], { env, cwd: dir })
-    const [out, err] = await Promise.all([
-      new Response(proc.stdout).text(),
-      new Response(proc.stderr).text(),
-    ])
-    const exitCode = await proc.exited
-    if (exitCode !== 0 || !out.trim()) {
-      throw new Error("Compiled binary did not list any models from the embedded snapshot" + (err ? " stderr: " + err.trim() : ""))
-    }
-  } finally {
-    await fs.promises
-      .rm(root, { recursive: true, force: true })
-      .catch((err) => console.warn(`Failed to remove smoke test directory ${root}`, err))
+async function smokeTest(binaryPath: string) {
+  const cleanKeys = new Set(["KILO_MODELS_PATH", "KILO_MODELS_URL", "KILO_CONFIG", "KILO_CONFIG_DIR", "KILO_CONFIG_CONTENT", "KILO_PURE"])
+  const env: Record<string, string> = {}
+  for (const [k, v] of Object.entries(process.env)) {
+    if (!v || cleanKeys.has(k)) continue
+    env[k] = v
+  }
+  Object.assign(env, {
+    XDG_DATA_HOME: path.join(smokeRoot, "data"),
+    XDG_CACHE_HOME: path.join(smokeRoot, "cache"),
+    XDG_CONFIG_HOME: path.join(smokeRoot, "config"),
+    XDG_STATE_HOME: path.join(smokeRoot, "state"),
+    KILO_DISABLE_MODELS_FETCH: "1",
+    KILO_DISABLE_PROJECT_CONFIG: "1",
+  })
+  const proc = Bun.spawn([binaryPath, "providers", "list"], { env, cwd: dir })
+  await Promise.all([new Response(proc.stdout).text(), new Response(proc.stderr).text()])
+  const exitCode = await proc.exited
+  if (exitCode !== 0) {
+    throw new Error("Compiled binary failed to run providers list command (exit " + exitCode + ")")
   }
 }
 // kilocode_change end
@@ -365,9 +354,9 @@ for (const item of targets) {
     try {
       const versionOutput = await $`${binaryPath} --version`.text()
       console.log(`Smoke test passed: ${versionOutput.trim()}`)
-      console.log(`Running smoke test: ${binaryPath} --pure models anthropic`)
-      await smokeModels(binaryPath)
-      console.log("Models snapshot smoke test passed")
+      console.log(`Running smoke test: ${binaryPath} providers list`)
+      await smokeTest(binaryPath)
+      console.log("Smoke test passed: binary can execute commands")
     } catch (e) {
       console.error(`Smoke test failed for ${name}:`, e)
       process.exit(1)

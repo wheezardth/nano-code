@@ -446,9 +446,7 @@ export class Service extends Context.Service<Service, Interface>()("@opencode/Co
 export const use = serviceUse(Service)
 
 function globalConfigFile() {
-  // kilocode_change start
-  const candidates = ["kilo.jsonc", "kilo.json", "opencode.jsonc", "opencode.json", "config.json"].map((file) =>
-    // kilocode_change end
+  const candidates = ["nano.jsonc", "nano.json", "kilo.jsonc", "kilo.json", "opencode.jsonc", "opencode.json", "config.json"].map((file) =>
     path.join(Global.Path.config, file),
   )
   for (const file of candidates) {
@@ -584,6 +582,9 @@ export const layer = Layer.effect(
         }
       }
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "config.json"), env))
+      // nano global config files (new nano — highest precedence, loaded before kilo and opencode)
+      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "nano.json"), env))
+      result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "nano.jsonc"), env))
       // kilocode_change start
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "kilo.json"), env))
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "kilo.jsonc"), env))
