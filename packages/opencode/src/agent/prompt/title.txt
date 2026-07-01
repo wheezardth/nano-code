@@ -7,7 +7,7 @@ Follow all rules in <rules>
 Use the <examples> so you know what a good title looks like.
 Your output must be:
 - A single line
-- ≤10 words
+- ≤10 words AND ≤60 characters
 - No explanations, no surrounding quotes
 </task>
 
@@ -28,6 +28,7 @@ Your output must be:
 - Always output something meaningful, even if the input is minimal.
 - If the user message is short or conversational (e.g. "hello", "lol", "what's up", "hey"):
   → create a title that reflects the user's tone or intent (such as Greeting, Quick check-in, Light chat, Intro message, etc.)
+- Focus on the user's original intent or question. Ignore file contents, tool outputs, environment details, and other synthetic context in the input.
 </rules>
 
 <examples>

@@ -313,8 +313,14 @@ export const layer = Layer.effect(
       if (!rawLine) return
       const cleaned = rawLine.replace(/^["']|["']$/g, "").trim()
       if (!cleaned) return
-      const words = cleaned.split(/\s+/).filter(Boolean)
-      const t = words.length > 10 ? words.slice(0, 10).join(" ") : cleaned
+      let t = cleaned
+      if (t.length > 60) {
+        const words = cleaned.split(/\s+/).filter(Boolean)
+        t = words.join(" ")
+        while (t.length > 60 && t.lastIndexOf(" ") > 0) {
+          t = t.slice(0, t.lastIndexOf(" "))
+        }
+      }
       yield* sessions
         .setTitle({ sessionID: input.session.id, title: t })
         .pipe(Effect.catchCause((cause) => elog.error("failed to generate title", { error: Cause.squash(cause) })))
@@ -1302,6 +1308,23 @@ export const layer = Layer.effect(
         yield* KiloSessionPrompt.recoverProviderFinishError({ sessionID: input.sessionID, status, sessions })
         // kilocode_change end
         const message = yield* createUserMessage(input)
+        // Generate session title from the user's first message — forked so it doesn't delay the response
+        /* eslint-disable no-unused-vars no-unsafe-type-assertion no-unnecessary-type-assertion */
+        const titleGen = Effect.gen(function* () {
+          const msgs = yield* sessions.messages({ sessionID: input.sessionID, limit: 10 }).pipe(Effect.orDie)
+          let msg: MessageV2.WithParts | undefined
+          for (const m of msgs) {
+            if (m.info.role === "user") { msg = m; break }
+          }
+          if (!msg) return
+          yield* title({
+            session,
+            modelID: (msg.info as MessageV2.User).model!.modelID,
+            providerID: (msg.info as MessageV2.User).model!.providerID,
+            history: msgs,
+          }).pipe(Effect.ignore)
+        /* eslint-enable no-unused-vars no-unsafe-type-assertion no-unnecessary-type-assertion */
+        }).pipe(Effect.ignore, Effect.forkIn(scope))
         yield* sessions.touch(input.sessionID)
 
         const permissions: Permission.Rule[] = []
@@ -1453,13 +1476,6 @@ export const layer = Layer.effect(
         }
 
         step++
-        if (step === 1)
-          yield* title({
-            session,
-            modelID: lastUser.model.modelID,
-            providerID: lastUser.model.providerID,
-            history: msgs,
-          }).pipe(Effect.ignore, Effect.forkIn(scope))
 
         const model = yield* getModel(lastUser.model.providerID, lastUser.model.modelID, sessionID)
         const task = tasks.pop()
