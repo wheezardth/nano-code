@@ -1850,8 +1850,8 @@ export class KiloProvider implements vscode.WebviewViewProvider {
       typeof msg.apiKey === "string" ? msg.apiKey : resolveStoredKey(this.storedProviderKeys, msg.providerID, url)
     const headers = msg.headers && typeof msg.headers === "object" ? (msg.headers as Record<string, string>) : undefined
     try {
-      const models = await fetchOpenAIModels({ baseURL: url, apiKey: key, headers })
-      this.postMessage({ type: "customProviderModelsFetched", requestId: rid, models })
+      const { models, maxModelLen } = await fetchOpenAIModels({ baseURL: url, apiKey: key, headers })
+      this.postMessage({ type: "customProviderModelsFetched", requestId: rid, models, maxModelLen })
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Failed to fetch models"
       const auth = err instanceof FetchModelsError && err.auth

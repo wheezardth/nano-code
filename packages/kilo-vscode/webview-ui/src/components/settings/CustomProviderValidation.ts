@@ -131,6 +131,44 @@ function resolveEnv(rawEnv: string | undefined, savedEnv: string[] | undefined) 
   return {}
 }
 
+function validateContextLength(raw: string, t: Translator): number | string {
+  if (!raw) return t("provider.custom.error.contextLength.required")
+  const parsed = parseInt(raw, 10)
+  return !Number.isInteger(parsed) || parsed < 1024 ? t("provider.custom.error.contextLength.format") : parsed
+}
+
+function buildOptions(baseURL: string, headers: HeaderRow[]): { baseURL: string; headers?: Record<string, string> } {
+  const trimmed = headers.map((h) => ({ key: h.key.trim(), value: h.value.trim() })).filter((h) => !!h.key && !!h.value)
+  const hdrs = Object.fromEntries(trimmed.map((h) => [h.key, h.value]))
+  return hdrs && Object.keys(hdrs).length ? { baseURL, headers: hdrs } : { baseURL }
+}
+
+function buildResult(
+  providerID: string,
+  name: string,
+  key: string | undefined,
+  options: { baseURL: string; headers?: Record<string, string> },
+  contextLength: number,
+  npm: CustomProviderPackage,
+  rawEnv: string | undefined,
+  savedEnv: string[] | undefined,
+  models: ModelEntry[],
+) {
+  return {
+    providerID,
+    name,
+    key,
+    config: {
+      npm,
+      name,
+      contextLength,
+      ...resolveEnv(rawEnv, savedEnv),
+      options,
+      models: Object.fromEntries(models.map(serializeModel)),
+    },
+  }
+}
+
 export function validateCustomProvider(input: ValidateArgs): ValidateResult {
   const providerID = input.form.providerID.trim()
   const name = input.form.name.trim()
@@ -142,6 +180,8 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
   // When editing and apiKey is empty, preserve existing env from the original config
   const savedEnv = input.editing && !apiKey ? input.existingEnv : undefined
   const key = apiKey && !rawEnv ? apiKey : undefined
+  const parsedContextLength = validateContextLength(contextLengthRaw, input.t)
+  const contextLengthError = typeof parsedContextLength === "string" ? parsedContextLength : undefined
 
   const { idErr, existsErr } = checkProviderID(
     providerID,
@@ -156,13 +196,6 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
     ? input.t("provider.custom.error.baseURL.required")
     : !/^https?:\/\//.test(baseURL)
       ? input.t("provider.custom.error.baseURL.format")
-      : undefined
-
-  const parsedContextLength = parseInt(contextLengthRaw, 10)
-  const contextLengthError = !contextLengthRaw
-    ? input.t("provider.custom.error.contextLength.required")
-    : !Number.isInteger(parsedContextLength) || parsedContextLength < 1024
-      ? input.t("provider.custom.error.contextLength.format")
       : undefined
 
   const seenModels = new Set<string>()
@@ -185,32 +218,20 @@ export function validateCustomProvider(input: ValidateArgs): ValidateResult {
   const ok = !idErr && !existsErr && !nameError && !urlError && !contextLengthError && modelsValid && headersValid
   if (!ok) return { errors }
 
-  const headers = Object.fromEntries(
-    input.form.headers
-      .map((h) => ({ key: h.key.trim(), value: h.value.trim() }))
-      .filter((h) => !!h.key && !!h.value)
-      .map((h) => [h.key, h.value]),
-  )
-
-  const options = {
-    baseURL,
-    ...(Object.keys(headers).length ? { headers } : {}),
-  }
+  const options = buildOptions(baseURL, input.form.headers)
 
   return {
     errors,
-    result: {
+    result: buildResult(
       providerID,
       name,
       key,
-      config: {
-        npm: input.form.npm,
-        name,
-        contextLength: parsedContextLength,
-        ...resolveEnv(rawEnv, savedEnv),
-        options,
-        models: Object.fromEntries(input.form.models.map(serializeModel)),
-      },
-    },
+      options,
+      parsedContextLength as number,
+      input.form.npm,
+      rawEnv,
+      savedEnv,
+      input.form.models,
+    ),
   }
 }

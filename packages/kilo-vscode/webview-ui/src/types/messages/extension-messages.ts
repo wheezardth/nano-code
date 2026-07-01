@@ -831,10 +831,13 @@ export interface ProviderActionErrorMessage {
   message: string
 }
 
+type ModelEntry = { id: string; name: string; maxModelLen?: number }
+
 export interface CustomProviderModelsFetchedMessage {
   type: "customProviderModelsFetched"
   requestId: string
-  models?: Array<{ id: string; name: string }>
+  models?: ModelEntry[]
+  maxModelLen?: number
   error?: string
   /** True when error was HTTP 401/403 — hints the user to check their API key */
   auth?: boolean

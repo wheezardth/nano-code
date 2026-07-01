@@ -51,7 +51,7 @@ function fuzzy(query: string, target: string) {
   return qi === q.length
 }
 
-type FetchedModel = { id: string; name: string }
+type FetchedModel = { id: string; name: string; maxModelLen?: number }
 type RawModel = { name?: string; reasoning?: boolean; variants?: Record<string, Record<string, unknown>> }
 
 function parseVariant([name, cfg]: [string, Record<string, unknown>]): VariantEntry {
@@ -271,6 +271,12 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
 
       // Filter using the snapshot taken at fetch time
       const fresh = models.filter((m) => !existing.has(m.id))
+
+      // Auto-fill context length for new providers when max_model_len is available
+      const msg2 = msg as { maxModelLen?: number }
+      if (msg2.maxModelLen && !editing() && !form.contextLength) {
+        setForm("contextLength", String(msg2.maxModelLen))
+      }
 
       if (fresh.length === 0) {
         setFetchStatus(language.t("provider.custom.models.fetch.allExist"))
