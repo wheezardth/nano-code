@@ -1216,6 +1216,7 @@ export type AgentConfig = {
 export type ProviderConfig = {
   api?: string
   name?: string
+  contextLength?: number
   env?: Array<string>
   id?: string
   npm?: string

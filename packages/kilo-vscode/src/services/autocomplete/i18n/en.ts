@@ -2,9 +2,9 @@
 // Source: src/i18n/locales/en/kilocode.json → "autocomplete" section
 
 export const dict = {
-  "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Autocomplete",
+  "kilocode:autocomplete.statusBar.enabled": "$(kilo-logo) Completion",
   "kilocode:autocomplete.statusBar.snoozed": "snoozed",
-  "kilocode:autocomplete.statusBar.warning": "$(warning) Autocomplete",
+  "kilocode:autocomplete.statusBar.warning": "$(warning) Completion",
   "kilocode:autocomplete.statusBar.tooltip.basic": "Nano Code Autocomplete",
   "kilocode:autocomplete.statusBar.tooltip.disabled": "Nano Code Autocomplete (disabled)",
   "kilocode:autocomplete.statusBar.tooltip.noUsableProvider":
@@ -15,8 +15,8 @@ export const dict = {
   "kilocode:autocomplete.statusBar.tooltip.profile": "Profile: ",
   "kilocode:autocomplete.statusBar.tooltip.defaultProfile": "Default",
   "kilocode:autocomplete.statusBar.tooltip.completionSummary":
-    "Performed {{count}} completions between {{startTime}} and {{endTime}}.",
-  "kilocode:autocomplete.statusBar.tooltip.providerInfo": "Autocompletions provided by {{model}} via {{provider}}.",
+    "Performed {{count}} completions.",
+  "kilocode:autocomplete.statusBar.tooltip.providerInfo": "Model: {{model}} via {{provider}}.",
   "kilocode:autocomplete.statusBar.cost.zero": "$0.00",
   "kilocode:autocomplete.statusBar.cost.lessThanCent": "<$0.01",
   "kilocode:autocomplete.toggleMessage": "Nano Code Autocomplete {{status}}",

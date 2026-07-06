@@ -109,16 +109,26 @@ function resolveAuth(existing: ExistingProvider | undefined, states: Record<stri
 }
 
 function initForm(existing: ExistingProvider | undefined, auth: ProviderAuthState | undefined): FormState {
-  const npm = existing?.config?.npm
+  const cfg = existing?.config
+  const opts = cfg?.options as { baseURL?: string; contextLength?: number } | undefined
+  const pkg = cfg?.npm
+  let ctxLength: string
+  if (opts?.contextLength !== undefined) {
+    ctxLength = String(opts.contextLength)
+  } else if ((cfg as { contextLength?: number } | undefined)?.contextLength !== undefined) {
+    ctxLength = String((cfg as { contextLength?: number }).contextLength!)
+  } else {
+    ctxLength = ""
+  }
   return {
     providerID: existing?.providerID ?? "",
     name: existing?.name ?? "",
-    npm: isCustomProviderPackage(npm) ? npm : CUSTOM_PROVIDER_PACKAGE,
-    baseURL: (existing?.config?.options as { baseURL?: string } | undefined)?.baseURL ?? "",
-    contextLength: String((existing?.config as { contextLength?: number } | undefined)?.contextLength ?? ""),
+    npm: isCustomProviderPackage(pkg) ? pkg : CUSTOM_PROVIDER_PACKAGE,
+    baseURL: opts?.baseURL ?? "",
+    contextLength: ctxLength,
     apiKey: resolveCustomProviderKey(auth),
-    models: initModels(existing?.config),
-    headers: initHeaders(existing?.config),
+    models: initModels(cfg),
+    headers: initHeaders(cfg),
     saving: false,
   }
 }
@@ -474,6 +484,7 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
           aria-label={language.t("common.goBack")}
         />
       }
+      size="x-large"
       transition
     >
       <div
@@ -483,7 +494,7 @@ const CustomProviderDialog = (props: CustomProviderDialogProps) => {
           gap: "24px",
           padding: "0 10px 12px 10px",
           "overflow-y": "auto",
-          "max-height": "60vh",
+          "max-height": "95vh",
         }}
       >
         <div style={{ padding: "0 10px", display: "flex", gap: "16px", "align-items": "center" }}>
