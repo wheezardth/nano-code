@@ -1,5 +1,5 @@
 <p align="center">
-  <strong>NANO Code is a fork of KILO Code for internal IMS Nanofabrication use</strong><br>
+  <strong>NANO Code is a fork of KILO Code</strong><br>
   It is strongly tailored towards use only with locally hosted LLMs.<br>
 </p>
 
